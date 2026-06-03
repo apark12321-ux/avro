@@ -1,0 +1,6 @@
+{
+  "name": "AVRO - AI Engineering Studio",
+  "description": "AVRO is an AI Engineering Studio specializing in LLM integrations, AI agents, full-stack product development, and workflow automation.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
