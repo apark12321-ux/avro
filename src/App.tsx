@@ -32,6 +32,7 @@ import {
 } from 'lucide-react';
 import { timelineData, servicesData, projectsData, partnersData, processSteps } from './data';
 import { ProjectItem } from './types';
+import AICanvas from './components/AICanvas';
 
 export default function App() {
   const [activeService, setActiveService] = useState<string | null>('01');
@@ -274,8 +275,13 @@ export default function App() {
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-24 pb-16">
         
         {/* HERO SECTION */}
-        <section id="hero" className="min-h-[85vh] flex flex-col justify-center py-12 md:py-20 relative">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <section id="hero" className="min-h-[85vh] flex flex-col justify-center py-12 md:py-20 relative overflow-hidden">
+          {/* Ambient AI Background Connective Graph */}
+          <div className="absolute inset-0 z-0">
+            <AICanvas />
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
             
             {/* Hero text */}
             <div className="lg:col-span-7 flex flex-col justify-center">
@@ -495,45 +501,52 @@ export default function App() {
         </section>
 
         {/* CONTINUOUS MARQUEE TICKER ROW */}
-        <section className="py-4 overflow-hidden border-y border-white/[0.08] bg-lime-400 text-black font-mono font-black text-xs uppercase tracking-widest mb-16 relative">
-          <div className="flex gap-8 whitespace-nowrap min-w-full animate-grid-move">
-            <div className="flex gap-16 shrink-0 animate-[tick_35s_linear_infinite] hoverAnimation">
+        <section className="py-4 overflow-hidden border-y border-white/[0.08] bg-[#d4ff3a] text-black font-mono font-black text-xs uppercase tracking-widest mb-16 relative z-10">
+          <div className="flex whitespace-nowrap select-none overflow-hidden">
+            <div className="flex gap-16 shrink-0 animate-tick">
               <span>★ MATHHWP.COM</span>
-              <span>/</span>
+              <span className="text-black/30">/</span>
               <span>DIGITAL CONTENT SOLUTION</span>
-              <span>/</span>
-              <span className="text-indigo-900">AI MARKETING AUTOMATION</span>
-              <span>/</span>
+              <span className="text-black/30">/</span>
+              <span className="text-indigo-950 font-black">AI MARKETING AUTOMATION</span>
+              <span className="text-black/30">/</span>
               <span>VIDEO PRODUCTION EXPERT</span>
-              <span>/</span>
-              <span className="text-red-700">EBSMATH PARTNER</span>
-              <span>/</span>
+              <span className="text-black/30">/</span>
+              <span className="text-red-700 font-bold">EBSMATH PARTNER</span>
+              <span className="text-black/30">/</span>
               <span>SITE OPERATION CRITICAL SYSTEMS</span>
-              <span>/</span>
+              <span className="text-black/30">/</span>
               <span>SINCE 2016</span>
-              <span>/</span>
-              
+              <span className="text-black/30">/</span>
+            </div>
+            <div className="flex gap-16 shrink-0 animate-tick" aria-hidden="true">
               <span>★ MATHHWP.COM</span>
-              <span>/</span>
+              <span className="text-black/30">/</span>
               <span>DIGITAL CONTENT SOLUTION</span>
-              <span>/</span>
-              <span className="text-indigo-900">AI MARKETING AUTOMATION</span>
-              <span>/</span>
+              <span className="text-black/30">/</span>
+              <span className="text-indigo-950 font-black">AI MARKETING AUTOMATION</span>
+              <span className="text-black/30">/</span>
               <span>VIDEO PRODUCTION EXPERT</span>
-              <span>/</span>
-              <span className="text-red-700">EBSMATH PARTNER</span>
-              <span>/</span>
+              <span className="text-black/30">/</span>
+              <span className="text-red-700 font-bold">EBSMATH PARTNER</span>
+              <span className="text-black/30">/</span>
               <span>SITE OPERATION CRITICAL SYSTEMS</span>
-              <span>/</span>
+              <span className="text-black/30">/</span>
               <span>SINCE 2016</span>
-              <span>/</span>
+              <span className="text-black/30">/</span>
             </div>
           </div>
         </section>
 
         {/* SECTION 1: ABOUT */}
         <section id="about" className="py-16 md:py-24 text-left scroll-mt-24">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+          <motion.div 
+            initial={{ opacity: 0, y: 35 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-120px" }}
+            transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+            className="grid grid-cols-1 lg:grid-cols-12 gap-12"
+          >
             
             {/* Title column */}
             <div className="lg:col-span-5">
@@ -593,12 +606,18 @@ export default function App() {
               </div>
             </div>
 
-          </div>
+          </motion.div>
         </section>
 
         {/* SECTION 2: SERVICES (ACCORDIONS) */}
         <section id="services" className="py-16 md:py-24 text-left border-t border-white/[0.04] scroll-mt-24">
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 mb-12">
+          <motion.div
+            initial={{ opacity: 0, y: 35 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-120px" }}
+            transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 mb-12">
             <div>
               <div className="flex items-center gap-2 text-[10px] font-mono tracking-widest text-[#d4ff3a] uppercase mb-4">
                 <span>02</span>
@@ -677,11 +696,18 @@ export default function App() {
               </motion.div>
             ))}
           </div>
+          </motion.div>
         </section>
 
         {/* SECTION 3: WORKS (FILTERED PORTFOLIO) */}
         <section id="works" className="py-16 md:py-24 text-left border-t border-white/[0.04] scroll-mt-24">
-          <div className="flex flex-col justify-start mb-12">
+          <motion.div
+            initial={{ opacity: 0, y: 35 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-120px" }}
+            transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <div className="flex flex-col justify-start mb-12">
             <div className="flex items-center gap-2 text-[10px] font-mono tracking-widest text-[#d4ff3a] uppercase mb-4">
               <span>03</span>
               <span className="text-zinc-700">/</span>
@@ -824,11 +850,18 @@ export default function App() {
               ))}
             </AnimatePresence>
           </div>
+          </motion.div>
         </section>
 
         {/* SECTION 4: HISTORY TIMELINE */}
         <section id="history" className="py-16 md:py-24 text-left border-t border-white/[0.04] scroll-mt-24">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+          <motion.div
+            initial={{ opacity: 0, y: 35 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-120px" }}
+            transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+            className="grid grid-cols-1 lg:grid-cols-12 gap-12"
+          >
             
             {/* Left title card sticky scope */}
             <div className="lg:col-span-5 lg:sticky lg:top-24 h-max">
@@ -877,12 +910,18 @@ export default function App() {
               ))}
             </div>
 
-          </div>
+          </motion.div>
         </section>
 
         {/* SECTION 5: PARTNERS (LOGO GRID) */}
         <section id="partners" className="py-16 md:py-24 text-left border-t border-white/[0.04]">
-          <div className="flex flex-col gap-3 mb-10">
+          <motion.div
+            initial={{ opacity: 0, y: 35 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-120px" }}
+            transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <div className="flex flex-col gap-3 mb-10">
             <div className="flex items-center gap-2 text-[10px] font-mono tracking-widest text-[#d4ff3a] uppercase">
               <span>05</span>
               <span className="text-zinc-700">/</span>
@@ -917,11 +956,18 @@ export default function App() {
               </motion.div>
             ))}
           </div>
+          </motion.div>
         </section>
 
         {/* SECTION 6: HOW WE WORK (PROCESS) */}
         <section id="process" className="py-16 md:py-24 text-left border-t border-white/[0.04]">
-          <div className="flex flex-col gap-3 mb-12">
+          <motion.div
+            initial={{ opacity: 0, y: 35 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-120px" }}
+            transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <div className="flex flex-col gap-3 mb-12">
             <div className="flex items-center gap-2 text-[10px] font-mono tracking-widest text-[#d4ff3a] uppercase">
               <span>06</span>
               <span className="text-zinc-700">/</span>
@@ -951,10 +997,17 @@ export default function App() {
               </div>
             ))}
           </div>
+          </motion.div>
         </section>
 
         {/* METICULOUS MANIFESTO HIGHLIGHT BANNER */}
-        <section className="py-12 md:py-16 my-8 px-6 sm:px-12 rounded-2xl border border-red-500/20 bg-gradient-to-r from-red-950/10 to-transparent flex flex-col justify-center items-start text-left relative overflow-hidden">
+        <motion.section 
+          initial={{ opacity: 0, scale: 0.98, y: 25 }}
+          whileInView={{ opacity: 1, scale: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          className="py-12 md:py-16 my-8 px-6 sm:px-12 rounded-2xl border border-red-500/20 bg-gradient-to-r from-red-950/10 to-transparent flex flex-col justify-center items-start text-left relative overflow-hidden"
+        >
           <div className="absolute top-4 left-6 sm:left-12 font-mono text-[9px] tracking-widest text-red-500 uppercase font-black">
             ◆ AVRO_MANIFESTO // METRICS
           </div>
@@ -965,11 +1018,17 @@ export default function App() {
           <div className="font-mono text-[9px] text-zinc-500 tracking-wider uppercase mt-6">
             AVRO STUDIO MANIFESTO · FY 2026. ALL METRICS VERIFIED INC.
           </div>
-        </section>
+        </motion.section>
 
         {/* SECTION 7: CONTACT / CTA */}
         <section id="contact" className="py-16 md:py-24 text-left border-t border-white/[0.04] scroll-mt-24">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+          <motion.div
+            initial={{ opacity: 0, y: 35 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-120px" }}
+            transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+            className="grid grid-cols-1 lg:grid-cols-12 gap-12"
+          >
             
             {/* CTA action copy column */}
             <div className="lg:col-span-7 flex flex-col justify-center">
@@ -1047,7 +1106,7 @@ export default function App() {
               </div>
             </div>
 
-          </div>
+          </motion.div>
         </section>
 
       </main>
