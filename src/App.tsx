@@ -33,12 +33,17 @@ import {
 import { timelineData, servicesData, projectsData, partnersData, processSteps } from './data';
 import { ProjectItem } from './types';
 import AICanvas from './components/AICanvas';
+import CursorAura from './components/CursorAura';
+import TiltCard from './components/TiltCard';
+import GlitchText from './components/GlitchText';
 
 export default function App() {
   const [activeService, setActiveService] = useState<string | null>('01');
   const [projectFilter, setProjectFilter] = useState<'ALL' | 'AI' | 'CASE_STUDY'>('ALL');
   const [liveSeoulTime, setLiveSeoulTime] = useState<string>('');
   const [scrollPercentage, setScrollPercentage] = useState<number>(0);
+  const [isNavHidden, setIsNavHidden] = useState<boolean>(false);
+  const [brandRotation, setBrandRotation] = useState<number>(0);
   const [typedCommand, setTypedCommand] = useState<string>('avro agent --optimize');
   const [terminalLogs, setTerminalLogs] = useState<Array<{ id: number; text: string; type: 'client' | 'info' | 'success' | 'warn' | 'header' }>>([
     { id: 1, text: 'avro init --studio-preset=future', type: 'header' },
@@ -72,13 +77,30 @@ export default function App() {
     return () => clearInterval(interval);
   }, []);
 
-  // Scroll depth tracking
+  // Scroll depth, direction, and brand mark rotation tracking
   useEffect(() => {
+    let lastScrollY = window.scrollY;
     const handleScroll = () => {
+      const currentScrollY = window.scrollY;
       const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
       if (scrollHeight > 0) {
-        setScrollPercentage((window.scrollY / scrollHeight) * 100);
+        setScrollPercentage((currentScrollY / scrollHeight) * 100);
       }
+
+      // Hide nav when scrolling down past 100px, show when scrolling up
+      if (currentScrollY > 100) {
+        if (currentScrollY > lastScrollY) {
+          setIsNavHidden(true);
+        } else {
+          setIsNavHidden(false);
+        }
+      } else {
+        setIsNavHidden(false);
+      }
+
+      // Brand mark dynamic scroll rotation
+      setBrandRotation(currentScrollY * 0.15);
+      lastScrollY = currentScrollY;
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
@@ -213,17 +235,8 @@ export default function App() {
         <div className="absolute bottom-[35%] left-[10%] w-1 h-1 rounded-full bg-blue-400/20 shadow-[0_0_8px_#5b8bff]" />
       </div>
 
-      {/* Modern Mouse Spotlight Backdrop Glow on desktop */}
-      <div
-        className="fixed pointer-events-none z-50 w-[400px] h-[400px] rounded-full hidden md:block bg-[radial-gradient(circle_at_center,rgba(212,255,58,0.04)_0%,rgba(34,211,238,0.01)_40%,transparent_70%)]"
-        style={{
-          left: `${mousePos.x}px`,
-          top: `${mousePos.y}px`,
-          transform: 'translate(-50%, -50%)',
-          opacity: cursorOpacity,
-          transition: 'opacity 0.5s ease',
-        }}
-      />
+      {/* Modern Aura Cursor Follower from HTML template with smooth inertia tracking */}
+      <CursorAura />
 
       {/* Floating scroll indicator progress bar */}
       <div
@@ -231,18 +244,24 @@ export default function App() {
         style={{ width: `${scrollPercentage}%` }}
       />
 
-      {/* STICKY NAV */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-black/60 backdrop-blur-xl border-b border-white/[0.04] transition-all duration-300">
+      {/* STICKY NAV - direction-aware scroll toggle hide/show */}
+      <header 
+        className="fixed top-0 left-0 right-0 z-50 bg-black/60 backdrop-blur-xl border-b border-white/[0.04] transition-transform duration-300 ease-out"
+        style={{
+          transform: isNavHidden ? 'translateY(-110%)' : 'translateY(0)',
+          transition: 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)'
+        }}
+      >
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <motion.div 
-              className="w-8 h-8 rounded-md bg-lime-400 text-black font-mono font-black flex items-center justify-center text-lg shadow-[0_0_15px_rgba(212,255,58,0.3)] relative group cursor-pointer"
-              whileHover={{ rotate: -10, scale: 1.05 }}
+            <div 
+              className="w-8 h-8 rounded-md bg-lime-400 text-black font-mono font-black flex items-center justify-center text-lg shadow-[0_0_15px_rgba(212,255,58,0.3)] relative group cursor-pointer transition-transform duration-100"
+              style={{ transform: `rotate(${brandRotation}deg)` }}
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
             >
               A
               <span className="absolute -bottom-1 -right-1 w-2 h-2 rounded-full bg-red-500 animate-ping" />
-            </motion.div>
+            </div>
             <div className="flex flex-col">
               <span className="font-mono font-extrabold tracking-wider text-sm sm:text-base text-white">AVRO</span>
               <span className="text-[10px] text-zinc-500 font-mono tracking-widest hidden sm:inline-block">에이브로</span>
@@ -302,41 +321,41 @@ export default function App() {
                 <span className="text-cyan-400 font-medium">AI ENGINEERING STUDIO</span>
               </motion.div>
 
-              {/* Title with staggered text rise */}
-              <h1 className="text-4xl sm:text-6xl md:text-[5.4rem] font-sans font-black tracking-tight leading-[0.95] mb-6 select-none text-left">
-                <span className="block overflow-hidden py-1">
-                  <motion.span 
-                    initial={{ y: '100%' }}
-                    animate={{ y: 0 }}
-                    transition={{ duration: 0.8, cubicBezier: [0.16, 1, 0.3, 1] }}
-                    className="block"
-                  >
-                    우리는 <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-indigo-400 bg-clip-text text-fill-transparent text-transparent">AI</span>로
-                  </motion.span>
-                </span>
-                <span className="block overflow-hidden py-1">
-                  <motion.span 
-                    initial={{ y: '100%' }}
-                    animate={{ y: 0 }}
-                    transition={{ duration: 0.8, delay: 0.15, cubicBezier: [0.16, 1, 0.3, 1] }}
-                    className="block"
-                  >
-                    <span className="bg-lime-400 text-black px-4 py-1.5 rounded-lg inline-block mr-2 shadow-[0_0_25px_rgba(212,255,58,0.2)]">소프트웨어</span>를
-                  </motion.span>
-                </span>
-                <span className="block overflow-hidden py-1">
-                  <motion.span 
-                    initial={{ y: '100%' }}
-                    animate={{ y: 0 }}
-                    transition={{ duration: 0.8, delay: 0.28, cubicBezier: [0.16, 1, 0.3, 1] }}
-                    className="inline-block relative"
-                  >
-                    <span className="font-mono italic font-light tracking-wide text-zinc-300">만듭니다</span>
-                    <span className="text-lime-400 animate-pulse">.</span>
-                    <span className="absolute left-0 bottom-1 w-full h-[3px] bg-red-500 roundedScale" />
-                  </motion.span>
-                </span>
-              </h1>
+               {/* Title with staggered text rise and interactive glitch hovering */}
+               <h1 className="text-4xl sm:text-6xl md:text-[5.4rem] font-sans font-black tracking-tight leading-[0.95] mb-6 select-none text-left">
+                 <span className="block overflow-hidden py-1">
+                   <motion.span 
+                     initial={{ y: '100%' }}
+                     animate={{ y: 0 }}
+                     transition={{ duration: 0.8, cubicBezier: [0.16, 1, 0.3, 1] }}
+                     className="block"
+                   >
+                     우리는 <GlitchText text="AI" className="bg-gradient-to-r from-cyan-400 via-blue-400 to-indigo-400 bg-clip-text text-fill-transparent text-transparent" />로
+                   </motion.span>
+                 </span>
+                 <span className="block overflow-hidden py-1">
+                   <motion.span 
+                     initial={{ y: '100%' }}
+                     animate={{ y: 0 }}
+                     transition={{ duration: 0.8, delay: 0.15, cubicBezier: [0.16, 1, 0.3, 1] }}
+                     className="block"
+                   >
+                     <GlitchText text="소프트웨어" className="bg-lime-400 text-black px-4 py-1.5 rounded-lg inline-block mr-2 shadow-[0_0_25px_rgba(212,255,58,0.2)] hover:bg-lime-300" />를
+                   </motion.span>
+                 </span>
+                 <span className="block overflow-hidden py-1">
+                   <motion.span 
+                     initial={{ y: '100%' }}
+                     animate={{ y: 0 }}
+                     transition={{ duration: 0.8, delay: 0.28, cubicBezier: [0.16, 1, 0.3, 1] }}
+                     className="inline-block relative fill-current"
+                   >
+                     <GlitchText text="만듭니다" className="font-mono italic font-light tracking-wide text-zinc-300" />
+                     <span className="text-lime-400 animate-pulse">.</span>
+                     <span className="absolute left-0 bottom-1 w-full h-[3px] bg-red-500 roundedScale" />
+                   </motion.span>
+                 </span>
+               </h1>
 
               {/* Tagline */}
               <motion.p 
@@ -636,9 +655,8 @@ export default function App() {
 
           <div className="grid grid-cols-1 gap-4 max-w-5xl">
             {servicesData.map((svc) => (
-              <motion.div
+              <TiltCard
                 key={svc.num}
-                layout="position"
                 onClick={() => setActiveService(activeService === svc.num ? null : svc.num)}
                 className={`glass-effect border rounded-xl overflow-hidden cursor-pointer transition-all duration-300 ${
                   activeService === svc.num
@@ -693,7 +711,7 @@ export default function App() {
                     </motion.div>
                   )}
                 </AnimatePresence>
-              </motion.div>
+              </TiltCard>
             ))}
           </div>
           </motion.div>
@@ -772,80 +790,84 @@ export default function App() {
                   animate={{ opacity: 1, scale: 1, y: 0 }}
                   exit={{ opacity: 0, scale: 0.98, y: -15 }}
                   transition={{ duration: 0.4 }}
-                  className={`glass-effect border rounded-2xl p-6 sm:p-8 flex flex-col md:flex-row gap-6 justify-between items-start md:items-center relative overflow-hidden ${
-                    prj.isFeatured
-                      ? 'border-lime-400/[0.25] bg-gradient-to-r from-lime-400/[0.04] to-cyan-400/[0.02]'
-                      : 'border-white/[0.05]'
-                  } glass-effect-hover`}
+                  className="w-full h-full"
                 >
-                  {/* Glowing tag for featured badge */}
-                  {prj.isFeatured && (
-                    <div className="absolute top-0 right-0 p-1 px-3 bg-lime-400 text-black font-mono font-black text-[8px] uppercase tracking-widest rounded-bl-lg shadow-md animate-pulse">
-                      Featured SaaS
-                    </div>
-                  )}
+                  <TiltCard
+                    className={`glass-effect border rounded-2xl p-6 sm:p-8 flex flex-col md:flex-row gap-6 justify-between items-start md:items-center relative overflow-hidden ${
+                      prj.isFeatured
+                        ? 'border-lime-400/[0.25] bg-gradient-to-r from-lime-400/[0.04] to-cyan-400/[0.02]'
+                        : 'border-white/[0.05]'
+                    } glass-effect-hover w-full h-full`}
+                  >
+                    {/* Glowing tag for featured badge */}
+                    {prj.isFeatured && (
+                      <div className="absolute top-0 right-0 p-1 px-3 bg-lime-400 text-black font-mono font-black text-[8px] uppercase tracking-widest rounded-bl-lg shadow-md animate-pulse">
+                        Featured SaaS
+                      </div>
+                    )}
 
-                  {/* Left detail area */}
-                  <div className="space-y-4 max-w-2xl text-left">
-                    <div className="flex flex-wrap items-center gap-3">
-                      <span className="font-mono text-[10px] font-bold text-lime-400 tracking-wider">
-                        {prj.id}
-                      </span>
-                      <span className="text-zinc-600 font-mono text-[10px]">•</span>
-                      <span className={`font-mono text-[10px] px-2.5 py-0.5 rounded-full border ${
-                        prj.status === 'LAUNCHING SOON' 
-                          ? 'bg-cyan-400/10 border-cyan-400/25 text-cyan-400 animate-pulse' 
-                          : prj.status === 'LIVE' 
-                          ? 'bg-lime-400/10 border-lime-400/25 text-lime-400' 
-                          : 'bg-white/[0.02] border-white/[0.08] text-zinc-400'
-                      }`}>
-                        {prj.status}
-                      </span>
-                      {prj.domain && (
-                        <a 
-                          href={`https://${prj.domain}`} 
-                          target="_blank" 
-                          rel="noopener" 
-                          className="font-mono text-[10px] text-zinc-500 hover:text-white flex items-center gap-0.5 transition-colors duration-150"
-                        >
-                          {prj.domain} <ExternalLink className="w-2.5 h-2.5" />
-                        </a>
-                      )}
-                    </div>
-
-                    <div>
-                      <h3 className="text-2xl sm:text-3xl font-sans font-black text-white tracking-tight flex items-center gap-2">
-                        {prj.name}
-                        <span className="text-xs font-mono font-medium text-zinc-500"> — {prj.client}</span>
-                      </h3>
-                      <p className="text-zinc-400 text-xs sm:text-sm leading-relaxed mt-2.5">
-                        {prj.description}
-                      </p>
-                    </div>
-
-                    {/* Chips list */}
-                    <div className="flex flex-wrap gap-1.5">
-                      {prj.tags.map((tag) => (
-                        <span key={tag} className="px-2.5 py-0.5 rounded bg-zinc-950 font-mono text-[9px] text-zinc-500 border border-white/[0.04]">
-                          #{tag}
+                    {/* Left detail area */}
+                    <div className="space-y-4 max-w-2xl text-left">
+                      <div className="flex flex-wrap items-center gap-3">
+                        <span className="font-mono text-[10px] font-bold text-lime-400 tracking-wider">
+                          {prj.id}
                         </span>
-                      ))}
-                    </div>
-                  </div>
+                        <span className="text-zinc-600 font-mono text-[10px]">•</span>
+                        <span className={`font-mono text-[10px] px-2.5 py-0.5 rounded-full border ${
+                          prj.status === 'LAUNCHING SOON' 
+                            ? 'bg-cyan-400/10 border-cyan-400/25 text-cyan-400 animate-pulse' 
+                            : prj.status === 'LIVE' 
+                            ? 'bg-lime-400/10 border-lime-400/25 text-lime-400' 
+                            : 'bg-white/[0.02] border-white/[0.08] text-zinc-400'
+                        }`}>
+                          {prj.status}
+                        </span>
+                        {prj.domain && (
+                          <a 
+                            href={`https://${prj.domain}`} 
+                            target="_blank" 
+                            rel="noopener" 
+                            className="font-mono text-[10px] text-zinc-500 hover:text-white flex items-center gap-0.5 transition-colors duration-150"
+                          >
+                            {prj.domain} <ExternalLink className="w-2.5 h-2.5" />
+                          </a>
+                        )}
+                      </div>
 
-                  {/* Operational redirection link icon */}
-                  {prj.domain && (
-                    <motion.a
-                      href={`https://${prj.domain}`}
-                      target="_blank"
-                      rel="noopener"
-                      whileHover={{ scale: 1.1, rotate: 45 }}
-                      whileTap={{ scale: 0.95 }}
-                      className="w-12 h-12 rounded-full border border-lime-400/30 text-lime-400 bg-lime-400/10 flex items-center justify-center cursor-pointer shrink-0"
-                    >
-                      <ArrowUpRight className="w-5 h-5" />
-                    </motion.a>
-                  )}
+                      <div>
+                        <h3 className="text-2xl sm:text-3xl font-sans font-black text-white tracking-tight flex items-center gap-2">
+                          {prj.name}
+                          <span className="text-xs font-mono font-medium text-zinc-500"> — {prj.client}</span>
+                        </h3>
+                        <p className="text-zinc-400 text-xs sm:text-sm leading-relaxed mt-2.5">
+                          {prj.description}
+                        </p>
+                      </div>
+
+                      {/* Chips list */}
+                      <div className="flex flex-wrap gap-1.5">
+                        {prj.tags.map((tag) => (
+                          <span key={tag} className="px-2.5 py-0.5 rounded bg-zinc-950 font-mono text-[9px] text-zinc-500 border border-white/[0.04]">
+                            #{tag}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Operational redirection link icon */}
+                    {prj.domain && (
+                      <motion.a
+                        href={`https://${prj.domain}`}
+                        target="_blank"
+                        rel="noopener"
+                        whileHover={{ scale: 1.1, rotate: 45 }}
+                        whileTap={{ scale: 0.95 }}
+                        className="w-12 h-12 rounded-full border border-lime-400/30 text-lime-400 bg-lime-400/10 flex items-center justify-center cursor-pointer shrink-0"
+                      >
+                        <ArrowUpRight className="w-5 h-5" />
+                      </motion.a>
+                    )}
+                  </TiltCard>
                 </motion.div>
               ))}
             </AnimatePresence>
