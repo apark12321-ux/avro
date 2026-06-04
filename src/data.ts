@@ -4,43 +4,33 @@ export const timelineData: TimelineItem[] = [
   {
     year: '2026',
     events: [
-      { description: 'AI 마케팅 솔루션 사업 본격화 · 자체 마케팅 툴 개발 및 종합 마케팅 대행 영역 확장', isHighlight: true },
-      { description: 'mathhwp.com 출시 · 수학 PDF→아래한글 AI 변환 서비스 (라스트마일 협업)', isHighlight: true },
-      { description: 'blogstudio.live 출시 임박 · AI 기반 OSMU 콘텐츠 자동화 SaaS (자체 서비스)', isHighlight: true }
+      { description: '★ AI 핵심 기업 피벗 (AI Pivot) 완성 · 10년 콘텐츠 개발 대행을 마감하고 비즈니스 AI 유틸리티 엔진 그룹으로 선언', isHighlight: true },
+      { description: 'mathhwp.com 공식 브랜드 운영 · 구글 Gemini 1.5/2.0 API와 Mathpix OCR 엔지니어링을 통한 수학 PDF 수식-아래한글(HWPX) 자동 변환 SaaS 런칭', isHighlight: true },
+      { description: 'blogstudio.live 정식 서비스 개시 · 멀티 디바이스 원스톱 다중 발행 특화 콘텐츠 자동 생성 AI 솔루션', isHighlight: true },
+      { description: '에이전틱 워크플로우(Agentic Workflow) 구축 대행 및 Multi-LLM 엔터프라이즈 콘텐츠 자동화 서비스 론칭', isHighlight: true }
     ]
   },
   {
     year: '2022 — 2025',
     events: [
-      { description: 'EBSMath 콘텐츠 활용방안 연구 / 학습서비스 연구활동 / 수업지도안 개발 · 4년 연속 파트너십 (2022–2025)' },
-      { description: '미래엔 초코 · 엠티처 사이트 QA · QC 및 콘텐츠 개발 (2023–2025)' },
-      { description: '구미시청 산업유산투어 공연형 테마버스 안내 영상 제작 (2023)' },
-      { description: '맥스(MAX)농구교실 홈페이지 구축 및 로고 디자인 (2023)' },
-      { description: '윌비스 1억뷰N잡 콘텐츠 개발 자문 (2022)' },
-      { description: '하나로컨설팅노무법인 유튜브 영상 제작 및 채널 운영 (2022)' },
-      { description: '동서대학교 LINC 3.0사업단 산학협약 체결 (2022)' }
+      { description: 'EBSMath 핵심 콘텐츠 설계 및 교수학습지도안 4년 연속 장기 전담 개발 (비-AI 레거시의 극치, 견고한 교육 도메인 장악)' },
+      { description: '미래엔(Mirae-N) 플래그십 교육 플랫폼 초코 · 엠티처 사이트 QA/QC 총괄 기능 점검 및 디지털 검수 운영 (대규모 플랫폼 무결성 보장 노하우 축적)' },
+      { description: '구미시청 지역 문화유산 투어 오리지널 실사/공연형 영상 시나리오 기획 및 영상 촬영 제작 (2023)' },
+      { description: '맥스(MAX)농구교실 풀스택 홈페이지 구축 및 BI 브랜드 아이덴티티 로고 디자인 (2023)' },
+      { description: '윌비스 1억뷰N잡 클래스 디지털 미디어 콘텐츠 기획 및 교육 콘텐츠 자문 (2022)' },
+      { description: '하나로컨설팅노무법인 등 오피스 전문 기관의 장기 유튜브 대행 운영 및 디지털 교육 영상 제작 (2022)' },
+      { description: '동서대학교 LINC 3.0 사업단 공식 산학협약 체결 및 디지털 콘텐츠 공동 연구 개발 (2022)' }
     ]
   },
   {
-    year: '2018 — 2021',
+    year: '2016 — 2021',
     events: [
-      { description: '타임폴리오투자자문 사이트 구축 · BI & CI 제작 (2018–2022)' },
-      { description: '미디어크루 동영상 강의 및 홍보영상 제작 (2018)' },
-      { description: '한국릴리 제약 연구 소개영상 제작 (2021)' },
-      { description: '롯데시네마 창립기념 홍보영상 / 국기원 태권도 영상 제작 (2020)' }
-    ]
-  },
-  {
-    year: '2016 — 2017',
-    events: [
-      { description: '주식회사 에이브로 법인 설립 (2016.07)', isHighlight: true },
-      { description: '서울예술대학교 산학협력단 차세대 실감콘텐츠 영상 제작 (2017.12)' },
-      { description: '아시아문화원 차세대 실감콘텐츠 컨셉 및 키비주얼 개발 (2017.12)' },
-      { description: '쥬스컴퍼니 미스터 레이디 · 남산골 한옥마을 온라인 홍보대행 (2017.10–11)' },
-      { description: '동국대학교 산학협력단 협력 프로젝트 (2017.11)' },
-      { description: '투모로우 홍보영상 기획 및 컨설팅 (2016.12)' },
-      { description: '이코브리지 디자인 및 퍼블리싱 (2016.11–12)' },
-      { description: '한국쓰리디프린팅협회 K-ICT 디바이스 FAB 판교 사례 발표 행사 (2016.12)' }
+      { description: '타임폴리오투자자문(Timefolio) 공식 투자 관리 웹 서비스 인터랙티브 프론트엔드 구축 및 브랜드 디자인 전반 (2018–2022)' },
+      { description: '한국릴리 제약 메디컬 리서치 정보 인포그래픽스 및 인체 모션 소개 영상 제작 (2021)' },
+      { description: '롯데시네마 창립기념 영상 및 국기원 태권도 글로벌 보급 교육 콘텐츠 제작 (2020)' },
+      { description: '주식회사 에이브로 공식 법인 설립 (2016.07) · 10년 전 탄탄한 디지털 콘텐츠 기획/제작 대행사로 대장정 개시' },
+      { description: '서울예술대학교 산학협력단 / 아시아문화원 미래 실감 비주얼 키 그래픽 기획 및 디자인 개발 (2017)' },
+      { description: '쥬스컴퍼니 및 남산골한옥마을 등 전통 문화 브랜드 페스티벌 온라인 전시 콘텐츠 기획 및 미디어 콘텐츠 구축 (2017)' }
     ]
   }
 ];
@@ -48,82 +38,82 @@ export const timelineData: TimelineItem[] = [
 export const servicesData: ServiceItem[] = [
   {
     num: '01',
-    title: 'AI Engineering',
-    englishTitle: 'LLM · AGENT · CORE',
-    description: 'Claude · GPT · Gemini 등 최신 오픈AI/앤트로픽/구글 모델을 통합한 맞춤형 언어모델 솔루션 및 의사결정형 자율 에이전트 시스템을 기획하고 완전하게 개발합니다. 정교한 RAG 데이터베이스 연동과 MCP 통합, 최적의 인하우스 오케스트레이션을 보장합니다.',
-    items: ['LLM 연동 및 미세조정', '자율 협업형 AI 에이전트', 'RAG 지식 허브 구축', '프롬프트 옵티마이징']
+    title: 'AI Engineering & SaaS',
+    englishTitle: 'LLM · AGENT · SaaS ENGINE',
+    description: '10년의 견고한 플랫폼 검수 노하우 위에, Google Gemini, OpenAI, Anthropic 등 최신 AI 신경망을 결합합니다. 복잡한 수식을 완벽히 인식하여 변환하는 mathhwp.com의 설계 역량을 바탕으로, 기업용 실무 에이전트와 도메인 특화 인터랙티브 시스템을 전문적으로 빌드합니다.',
+    items: ['다중 LLM 조율 및 API 결합', '도메인 특화 OCR & 파서 엔지니어링', '실무 지향 AI 에이전트 워크플로우', '무결성 보장 전용 SaaS 설계 및 배포']
   },
   {
     num: '02',
-    title: 'Product Development',
-    englishTitle: 'WEB · APP · SAAS',
-    description: '기업 홍보 웹사이트, 고도화된 기능성 플랫폼, 비즈니스 지향 SaaS 제품 및 크로스플랫폼 모바일 앱을 풀스택으로 설계·개발합니다. 빠른 실행에 최신의 컴포넌트 아키텍처와 대규모 백엔드 트래픽 처리 노하우를 주입합니다. mathhwp.com 서비스가 대표적인 실서비스 빌드 성과입니다.',
-    items: ['반응형 웹 & 플랫폼 개발', '네이티브/하이브리드 모바일 앱', '고성능 비즈니스 SaaS', '유지보수 및 인프라 운영']
+    title: 'Creative AI Automation',
+    englishTitle: 'CREATIVE OSMU AUTOMATION',
+    description: 'blogstudio.live의 OSMU 원천 자동화 구조를 계승하여 중복적인 콘텐츠 가공 리소스를 혁신적으로 제거합니다. 검증된 원본 텍스트 하나만으로 가독성 품질을 정교하게 유지한 채 네이버 블로그 포스팅, 인스타그램 캡션, 숏폼 비디오 시나리오, 교육/뉴스레터용 원고를 AI 멀티 에이전트가 완벽히 구성하고 스케줄 발행합니다.',
+    items: ['원소스 멀티유즈 (OSMU) 자동 기획', '지능형 블로그/SNS 다중 플랫폼 연합 배포', '브랜드 페르소나 정교화 튜닝 프롬프트', '정교한 콘텐츠 퍼블리싱 자동화 스택']
   },
   {
     num: '03',
-    title: 'AI Automation',
-    englishTitle: 'WORKFLOW · TOOLS',
-    description: '반복적인 정보 수집, 원시 데이터 포맷팅, 이종 도구 간의 데이터 동기화, 대량의 문서 분석 및 정보 분류 프로세스를 자동화합니다. API 기반 오토메이션과 AI 판단 단계를 엮음으로써 현업 부서의 실무 리소스를 대폭 경감합니다.',
-    items: ['비즈니스 프로세스 자동화 (BPA)', '비정형 문서 정보 추출', '자동 마케팅 발행 루틴', '맞춤형 AI 내부 유틸리티']
+    title: '10-Year Digital Legacy Operations',
+    englishTitle: 'TRUSTED PLATFORM LEGACY',
+    description: 'EBSMath, 미래엔, 윌비스 등 10년간 검증된 공공 및 대기업 에듀테크 플랫폼 대규모 검수와 디지털 운영의 헤리티지. AI 기술의 사각지대인 "실무 무결성"과 "시스템 신뢰도"를 보장하기 위해, 우리는 10년의 깊은 에이전시 운영 역량을 AI 핵심 빔으로 투사합니다.',
+    items: ['안정성/신뢰성 최우선 대형 시스템 조율', '에듀테크 전문 QA & 퍼블리싱 체계 보장', '인프라 클라우드 전환 및 API 통합', '레거시 연계 비즈니스 인터랙션 보정']
   },
   {
     num: '04',
-    title: 'Digital Production',
-    englishTitle: 'VIDEO · CONTENT',
-    description: '10년 동안 정교하게 다듬어온 콘텐츠 시각 기획 능력과 현대의 생성형 크리에이션 AI 스택을 접목합니다. 모션 그래픽스, 교육용 홍보 영상, 기업 브랜딩 콘텐츠 기획, SNS 미디어 가치 상승을 위한 디지털 시각 산출물을 초음속으로 완수합니다.',
-    items: ['모션 그래픽스 & 홍보 영상', '교육용 인터랙티브 콘텐츠', '유튜브 & 미디어 채널 운영', '생성형 AI 비디오 메이킹']
+    title: 'AI Visual & Cinema Production',
+    englishTitle: 'DIGITAL VIDEO & GENERATIVE SEAMLESS',
+    description: '구미시청, 한국릴리, 롯데시네마 등 10년간 누적된 메이저 비주얼 영상 기획 노하우를 바탕으로 차세대 Generative AI 영상 제작을 완수합니다. 연출의 미감(Human Eye)과 고급 AI 영상 툴체인을 융합하여 상상을 현실로 바꾸는 초고해상도 실감 미디어를 초단기 완성해 냅니다.',
+    items: ['브랜드 다큐멘터리 / 웰메이드 콘텐츠 영상', '교육 최적화 모션그래픽스 및 인포그래픽스', '생성형 비디오(Gen-2, Sora) 기반 워크플로우', '멀티미디어 채널 브랜딩 및 디지털 미디어 콘텐츠 포지셔닝']
   }
 ];
 
 export const projectsData: ProjectItem[] = [
   {
     id: 'PRD_001',
-    name: 'BlogStudio',
-    client: '자체 SaaS 제품',
-    domain: 'blogstudio.live',
-    tags: ['AI', 'SaaS', 'OSMU', 'Multi-LLM', 'Creative Automation'],
-    description: '단 하나의 마스터 소스 텍스트로부터 다채로운 배포 포맷을 일괄 변환해내는 원소스 멀티유즈(OSMU) 콘텐츠 허브. 네이버 블로그 포스팅, 인스타그램 캡션, 숏폼 스크립트, 뉴스레터를 AI 에이전트가 동시에 조율하여 생성 및 발행합니다. 2026년 에이브로의 대표적인 차세대 릴리스 플랫폼.',
+    name: 'mathhwp',
+    client: '(주)라스트마일 핵심 공조 빌드',
+    domain: 'mathhwp.com',
+    tags: ['AI', 'OCR', 'hwp', 'LaTex', 'EduTech', '1st Pivot Product'],
+    description: 'Google Gemini 분석 브레인과 Mathpix 수식 파서를 고도로 오케스트레이션하여, 가장 정교한 서식 변정이 요구되는 수학/과학 PDF 내 수식들을 편집용 아래한글(HWPX) 코드로 리포맷해주는 국내 선두의 수학 변환 에듀테크 SaaS입니다. 에이브로의 핵심적인 AI 피벗 첫 타자입니다.',
     isFeatured: true,
-    status: 'LAUNCHING SOON'
+    status: 'LIVE'
   },
   {
     id: 'PRD_002',
-    name: 'mathhwp',
-    client: '(주)라스트마일 협업 빌드',
-    domain: 'mathhwp.com',
-    tags: ['AI', 'OCR', 'hwp', 'LaTex', 'EduTech'],
-    description: '구글 Gemini AI 분석 엔진과 고정밀 특화 OCR 기술을 융합하여, 수학 PDF 파일에 포함된 수식과 기호들을 오판 없이 완전히 편집 가능한 아래한글(HWPX) 수식으로 원클릭 변환해내는 대중적 에듀테크 서비스입니다. 교사 및 수학 교육 기업에 전례 없는 가치를 전하고 있습니다.',
-    isFeatured: false,
+    name: 'BlogStudio',
+    client: '에이브로 독자 AI SaaS 제품',
+    domain: 'blogstudio.live',
+    tags: ['AI-OSMU', 'SaaS', 'Content Automation', 'Multi-LLM Pipeline'],
+    description: '지난 10년간 대형 브랜드와 교육기관의 비주얼 및 미디어 콘텐츠를 수작업으로 기획·개발하고 퍼블리싱하며 격파해 온 병목 현상을 집대성하여 탄생시킨 AI 멀티 에이전트 SaaS. 단 한 번의 텍스트 입력으로 블로그 포스팅, 카드뉴스 캡션, 숏폼 비디오 대본을 전문성 높은 어조로 다중 제작해 냅니다.',
+    isFeatured: true,
     status: 'LIVE'
   },
   {
     id: 'CASE_001',
-    name: 'EBSMath 콘텐츠 개발',
+    name: 'EBSMath 4개년 대규모 파트너십',
     client: '한국교육방송공사 (EBS)',
     domain: 'ebsmath.co.kr',
-    tags: ['EBSMath', 'LINC', '수업지도안', '4년 연속'],
-    description: '2022년부터 2025년까지 연속으로 EBS의 핵심 플랫폼인 EBSMath 콘텐츠 활용방안 연구 용역, 중학수학 학습서비스 연구활동, 입체 클래스 매직 수업지도안 개발 등을 수행하며 공교육 공조 파트너로서 공헌해왔습니다.',
+    tags: ['EBSMath', '수업지도안', '4년 연속 수행', 'Stable Legacy Operations'],
+    description: '2022년부터 2025년까지 비-AI 영역에서 공교육 사상 최대 규모 수학 콘텐츠의 활용 방안 기획, 공교육 맞춤 입체 수업지도안 전담 연구를 성공리에 수행하며, 단순 AI 연산을 실상의 교육 비즈니스로 밀결합시키는 핵심 도메인 지식을 배양해왔습니다.',
     isFeatured: false,
     status: 'CASE STUDY'
   },
   {
     id: 'CASE_002',
-    name: '미래엔 초코 & 엠티처 파이프라인',
+    name: '미래엔 초코 / 엠티처 총괄 무결성 QA',
     client: '(주)미래엔',
     domain: 'mirae-n.com',
-    tags: ['엠티처', '초코', 'QA / QC', '퍼블리싱 검증'],
-    description: '교과 교육 출판사 미래엔의 플래그십 학생 커뮤니티 "초코" 플랫폼 및 핵심 지원 앰티처 채널의 완벽한 기능 무결성 보장을 극대화하기 위해 다년간의 전문 품질 검증(QA/QC) 및 퍼블리싱 가속화를 수행하였습니다.',
+    tags: ['초코', '엠티처', 'QA / QC', '무결성 운영 레거시'],
+    description: '대표적인 교과서 출판사 미래엔의 초대형 교육 커뮤니티 초코 플랫폼 및 교사용 지원 시스템 엠티처의 기능 동작, 완벽한 사용자 만족을 위한 전체 검수와 QA 퍼블리싱 가속화를 도맡아 시스템 무안정 운영을 달성한 굵직한 업적입니다.',
     isFeatured: false,
     status: 'CASE STUDY'
   },
   {
     id: 'CASE_003',
-    name: '윌비스 1억뷰N잡 전문화',
-    client: '(주)윌비스',
-    domain: 'njobler.net',
-    tags: ['컨설팅', '콘텐츠 자문', '온라인 아카데미'],
-    description: '온라인 멀티 에듀 플랫폼 윌비스의 미디어 1억뷰N잡 콘텐츠 전략 구성 자문을 수행하여 교육 채널 다양화에 기여하였습니다.',
+    name: '타임폴리오투자자문 인터랙티브 사이트 구축',
+    client: '타임폴리오 (TIMEFOLIO)',
+    domain: 'timefolio.co.kr',
+    tags: ['금융 웹 브랜딩', 'UI UX', 'Identity Design'],
+    description: '대한민국 대표 자산 운용사 타임폴리오의 공식 사이트 웹 인터랙션 구축과 기업 전용 BI/CI 전반 패키지를 밀착 설계하여 신뢰 위주의 하이엔드 온라인 창구를 완벽하게 일구어냈습니다.',
     isFeatured: false,
     status: 'CASE STUDY'
   }
@@ -149,10 +139,10 @@ export const partnersData: PartnerItem[] = [
 ];
 
 export const processSteps: ProcessStep[] = [
-  { step: '01', title: '전문 플래너 1:1 상담', englishTitle: 'DEDICATED PLANNER' },
-  { step: '02', title: '세부 요구사항 규격화', englishTitle: 'REQUIREMENTS DESIGN' },
-  { step: '03', title: '맞춤 솔루션 개념 기획', englishTitle: 'CONCEPT ARCHITECTURE' },
-  { step: '04', title: '합리적 견적 & 일정 확정', englishTitle: 'FINAL AGREEMENT' },
-  { step: '05', title: '정밀 엔지니어링 실행', englishTitle: 'AGILE DEPLOYMENT' },
-  { step: '06', title: '결과 분석 및 지속적 고도화', englishTitle: 'VALUE RETROSPECTIVE' }
+  { step: '01', title: 'AI 비즈니스 1:1 진단 및 분석', englishTitle: 'AI FIT DIAGNOSIS' },
+  { step: '02', title: '레거시 데이터 / 도메인 워크플로우 분석', englishTitle: 'LEGACY DATA ANALYSIS' },
+  { step: '03', title: '맞춤형 Multi-LLM 에이전트 상세 구조 기획', englishTitle: 'CUSTOM AGENTIC PLANNING' },
+  { step: '04', title: '무결성 PoC 테스트 및 개발 예산 조율', englishTitle: 'INTEGRITY POC & SCOPE' },
+  { step: '05', title: '애자일 기반 서비스/SaaS 엔진 초광속 배포', englishTitle: 'AGILE SaaS DEPLOYMENT' },
+  { step: '06', title: '정밀 결과 리포포 및 실무 지속 고도화', englishTitle: 'VALUE SCALE-UP' }
 ];

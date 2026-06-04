@@ -44,16 +44,16 @@ export default function App() {
   const [scrollPercentage, setScrollPercentage] = useState<number>(0);
   const [isNavHidden, setIsNavHidden] = useState<boolean>(false);
   const [brandRotation, setBrandRotation] = useState<number>(0);
-  const [typedCommand, setTypedCommand] = useState<string>('avro agent --optimize');
+  const [typedCommand, setTypedCommand] = useState<string>('blogstudio write --topic="AI-Pivot"');
   const [terminalLogs, setTerminalLogs] = useState<Array<{ id: number; text: string; type: 'client' | 'info' | 'success' | 'warn' | 'header' }>>([
-    { id: 1, text: 'avro init --studio-preset=future', type: 'header' },
-    { id: 2, text: 'Initializing AVRO AI Core Engine v2.6.4...', type: 'info' },
-    { id: 3, text: '✓ Core Neural Bridge connected. AI models calibrated.', type: 'success' },
-    { id: 4, text: '✓ Full-stack Next.js/Tailwind workspace ready.', type: 'success' },
-    { id: 5, text: 'Ready to build high-performance software.', type: 'info' }
+    { id: 1, text: 'blogstudio init --preset=content_creation', type: 'header' },
+    { id: 2, text: 'Initializing BlogStudio Engine v1.0.2...', type: 'info' },
+    { id: 3, text: '✓ 10-Year human expert content development database loaded.', type: 'success' },
+    { id: 4, text: '✓ Multi-channel automation active (Tistory, Naver, Instagram).', type: 'success' },
+    { id: 5, text: 'Ready to generate high-conversion content assets below.', type: 'info' }
   ]);
   const [isTerminalBuilding, setIsTerminalBuilding] = useState<boolean>(false);
-  const [activeTerminalPreset, setActiveTerminalPreset] = useState<string>('agent');
+  const [activeTerminalPreset, setActiveTerminalPreset] = useState<string>('blog');
 
   // Mouse coordinate tracking for spotlight effects
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
@@ -133,46 +133,49 @@ export default function App() {
     let sequence: Array<{ text: string; type: 'client' | 'info' | 'success' | 'warn' | 'header' }> = [];
 
     switch (preset) {
-      case 'agent':
-        commandText = 'avro agent --spin-up=marketing-crew';
+      case 'blog':
+        commandText = 'blogstudio write --topic="AI-Pivot의 필요성"';
         sequence = [
-          { text: 'Starting multi-agent RAG workflow...', type: 'info' },
-          { text: 'Connecting with DeepResearch capabilities...', type: 'info' },
-          { text: '✓ Agent [Content Planner] loaded context from db.', type: 'success' },
-          { text: '✓ Agent [Copywriter] generated SEO social copies.', type: 'success' },
-          { text: '✓ Completed automatic newsletter in 850ms.', type: 'success' }
+          { text: 'Analyzing topic intent utilizing Google Gemini API...', type: 'info' },
+          { text: 'Connecting Naver & Tistory publishing gateways...', type: 'info' },
+          { text: '✓ Generated optimized SEO article structure, tags & keywords.', type: 'success' },
+          { text: '✓ Draft formatted & sent to BlogStudio Stage DB.', type: 'success' },
+          { text: '✓ Human curation level: 98.4% readability index.', type: 'success' }
         ];
         break;
-      case 'mathhwp':
-        commandText = 'npx mathhwp transform --src=exam_2026.pdf';
+      case 'instagram':
+        commandText = 'blogstudio render --channel=instagram --style=card';
         sequence = [
-          { text: 'Analyzing math PDF layout structure via Gemini AI...', type: 'info' },
-          { text: 'Extracting Mathpix OCR 수식 객체 145개...', type: 'info' },
-          { text: 'Writing formatted HWPX document model...', type: 'info' },
-          { text: '✓ Successfully converted 14 pages of math formulae.', type: 'success' },
-          { text: '✓ Source: exam_2026.docx/hwpx generated in 1.2s.', type: 'success' }
+          { text: 'Condensing core concepts into social punchy captions...', type: 'info' },
+          { text: 'Generating eye-catching hashtags and layout bullet points...', type: 'info' },
+          { text: '✓ Formatted premium Instagram post caption ready.', type: 'success' },
+          { text: '✓ Created 5-slide card carousel structure concept tags.', type: 'success' },
+          { text: '✓ Post prepared and scheduled for optimized feed timing.', type: 'success' }
         ];
         break;
-      case 'automation':
-        commandText = 'avro workflow --trigger=daily-sync-reports';
+      case 'shorts':
+        commandText = 'blogstudio script --channel=shorts --voice=confident';
         sequence = [
-          { text: 'Triggering scheduled SaaS integrations...', type: 'info' },
-          { text: 'Importing metrics: Google Analytics, Slack, Mailchimp...', type: 'info' },
-          { text: '✓ Consolidated weekly marketing conversion report.', type: 'success' },
-          { text: '✓ PDF summary dispatched to slack channel #avro-marketing.', type: 'success' }
+          { text: 'Pre-calculating first 3s high-retention hook scenario...', type: 'info' },
+          { text: 'Writing narrative script with secondary visual prompts...', type: 'info' },
+          { text: '✓ Voice narration rhythm matched to trendy video styles.', type: 'success' },
+          { text: '✓ Audio prompt: /assets/voice-gen/script_01.mp3 synced.', type: 'success' },
+          { text: '✓ Rendered narration script for 60-second video duration.', type: 'success' }
         ];
         break;
-      case 'saas':
-        commandText = 'avro deploy --platform=blogstudio --env=production';
+      case 'publish':
+        commandText = 'blogstudio deploy --all-channels --release=live';
         sequence = [
-          { text: 'Triggering zero-downtime Vercel edge build...', type: 'info' },
-          { text: 'Optimizing static chunks & bundler cache...', type: 'info' },
-          { text: '✓ deployed to cloud run edge (tokyo/seoul shards).', type: 'success' },
-          { text: '✓ Service live: https://blogstudio.live [SSL: OK]', type: 'success' }
+          { text: 'Validating structural content across multi-service APIs...', type: 'info' },
+          { text: 'Initiating simultaneous OSMU posting engine...', type: 'info' },
+          { text: '✓ Successfully posted to Naver Blog API.', type: 'success' },
+          { text: '✓ Successfully published to Tistory Server.', type: 'success' },
+          { text: '✓ Triggered automatic Instagram publishing feed callback.', type: 'success' },
+          { text: '✓ 1 Original Source → 5 Multi-use social contents live!', type: 'success' }
         ];
         break;
       default:
-        commandText = 'avro optimize';
+        commandText = 'blogstudio optimize';
         sequence = [{ text: 'Optimization completed.', type: 'success' }];
     }
 
@@ -212,7 +215,7 @@ export default function App() {
   // Filter projects depending on selected tag
   const filteredProjects = projectsData.filter((project) => {
     if (projectFilter === 'ALL') return true;
-    if (projectFilter === 'AI') return project.tags.includes('AI') || project.tags.includes('OSMU');
+    if (projectFilter === 'AI') return project.id.startsWith('PRD') || project.tags.some(tag => tag.toLowerCase().includes('ai') || tag.toLowerCase().includes('osmu') || tag.toLowerCase().includes('saas'));
     if (projectFilter === 'CASE_STUDY') return project.status === 'CASE STUDY';
     return true;
   });
@@ -313,16 +316,16 @@ export default function App() {
               >
                 <span className="text-lime-400 font-bold flex items-center gap-1.5">
                   <span className="w-1.5 h-1.5 rounded-full bg-lime-400 animate-ping" />
-                  SHIPPING_v.2026
+                  PIVOT_RELEASE_2026
                 </span>
                 <span className="text-zinc-600">|</span>
                 <span>EST 2016.07.18</span>
                 <span className="text-zinc-600">|</span>
-                <span className="text-cyan-400 font-medium">AI ENGINEERING STUDIO</span>
+                <span className="text-cyan-400 font-medium">HOT RELEASE: BLOGSTUDIO.LIVE</span>
               </motion.div>
 
                {/* Title with staggered text rise and interactive glitch hovering */}
-               <h1 className="text-4xl sm:text-6xl md:text-[5.4rem] font-sans font-black tracking-tight leading-[0.95] mb-6 select-none text-left">
+               <h1 className="text-[2.2rem] sm:text-5xl md:text-[4.4rem] font-sans font-black tracking-tight leading-[1.05] sm:leading-[0.95] mb-6 select-none text-left">
                  <span className="block overflow-hidden py-1">
                    <motion.span 
                      initial={{ y: '100%' }}
@@ -330,7 +333,7 @@ export default function App() {
                      transition={{ duration: 0.8, cubicBezier: [0.16, 1, 0.3, 1] }}
                      className="block"
                    >
-                     우리는 <GlitchText text="AI" className="bg-gradient-to-r from-cyan-400 via-blue-400 to-indigo-400 bg-clip-text text-fill-transparent text-transparent" />로
+                     한 줄의 <GlitchText text="텍스트" className="bg-gradient-to-r from-cyan-400 via-blue-400 to-indigo-400 bg-clip-text text-fill-transparent text-transparent" />에서
                    </motion.span>
                  </span>
                  <span className="block overflow-hidden py-1">
@@ -340,7 +343,7 @@ export default function App() {
                      transition={{ duration: 0.8, delay: 0.15, cubicBezier: [0.16, 1, 0.3, 1] }}
                      className="block"
                    >
-                     <GlitchText text="소프트웨어" className="bg-lime-400 text-black px-4 py-1.5 rounded-lg inline-block mr-2 shadow-[0_0_25px_rgba(212,255,58,0.2)] hover:bg-lime-300" />를
+                     블로그·SNS를 <span className="bg-lime-400 text-black px-3.5 py-1.5 rounded-lg inline-block mr-2 shadow-[0_0_25px_rgba(212,255,58,0.25)] hover:bg-lime-300">동시 지배</span>하는
                    </motion.span>
                  </span>
                  <span className="block overflow-hidden py-1">
@@ -350,7 +353,7 @@ export default function App() {
                      transition={{ duration: 0.8, delay: 0.28, cubicBezier: [0.16, 1, 0.3, 1] }}
                      className="inline-block relative fill-current"
                    >
-                     <GlitchText text="만듭니다" className="font-mono italic font-light tracking-wide text-zinc-300" />
+                     신형 AI 엔진, <GlitchText text="BlogStudio" className="font-mono text-lime-400 italic font-medium hover:text-lime-300" />
                      <span className="text-lime-400 animate-pulse">.</span>
                      <span className="absolute left-0 bottom-1 w-full h-[3px] bg-red-500 roundedScale" />
                    </motion.span>
@@ -364,7 +367,7 @@ export default function App() {
                 transition={{ duration: 0.8, delay: 0.45 }}
                 className="text-base sm:text-lg text-zinc-400 max-w-xl leading-relaxed text-left mb-8"
               >
-                <strong className="text-white font-semibold">(주)에이브로</strong>는 LLM · AI 에이전트 · 워크플로우 자동화를 코어 역량으로, 웹/앱/플랫폼/SaaS를 처음부터 끝까지 빠르고 지독하게 구축하는 <span className="text-lime-400 font-medium">전천후 AI 엔지니어링 스튜디오</span>입니다. 
+              <strong className="text-white font-semibold">에이브로의 독자 AI SaaS \'블로그스튜디오(blogstudio.live)\'</strong>는 10년간 대형 브랜드와 교육기관의 비주얼 및 미디어 콘텐츠를 수작업으로 기획·개발해 온 노하우를 집대성한 솔루션입니다. 원천 텍스트 소스 하나로 고품질의 네이버 블로그, 티스토리, 인스타그램 카드뉴스, 숏폼 스크립트까지 다중 아웃풋 콘텐츠로 자동 기획·발행해 줍니다. 
               </motion.p>
 
               {/* Tag badges */}
@@ -375,16 +378,13 @@ export default function App() {
                 className="flex flex-wrap gap-2 text-left justify-start"
               >
                 <span className="px-3.5 py-1.5 rounded-full border border-lime-400/40 bg-lime-400/5 text-lime-400 font-mono text-[10px] uppercase font-bold tracking-widest shadow-[0_0_15px_rgba(212,255,58,0.1)] hover:scale-105 transition-transform duration-200">
-                  AI Engineering
+                  BlogStudio Live
                 </span>
                 <span className="px-3.5 py-1.5 rounded-full border border-white/[0.08] bg-white/[0.02] text-zinc-300 font-mono text-[10px] uppercase font-semibold tracking-wider hover:border-cyan-400/50 hover:text-cyan-400 transition-colors duration-200">
-                  LLM & Agent Systems
+                  One-Source Multi-Use AI
                 </span>
                 <span className="px-3.5 py-1.5 rounded-full border border-white/[0.08] bg-white/[0.02] text-zinc-300 font-mono text-[10px] uppercase font-semibold tracking-wider hover:border-cyan-400/50 hover:text-cyan-400 transition-colors duration-200">
-                  Full-stack Product Build
-                </span>
-                <span className="px-3.5 py-1.5 rounded-full border border-white/[0.08] bg-white/[0.02] text-zinc-300 font-mono text-[10px] uppercase font-semibold tracking-wider hover:border-cyan-400/50 hover:text-cyan-400 transition-colors duration-200">
-                  Workflow Automation
+                  Multi-Agent Scheduling
                 </span>
               </motion.div>
             </div>
@@ -452,48 +452,48 @@ export default function App() {
                   </div>
                   <div className="grid grid-cols-4 gap-1.5">
                     <button
-                      onClick={() => runTerminalSimulation('agent')}
+                      onClick={() => runTerminalSimulation('blog')}
                       disabled={isTerminalBuilding}
                       className={`px-1 py-1.5 rounded text-[9px] font-mono font-bold tracking-tight uppercase border transition-all duration-200 ${
-                        activeTerminalPreset === 'agent'
+                        activeTerminalPreset === 'blog'
                           ? 'bg-lime-400/10 border-lime-400/50 text-lime-400'
                           : 'bg-white/[0.02] border-white/[0.06] text-zinc-400 hover:border-white/[0.12] hover:text-white'
                       }`}
                     >
-                      AI Agent
+                      Write Blog
                     </button>
                     <button
-                      onClick={() => runTerminalSimulation('mathhwp')}
+                      onClick={() => runTerminalSimulation('instagram')}
                       disabled={isTerminalBuilding}
                       className={`px-1 py-1.5 rounded text-[9px] font-mono font-bold tracking-tight uppercase border transition-all duration-200 ${
-                        activeTerminalPreset === 'mathhwp'
+                        activeTerminalPreset === 'instagram'
                           ? 'bg-lime-400/10 border-lime-400/50 text-lime-400'
                           : 'bg-white/[0.02] border-white/[0.06] text-zinc-400 hover:border-white/[0.12] hover:text-white'
                       }`}
                     >
-                      MathHWP
+                      Insta Caption
                     </button>
                     <button
-                      onClick={() => runTerminalSimulation('automation')}
+                      onClick={() => runTerminalSimulation('shorts')}
                       disabled={isTerminalBuilding}
                       className={`px-1 py-1.5 rounded text-[9px] font-mono font-bold tracking-tight uppercase border transition-all duration-200 ${
-                        activeTerminalPreset === 'automation'
+                        activeTerminalPreset === 'shorts'
                           ? 'bg-lime-400/10 border-lime-400/50 text-lime-400'
                           : 'bg-white/[0.02] border-white/[0.06] text-zinc-400 hover:border-white/[0.12] hover:text-white'
                       }`}
                     >
-                      Autopilot
+                      Video Script
                     </button>
                     <button
-                      onClick={() => runTerminalSimulation('saas')}
+                      onClick={() => runTerminalSimulation('publish')}
                       disabled={isTerminalBuilding}
                       className={`px-1 py-1.5 rounded text-[9px] font-mono font-bold tracking-tight uppercase border transition-all duration-200 ${
-                        activeTerminalPreset === 'saas'
+                        activeTerminalPreset === 'publish'
                           ? 'bg-lime-400/10 border-lime-400/50 text-lime-400'
                           : 'bg-white/[0.02] border-white/[0.06] text-zinc-400 hover:border-white/[0.12] hover:text-white'
                       }`}
                     >
-                      SaaS Deploy
+                      OSMU Publish
                     </button>
                   </div>
                 </div>
@@ -523,11 +523,13 @@ export default function App() {
         <section className="py-4 overflow-hidden border-y border-white/[0.08] bg-[#d4ff3a] text-black font-mono font-black text-xs uppercase tracking-widest mb-16 relative z-10">
           <div className="flex whitespace-nowrap select-none overflow-hidden">
             <div className="flex gap-16 shrink-0 animate-tick">
+              <span className="text-indigo-950 font-black">★ BLOGSTUDIO.LIVE</span>
+              <span className="text-black/30">/</span>
               <span>★ MATHHWP.COM</span>
               <span className="text-black/30">/</span>
               <span>DIGITAL CONTENT SOLUTION</span>
               <span className="text-black/30">/</span>
-              <span className="text-indigo-950 font-black">AI MARKETING AUTOMATION</span>
+              <span className="text-indigo-950 font-black">AI CONTENT AUTOMATION</span>
               <span className="text-black/30">/</span>
               <span>VIDEO PRODUCTION EXPERT</span>
               <span className="text-black/30">/</span>
@@ -539,11 +541,13 @@ export default function App() {
               <span className="text-black/30">/</span>
             </div>
             <div className="flex gap-16 shrink-0 animate-tick" aria-hidden="true">
+              <span className="text-indigo-950 font-black">★ BLOGSTUDIO.LIVE</span>
+              <span className="text-black/30">/</span>
               <span>★ MATHHWP.COM</span>
               <span className="text-black/30">/</span>
               <span>DIGITAL CONTENT SOLUTION</span>
               <span className="text-black/30">/</span>
-              <span className="text-indigo-950 font-black">AI MARKETING AUTOMATION</span>
+              <span className="text-indigo-950 font-black">AI CONTENT AUTOMATION</span>
               <span className="text-black/30">/</span>
               <span>VIDEO PRODUCTION EXPERT</span>
               <span className="text-black/30">/</span>
@@ -572,30 +576,49 @@ export default function App() {
               <div className="flex items-center gap-2 text-[10px] font-mono tracking-widest text-[#d4ff3a] uppercase mb-4">
                 <span>01</span>
                 <span className="text-zinc-700">/</span>
-                <span>ABOUT THE STUDIO</span>
+                <span>ABOUT OUR JOURNEY</span>
                 <span className="text-zinc-700">↳</span>
               </div>
               <h2 className="text-3xl sm:text-5xl font-sans font-extrabold tracking-tight text-white mb-6">
-                우리는 <span className="text-lime-400">AI</span>로<br/>소프트웨어를 만듭니다.
+                10년의 견고한 레거시,<br/>
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-lime-400 via-cyan-400 to-indigo-400">인공지능</span>으로 날아오르다.
               </h2>
-              <div className="w-12 h-[1px] bg-white/[0.1] block" />
+              <div className="w-12 h-[1px] bg-white/[0.1] block mb-6" />
+              <div className="space-y-4">
+                <div className="p-4 rounded-xl border border-white/[0.04] bg-white/[0.01] hover:border-lime-400/20 transition-all duration-300">
+                  <div className="font-mono text-lime-400 text-xs font-bold mb-1">LEGACY: 2016 - 2025</div>
+                  <div className="text-zinc-400 text-[11px] leading-relaxed">
+                    EBSMath, 미래엔 등 최고 수준의 엄격함이 요구되는 대형 에듀테크·공공 미디어 플랫폼들의 무결성 품질 검증(QA) 및 디지털 시각 제작물 대행 전념.
+                  </div>
+                </div>
+                <div className="p-4 rounded-xl border border-lime-400/30 bg-lime-400/[0.02] hover:border-lime-400/50 transition-all duration-300">
+                  <div className="font-mono text-lime-400 text-xs font-bold mb-1">AI PIVOT NEXT: 2026 ~</div>
+                  <div className="text-zinc-300 text-[11px] leading-relaxed">
+                    수식-HWPX 완벽 변환 <strong className="text-white">mathhwp.com</strong> 및 지능형 콘텐츠 제작 멀티 에이전트 <strong className="text-white">blogstudio.live</strong> 출시를 필두로, 비-AI의 현실 장벽을 첨단 기술로 파쇄하는 최고의 AI 실무 엔지니어링 그룹으로 거듭납니다.
+                  </div>
+                </div>
+              </div>
             </div>
 
             {/* Paragraph column & Factsheet */}
             <div className="lg:col-span-7 space-y-6">
               <p className="text-xl font-sans font-medium text-white leading-relaxed">
-                "이전의 방식을 파괴하고 고품질의 생성형 AI 기반 오토메이션 시스템을 실시간 배포합니다."
+                "우리는 AI 유행어에 현혹되지 않습니다. 지난 10년간 비-AI 영역에서 갈고닦은 극한의 현실 집행력이 우리의 진짜 무기입니다."
               </p>
-              <p className="text-zinc-400 text-base leading-relaxed space-y-4">
-                오랜 세월 동안 EBSMath, 미래엔, 윌비스 등 주요 에듀테크 전문 그룹 및 미디어 기업들과 쌓아온 <strong>10년 간의 공장형 개발/지속 품질 검증 (QA) 노하우</strong>를 가지고 있습니다.
-                여기에 최신의 대형언어모델(LLMs) 비즈니스 전개 기획을 주입하여 기획에서 정식 런칭까지 걸리는 타임라인을 압도적으로 단축시켰습니다.
-              </p>
+              <div className="text-zinc-400 text-sm leading-relaxed space-y-4 text-left">
+                <p>
+                  에이브로는 지난 10년간 AI와 무관한 전통 디지털 에이전시 비즈니스를 수행해 왔습니다. 대형 교과서 출판사의 무수한 교육 페이지들의 엄격한 품질 점검(QA/QC)을 전담하고, 공교육 수학 콘텐츠의 정밀 시각화를 기획·제작해 오며 <strong>'성공할 수밖에 없는 디테일과 기능적 무결성'</strong>이 무엇인지를 처절하게 증명해 왔습니다.
+                </p>
+                <p>
+                  이 견고한 비즈니스 뼈대 위에 최신 초거대 언어모델(LLM)과 에이전틱 오케스트레이션 엔지니어링을 온전히 융합했습니다. 단순한 AI 래퍼(Wrapper) 서비스가 아닌, 공교육 라스트마일을 완수하는 수학 수식-아래한글 변환 SaaS인 <strong className="text-lime-300">mathhwp.com</strong>과 디지털 콘텐츠 다중 자동 생성 및 유통의 결정체인 <strong className="text-cyan-300">blogstudio.live</strong>를 성공적으로 시장에 안착시키며 기술로 세상을 직접 재정의하는 본격 인공지능 솔루션 그룹으로 대전환을 이루었습니다.
+                </p>
+              </div>
 
               {/* FACT SHEET TABLE */}
               <div className="border border-white/[0.08] lg:max-w-2xl bg-zinc-950/75 rounded-xl overflow-hidden font-mono text-xs mt-8 shadow-inner">
                 <div className="bg-white/[0.02] border-b border-white/[0.06] p-3 text-zinc-500 flex justify-between items-center px-4">
                   <span>// FACT_SHEET_DATA</span>
-                  <span className="text-[10px] text-lime-400 font-bold uppercase">Avro Inc. Verified ✓</span>
+                  <span className="text-[10px] text-lime-400 font-bold uppercase">Pivot Status: Dynamic Verified ✓</span>
                 </div>
                 
                 <div className="divide-y divide-white/[0.05]">
@@ -605,21 +628,21 @@ export default function App() {
                   </div>
                   <div className="grid grid-cols-3 p-3.5 px-4">
                     <span className="text-zinc-500">설립 일자</span>
-                    <span className="col-span-2 text-zinc-200">2016년 7월 18일</span>
+                    <span className="col-span-2 text-zinc-200">2016년 7월 18일 (10년 차 우량 법인)</span>
                   </div>
                   <div className="grid grid-cols-3 p-3.5 px-4">
-                    <span className="text-zinc-500">핵심 기술</span>
+                    <span className="text-zinc-500">트랜스포메이션</span>
                     <span className="col-span-2 text-lime-400 font-semibold flex items-center gap-1">
-                      LLM 통합 · 에이전틱 자동화 · 풀스택 클라우드
+                      전통 플랫폼 에이전시 → AI 비즈니스 유틸리티 엔지니어링 그룹
                     </span>
                   </div>
                   <div className="grid grid-cols-3 p-3.5 px-4">
-                    <span className="text-zinc-500">주요 스택</span>
-                    <span className="col-span-2 text-zinc-300">Claude · GPT · Gemini · Next.js · React · Node · Python · AWS</span>
+                    <span className="text-zinc-500">대표 프로덕트</span>
+                    <span className="col-span-2 text-zinc-300">mathhwp.com (수식 변환) · blogstudio.live (AI OSMU)</span>
                   </div>
                   <div className="grid grid-cols-3 p-3.5 px-4 col-span-3">
-                    <span className="text-zinc-500">소재지</span>
-                    <span className="col-span-2 text-zinc-400">인천 서구 청라에메랄드로 99</span>
+                    <span className="text-zinc-500">엔지니어링 코어</span>
+                    <span className="col-span-2 text-zinc-400">Multi-LLM Calibration · Agentic Automation · Cloud Ingress</span>
                   </div>
                 </div>
               </div>
@@ -1034,8 +1057,8 @@ export default function App() {
             ◆ AVRO_MANIFESTO // METRICS
           </div>
           <p className="font-sans font-bold text-xl sm:text-3xl text-white tracking-tight leading-relaxed max-w-3xl mt-6">
-            "감으로만 짐작하고 주먹구구로 운영하던 마케팅과 데이터, <br className="hidden sm:inline" />
-            이제 <span className="bg-lime-400 text-black px-2 py-0.5 rounded shadow-sm text-[16px] sm:text-[22px] font-black align-middle mx-1">AI</span>가 지능적으로 분석·이해하고 정형화된 <span className="text-red-400 underline decoration-red-500/60 decoration-2 underline-offset-4 font-black">자동화</span> 수치로 증명해 보입니다."
+            "대형 브랜드·교육기관의 복잡한 비주얼 콘텐츠 기획과 고노동 가공 방식, <br className="hidden sm:inline" />
+            이제 <span className="bg-lime-400 text-black px-2 py-0.5 rounded shadow-sm text-[16px] sm:text-[22px] font-black align-middle mx-1">AI</span>가 지능적으로 분석·이해하고 정형화된 <span className="text-red-400 underline decoration-red-500/60 decoration-2 underline-offset-4 font-black">자동화</span> 구조로 완벽히 자동 기획 및 완성해 냅니다."
           </p>
           <div className="font-mono text-[9px] text-zinc-500 tracking-wider uppercase mt-6">
             AVRO STUDIO MANIFESTO · FY 2026. ALL METRICS VERIFIED INC.
