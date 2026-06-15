@@ -536,8 +536,6 @@ export default function App() {
             <div className="flex gap-16 shrink-0 animate-tick">
               <span className="text-indigo-950 font-black">★ BLOGSTUDIO.LIVE</span>
               <span className="text-black/30">/</span>
-              <span>★ MATHHWP.COM</span>
-              <span className="text-black/30">/</span>
               <span>DIGITAL CONTENT SOLUTION</span>
               <span className="text-black/30">/</span>
               <span className="text-indigo-950 font-black">AI CONTENT AUTOMATION</span>
@@ -553,8 +551,6 @@ export default function App() {
             </div>
             <div className="flex gap-16 shrink-0 animate-tick" aria-hidden="true">
               <span className="text-indigo-950 font-black">★ BLOGSTUDIO.LIVE</span>
-              <span className="text-black/30">/</span>
-              <span>★ MATHHWP.COM</span>
               <span className="text-black/30">/</span>
               <span>DIGITAL CONTENT SOLUTION</span>
               <span className="text-black/30">/</span>
@@ -605,7 +601,7 @@ export default function App() {
                 <div className="p-4 rounded-xl border border-lime-400/30 bg-lime-400/[0.02] hover:border-lime-400/50 transition-all duration-300">
                   <div className="font-mono text-lime-400 text-xs font-bold mb-1">AI PIVOT NEXT: 2026 ~</div>
                   <div className="text-zinc-300 text-[11px] leading-relaxed">
-                    수식-HWPX 완벽 변환 <strong className="text-white">mathhwp.com</strong> 및 지능형 콘텐츠 제작 멀티 에이전트 <strong className="text-white">blogstudio.live</strong> 출시를 필두로, 비-AI의 현실 장벽을 첨단 기술로 파쇄하는 최고의 AI 실무 엔지니어링 그룹으로 거듭납니다.
+                    지능형 콘텐츠 제작 멀티 에이전트 <strong className="text-white">blogstudio.live</strong> 출시를 필두로, 비-AI 비즈니스의 실무적 한계를 첨단 기술로 해결해 나가는 신뢰받는 AI 실무 엔지니어링 그룹으로 거듭납니다.
                   </div>
                 </div>
               </div>
@@ -614,14 +610,14 @@ export default function App() {
             {/* Paragraph column & Factsheet */}
             <div className="lg:col-span-7 space-y-6">
               <p className="text-xl font-sans font-medium text-white leading-relaxed">
-                "우리는 AI 유행어에 현혹되지 않습니다. 지난 10년간 비-AI 영역에서 갈고닦은 극한의 현실 집행력이 우리의 진짜 무기입니다."
+                "우리는 일시적인 트렌드에 치우치지 않습니다. 지난 10년간 축적해 온 디지털 콘텐츠 분야의 실무 실행력이 에이브로의 핵심 역량입니다."
               </p>
               <div className="text-zinc-400 text-sm leading-relaxed space-y-4 text-left">
                 <p>
-                  에이브로는 지난 10년간 AI와 무관한 전통 디지털 에이전시 비즈니스를 수행해 왔습니다. 대형 교과서 출판사의 무수한 교육 페이지들의 엄격한 품질 점검(QA/QC)을 전담하고, 공교육 수학 콘텐츠의 정밀 시각화를 기획·제작해 오며 <strong>'성공할 수밖에 없는 디테일과 기능적 무결성'</strong>이 무엇인지를 처절하게 증명해 왔습니다.
+                  에이브로는 지난 10년간 안정도 높은 디지털 에이전시 비즈니스를 수행해 왔습니다. 대형 교과서 출판사의 에듀테크 콘텐츠들의 고품질 검증(QA/QC)을 전담하고, 공교육 수학 자료의 정밀 정형화를 기획·제작해 오며 <strong>'디테일과 품질의 무결성'</strong>을 일관되게 입증해 왔습니다.
                 </p>
                 <p>
-                  이 견고한 비즈니스 뼈대 위에 최신 초거대 언어모델(LLM)과 에이전틱 오케스트레이션 엔지니어링을 온전히 융합했습니다. 단순한 AI 래퍼(Wrapper) 서비스가 아닌, 공교육 라스트마일을 완수하는 수학 수식-아래한글 변환 SaaS인 <strong className="text-lime-300">mathhwp.com</strong>과 디지털 콘텐츠 다중 자동 생성 및 유통의 결정체인 <strong className="text-cyan-300">blogstudio.live</strong>를 성공적으로 시장에 안착시키며 기술로 세상을 직접 재정의하는 본격 인공지능 솔루션 그룹으로 대전환을 이루었습니다.
+                  이러한 탄탄한 디지털 비즈니스 노하우 위에 최신 초거대 언어모델(LLM)과 에이전틱 오케스트레이션 엔지니어링을 조화롭게 융합했습니다. 단순한 API 연결 차원의 서비스를 넘어, 디지털 콘텐츠 생성 및 분산 발행을 돕는 독자적인 전문 SaaS <strong className="text-cyan-300">blogstudio.live</strong>를 성공적으로 론칭하며 비즈니스 성장에 기여하는 인공지능 솔루션 파트너로 도약하고 있습니다.
                 </p>
               </div>
 
@@ -649,7 +645,7 @@ export default function App() {
                   </div>
                   <div className="grid grid-cols-3 p-3.5 px-4">
                     <span className="text-zinc-500">대표 프로덕트</span>
-                    <span className="col-span-2 text-zinc-300">mathhwp.com (수식 변환) · blogstudio.live (AI OSMU)</span>
+                    <span className="col-span-2 text-zinc-300">blogstudio.live (AI OSMU 콘텐츠 자동화)</span>
                   </div>
                   <div className="grid grid-cols-3 p-3.5 px-4 col-span-3">
                     <span className="text-zinc-500">엔지니어링 코어</span>
@@ -1062,17 +1058,17 @@ export default function App() {
           whileInView={{ opacity: 1, scale: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className="py-12 md:py-16 my-8 px-6 sm:px-12 rounded-2xl border border-red-500/20 bg-gradient-to-r from-red-950/10 to-transparent flex flex-col justify-center items-start text-left relative overflow-hidden"
+          className="py-12 md:py-16 my-8 px-6 sm:px-12 rounded-2xl border border-white/[0.08] bg-white/[0.01] flex flex-col justify-center items-start text-left relative overflow-hidden"
         >
-          <div className="absolute top-4 left-6 sm:left-12 font-mono text-[9px] tracking-widest text-red-500 uppercase font-black">
-            ◆ AVRO_MANIFESTO // METRICS
+          <div className="absolute top-4 left-6 sm:left-12 font-mono text-[9px] tracking-widest text-lime-400 uppercase font-black">
+            ◆ AVRO_MANIFESTO // AUTOMATION
           </div>
           <p className="font-sans font-bold text-xl sm:text-3xl text-white tracking-tight leading-relaxed max-w-3xl mt-6">
-            "대형 브랜드·교육기관의 복잡한 비주얼 콘텐츠 기획과 고노동 가공 방식, <br className="hidden sm:inline" />
-            이제 <span className="bg-lime-400 text-black px-2 py-0.5 rounded shadow-sm text-[16px] sm:text-[22px] font-black align-middle mx-1">AI</span>가 지능적으로 분석·이해하고 정형화된 <span className="text-red-400 underline decoration-red-500/60 decoration-2 underline-offset-4 font-black">자동화</span> 구조로 완벽히 자동 기획 및 완성해 냅니다."
+            "대형 브랜드 및 기관의 다채로운 디지털 비주얼 콘텐츠 기획과 수작업 가공 구조, <br className="hidden sm:inline" />
+            이제 <span className="bg-lime-400 text-black px-2 py-0.5 rounded shadow-sm text-[16px] sm:text-[22px] font-black align-middle mx-1">AI</span> 엔지니어링이 지능적으로 분석·조율하여 정밀한 <span className="text-lime-400 underline decoration-lime-500/60 decoration-2 underline-offset-4 font-black">자동화</span> 설계로 기획과 운영 프로세스를 지원합니다."
           </p>
           <div className="font-mono text-[9px] text-zinc-500 tracking-wider uppercase mt-6">
-            AVRO STUDIO MANIFESTO · FY 2026. ALL METRICS VERIFIED INC.
+            AVRO STUDIO MANIFESTO · FY 2026. ALL PROCESS VERIFIED.
           </div>
         </motion.section>
 
@@ -1103,7 +1099,7 @@ export default function App() {
                 />
               </h2>
               <p className="text-zinc-400 text-sm sm:text-base leading-relaxed max-w-lg mb-8">
-                에이전틱 제품 제작이 필요하시거나, mathhwp.com과 같은 PDF OCR 기반 HWP API 특수 가공이 필요하시다면 언제든 연락 주시기 바랍니다. 
+                에이전틱 제품 제작이 필요하시거나, 도메인 특화 데이터 자동화 및 특수 콘텐츠 API 연동 가공이 필요하시다면 언제든 연락 주시기 바랍니다. 
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4">
