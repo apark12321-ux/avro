@@ -273,10 +273,21 @@ export default function App() {
 
           <div className="flex items-center gap-6">
             {/* Live Synchronized clock */}
-            <div className="hidden md:flex items-center gap-2 border border-white/[0.06] rounded-full px-3.5 py-1 bg-white/[0.02]">
+            <div className="hidden lg:flex items-center gap-2 border border-white/[0.06] rounded-full px-3.5 py-1 bg-white/[0.02]">
               <span className="w-1.5 h-1.5 rounded-full bg-lime-400 animate-pulse shadow-[0_0_8px_#d4ff3a]" />
               <span className="text-[10px] font-mono text-zinc-400 tracking-wider">SEL CLOCK {liveSeoulTime || '15:20:00'}</span>
             </div>
+
+            <motion.a
+              whileHover={{ scale: 1.03 }}
+              href="https://avro-home.netlify.app"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[11px] font-mono font-bold tracking-widest uppercase text-zinc-400 hover:text-white transition-colors duration-200 flex items-center gap-1"
+            >
+              <span>Main Website</span>
+              <span className="text-lime-400 font-sans">↗</span>
+            </motion.a>
 
             <motion.button
               whileHover={{ scale: 1.05 }}
@@ -1169,6 +1180,15 @@ export default function App() {
               <span className="text-[10px] font-mono text-zinc-500 tracking-wider uppercase mt-1">
                 DIGITAL CONTENT × AI ENGINEERING SOLUTION
               </span>
+              <a 
+                href="https://avro-home.netlify.app" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-[10px] font-mono text-lime-400 hover:text-lime-300 tracking-wider uppercase mt-3.5 inline-flex items-center gap-1.5 transition-colors font-bold"
+              >
+                <span>Go to Main Website</span>
+                <span className="text-xs">↗</span>
+              </a>
             </div>
 
             {/* Corp legal info box */}
