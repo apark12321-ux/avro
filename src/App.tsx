@@ -39,6 +39,10 @@ import AICanvas from './components/AICanvas';
 import CursorAura from './components/CursorAura';
 import TiltCard from './components/TiltCard';
 import GlitchText from './components/GlitchText';
+import IntroSlide from './components/IntroSlide';
+import ProjectsSlide from './components/ProjectsSlide';
+import TimelineSlide from './components/TimelineSlide';
+import ContactSlide from './components/ContactSlide';
 
 export default function App() {
   const [activeService, setActiveService] = useState<string | null>('01');
@@ -55,10 +59,10 @@ export default function App() {
   const [isTerminalBuilding, setIsTerminalBuilding] = useState<boolean>(false);
   const [activeTerminalPreset, setActiveTerminalPreset] = useState<string>('lesson');
 
-  // Main Horizontal Slide Navigation state (0 to 5)
-  // 0: Home/About Intro, 1: QA Checklist, 2: SaaS Playground, 3: Works, 4: Timeline & Partners, 5: Contact
+  // Main Horizontal Slide Navigation state (0 to 3)
+  // 0: Home/About Intro, 1: Works, 2: Timeline & Partners, 3: Contact
   const [currentSlide, setCurrentSlide] = useState<number>(0);
-  const totalSlides = 6;
+  const totalSlides = 4;
   const [slideDirection, setSlideDirection] = useState<'left' | 'right'>('right');
 
   const goToSlide = (idx: number) => {
@@ -93,58 +97,6 @@ export default function App() {
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
-
-  // Slide 1: Interactive QA Checklist Simulator state
-  const [qaStatus, setQaStatus] = useState<'idle' | 'running' | 'complete'>('idle');
-  const [qaSteps, setQaSteps] = useState([
-    { name: 'LaTeX 수학 식 표준 기호 탑재 및 파싱 적합도 판정', status: 'idle', desc: '표준 수식 변환 규칙 일치 여부' },
-    { name: '대형 출판사 전임 단원 분류 메타데이터 매칭', status: 'idle', desc: '커리큘럼 맵핑 식별자 정밀도 100%' },
-    { name: '크로스 브라우저 다중 플랫폼 스크린 오차 검수', status: 'idle', desc: '크롬/사파리/웨일 반응형 깨짐 및 여백 공차 검출' },
-    { name: 'KWCAG 2.2 웹 접근성 준수 체크리스트 검사', status: 'idle', desc: '스크린 리더 태그 및 대체 텍스트 무결성 측정' }
-  ]);
-
-  const runQaSimulation = () => {
-    if (qaStatus === 'running') return;
-    setQaStatus('running');
-    
-    // Reset steps
-    setQaSteps((prev) => prev.map((s, idx) => ({ ...s, status: idx === 0 ? 'running' : 'idle' })));
-    
-    let currentStepIndex = 0;
-    const processSteps = () => {
-      setQaSteps((prev) => {
-        const next = [...prev];
-        // Complete current step
-        next[currentStepIndex] = { ...next[currentStepIndex], status: 'success' };
-        // If there's a next, make it running
-        if (currentStepIndex < 3) {
-          next[currentStepIndex + 1] = { ...next[currentStepIndex + 1], status: 'running' };
-        }
-        return next;
-      });
-      
-      currentStepIndex++;
-      if (currentStepIndex < 4) {
-        setTimeout(processSteps, 1200);
-      } else {
-        setQaStatus('complete');
-      }
-    };
-    
-    setTimeout(processSteps, 1200);
-  };
-
-  // Slide 2: Interactive Curriculum Block Customizer state
-  const [selectedBlocks, setSelectedBlocks] = useState<string[]>(['header', 'math', 'quiz']);
-  const toggleBlock = (blockId: string) => {
-    if (selectedBlocks.includes(blockId)) {
-      if (selectedBlocks.length > 1) { // keep at least 1 block active
-        setSelectedBlocks(selectedBlocks.filter((b) => b !== blockId));
-      }
-    } else {
-      setSelectedBlocks([...selectedBlocks, blockId]);
-    }
-  };
 
   // Slide drawer state variables for full company details
   const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
@@ -283,8 +235,6 @@ export default function App() {
   // Slide names mapping for visual pagination & navigation indicators
   const slideTitles = [
     { label: '회사 소개', eng: 'HOME ABOUT' },
-    { label: '검수 QA', eng: 'VERIFY QA' },
-    { label: 'SaaS 저작', eng: 'SAAS TOOL' },
     { label: '주요 프로젝트', eng: 'WORKS' },
     { label: '파트너 / 연혁', eng: 'PARTNERS' },
     { label: '문의처', eng: 'CONTACT' }
@@ -353,21 +303,12 @@ export default function App() {
               <span className="text-[9px] font-mono text-zinc-400 tracking-wider">SEL CLOCK {liveSeoulTime || '15:20:00'}</span>
             </div>
 
-            <motion.a
-              whileHover={{ scale: 1.03 }}
-              href="https://avro-home.netlify.app"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-[10px] sm:text-[11px] font-mono font-bold tracking-widest uppercase text-zinc-400 hover:text-white transition-colors flex items-center gap-1"
-            >
-              <span>Main Site</span>
-              <span className="text-lime-400 font-sans text-xs">↗</span>
-            </motion.a>
+
 
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              onClick={() => goToSlide(5)}
+              onClick={() => goToSlide(3)}
               className="relative inline-flex items-center gap-1.5 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-[10px] sm:text-[11px] font-mono font-bold tracking-widest uppercase bg-gradient-to-r from-blue-500 via-cyan-400 to-lime-400 text-black overflow-hidden shadow-[0_4px_15px_rgba(34,211,238,0.25)] group"
             >
               <span className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 pointer-events-none" />
@@ -533,351 +474,10 @@ export default function App() {
               </motion.div>
             )}
 
-            {/* SLIDE 1: QA SYSTEM */}
+            {/* SLIDE 1: PORTFOLIO WORKS */}
             {currentSlide === 1 && (
               <motion.div
                 key="slide-1"
-                custom={slideDirection}
-                variants={{
-                  enter: (direction: 'left' | 'right') => ({ x: direction === 'right' ? '100vw' : '-100vw', opacity: 0 }),
-                  center: { x: 0, opacity: 1 },
-                  exit: (direction: 'left' | 'right') => ({ x: direction === 'right' ? '-100vw' : '100vw', opacity: 0 })
-                }}
-                transition={{ type: 'spring', stiffness: 220, damping: 25 }}
-                className="absolute inset-0 w-full h-full flex items-center grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 overflow-y-auto lg:overflow-visible py-4 custom-scrollbar"
-              >
-                {/* Left Column Content */}
-                <div className="lg:col-span-7 flex flex-col justify-center text-left">
-                  <div className="inline-flex flex-wrap items-center gap-2 border border-lime-400/20 bg-lime-400/5 px-3 py-1 rounded-full w-max text-[9px] font-mono tracking-widest text-lime-400 uppercase mb-4 sm:mb-6">
-                    <span className="w-1.5 h-1.5 rounded-full bg-lime-400 animate-pulse shadow-[0_0_8px_#d4ff3a]" />
-                    <span>MISSION 02 : METICULOUS VERIFICATION</span>
-                    <span className="text-zinc-600">|</span>
-                    <span className="text-white">QUALITY CONTROL</span>
-                  </div>
-
-                  <h1 className="text-[1.5rem] xs:text-[1.8rem] sm:text-[2.2rem] md:text-[2.8rem] lg:text-[2.4rem] xl:text-[2.8rem] font-sans font-black tracking-tight leading-[1.2] mb-4 sm:mb-5 text-zinc-100 break-keep">
-                    수식 기오 오치 하나 없는<br/>
-                    <span className="text-lime-400 underline underline-offset-4 decoration-lime-400/30">공교육 플랫폼 검수(QA)</span> 노하우.
-                  </h1>
-
-                  <p className="text-xs sm:text-sm text-zinc-400 max-w-xl leading-relaxed mb-5 sm:mb-6">
-                    EBSMath, 미래엔 등 최상위 지향 교육 플랫폼 규칙들을 정밀 설계하고 분석 지원해 왔습니다. 단순 확인 수준을 넘어, 수식 표준 파싱 설계 데이터와 크로스 브라우저 다중 플랫폼의 반응형 레이아웃 오차를 1:1 검토해냅니다.
-                  </p>
-
-                  <div className="flex flex-wrap gap-1.5 mb-6">
-                    <span className="px-2.5 py-1 rounded-full border border-lime-400/30 bg-lime-400/5 text-lime-400 font-mono text-[8px] uppercase font-bold tracking-widest">
-                      Perfect Quality Control
-                    </span>
-                    <span className="px-2.5 py-1 rounded-full border border-white/[0.08] bg-white/[0.02] text-zinc-300 font-mono text-[8px] uppercase font-semibold tracking-wider">
-                      10 Years Legacy
-                    </span>
-                    <span className="px-2.5 py-1 rounded-full border border-white/[0.08] bg-white/[0.02] text-zinc-300 font-mono text-[8px] uppercase font-semibold tracking-wider">
-                      Zero Error Limit
-                    </span>
-                  </div>
-
-                  <div className="flex flex-col sm:flex-row gap-3 pt-3 border-t border-white/[0.04]">
-                    <button
-                      onClick={() => openDrawer('timeline')}
-                      className="flex-1 flex items-center justify-between gap-3 px-4 py-3 rounded-lg bg-white/[0.02] hover:bg-neutral-900 border border-white/[0.08] hover:border-lime-400/40 text-left transition-all group max-w-sm cursor-pointer"
-                    >
-                      <div className="flex flex-col min-w-0">
-                        <span className="text-white text-xs font-bold font-sans flex items-center gap-1.5 truncate">
-                          설립 연력 및 연대기 보기
-                          <ArrowRight className="w-3.5 h-3.5 text-lime-400 group-hover:translate-x-1 transition-transform shrink-0" />
-                        </span>
-                        <span className="text-zinc-500 font-mono text-[8px] uppercase tracking-wider mt-0.5">AVRO ROADMAP HISTORY</span>
-                      </div>
-                    </button>
-
-                    <button
-                      onClick={() => goToSlide(5)}
-                      className="flex-1 flex items-center justify-between gap-3 px-4 py-3 rounded-lg bg-[#d4ff3a]/5 hover:bg-[#d4ff3a]/10 border border-[#d4ff3a]/25 hover:border-lime-400/60 text-left transition-all group max-w-sm cursor-pointer"
-                    >
-                      <div className="flex flex-col min-w-0">
-                        <span className="text-[#d4ff3a] text-xs font-bold font-sans flex items-center gap-1.5 truncate">
-                          검수 의뢰 도입 상담 접수
-                          <ArrowRight className="w-3.5 h-3.5 text-lime-400 group-hover:translate-x-1 transition-transform shrink-0" />
-                        </span>
-                        <span className="text-lime-400/50 font-mono text-[8px] uppercase tracking-wider mt-0.5">QA CONSULTING</span>
-                      </div>
-                    </button>
-                  </div>
-                </div>
-
-                {/* Right Interactive Column (Scoring / QA Simulator) */}
-                <div className="lg:col-span-5 w-full flex justify-center items-center">
-                  <div className="w-full max-w-md h-[340px] md:h-[360px] glass-effect rounded-xl border border-white/[0.08] overflow-hidden flex flex-col shadow-[0_20px_50px_rgba(0,0,0,0.6)]">
-                    <div className="px-3.5 py-2.5 bg-[#0d0d12]/90 border-b border-white/[0.06] flex items-center justify-between">
-                      <div className="flex gap-1.5">
-                        <span className="w-2.5 h-2.5 rounded-full bg-lime-400 inline-block" />
-                        <span className="w-2.5 h-2.5 rounded-full bg-cyan-400 inline-block" />
-                        <span className="w-2.5 h-2.5 rounded-full bg-zinc-600 inline-block" />
-                      </div>
-                      <span className="text-[9px] font-mono text-lime-400 tracking-wider">QA_AUTOMATION v1.02</span>
-                      <span className="text-[8px] font-mono text-zinc-500 uppercase">Interactive</span>
-                    </div>
-
-                    <div className="flex-1 p-3 bg-[#07070a]/90 overflow-y-auto space-y-2.5 text-left custom-scrollbar">
-                      <div className="flex justify-between items-center pb-2 border-b border-white/[0.06]">
-                        <span className="text-[10px] font-mono text-zinc-400 uppercase">// Verification Rules</span>
-                        <button
-                          onClick={runQaSimulation}
-                          disabled={qaStatus === 'running'}
-                          className={`px-2.5 py-1 rounded text-[9px] font-sans font-bold flex items-center gap-1 hover:brightness-110 active:scale-95 transition-all cursor-pointer ${
-                            qaStatus === 'running'
-                              ? 'bg-zinc-800 text-zinc-500 border border-zinc-700'
-                              : 'bg-lime-400 text-black font-extrabold'
-                          }`}
-                        >
-                          {qaStatus === 'running' ? (
-                            <>
-                              <Loader2 className="w-2.5 h-2.5 animate-spin text-zinc-500" />
-                              검출 중
-                            </>
-                          ) : qaStatus === 'complete' ? (
-                            '재실행'
-                          ) : (
-                            '원클릭 검정'
-                          )}
-                        </button>
-                      </div>
-
-                      <div className="space-y-1.5">
-                        {qaSteps.map((step, idx) => (
-                          <div key={idx} className="p-2 rounded border border-white/[0.04] bg-white/[0.01] flex items-start gap-2">
-                            <div className="mt-0.5 shrink-0">
-                              {step.status === 'success' ? (
-                                <div className="w-3.5 h-3.5 rounded-full bg-lime-400/15 border border-lime-400 flex items-center justify-center text-lime-400">
-                                  <Check className="w-2 h-2" />
-                                </div>
-                              ) : step.status === 'running' ? (
-                                <Loader2 className="w-3.5 h-3.5 text-cyan-400 animate-spin" />
-                              ) : (
-                                <span className="w-3.5 h-3.5 rounded-full border border-white/[0.12] bg-white/[0.02] inline-block" />
-                              )}
-                            </div>
-                            <div className="flex flex-col min-w-0 text-left">
-                              <span className={`text-[9px] font-sans font-bold truncate ${step.status === 'success' ? 'text-zinc-200' : step.status === 'running' ? 'text-cyan-400 animate-pulse' : 'text-zinc-500'}`}>
-                                {step.name}
-                              </span>
-                              <span className="text-[8px] font-mono text-zinc-500 mt-0.5 truncate">{step.desc}</span>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-
-                    <div className="p-2.5 bg-zinc-950/90 border-t border-white/[0.06] flex items-center justify-between text-left font-mono">
-                      <div className="flex flex-col">
-                        <span className="text-[8px] text-zinc-500 uppercase tracking-widest leading-none">VERDICT</span>
-                        <span className={`text-[9px] font-bold mt-1 ${qaStatus === 'complete' ? 'text-lime-400' : 'text-zinc-400'}`}>
-                          {qaStatus === 'complete' ? 'VERIFIED: 100% SUCCESS ✓' : qaStatus === 'running' ? 'COMPILING CHECK...' : 'STATUS: READY TO TEST'}
-                        </span>
-                      </div>
-                      <div className="w-20 bg-white/[0.06] h-1 rounded-full overflow-hidden">
-                        <div 
-                          className="bg-lime-400 h-full rounded-full transition-all duration-300"
-                          style={{ 
-                            width: qaStatus === 'complete' ? '100%' : 
-                                   qaStatus === 'running' ? '50%' : '0%' 
-                          }}
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            )}
-
-            {/* SLIDE 2: SAAS TOOL BUILDER */}
-            {currentSlide === 2 && (
-              <motion.div
-                key="slide-2"
-                custom={slideDirection}
-                variants={{
-                  enter: (direction: 'left' | 'right') => ({ x: direction === 'right' ? '100vw' : '-100vw', opacity: 0 }),
-                  center: { x: 0, opacity: 1 },
-                  exit: (direction: 'left' | 'right') => ({ x: direction === 'right' ? '-100vw' : '100vw', opacity: 0 })
-                }}
-                transition={{ type: 'spring', stiffness: 220, damping: 25 }}
-                className="absolute inset-0 w-full h-full flex items-center grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 overflow-y-auto lg:overflow-visible py-4 custom-scrollbar"
-              >
-                {/* Left Column Content */}
-                <div className="lg:col-span-7 flex flex-col justify-center text-left">
-                  <div className="inline-flex flex-wrap items-center gap-2 border border-purple-400/20 bg-purple-400/5 px-3 py-1 rounded-full w-max text-[9px] font-mono tracking-widest text-[#d8b4fe] uppercase mb-4 sm:mb-6">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#c084fc] animate-pulse" />
-                    <span>MISSION 03 : EDUTECH SMART SAAS</span>
-                    <span className="text-zinc-600">|</span>
-                    <span className="text-white">LOW-CODE WORKBENCH</span>
-                  </div>
-
-                  <h1 className="text-[1.5rem] xs:text-[1.8rem] sm:text-[2.2rem] md:text-[2.8rem] lg:text-[2.4rem] xl:text-[2.8rem] font-sans font-black tracking-tight leading-[1.2] mb-4 sm:mb-5 text-zinc-100 break-keep">
-                    교사들의 교안 준비 부담을 비우는<br/>
-                    <span className="bg-gradient-to-r from-[#c084fc] to-[#f472b6] bg-clip-text text-transparent">학습 보조 저작 도구 &amp; SaaS</span> 패키지.
-                  </h1>
-
-                  <p className="text-xs sm:text-sm text-zinc-400 max-w-xl leading-relaxed mb-5 sm:mb-6">
-                    복잡한 LaTeX 수학 기호 입력부터 반응형 수식 퀴즈 세팅, 구조화 학습 미디어 배치를 법령 표준 조건에 딱 맞게 배치하는 맞춤 교안 기획 SaaS 및 통계 보드를 정교하게 설계 빌드해 드립니다.
-                  </p>
-
-                  <div className="flex flex-wrap gap-1.5 mb-6">
-                    <span className="px-2.5 py-1 rounded-full border border-indigo-400/30 bg-indigo-400/5 text-indigo-400 font-mono text-[8px] uppercase font-bold tracking-widest">
-                      LMS Curriculum SaaS
-                    </span>
-                    <span className="px-2.5 py-1 rounded-full border border-white/[0.08] bg-white/[0.02] text-zinc-300 font-mono text-[8px] uppercase font-semibold tracking-wider">
-                      Interactive Layouts
-                    </span>
-                    <span className="px-2.5 py-1 rounded-full border border-white/[0.08] bg-white/[0.02] text-zinc-300 font-mono text-[8px] uppercase font-semibold tracking-wider">
-                      Math Sheet Widgets
-                    </span>
-                  </div>
-
-                  <div className="flex flex-col sm:flex-row gap-3 pt-3 border-t border-white/[0.04]">
-                    <button
-                      onClick={() => openDrawer('process')}
-                      className="flex-1 flex items-center justify-between gap-3 px-4 py-3 rounded-lg bg-white/[0.02] hover:bg-neutral-900 border border-white/[0.08] hover:border-lime-400/40 text-left transition-all group max-w-sm cursor-pointer"
-                    >
-                      <div className="flex flex-col min-w-0">
-                        <span className="text-white text-xs font-bold font-sans flex items-center gap-1.5 truncate">
-                          에이브로 작업 프로세스 흐름
-                          <ArrowRight className="w-3.5 h-3.5 text-lime-400 group-hover:translate-x-1 transition-transform shrink-0" />
-                        </span>
-                        <span className="text-zinc-500 font-mono text-[8px] uppercase tracking-wider mt-0.5">AVRO STRATEGY PROCESS</span>
-                      </div>
-                    </button>
-
-                    <button
-                      onClick={() => goToSlide(5)}
-                      className="flex-1 flex items-center justify-between gap-3 px-4 py-3 rounded-lg bg-purple-500/5 hover:bg-purple-500/10 border border-purple-500/25 hover:border-purple-400/60 text-left transition-all group max-w-sm cursor-pointer"
-                    >
-                      <div className="flex flex-col min-w-0">
-                        <span className="text-purple-300 text-xs font-bold font-sans flex items-center gap-1.5 truncate">
-                          맞춤 에듀테크 SaaS 빌딩 도입하기
-                          <ArrowRight className="w-3.5 h-3.5 text-purple-400 group-hover:translate-x-1 transition-transform shrink-0" />
-                        </span>
-                        <span className="text-purple-500/50 font-mono text-[8px] uppercase tracking-wider mt-0.5">LAUNCH PILOT SAAS</span>
-                      </div>
-                    </button>
-                  </div>
-                </div>
-
-                {/* Right Interactive Column (Playground) */}
-                <div className="lg:col-span-5 w-full flex justify-center items-center">
-                  <div className="w-full max-w-md h-[340px] md:h-[360px] glass-effect rounded-xl border border-white/[0.08] overflow-hidden flex flex-col shadow-[0_20px_50px_rgba(0,0,0,0.6)]">
-                    <div className="px-3.5 py-2.5 bg-[#0d0d12]/90 border-b border-white/[0.06] flex items-center justify-between">
-                      <div className="flex gap-1.5">
-                        <span className="w-2.5 h-2.5 rounded-full bg-purple-400 inline-block" />
-                        <span className="w-2.5 h-2.5 rounded-full bg-pink-400 inline-block" />
-                        <span className="w-2.5 h-2.5 rounded-full bg-indigo-600 inline-block" />
-                      </div>
-                      <span className="text-[9px] font-mono text-[#c084fc] tracking-wider">BLOCKS_PLAYGROUND v1.0</span>
-                      <span className="text-[8px] font-mono text-zinc-500 uppercase">Live Preview</span>
-                    </div>
-
-                    <div className="p-2 bg-[#0d0d12]/80 border-b border-white/[0.04]">
-                      <span className="text-[8px] font-mono text-zinc-400 block mb-1 text-left uppercase">// Toggle layout modules:</span>
-                      <div className="grid grid-cols-4 gap-1">
-                        {[
-                          { id: 'header', label: '교안 헤더' },
-                          { id: 'math', label: 'LaTeX 수식' },
-                          { id: 'quiz', label: '단원 퀴즈' },
-                          { id: 'script', label: '수업 안내' }
-                        ].map((block) => {
-                          const isSel = selectedBlocks.includes(block.id);
-                          return (
-                            <button
-                              key={block.id}
-                              onClick={() => toggleBlock(block.id)}
-                              className={`px-1 py-1 rounded text-[8px] font-sans font-bold border transition-all cursor-pointer ${
-                                isSel
-                                  ? 'bg-purple-500/10 border-purple-400/50 text-purple-300'
-                                  : 'bg-white/[0.02] border-white/[0.06] text-zinc-500 hover:text-zinc-300'
-                              }`}
-                            >
-                              {block.label}
-                            </button>
-                          );
-                        })}
-                      </div>
-                    </div>
-
-                    <div className="flex-1 p-3 bg-[#07070a]/90 overflow-y-auto space-y-2 text-left custom-scrollbar relative">
-                      <span className="absolute right-2 top-1.5 text-[7px] font-mono text-zinc-600 bg-black/60 px-1.5 py-0.5 rounded border border-white/[0.04] select-none">
-                        PREVIEW_SCREEN ✓
-                      </span>
-
-                      <div className="space-y-2 pt-2">
-                        <AnimatePresence>
-                          {selectedBlocks.includes('header') && (
-                            <motion.div
-                              initial={{ opacity: 0, y: -5 }}
-                              animate={{ opacity: 1, y: 0 }}
-                              exit={{ opacity: 0 }}
-                              className="p-2 bg-white/[0.01] border border-white/[0.04] rounded-lg text-left"
-                            >
-                              <span className="text-[7px] font-mono text-purple-400 select-none block">// MODULE : LESSON HEADER</span>
-                              <h4 className="text-[10px] font-bold text-zinc-100 mt-0.5">EBSMath 대수 기본학습 [일차함수]</h4>
-                              <span className="text-[7px] font-mono text-zinc-500">Curriculum Code: 중등수학 2-1</span>
-                            </motion.div>
-                          )}
-
-                          {selectedBlocks.includes('math') && (
-                            <motion.div
-                              initial={{ opacity: 0, y: -5 }}
-                              animate={{ opacity: 1, y: 0 }}
-                              exit={{ opacity: 0 }}
-                              className="p-2 bg-white/[0.02] border border-[#d4ff3a]/15 rounded-lg font-mono text-left"
-                            >
-                              <span className="text-[7px] text-[#d4ff3a] block">// MODULE : LaTeX MATH FORMAT</span>
-                              <div className="text-[9px] text-zinc-300 mt-1 py-1 text-center bg-black/50 border border-white/[0.04] rounded">
-                                f(x) = ax + b \ (a \neq 0)
-                              </div>
-                            </motion.div>
-                          )}
-
-                          {selectedBlocks.includes('quiz') && (
-                            <motion.div
-                              initial={{ opacity: 0, y: -5 }}
-                              animate={{ opacity: 1, y: 0 }}
-                              exit={{ opacity: 0 }}
-                              className="p-2 bg-white/[0.01] border border-white/[0.04] rounded-lg text-left"
-                            >
-                              <span className="text-[7px] font-mono text-cyan-400 block">// MODULE : INTERACTIVE QUIZ</span>
-                              <p className="text-[9px] font-semibold text-zinc-300 mt-0.5 leading-normal">다음 중 일차함수인 것을 모두 고르시오.</p>
-                              <div className="grid grid-cols-2 gap-1 mt-1.5">
-                                {['① y = 2x - 3', '② y = x²', '③ y = 3 / x', '④ y = 5'].map((opt, i) => (
-                                  <div key={i} className={`p-1 border rounded text-[8px] cursor-pointer font-sans transition-all text-left ${i === 0 ? 'border-lime-400/30 bg-lime-400/[0.02] text-lime-400 font-bold' : 'border-white/[0.05] bg-white/[0.01] text-zinc-400'}`}>
-                                    {opt}
-                                  </div>
-                                ))}
-                              </div>
-                            </motion.div>
-                          )}
-
-                          {selectedBlocks.includes('script') && (
-                            <motion.div
-                              initial={{ opacity: 0, y: -5 }}
-                              animate={{ opacity: 1, y: 0 }}
-                              exit={{ opacity: 0 }}
-                              className="p-2 bg-white/[0.01] border border-dashed border-white/[0.08] rounded-lg text-zinc-400 text-[8px] leading-relaxed text-left"
-                            >
-                              <strong className="text-zinc-200 block mb-0.5 font-bold">💡 실무 설계 어드바이스:</strong>
-                              도해 및 LaTeX 수식은 태블릿 모바일 비율에서도 잘림 없이 가단 자동 조절되도록 CSS 비율 레이어를 보존합니다.
-                            </motion.div>
-                          )}
-                        </AnimatePresence>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            )}
-
-            {/* SLIDE 3: PORTFOLIO WORKS */}
-            {currentSlide === 3 && (
-              <motion.div
-                key="slide-3"
                 custom={slideDirection}
                 variants={{
                   enter: (direction: 'left' | 'right') => ({ x: direction === 'right' ? '100vw' : '-100vw', opacity: 0 }),
@@ -891,7 +491,7 @@ export default function App() {
                   <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-3 mb-6">
                     <div>
                       <div className="flex items-center gap-2 text-[10px] font-mono tracking-widest text-[#d4ff3a] uppercase mb-1">
-                        <span>03</span>
+                        <span>02</span>
                         <span className="text-zinc-700">/</span>
                         <span>SELECTED PROJECTS</span>
                         <span className="text-zinc-700">↳</span>
@@ -990,10 +590,10 @@ export default function App() {
               </motion.div>
             )}
 
-            {/* SLIDE 4: TIMELINE & PARTNERS */}
-            {currentSlide === 4 && (
+            {/* SLIDE 2: TIMELINE & PARTNERS */}
+            {currentSlide === 2 && (
               <motion.div
-                key="slide-4"
+                key="slide-2"
                 custom={slideDirection}
                 variants={{
                   enter: (direction: 'left' | 'right') => ({ x: direction === 'right' ? '100vw' : '-100vw', opacity: 0 }),
@@ -1006,7 +606,7 @@ export default function App() {
                 {/* Left Column (Timeline roadmap chronology) */}
                 <div className="lg:col-span-6 text-left flex flex-col justify-center">
                   <div className="flex items-center gap-2 text-[10px] font-mono tracking-widest text-[#d4ff3a] uppercase mb-2">
-                    <span>04</span>
+                    <span>03</span>
                     <span className="text-zinc-700">/</span>
                     <span>CHRONOLOGY ROADMAP</span>
                   </div>
@@ -1016,7 +616,7 @@ export default function App() {
                     {timelineData.map((mile) => (
                       <div key={mile.year} className="relative text-left">
                         <div className="absolute -left-[26px] top-1 w-2 h-2 rounded-full bg-[#07070a] border-2 border-lime-400" />
-                        <span className="font-mono text-sm font-extrabold text-lime-400 block mb-1">
+                        <span className="font-mono text-sm font-extrabold text-[#d4ff3a] block mb-1">
                           {mile.year}
                         </span>
                         <ul className="space-y-1">
@@ -1027,7 +627,7 @@ export default function App() {
                                 ev.isHighlight ? 'before:bg-lime-400 text-zinc-100 font-semibold' : 'before:bg-zinc-600 text-zinc-400'
                               }`}
                             >
-                              {ev.description}
+                               {ev.description}
                             </li>
                           ))}
                         </ul>
@@ -1039,7 +639,7 @@ export default function App() {
                 {/* Right Column (Partners Grid) */}
                 <div className="lg:col-span-6 flex flex-col justify-center text-left">
                   <div className="flex items-center gap-2 text-[10px] font-mono tracking-widest text-cyan-400 uppercase mb-2">
-                    <span>05</span>
+                    <span>04</span>
                     <span className="text-zinc-700">/</span>
                     <span>TRUSTED PARTNERS</span>
                   </div>
@@ -1068,10 +668,10 @@ export default function App() {
               </motion.div>
             )}
 
-            {/* SLIDE 5: CONTACT & CORPORATE PROFILE */}
-            {currentSlide === 5 && (
+            {/* SLIDE 3: CONTACT & CORPORATE PROFILE */}
+            {currentSlide === 3 && (
               <motion.div
-                key="slide-5"
+                key="slide-3"
                 custom={slideDirection}
                 variants={{
                   enter: (direction: 'left' | 'right') => ({ x: direction === 'right' ? '100vw' : '-100vw', opacity: 0 }),
