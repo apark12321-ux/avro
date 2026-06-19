@@ -44,13 +44,13 @@ export default function App() {
   const [scrollPercentage, setScrollPercentage] = useState<number>(0);
   const [isNavHidden, setIsNavHidden] = useState<boolean>(false);
   const [brandRotation, setBrandRotation] = useState<number>(0);
-  const [typedCommand, setTypedCommand] = useState<string>('edu-agent generate --grade=middle-3 --subject="math"');
+  const [typedCommand, setTypedCommand] = useState<string>('npm run dev --filter=ebsmath-helper');
   const [terminalLogs, setTerminalLogs] = useState<Array<{ id: number; text: string; type: 'client' | 'info' | 'success' | 'warn' | 'header' }>>([
-    { id: 1, text: 'edu-agent init --preset=curriculum_analysis', type: 'header' },
-    { id: 2, text: 'Initializing AvroEdu Core Engine v2.0.1...', type: 'info' },
-    { id: 3, text: '✓ 10-Year public & corporate educational contents QA database loaded.', type: 'success' },
-    { id: 4, text: '✓ Adaptive learning math formula (LaTeX-HWPX) converter engine active.', type: 'success' },
-    { id: 5, text: 'Ready to build high-precision pedagogical materials & visual assets below.', type: 'info' }
+    { id: 1, text: 'npm run dev --filter=ebsmath-helper', type: 'header' },
+    { id: 2, text: '[vite] local server running on port 3000', type: 'info' },
+    { id: 3, text: '✓ Educational metadata and QA validation schemas loaded.', type: 'success' },
+    { id: 4, text: '✓ Shared UI components & math LaTeX converter ready.', type: 'success' },
+    { id: 5, text: 'Web application environment listening for developer commands.', type: 'info' }
   ]);
   const [isTerminalBuilding, setIsTerminalBuilding] = useState<boolean>(false);
   const [activeTerminalPreset, setActiveTerminalPreset] = useState<string>('lesson');
@@ -134,49 +134,48 @@ export default function App() {
 
     switch (preset) {
       case 'lesson':
-        commandText = 'edu-agent compose --type=lesson-plan --topic="중3 삼각비 실생활 활용"';
+        commandText = 'npm run test --suite=math-parser';
         sequence = [
-          { text: 'Analyzing curriculum standards and pedagogic guidelines utilizing Google Gemini...', type: 'info' },
-          { text: 'Aligning with EBSMath structure and national math guidelines database...', type: 'info' },
-          { text: '✓ Generated optimized lesson plan structure, concept keys & rubric.', type: 'success' },
-          { text: '✓ Created instructor lecture guide and interactive prompt triggers.', type: 'success' },
-          { text: '✓ Pedagogical validation index: Excellent (98.6% structure rating).', type: 'success' }
+          { text: 'Analyzing math question layout and instruction standards...', type: 'info' },
+          { text: 'Checking compatibility with EBSMath curriculum format databases...', type: 'info' },
+          { text: '✓ Successfully verified LaTeX math formula parsing rules.', type: 'success' },
+          { text: '✓ Verified HWPX math document metadata extraction.', type: 'success' },
+          { text: '✓ Core math parser: Passed all 42 integrity checks.', type: 'success' }
         ];
         break;
       case 'evaluation':
-        commandText = 'edu-agent evaluate --source=custom_assessment --questions=5';
+        commandText = 'npm run compile:workbook';
         sequence = [
-          { text: 'Extracting key evaluation concepts and diagnostic formula patterns...', type: 'info' },
-          { text: 'Generating multi-level diagnostic math questions & descriptive feedback...', type: 'info' },
-          { text: '✓ Styled study materials into 5 personalized adaptive assessment items.', type: 'success' },
-          { text: '✓ Rendered math symbols via LaTeX-HWP compiler engine smoothly.', type: 'success' },
-          { text: '✓ Concept coverage alignment & pedagogical difficulty checks passed.', type: 'success' }
+          { text: 'Converting digital design system to student print-ready workbook layout...', type: 'info' },
+          { text: 'Synthesizing grid parameters, margins, and section headings...', type: 'info' },
+          { text: '✓ Compiled 5 interactive workbook templates beautifully.', type: 'success' },
+          { text: '✓ Validated PDF page breaks and responsive image rendering paths.', type: 'success' },
+          { text: '✓ Web layout export checklist: 100% compliant.', type: 'success' }
         ];
         break;
       case 'visualize':
-        commandText = 'edu-agent render --output=visual-deck --style=diagram';
+        commandText = 'npm run build:ui --preset=responsive';
         sequence = [
-          { text: 'Pre-calculating instructional visual layout & geometric concept node shapes...', type: 'info' },
-          { text: 'Configuring precise responsive coordinates for educational vector graphics...', type: 'info' },
-          { text: '✓ Educational visual animation frame timeline mapped successfully.', type: 'success' },
-          { text: '✓ Generated concept slide: /assets/edu-gen/geometry_triangle.svg outputted.', type: 'success' },
-          { text: '✓ Created graphic visualizer widget for student delivery.', type: 'success' }
+          { text: 'Compiling custom Tailwind components and interactive CSS layers...', type: 'info' },
+          { text: 'Bundling web application bundles via Vite bundler...', type: 'info' },
+          { text: '✓ CSS modules minified and asset path trees resolved.', type: 'success' },
+          { text: '✓ Generated responsive visual components in /dist/assets/ smoothly.', type: 'success' },
+          { text: '✓ UI/UX assets rendering validation complete.', type: 'success' }
         ];
         break;
       case 'integrate':
-        commandText = 'edu-agent deploy --platform=lms --release=production';
+        commandText = 'npm run deploy --target=production';
         sequence = [
-          { text: 'Validating curricular content compatibility against standard LMS API...', type: 'info' },
-          { text: 'Initiating automated data publishing engine and academic validator...', type: 'info' },
-          { text: '✓ Successfully compiled and synced to School LMS platform database.', type: 'success' },
-          { text: '✓ HWPX/LaTeX formula rendering parsed with absolute integrity.', type: 'success' },
-          { text: '✓ Triggered evaluation callback tracker mapping for classroom students.', type: 'success' },
-          { text: '✓ Compiled 1 Concept Core → Multiple adaptive pedagogical resources live!', type: 'success' }
+          { text: 'Running production build and performance audit pipeline...', type: 'info' },
+          { text: 'Deploying secure static builds to public CDN networks...', type: 'info' },
+          { text: '✓ Successfully synchronized build with target platform folders.', type: 'success' },
+          { text: '✓ SSL cache purged and server routes updated gracefully.', type: 'success' },
+          { text: '✓ Client-side and server-side assets are now live: v1.3.0 deployed!', type: 'success' }
         ];
         break;
       default:
-        commandText = 'edu-agent optimize';
-        sequence = [{ text: 'Workflow optimization completed.', type: 'success' }];
+        commandText = 'npm run optimize';
+        sequence = [{ text: 'Asset tree optimization complete.', type: 'success' }];
     }
 
     setTypedCommand('');
@@ -354,7 +353,7 @@ export default function App() {
                      transition={{ duration: 0.8, delay: 0.15, cubicBezier: [0.16, 1, 0.3, 1] }}
                      className="block"
                    >
-                     가장 편리한 <span className="bg-lime-400 text-black px-3.5 py-1.5 rounded-lg inline-block mr-2 shadow-[0_0_25px_rgba(212,255,58,0.25)] hover:bg-lime-300">AI 에듀테크</span>
+                     실용적인 <span className="bg-lime-400 text-black px-3.5 py-1.5 rounded-lg inline-block mr-2 shadow-[0_0_25px_rgba(212,255,58,0.25)] hover:bg-lime-300">교육 기술</span>과
                    </motion.span>
                  </span>
                  <span className="block overflow-hidden py-1">
@@ -364,7 +363,7 @@ export default function App() {
                      transition={{ duration: 0.8, delay: 0.28, cubicBezier: [0.16, 1, 0.3, 1] }}
                      className="inline-block relative fill-current"
                    >
-                     교육 특화 AI 엔진, <GlitchText text="AvroEdu" className="font-mono text-lime-400 italic font-medium hover:text-lime-300" />
+                     맞춤형 AI 솔루션, <GlitchText text="에이브로" className="font-mono text-lime-400 italic font-medium hover:text-lime-300" />
                      <span className="text-lime-400 animate-pulse">.</span>
                      <span className="absolute left-0 bottom-1 w-full h-[3px] bg-red-500 roundedScale" />
                    </motion.span>
@@ -378,7 +377,7 @@ export default function App() {
                 transition={{ duration: 0.8, delay: 0.45 }}
                 className="text-base sm:text-lg text-zinc-400 max-w-xl leading-relaxed text-left mb-8"
               >
-                에이브로는 지난 10년간 공교육 플랫폼과 대형 출판사의 교육 콘텐츠를 기획·검증해 왔습니다. 검증된 교육 도메인 전문성에 AI 기술을 매끄럽게 결합하여, 교수자에게는 생산적인 수업 저작 툴을 제공하고 학습자에게는 개인 맞춤형 교육 솔루션을 설계합니다.
+                에이브로는 지난 10년간 공교육 플랫폼과 대형 출판사의 교육 콘텐츠를 기획·검증해 왔습니다. 풍부한 학습 도메인 노하우와 검증된 기획력을 결합하여, 더 정확하고 실용적인 교육용 디지털 서비스와 다양한 스마트 도구들을 맞춤 개발 및 구축합니다.
               </motion.p>
 
               {/* Tag badges */}
@@ -389,13 +388,13 @@ export default function App() {
                 className="flex flex-wrap gap-2 text-left justify-start"
               >
                 <span className="px-3.5 py-1.5 rounded-full border border-lime-400/40 bg-lime-400/5 text-lime-400 font-mono text-[10px] uppercase font-bold tracking-widest shadow-[0_0_15px_rgba(212,255,58,0.1)] hover:scale-105 transition-transform duration-200">
-                  AvroEdu Platform
+                  Educational Web App Dev
                 </span>
                 <span className="px-3.5 py-1.5 rounded-full border border-white/[0.08] bg-white/[0.02] text-zinc-300 font-mono text-[10px] uppercase font-semibold tracking-wider hover:border-cyan-400/50 hover:text-cyan-400 transition-colors duration-200">
-                  Domain-Specific Math OCR & LaTeX
+                  Content Curation &amp; QA
                 </span>
                 <span className="px-3.5 py-1.5 rounded-full border border-white/[0.08] bg-white/[0.02] text-zinc-300 font-mono text-[10px] uppercase font-semibold tracking-wider hover:border-cyan-400/50 hover:text-cyan-400 transition-colors duration-200">
-                  Adaptive Pedagogical AI
+                  E-Learning Tool Design
                 </span>
               </motion.div>
             </div>
@@ -459,7 +458,7 @@ export default function App() {
                 <div className="p-3 bg-zinc-950/90 border-t border-white/[0.06]">
                   <div className="text-[9px] text-zinc-500 uppercase tracking-wider text-left mb-2 font-mono flex items-center gap-1.5">
                     <Zap className="w-3 h-3 text-lime-400" />
-                    Interactive Simulator — Click to test AI workflow
+                    Interactive Simulator — Click to test development tasks
                   </div>
                   <div className="grid grid-cols-4 gap-1.5">
                     <button
@@ -471,7 +470,7 @@ export default function App() {
                           : 'bg-white/[0.02] border-white/[0.06] text-zinc-400 hover:border-white/[0.12] hover:text-white'
                       }`}
                     >
-                      Lesson Plan
+                      Math Parser
                     </button>
                     <button
                       onClick={() => runTerminalSimulation('evaluation')}
@@ -482,7 +481,7 @@ export default function App() {
                           : 'bg-white/[0.02] border-white/[0.06] text-zinc-400 hover:border-white/[0.12] hover:text-white'
                       }`}
                     >
-                      Assessment
+                      Workbook
                     </button>
                     <button
                       onClick={() => runTerminalSimulation('visualize')}
@@ -493,7 +492,7 @@ export default function App() {
                           : 'bg-white/[0.02] border-white/[0.06] text-zinc-400 hover:border-white/[0.12] hover:text-white'
                       }`}
                     >
-                      Visual Deck
+                      Build UI
                     </button>
                     <button
                       onClick={() => runTerminalSimulation('integrate')}
@@ -504,7 +503,7 @@ export default function App() {
                           : 'bg-white/[0.02] border-white/[0.06] text-zinc-400 hover:border-white/[0.12] hover:text-white'
                       }`}
                     >
-                      LMS Sync
+                      Deploy
                     </button>
                   </div>
                 </div>
@@ -595,13 +594,13 @@ export default function App() {
                 <div className="p-4 rounded-xl border border-white/[0.04] bg-white/[0.01] hover:border-lime-400/20 transition-all duration-300">
                   <div className="font-mono text-lime-400 text-xs font-bold mb-1">LEGACY: 2016 - 2025</div>
                   <div className="text-zinc-400 text-[11px] leading-relaxed">
-                    EBSMath, 미래엔 등 최고 수준의 엄격함이 요구되는 대형 에듀테크·공공 미디어 플랫폼들의 무결성 품질 검증(QA) 및 디지털 시각 제작물 대행 전념.
+                    EBSMath, 미래엔 등 가이드라인이 명밀하고 탄탄한 교육 플랫폼들의 디지털 기능 검수(QA) 및 웹 시각 결과물 기획·제작을 대행했습니다.
                   </div>
                 </div>
                 <div className="p-4 rounded-xl border border-lime-400/30 bg-lime-400/[0.02] hover:border-lime-400/50 transition-all duration-300">
                   <div className="font-mono text-lime-400 text-xs font-bold mb-1">AI PIVOT NEXT: 2026 ~</div>
                   <div className="text-zinc-300 text-[11px] leading-relaxed">
-                    교수자와 학습자를 돕는 맞춤형 에듀테크 지원 도구 및 교육 AI 솔루션을 필두로, 기존 비-AI 비즈니스의 실무적 한계를 첨단 기술로 해결해 나가는 신뢰받는 에듀테크 엔지니어링 파트너로 거듭납니다.
+                    학습과 교수에 실무적으로 도움이 되는 에듀테크 디지털 툴과 실용적인 웹 솔루션을 기획·설계하는 믿음직한 디지털 에이전시 및 개발 파트너로 나아갑니다.
                   </div>
                 </div>
               </div>
@@ -610,14 +609,14 @@ export default function App() {
             {/* Paragraph column & Factsheet */}
             <div className="lg:col-span-7 space-y-6">
               <p className="text-xl font-sans font-medium text-white leading-relaxed">
-                "우리는 일시적인 트렌드에 치우치지 않습니다. 지난 10년간 축적해 온 디지털 콘텐츠 분야의 실무 실행력이 에이브로의 핵심 역량입니다."
+                "트렌디한 유행어나 과장 없이 실질적인 기획과 탄탄한 실행력으로 교육 및 에듀테크 프로젝트의 디테일을 완성합니다."
               </p>
               <div className="text-zinc-400 text-sm leading-relaxed space-y-4 text-left">
                 <p>
-                  에이브로는 지난 10년간 대형 교과서 출판사의 에듀테크 플랫폼 기능 검증(QA/QC)을 수행하고, 공교육 수학 자료를 기획·개발해 왔습니다. 교육 현장의 복잡한 데이터를 안정적으로 다루며 축적된 기획력이 에이브로의 핵심 신뢰도입니다.
+                  에이브로는 지난 10년간 대형 교과서 출판사의 디지털 학습 서비스 검수(QA/QC) 업무를 전담하고, 공교육 수학 콘텐츠의 기획 및 개발을 수행해 왔습니다. 교육 현장의 다양한 규격과 세부 가이드라인을 면밀히 분석하고 검수해 온 안목이 에이브로의 가장 큰 자산입니다.
                 </p>
                 <p>
-                  이러한 교육 도메인 경험에 실용적인 AI 기술을 접목했습니다. 실제 가르치고 배우는 현장의 워크플로우를 분석하여 배움의 깊이를 더하고 교재 저작 속도를 올리는 특화된 AI 플랫폼 <strong className="text-cyan-300">AvroEdu</strong>를 연구·설계하며 신뢰받는 에듀테크 파트너로 나아가고 있습니다.
+                  우리는 정밀한 교육 업계 기획 노하우에 실용적인 AI 기술을 부드럽게 연동합니다. 교수자가 교재를 원활하게 구성하고 준비하는 과정을 돕는 웹 맞춤형 앱 개발과, 학습 데이터를 체계적으로 연동하는 직관적 시스템 설계를 지원하고 있습니다.
                 </p>
               </div>
 
@@ -625,7 +624,7 @@ export default function App() {
               <div className="border border-white/[0.08] lg:max-w-2xl bg-zinc-950/75 rounded-xl overflow-hidden font-mono text-xs mt-8 shadow-inner">
                 <div className="bg-white/[0.02] border-b border-white/[0.06] p-3 text-zinc-500 flex justify-between items-center px-4">
                   <span>// FACT_SHEET_DATA</span>
-                  <span className="text-[10px] text-lime-400 font-bold uppercase">Pivot Status: Dynamic Verified ✓</span>
+                  <span className="text-[10px] text-lime-400 font-bold uppercase">Pivot Status: Verified ✓</span>
                 </div>
                 
                 <div className="divide-y divide-white/[0.05]">
@@ -635,21 +634,21 @@ export default function App() {
                   </div>
                   <div className="grid grid-cols-3 p-3.5 px-4">
                     <span className="text-zinc-500">설립 일자</span>
-                    <span className="col-span-2 text-zinc-200">2016년 7월 18일 (10년 차 우량 법인)</span>
+                    <span className="col-span-2 text-zinc-200">2016년 7월 18일</span>
                   </div>
                   <div className="grid grid-cols-3 p-3.5 px-4">
-                    <span className="text-zinc-500">트랜스포메이션</span>
+                    <span className="text-zinc-500">비즈니스 방향</span>
                     <span className="col-span-2 text-lime-400 font-semibold flex items-center gap-1">
-                      전통 플랫폼 대행사 → 교육 특화 AI 전문 패밀리 피벗
+                      전통 웹 에이전시 및 검수 대행 → 에듀테크 및 교육용 스마트 도구 기획/개발사로 확장
                     </span>
                   </div>
                   <div className="grid grid-cols-3 p-3.5 px-4">
-                    <span className="text-zinc-500">핵심 포커스</span>
-                    <span className="col-span-2 text-zinc-300">AvroEdu Platform (지능형 맞춤 학습 및 교육 저작 툴)</span>
+                    <span className="text-zinc-500">주요 수행 업무</span>
+                    <span className="col-span-2 text-zinc-300">교육용 학습 보조 웹 개발, 출판물 연계 스마트 저작 레이아웃 기획</span>
                   </div>
                   <div className="grid grid-cols-3 p-3.5 px-4 col-span-3">
-                    <span className="text-zinc-500">주요 기술 스택</span>
-                    <span className="col-span-2 text-zinc-400">Education Domain AI · Math Custom Parser · User Interactive SaaS</span>
+                    <span className="text-zinc-500">경쟁력 스택</span>
+                    <span className="col-span-2 text-zinc-400">Web App Development · Educational Content System · UI/UX Design</span>
                   </div>
                 </div>
               </div>
@@ -769,42 +768,8 @@ export default function App() {
                   프로젝트 &amp; 제품군.
                 </h2>
                 <p className="text-zinc-400 font-mono text-xs max-w-md">
-                  에이브로가 자랑스럽게 독점 배포하거나, 유수한 파트너십으로 극대화시킨 주요 제품 사례입니다.
+                  에이브로가 풍부한 도메인 전문성과 고유한 기획력을 바탕으로 완성한 주요 프로젝트 사례입니다.
                 </p>
-              </div>
-
-              {/* Dynamic Tabs/Filters */}
-              <div className="flex items-center gap-1.5 bg-zinc-950 p-1 rounded-full border border-white/[0.06] self-start md:self-auto shrink-0">
-                <button
-                  onClick={() => setProjectFilter('ALL')}
-                  className={`px-4 py-1.5 rounded-full text-[10px] font-mono font-bold uppercase transition-all duration-200 ${
-                    projectFilter === 'ALL'
-                      ? 'bg-lime-400 text-black shadow-[0_2px_8px_rgba(212,255,58,0.25)]'
-                      : 'text-zinc-400 hover:text-white'
-                  }`}
-                >
-                  All Projects
-                </button>
-                <button
-                  onClick={() => setProjectFilter('AI')}
-                  className={`px-4 py-1.5 rounded-full text-[10px] font-mono font-bold uppercase transition-all duration-200 ${
-                    projectFilter === 'AI'
-                      ? 'bg-lime-400 text-black shadow-[0_2px_8px_rgba(212,255,58,0.25)]'
-                      : 'text-zinc-400 hover:text-white'
-                  }`}
-                >
-                  AI SaaS
-                </button>
-                <button
-                  onClick={() => setProjectFilter('CASE_STUDY')}
-                  className={`px-4 py-1.5 rounded-full text-[10px] font-mono font-bold uppercase transition-all duration-200 ${
-                    projectFilter === 'CASE_STUDY'
-                      ? 'bg-lime-400 text-black shadow-[0_2px_8px_rgba(212,255,58,0.25)]'
-                      : 'text-zinc-400 hover:text-white'
-                  }`}
-                >
-                  Case Studies
-                </button>
               </div>
             </div>
           </div>
@@ -832,7 +797,7 @@ export default function App() {
                     {/* Glowing tag for featured badge */}
                     {prj.isFeatured && (
                       <div className="absolute top-0 right-0 p-1 px-3 bg-lime-400 text-black font-mono font-black text-[8px] uppercase tracking-widest rounded-bl-lg shadow-md animate-pulse">
-                        Featured SaaS
+                        Featured Project
                       </div>
                     )}
 
@@ -1099,7 +1064,7 @@ export default function App() {
                 />
               </h2>
               <p className="text-zinc-400 text-sm sm:text-base leading-relaxed max-w-lg mb-8">
-                에이전틱 제품 제작이 필요하시거나, 도메인 특화 데이터 자동화 및 특수 콘텐츠 API 연동 가공이 필요하시다면 언제든 연락 주시기 바랍니다. 
+                에듀테크 서비스 제작이 필요하시거나, 교육 콘텐츠 연동 및 웹 데이터 가공이 필요하시다면 언제든 편하게 아래 메일로 의견을 남겨주세요.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4">

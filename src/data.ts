@@ -4,7 +4,7 @@ export const timelineData: TimelineItem[] = [
   {
     year: '2026',
     events: [
-      { description: '★ 교육 특화 AI 기업 선언 · 10년의 노하우를 계승하여 에듀테크 전문 AI 기획 및 저작 지원 하우스로 전환', isHighlight: true },
+      { description: '★ 교육 및 에듀테크 AI 기업 선언 · 10년의 노하우를 계승하여 에듀테크 전문 AI 기획 및 저작 지원 하우스로 전환', isHighlight: true },
       { description: '가르치고 배우는 이들을 위한 AI 맞춤형 교육 솔루션 및 저작 지원 툴 연구 개시', isHighlight: true }
     ]
   },
@@ -16,14 +16,14 @@ export const timelineData: TimelineItem[] = [
       { description: '구미시청 지역 문화유산 투어 오리지널 실사/공연형 영상 시나리오 기획 및 영상 촬영 제작 (2023)' },
       { description: '맥스(MAX)농구교실 풀스택 홈페이지 구축 및 BI 브랜드 아이덴티티 로고 디자인 (2023)' },
       { description: '윌비스 1억뷰N잡 클래스 디지털 미디어 콘텐츠 기획 및 교육 콘텐츠 자문 (2022)' },
-      { description: '하나로컨설팅노무법인 등 오피스 전문 기관의 장기 유튜브 대행 운영 및 디지털 교육 영상 제작 (2022)' },
+      { description: '하나로컨설팅노무법인 등 오피스 전문 기관의 유튜브 대행 운영 및 디지털 교육 영상 제작 (2022)' },
       { description: '동서대학교 LINC 3.0 사업단 공식 산학협약 체결 및 디지털 콘텐츠 공동 연구 개발 (2022)' }
     ]
   },
   {
     year: '2016 — 2021',
     events: [
-      { description: '타임폴리오투자자문(Timefolio) 공식 투자 관리 웹 서비스 인터랙티브 프론트엔드 구축 및 브랜드 디자인 전반 (2018–2022)' },
+      { description: '윌비스(Willbes) 1억뷰N잡 공식 온라인 강의 디지털 미디어 콘텐츠 자문 및 디자인 패키지 기획 (2019–2022)' },
       { description: '한국릴리 제약 메디컬 리서치 정보 인포그래픽스 및 인체 모션 소개 영상 제작 (2021)' },
       { description: '롯데시네마 창립기념 영상 및 국기원 태권도 글로벌 보급 교육 콘텐츠 제작 (2020)' },
       { description: '주식회사 에이브로 공식 법인 설립 (2016.07) · 디지털 콘텐츠 기획/제작 에이전시로서 비즈니스 개시' },
@@ -39,7 +39,7 @@ export const servicesData: ServiceItem[] = [
     title: 'AI Engineering & SaaS',
     englishTitle: 'LLM · AGENT · SaaS ENGINE',
     description: '10년의 공교육·출판 플랫폼 검수 노하우에 AI 기술을 융합합니다. 정밀한 기획력을 바탕으로 가볍고 강력한 맞춤형 교육 소프트웨어와 지능형 시스템을 설계합니다.',
-    items: ['안정적인 다중 AI 결합 설계', '도메인 특화 데이터 파싱', '실무 밀착형 AI 에이전트', '사용하기 쉬운 맞춤형 SaaS 구축']
+    items: ['안정적인 다중 AI 결합 설계', '도메인 맞춤 데이터 파싱', '실무 밀착형 AI 에이전트', '사용하기 쉬운 맞춤형 SaaS 구축']
   },
   {
     num: '02',
@@ -66,14 +66,14 @@ export const servicesData: ServiceItem[] = [
 
 export const projectsData: ProjectItem[] = [
   {
-    id: 'PRD_002',
-    name: 'AvroEdu Platform',
-    client: '에이브로 교육 AI 기술 연구',
-    domain: 'avro.co.kr/edu',
-    tags: ['EduTech', 'AI-SaaS', 'Adaptive Learning Support', 'Education Utilities'],
-    description: '공교육 및 대형 출판사의 풍부한 수학 기획력을 바탕으로 구축된 에듀테크 지원 플랫폼입니다. 가르치는 사람을 위한 스마트 문제 출제 및 교재 저작 기능과, 배우는 사람을 위한 대화형 맞춤 수학 튜터를 제공합니다.',
+    id: 'CASE_004',
+    name: '라스트마일 Blogstudio 개발 기획',
+    client: '(주)라스트마일 (LASTMILE)',
+    domain: 'blogstudio.ai',
+    tags: ['개발 기획', 'UI UX 설계', '스마트 에디터', '블로그 저작 도구'],
+    description: '블로그 및 디지털 콘텐츠 저작 지원 툴인 Blogstudio의 직관적인 사용자 워크플로우 설계, 인텔리전트 에디터 UI/UX 기획 및 백엔드 연동 관련 상세 개발 기획 전반에 주도적으로 참여하여 프로젝트 기반의 완성도 구축에 적극 기여하였습니다.',
     isFeatured: true,
-    status: 'LAUNCHING SOON'
+    status: 'CASE STUDY'
   },
   {
     id: 'CASE_001',
@@ -82,7 +82,7 @@ export const projectsData: ProjectItem[] = [
     domain: 'ebsmath.co.kr',
     tags: ['EBSMath', '수업지도안', '교육 콘텐츠 개발', 'Legacy Operations'],
     description: '2022년부터 2025년까지 공교육 및 상용 수학 콘텐츠의 학습 활용 방안을 기획하고, 맞춤형 수학 수업지도안 연구 및 개발 업무를 수행하며 교육 콘텐츠 분야의 풍부한 도메인 지식을 축적해왔습니다.',
-    isFeatured: false,
+    isFeatured: true,
     status: 'CASE STUDY'
   },
   {
@@ -97,11 +97,11 @@ export const projectsData: ProjectItem[] = [
   },
   {
     id: 'CASE_003',
-    name: '타임폴리오투자자문 브랜드 및 웹 구축',
-    client: '타임폴리오 (TIMEFOLIO)',
-    domain: 'timefolio.co.kr',
-    tags: ['웹 인프라', 'UI UX', 'Identity Design'],
-    description: '자산운용사인 타임폴리오의 공식 웹사이트 고도화 작업 및 기업 전용 BI/CI 디자인 패키지를 설계하여 사용자 친화적인 온라인 채널을 구축하였습니다.',
+    name: '윌비스 1억뷰N잡 디지털 미디어 콘텐츠 기획',
+    client: '윌비스 (WILLBES)',
+    domain: 'njob.willbes.net',
+    tags: ['디지털 콘텐츠', '미디어 기획', '교육 콘텐츠 자문'],
+    description: '윌비스 1억뷰N잡 클래스의 디지털 마케팅 및 교육용 미디어 콘텐츠를 기획·제작하고, 양질의 이러닝 커리큘럼 구성에 관한 전문 자문 및 파트너십을 완수하였습니다.',
     isFeatured: false,
     status: 'CASE STUDY'
   }
@@ -111,10 +111,9 @@ export const partnersData: PartnerItem[] = [
   { name: 'EBS', type: 'BROADCAST', isHighlight: true },
   { name: 'EBSMath', type: 'PLATFORM', isHighlight: true },
   { name: '미래엔', type: 'CONTENT', isHighlight: true },
-  { name: 'TIMEFOLIO', type: 'FINANCE', isHighlight: false },
   { name: '서울예대', type: 'ACADEMY', isHighlight: false },
   { name: '아시아문화원', type: 'CULTURE', isHighlight: false },
-  { name: '윌비스', type: 'CONSULTING', isHighlight: false },
+  { name: '윌비스', type: 'CONSULTING', isHighlight: true },
   { name: '국기원', type: 'SPORTS', isHighlight: false },
   { name: '롯데시네마', type: 'ENTERTAIN', isHighlight: false },
   { name: '한국릴리', type: 'PHARMACEUTICAL', isHighlight: false },
