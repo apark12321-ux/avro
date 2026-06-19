@@ -4,9 +4,8 @@ export const timelineData: TimelineItem[] = [
   {
     year: '2026',
     events: [
-      { description: '★ AI 핵심 기업 피벗 (AI Pivot) 완성 · 10년 콘텐츠 개발 대행을 마감하고 비즈니스 AI 유틸리티 엔진 그룹으로 선언', isHighlight: true },
-      { description: 'blogstudio.live 정식 서비스 개시 · 멀티 디바이스 원스톱 다중 발행 특화 콘텐츠 자동 생성 AI 솔루션', isHighlight: true },
-      { description: '에이전틱 워크플로우(Agentic Workflow) 구축 대행 및 Multi-LLM 엔터프라이즈 콘텐츠 자동화 서비스 론칭', isHighlight: true }
+      { description: '★ 교육 특화 AI 기업 선언 · 10년의 노하우를 계승하여 에듀테크 전문 AI 기획 및 저작 지원 하우스로 전환', isHighlight: true },
+      { description: '가르치고 배우는 이들을 위한 AI 맞춤형 교육 솔루션 및 저작 지원 툴 연구 개시', isHighlight: true }
     ]
   },
   {
@@ -39,22 +38,22 @@ export const servicesData: ServiceItem[] = [
     num: '01',
     title: 'AI Engineering & SaaS',
     englishTitle: 'LLM · AGENT · SaaS ENGINE',
-    description: '10년의 견고한 플랫폼 검수 노하우 위에, Google Gemini, OpenAI, Anthropic 등 최신 AI 신경망을 결합합니다. 정교한 도메인 특화 데이터 파싱 및 AI 엔지니어링 설계 역량을 바탕으로, 기업용 실무 에이전트와 특화 인터랙티브 시스템을 전문적으로 빌드합니다.',
-    items: ['다중 LLM 조율 및 API 결합', '도메인 특화 OCR & 파서 엔지니어링', '실무 지향 AI 에이전트 워크플로우', '무결성 보장 전용 SaaS 설계 및 배포']
+    description: '10년의 공교육·출판 플랫폼 검수 노하우에 AI 기술을 융합합니다. 정밀한 기획력을 바탕으로 가볍고 강력한 맞춤형 교육 소프트웨어와 지능형 시스템을 설계합니다.',
+    items: ['안정적인 다중 AI 결합 설계', '도메인 특화 데이터 파싱', '실무 밀착형 AI 에이전트', '사용하기 쉬운 맞춤형 SaaS 구축']
   },
   {
     num: '02',
-    title: 'Creative AI Automation',
-    englishTitle: 'CREATIVE OSMU AUTOMATION',
-    description: 'blogstudio.live의 OSMU 자동화 아키텍처를 바탕으로 하여 중복적인 콘텐츠 제작 리소스를 대폭 개선합니다. 검증된 원본 텍스트 소스 하나를 바탕으로 가독성과 신뢰성을 유지하며, 다양한 채널 최적화 텍스트, 소셜 미디어 플랫폼용 콘텐츠, 스크립트 등을 멀티 에이전트 워크플로우를 통해 정교하게 기획하고 안정적으로 생성합니다.',
-    items: ['원소스 멀티유즈 (OSMU) 자동 기획', '지능형 블로그/SNS 다중 플랫폼 연합 배포', '브랜드 페르소나 정교화 튜닝 프롬프트', '정교한 콘텐츠 퍼블리싱 자동화 스택']
+    title: 'AI Education & Learning Tools',
+    englishTitle: 'AI EDUTECH & AGENT SOLUTIONS',
+    description: 'EBSMath 등 공교육의 복잡한 교과/수학 콘텐츠를 개발했던 경험을 살려 에듀테크 도구를 만듭니다. 교수자를 위한 수학 수식 및 에듀텍스트 편리 저작 툴과, 학생들을 위한 맞춤 스마트 워크북을 설계합니다.',
+    items: ['가르치는 이들을 위한 교육 AI 설계', '수식 및 문항 저작 보조 AI 엔진', '배우는 이들을 위한 대화형 학습 앱', '교육 문서 자동 정형화 솔루션']
   },
   {
     num: '03',
     title: '10-Year Digital Legacy Operations',
     englishTitle: 'TRUSTED PLATFORM LEGACY',
     description: 'EBSMath, 미래엔, 윌비스 등 주요 에듀테크 플랫폼의 기능 검수와 디지털 운영 파트너십. 비즈니스 품질과 신뢰도를 보장하기 위해, 다년간 축적해 온 디지털 기획 및 퍼블리싱 검수 역량을 최적으로 조화시킵니다.',
-    items: ['안정성/신뢰성 최우선 대형 시스템 조율', '에듀테크 전문 QA & 퍼블리싱 체계 보장', '인프라 클라우드 전환 및 API 통합', '레거시 연계 비즈니스 인터랙션 보정']
+    items: ['안정성/신뢰성 최우선 대형 시스템 조율', 'EBS/출판사 정밀 수학 및 콘텐츠 기획 설계', '에듀테크 전문 QA & 퍼블리싱 체계 보장', '레거시 연계 비즈니스 인터랙션 보정']
   },
   {
     num: '04',
@@ -68,13 +67,13 @@ export const servicesData: ServiceItem[] = [
 export const projectsData: ProjectItem[] = [
   {
     id: 'PRD_002',
-    name: 'BlogStudio',
-    client: '에이브로 독자 AI SaaS 제품',
-    domain: 'blogstudio.live',
-    tags: ['AI-OSMU', 'SaaS', 'Content Automation', 'Multi-LLM Pipeline'],
-    description: '지난 10년간 대형 브랜드와 교육기관의 비주얼 및 미디어 콘텐츠를 기획·개발하고 퍼블리싱하며 해결해 온 병목 현상들을 바탕으로 탄생한 AI 멀티 에이전트 SaaS입니다. 텍스트 입력만으로 블로그 포스팅, 카드뉴스 콘텐츠, 숏폼 비디오 대본 등을 정교하고 전문성 높은 톤앤매너로 일관되게 동시 제작할 수 있습니다.',
+    name: 'AvroEdu Platform',
+    client: '에이브로 교육 AI 기술 연구',
+    domain: 'avro.co.kr/edu',
+    tags: ['EduTech', 'AI-SaaS', 'Adaptive Learning Support', 'Education Utilities'],
+    description: '공교육 및 대형 출판사의 풍부한 수학 기획력을 바탕으로 구축된 에듀테크 지원 플랫폼입니다. 가르치는 사람을 위한 스마트 문제 출제 및 교재 저작 기능과, 배우는 사람을 위한 대화형 맞춤 수학 튜터를 제공합니다.',
     isFeatured: true,
-    status: 'LIVE'
+    status: 'LAUNCHING SOON'
   },
   {
     id: 'CASE_001',

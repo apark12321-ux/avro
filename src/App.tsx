@@ -44,16 +44,16 @@ export default function App() {
   const [scrollPercentage, setScrollPercentage] = useState<number>(0);
   const [isNavHidden, setIsNavHidden] = useState<boolean>(false);
   const [brandRotation, setBrandRotation] = useState<number>(0);
-  const [typedCommand, setTypedCommand] = useState<string>('blogstudio write --topic="AI-Pivot"');
+  const [typedCommand, setTypedCommand] = useState<string>('edu-agent generate --grade=middle-3 --subject="math"');
   const [terminalLogs, setTerminalLogs] = useState<Array<{ id: number; text: string; type: 'client' | 'info' | 'success' | 'warn' | 'header' }>>([
-    { id: 1, text: 'blogstudio init --preset=content_creation', type: 'header' },
-    { id: 2, text: 'Initializing BlogStudio Engine v1.0.2...', type: 'info' },
-    { id: 3, text: '✓ 10-Year human expert content development database loaded.', type: 'success' },
-    { id: 4, text: '✓ Multi-channel automation active (Tistory, Naver, Instagram).', type: 'success' },
-    { id: 5, text: 'Ready to generate high-conversion content assets below.', type: 'info' }
+    { id: 1, text: 'edu-agent init --preset=curriculum_analysis', type: 'header' },
+    { id: 2, text: 'Initializing AvroEdu Core Engine v2.0.1...', type: 'info' },
+    { id: 3, text: '✓ 10-Year public & corporate educational contents QA database loaded.', type: 'success' },
+    { id: 4, text: '✓ Adaptive learning math formula (LaTeX-HWPX) converter engine active.', type: 'success' },
+    { id: 5, text: 'Ready to build high-precision pedagogical materials & visual assets below.', type: 'info' }
   ]);
   const [isTerminalBuilding, setIsTerminalBuilding] = useState<boolean>(false);
-  const [activeTerminalPreset, setActiveTerminalPreset] = useState<string>('blog');
+  const [activeTerminalPreset, setActiveTerminalPreset] = useState<string>('lesson');
 
   // Mouse coordinate tracking for spotlight effects
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
@@ -133,50 +133,50 @@ export default function App() {
     let sequence: Array<{ text: string; type: 'client' | 'info' | 'success' | 'warn' | 'header' }> = [];
 
     switch (preset) {
-      case 'blog':
-        commandText = 'blogstudio write --topic="AI-Pivot의 필요성"';
+      case 'lesson':
+        commandText = 'edu-agent compose --type=lesson-plan --topic="중3 삼각비 실생활 활용"';
         sequence = [
-          { text: 'Analyzing topic intent utilizing Google Gemini API...', type: 'info' },
-          { text: 'Connecting Naver & Tistory publishing gateways...', type: 'info' },
-          { text: '✓ Generated optimized SEO article structure, tags & keywords.', type: 'success' },
-          { text: '✓ Draft formatted & sent to BlogStudio Stage DB.', type: 'success' },
-          { text: '✓ Human curation level: 98.4% readability index.', type: 'success' }
+          { text: 'Analyzing curriculum standards and pedagogic guidelines utilizing Google Gemini...', type: 'info' },
+          { text: 'Aligning with EBSMath structure and national math guidelines database...', type: 'info' },
+          { text: '✓ Generated optimized lesson plan structure, concept keys & rubric.', type: 'success' },
+          { text: '✓ Created instructor lecture guide and interactive prompt triggers.', type: 'success' },
+          { text: '✓ Pedagogical validation index: Excellent (98.6% structure rating).', type: 'success' }
         ];
         break;
-      case 'instagram':
-        commandText = 'blogstudio render --channel=instagram --style=card';
+      case 'evaluation':
+        commandText = 'edu-agent evaluate --source=custom_assessment --questions=5';
         sequence = [
-          { text: 'Condensing core concepts into social punchy captions...', type: 'info' },
-          { text: 'Generating eye-catching hashtags and layout bullet points...', type: 'info' },
-          { text: '✓ Formatted premium Instagram post caption ready.', type: 'success' },
-          { text: '✓ Created 5-slide card carousel structure concept tags.', type: 'success' },
-          { text: '✓ Post prepared and scheduled for optimized feed timing.', type: 'success' }
+          { text: 'Extracting key evaluation concepts and diagnostic formula patterns...', type: 'info' },
+          { text: 'Generating multi-level diagnostic math questions & descriptive feedback...', type: 'info' },
+          { text: '✓ Styled study materials into 5 personalized adaptive assessment items.', type: 'success' },
+          { text: '✓ Rendered math symbols via LaTeX-HWP compiler engine smoothly.', type: 'success' },
+          { text: '✓ Concept coverage alignment & pedagogical difficulty checks passed.', type: 'success' }
         ];
         break;
-      case 'shorts':
-        commandText = 'blogstudio script --channel=shorts --voice=confident';
+      case 'visualize':
+        commandText = 'edu-agent render --output=visual-deck --style=diagram';
         sequence = [
-          { text: 'Pre-calculating first 3s high-retention hook scenario...', type: 'info' },
-          { text: 'Writing narrative script with secondary visual prompts...', type: 'info' },
-          { text: '✓ Voice narration rhythm matched to trendy video styles.', type: 'success' },
-          { text: '✓ Audio prompt: /assets/voice-gen/script_01.mp3 synced.', type: 'success' },
-          { text: '✓ Rendered narration script for 60-second video duration.', type: 'success' }
+          { text: 'Pre-calculating instructional visual layout & geometric concept node shapes...', type: 'info' },
+          { text: 'Configuring precise responsive coordinates for educational vector graphics...', type: 'info' },
+          { text: '✓ Educational visual animation frame timeline mapped successfully.', type: 'success' },
+          { text: '✓ Generated concept slide: /assets/edu-gen/geometry_triangle.svg outputted.', type: 'success' },
+          { text: '✓ Created graphic visualizer widget for student delivery.', type: 'success' }
         ];
         break;
-      case 'publish':
-        commandText = 'blogstudio deploy --all-channels --release=live';
+      case 'integrate':
+        commandText = 'edu-agent deploy --platform=lms --release=production';
         sequence = [
-          { text: 'Validating structural content across multi-service APIs...', type: 'info' },
-          { text: 'Initiating simultaneous OSMU posting engine...', type: 'info' },
-          { text: '✓ Successfully posted to Naver Blog API.', type: 'success' },
-          { text: '✓ Successfully published to Tistory Server.', type: 'success' },
-          { text: '✓ Triggered automatic Instagram publishing feed callback.', type: 'success' },
-          { text: '✓ 1 Original Source → 5 Multi-use social contents live!', type: 'success' }
+          { text: 'Validating curricular content compatibility against standard LMS API...', type: 'info' },
+          { text: 'Initiating automated data publishing engine and academic validator...', type: 'info' },
+          { text: '✓ Successfully compiled and synced to School LMS platform database.', type: 'success' },
+          { text: '✓ HWPX/LaTeX formula rendering parsed with absolute integrity.', type: 'success' },
+          { text: '✓ Triggered evaluation callback tracker mapping for classroom students.', type: 'success' },
+          { text: '✓ Compiled 1 Concept Core → Multiple adaptive pedagogical resources live!', type: 'success' }
         ];
         break;
       default:
-        commandText = 'blogstudio optimize';
-        sequence = [{ text: 'Optimization completed.', type: 'success' }];
+        commandText = 'edu-agent optimize';
+        sequence = [{ text: 'Workflow optimization completed.', type: 'success' }];
     }
 
     setTypedCommand('');
@@ -332,7 +332,7 @@ export default function App() {
                 <span className="text-zinc-600">|</span>
                 <span>EST 2016.07.18</span>
                 <span className="text-zinc-600">|</span>
-                <span className="text-cyan-400 font-medium">HOT RELEASE: BLOGSTUDIO.LIVE</span>
+                <span className="text-cyan-400 font-medium">AVRO EDUTECH INTELLIGENCE</span>
               </motion.div>
 
                {/* Title with staggered text rise and interactive glitch hovering */}
@@ -344,7 +344,7 @@ export default function App() {
                      transition={{ duration: 0.8, cubicBezier: [0.16, 1, 0.3, 1] }}
                      className="block"
                    >
-                     한 줄의 <GlitchText text="텍스트" className="bg-gradient-to-r from-cyan-400 via-blue-400 to-indigo-400 bg-clip-text text-fill-transparent text-transparent" />에서
+                     배우고 가르치는 <GlitchText text="모든 이" className="bg-gradient-to-r from-cyan-400 via-blue-400 to-indigo-400 bg-clip-text text-fill-transparent text-transparent" />를 위한
                    </motion.span>
                  </span>
                  <span className="block overflow-hidden py-1">
@@ -354,7 +354,7 @@ export default function App() {
                      transition={{ duration: 0.8, delay: 0.15, cubicBezier: [0.16, 1, 0.3, 1] }}
                      className="block"
                    >
-                     블로그·SNS를 <span className="bg-lime-400 text-black px-3.5 py-1.5 rounded-lg inline-block mr-2 shadow-[0_0_25px_rgba(212,255,58,0.25)] hover:bg-lime-300">동시 지배</span>하는
+                     가장 편리한 <span className="bg-lime-400 text-black px-3.5 py-1.5 rounded-lg inline-block mr-2 shadow-[0_0_25px_rgba(212,255,58,0.25)] hover:bg-lime-300">AI 에듀테크</span>
                    </motion.span>
                  </span>
                  <span className="block overflow-hidden py-1">
@@ -364,7 +364,7 @@ export default function App() {
                      transition={{ duration: 0.8, delay: 0.28, cubicBezier: [0.16, 1, 0.3, 1] }}
                      className="inline-block relative fill-current"
                    >
-                     신형 AI 엔진, <GlitchText text="BlogStudio" className="font-mono text-lime-400 italic font-medium hover:text-lime-300" />
+                     교육 특화 AI 엔진, <GlitchText text="AvroEdu" className="font-mono text-lime-400 italic font-medium hover:text-lime-300" />
                      <span className="text-lime-400 animate-pulse">.</span>
                      <span className="absolute left-0 bottom-1 w-full h-[3px] bg-red-500 roundedScale" />
                    </motion.span>
@@ -378,7 +378,7 @@ export default function App() {
                 transition={{ duration: 0.8, delay: 0.45 }}
                 className="text-base sm:text-lg text-zinc-400 max-w-xl leading-relaxed text-left mb-8"
               >
-              <strong className="text-white font-semibold">에이브로의 독자 AI SaaS \'블로그스튜디오(blogstudio.live)\'</strong>는 10년간 대형 브랜드와 교육기관의 비주얼 및 미디어 콘텐츠를 수작업으로 기획·개발해 온 노하우를 집대성한 솔루션입니다. 원천 텍스트 소스 하나로 고품질의 네이버 블로그, 티스토리, 인스타그램 카드뉴스, 숏폼 스크립트까지 다중 아웃풋 콘텐츠로 자동 기획·발행해 줍니다. 
+                에이브로는 지난 10년간 공교육 플랫폼과 대형 출판사의 교육 콘텐츠를 기획·검증해 왔습니다. 검증된 교육 도메인 전문성에 AI 기술을 매끄럽게 결합하여, 교수자에게는 생산적인 수업 저작 툴을 제공하고 학습자에게는 개인 맞춤형 교육 솔루션을 설계합니다.
               </motion.p>
 
               {/* Tag badges */}
@@ -389,13 +389,13 @@ export default function App() {
                 className="flex flex-wrap gap-2 text-left justify-start"
               >
                 <span className="px-3.5 py-1.5 rounded-full border border-lime-400/40 bg-lime-400/5 text-lime-400 font-mono text-[10px] uppercase font-bold tracking-widest shadow-[0_0_15px_rgba(212,255,58,0.1)] hover:scale-105 transition-transform duration-200">
-                  BlogStudio Live
+                  AvroEdu Platform
                 </span>
                 <span className="px-3.5 py-1.5 rounded-full border border-white/[0.08] bg-white/[0.02] text-zinc-300 font-mono text-[10px] uppercase font-semibold tracking-wider hover:border-cyan-400/50 hover:text-cyan-400 transition-colors duration-200">
-                  One-Source Multi-Use AI
+                  Domain-Specific Math OCR & LaTeX
                 </span>
                 <span className="px-3.5 py-1.5 rounded-full border border-white/[0.08] bg-white/[0.02] text-zinc-300 font-mono text-[10px] uppercase font-semibold tracking-wider hover:border-cyan-400/50 hover:text-cyan-400 transition-colors duration-200">
-                  Multi-Agent Scheduling
+                  Adaptive Pedagogical AI
                 </span>
               </motion.div>
             </div>
@@ -463,48 +463,48 @@ export default function App() {
                   </div>
                   <div className="grid grid-cols-4 gap-1.5">
                     <button
-                      onClick={() => runTerminalSimulation('blog')}
+                      onClick={() => runTerminalSimulation('lesson')}
                       disabled={isTerminalBuilding}
                       className={`px-1 py-1.5 rounded text-[9px] font-mono font-bold tracking-tight uppercase border transition-all duration-200 ${
-                        activeTerminalPreset === 'blog'
+                        activeTerminalPreset === 'lesson'
                           ? 'bg-lime-400/10 border-lime-400/50 text-lime-400'
                           : 'bg-white/[0.02] border-white/[0.06] text-zinc-400 hover:border-white/[0.12] hover:text-white'
                       }`}
                     >
-                      Write Blog
+                      Lesson Plan
                     </button>
                     <button
-                      onClick={() => runTerminalSimulation('instagram')}
+                      onClick={() => runTerminalSimulation('evaluation')}
                       disabled={isTerminalBuilding}
                       className={`px-1 py-1.5 rounded text-[9px] font-mono font-bold tracking-tight uppercase border transition-all duration-200 ${
-                        activeTerminalPreset === 'instagram'
+                        activeTerminalPreset === 'evaluation'
                           ? 'bg-lime-400/10 border-lime-400/50 text-lime-400'
                           : 'bg-white/[0.02] border-white/[0.06] text-zinc-400 hover:border-white/[0.12] hover:text-white'
                       }`}
                     >
-                      Insta Caption
+                      Assessment
                     </button>
                     <button
-                      onClick={() => runTerminalSimulation('shorts')}
+                      onClick={() => runTerminalSimulation('visualize')}
                       disabled={isTerminalBuilding}
                       className={`px-1 py-1.5 rounded text-[9px] font-mono font-bold tracking-tight uppercase border transition-all duration-200 ${
-                        activeTerminalPreset === 'shorts'
+                        activeTerminalPreset === 'visualize'
                           ? 'bg-lime-400/10 border-lime-400/50 text-lime-400'
                           : 'bg-white/[0.02] border-white/[0.06] text-zinc-400 hover:border-white/[0.12] hover:text-white'
                       }`}
                     >
-                      Video Script
+                      Visual Deck
                     </button>
                     <button
-                      onClick={() => runTerminalSimulation('publish')}
+                      onClick={() => runTerminalSimulation('integrate')}
                       disabled={isTerminalBuilding}
                       className={`px-1 py-1.5 rounded text-[9px] font-mono font-bold tracking-tight uppercase border transition-all duration-200 ${
-                        activeTerminalPreset === 'publish'
+                        activeTerminalPreset === 'integrate'
                           ? 'bg-lime-400/10 border-lime-400/50 text-lime-400'
                           : 'bg-white/[0.02] border-white/[0.06] text-zinc-400 hover:border-white/[0.12] hover:text-white'
                       }`}
                     >
-                      OSMU Publish
+                      LMS Sync
                     </button>
                   </div>
                 </div>
@@ -534,11 +534,11 @@ export default function App() {
         <section className="py-4 overflow-hidden border-y border-white/[0.08] bg-[#d4ff3a] text-black font-mono font-black text-xs uppercase tracking-widest mb-16 relative z-10">
           <div className="flex whitespace-nowrap select-none overflow-hidden">
             <div className="flex gap-16 shrink-0 animate-tick">
-              <span className="text-indigo-950 font-black">★ BLOGSTUDIO.LIVE</span>
+              <span className="text-indigo-950 font-black">★ AVRO EDUTECH INTELLIGENCE</span>
               <span className="text-black/30">/</span>
               <span>DIGITAL CONTENT SOLUTION</span>
               <span className="text-black/30">/</span>
-              <span className="text-indigo-950 font-black">AI CONTENT AUTOMATION</span>
+              <span className="text-indigo-950 font-black">AI EDUTECH SOLUTIONS</span>
               <span className="text-black/30">/</span>
               <span>VIDEO PRODUCTION EXPERT</span>
               <span className="text-black/30">/</span>
@@ -550,11 +550,11 @@ export default function App() {
               <span className="text-black/30">/</span>
             </div>
             <div className="flex gap-16 shrink-0 animate-tick" aria-hidden="true">
-              <span className="text-indigo-950 font-black">★ BLOGSTUDIO.LIVE</span>
+              <span className="text-indigo-950 font-black">★ AVRO EDUTECH INTELLIGENCE</span>
               <span className="text-black/30">/</span>
               <span>DIGITAL CONTENT SOLUTION</span>
               <span className="text-black/30">/</span>
-              <span className="text-indigo-950 font-black">AI CONTENT AUTOMATION</span>
+              <span className="text-indigo-950 font-black">AI EDUTECH SOLUTIONS</span>
               <span className="text-black/30">/</span>
               <span>VIDEO PRODUCTION EXPERT</span>
               <span className="text-black/30">/</span>
@@ -601,7 +601,7 @@ export default function App() {
                 <div className="p-4 rounded-xl border border-lime-400/30 bg-lime-400/[0.02] hover:border-lime-400/50 transition-all duration-300">
                   <div className="font-mono text-lime-400 text-xs font-bold mb-1">AI PIVOT NEXT: 2026 ~</div>
                   <div className="text-zinc-300 text-[11px] leading-relaxed">
-                    지능형 콘텐츠 제작 멀티 에이전트 <strong className="text-white">blogstudio.live</strong> 출시를 필두로, 비-AI 비즈니스의 실무적 한계를 첨단 기술로 해결해 나가는 신뢰받는 AI 실무 엔지니어링 그룹으로 거듭납니다.
+                    교수자와 학습자를 돕는 맞춤형 에듀테크 지원 도구 및 교육 AI 솔루션을 필두로, 기존 비-AI 비즈니스의 실무적 한계를 첨단 기술로 해결해 나가는 신뢰받는 에듀테크 엔지니어링 파트너로 거듭납니다.
                   </div>
                 </div>
               </div>
@@ -614,10 +614,10 @@ export default function App() {
               </p>
               <div className="text-zinc-400 text-sm leading-relaxed space-y-4 text-left">
                 <p>
-                  에이브로는 지난 10년간 안정도 높은 디지털 에이전시 비즈니스를 수행해 왔습니다. 대형 교과서 출판사의 에듀테크 콘텐츠들의 고품질 검증(QA/QC)을 전담하고, 공교육 수학 자료의 정밀 정형화를 기획·제작해 오며 <strong>'디테일과 품질의 무결성'</strong>을 일관되게 입증해 왔습니다.
+                  에이브로는 지난 10년간 대형 교과서 출판사의 에듀테크 플랫폼 기능 검증(QA/QC)을 수행하고, 공교육 수학 자료를 기획·개발해 왔습니다. 교육 현장의 복잡한 데이터를 안정적으로 다루며 축적된 기획력이 에이브로의 핵심 신뢰도입니다.
                 </p>
                 <p>
-                  이러한 탄탄한 디지털 비즈니스 노하우 위에 최신 초거대 언어모델(LLM)과 에이전틱 오케스트레이션 엔지니어링을 조화롭게 융합했습니다. 단순한 API 연결 차원의 서비스를 넘어, 디지털 콘텐츠 생성 및 분산 발행을 돕는 독자적인 전문 SaaS <strong className="text-cyan-300">blogstudio.live</strong>를 성공적으로 론칭하며 비즈니스 성장에 기여하는 인공지능 솔루션 파트너로 도약하고 있습니다.
+                  이러한 교육 도메인 경험에 실용적인 AI 기술을 접목했습니다. 실제 가르치고 배우는 현장의 워크플로우를 분석하여 배움의 깊이를 더하고 교재 저작 속도를 올리는 특화된 AI 플랫폼 <strong className="text-cyan-300">AvroEdu</strong>를 연구·설계하며 신뢰받는 에듀테크 파트너로 나아가고 있습니다.
                 </p>
               </div>
 
@@ -640,16 +640,16 @@ export default function App() {
                   <div className="grid grid-cols-3 p-3.5 px-4">
                     <span className="text-zinc-500">트랜스포메이션</span>
                     <span className="col-span-2 text-lime-400 font-semibold flex items-center gap-1">
-                      전통 플랫폼 에이전시 → AI 비즈니스 유틸리티 엔지니어링 그룹
+                      전통 플랫폼 대행사 → 교육 특화 AI 전문 패밀리 피벗
                     </span>
                   </div>
                   <div className="grid grid-cols-3 p-3.5 px-4">
-                    <span className="text-zinc-500">대표 프로덕트</span>
-                    <span className="col-span-2 text-zinc-300">blogstudio.live (AI OSMU 콘텐츠 자동화)</span>
+                    <span className="text-zinc-500">핵심 포커스</span>
+                    <span className="col-span-2 text-zinc-300">AvroEdu Platform (지능형 맞춤 학습 및 교육 저작 툴)</span>
                   </div>
                   <div className="grid grid-cols-3 p-3.5 px-4 col-span-3">
-                    <span className="text-zinc-500">엔지니어링 코어</span>
-                    <span className="col-span-2 text-zinc-400">Multi-LLM Calibration · Agentic Automation · Cloud Ingress</span>
+                    <span className="text-zinc-500">주요 기술 스택</span>
+                    <span className="col-span-2 text-zinc-400">Education Domain AI · Math Custom Parser · User Interactive SaaS</span>
                   </div>
                 </div>
               </div>
