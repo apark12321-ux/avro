@@ -68,7 +68,7 @@ export const projectsData: ProjectItem[] = [
   {
     id: 'CASE_004',
     name: '라스트마일 Blogstudio 개발 기획',
-    client: '(주)라스트마일 (LASTMILE)',
+    client: '라스트마일 (LASTMILE)',
     domain: 'blogstudio.ai',
     tags: ['개발 기획', 'UI UX 설계', '스마트 에디터', '블로그 저작 도구'],
     description: '블로그 및 디지털 콘텐츠 저작 지원 툴인 Blogstudio의 직관적인 사용자 워크플로우 설계, 인텔리전트 에디터 UI/UX 기획 및 백엔드 연동 관련 상세 개발 기획 전반에 주도적으로 참여하여 프로젝트 기반의 완성도 구축에 적극 기여하였습니다.',

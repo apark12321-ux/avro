@@ -270,7 +270,7 @@ export default function App() {
             </div>
           </div>
 
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-3 sm:gap-6">
             {/* Live Synchronized clock */}
             <div className="hidden lg:flex items-center gap-2 border border-white/[0.06] rounded-full px-3.5 py-1 bg-white/[0.02]">
               <span className="w-1.5 h-1.5 rounded-full bg-lime-400 animate-pulse shadow-[0_0_8px_#d4ff3a]" />
@@ -282,21 +282,23 @@ export default function App() {
               href="https://avro-home.netlify.app"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[11px] font-mono font-bold tracking-widest uppercase text-zinc-400 hover:text-white transition-colors duration-200 flex items-center gap-1"
+              className="text-[10px] sm:text-[11px] font-mono font-bold tracking-wider sm:tracking-widest uppercase text-zinc-400 hover:text-white transition-colors duration-200 flex items-center gap-1"
             >
-              <span>Main Website</span>
-              <span className="text-lime-400 font-sans">↗</span>
+              <span className="hidden xs:inline">Main Website</span>
+              <span className="xs:hidden">Web</span>
+              <span className="text-lime-400 font-sans text-xs">↗</span>
             </motion.a>
 
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-              className="relative inline-flex items-center gap-2 px-5 py-2 rounded-full text-[11px] font-mono font-bold tracking-widest uppercase bg-gradient-to-r from-blue-500 via-cyan-400 to-lime-400 text-black overflow-hidden shadow-[0_4px_20px_rgba(34,211,238,0.25)] group"
+              className="relative inline-flex items-center gap-1.5 sm:gap-2 px-3.5 sm:px-5 py-1.5 sm:py-2 rounded-full text-[10px] sm:text-[11px] font-mono font-bold tracking-wider sm:tracking-widest uppercase bg-gradient-to-r from-blue-500 via-cyan-400 to-lime-400 text-black overflow-hidden shadow-[0_4px_20px_rgba(34,211,238,0.25)] group"
             >
               <span className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 pointer-events-none" />
-              <span>Contact Studio</span>
-              <motion.span animate={{ x: [0, 4, 0] }} transition={{ repeat: Infinity, duration: 1.5, ease: 'easeInOut' }}>
+              <span className="hidden xs:inline">Contact Studio</span>
+              <span className="xs:hidden">Contact</span>
+              <motion.span animate={{ x: [0, 3, 0] }} transition={{ repeat: Infinity, duration: 1.5, ease: 'easeInOut' }}>
                 →
               </motion.span>
             </motion.button>
@@ -335,37 +337,37 @@ export default function App() {
               </motion.div>
 
                {/* Title with staggered text rise and interactive glitch hovering */}
-               <h1 className="text-[2.2rem] sm:text-5xl md:text-[4.4rem] font-sans font-black tracking-tight leading-[1.05] sm:leading-[0.95] mb-6 select-none text-left">
-                 <span className="block overflow-hidden py-1">
+               <h1 className="text-[1.62rem] xs:text-[1.95rem] sm:text-4xl md:text-[3.1rem] lg:text-[3.8rem] xl:text-[4.2rem] font-sans font-black tracking-tight leading-[1.25] sm:leading-[1.15] md:leading-[1.1] lg:leading-[1.05] mb-6 select-none text-left break-keep">
+                 <span className="block overflow-hidden py-0.5">
                    <motion.span 
                      initial={{ y: '100%' }}
                      animate={{ y: 0 }}
                      transition={{ duration: 0.8, cubicBezier: [0.16, 1, 0.3, 1] }}
-                     className="block"
+                     className="inline-block md:block"
                    >
-                     배우고 가르치는 <GlitchText text="모든 이" className="bg-gradient-to-r from-cyan-400 via-blue-400 to-indigo-400 bg-clip-text text-fill-transparent text-transparent" />를 위한
+                     10년의 교육 콘텐츠 <GlitchText text="노하우" className="bg-gradient-to-r from-cyan-400 via-blue-400 to-indigo-400 bg-clip-text text-fill-transparent text-transparent" />와
                    </motion.span>
                  </span>
-                 <span className="block overflow-hidden py-1">
+                 <span className="block overflow-hidden py-0.5">
                    <motion.span 
                      initial={{ y: '100%' }}
                      animate={{ y: 0 }}
                      transition={{ duration: 0.8, delay: 0.15, cubicBezier: [0.16, 1, 0.3, 1] }}
-                     className="block"
+                     className="inline-block md:block"
                    >
-                     실용적인 <span className="bg-lime-400 text-black px-3.5 py-1.5 rounded-lg inline-block mr-2 shadow-[0_0_25px_rgba(212,255,58,0.25)] hover:bg-lime-300">교육 기술</span>과
+                     실용적인 <span className="bg-lime-400 text-black px-2 py-0.5 sm:px-3 sm:py-1 rounded lg:rounded-lg inline-block mr-1 sm:mr-2 shadow-[0_0_15px_rgba(212,255,58,0.2)] hover:bg-lime-300 transition-colors">교육 &amp; AI 기술</span>의 결합
                    </motion.span>
                  </span>
-                 <span className="block overflow-hidden py-1">
+                 <span className="block overflow-hidden py-0.5">
                    <motion.span 
                      initial={{ y: '100%' }}
                      animate={{ y: 0 }}
                      transition={{ duration: 0.8, delay: 0.28, cubicBezier: [0.16, 1, 0.3, 1] }}
-                     className="inline-block relative fill-current"
+                     className="inline-block md:block relative pb-0.5"
                    >
-                     맞춤형 AI 솔루션, <GlitchText text="에이브로" className="font-mono text-lime-400 italic font-medium hover:text-lime-300" />
+                     에듀테크 전문 파트너, <GlitchText text="에이브로" className="font-mono text-lime-400 italic font-medium hover:text-lime-300" />
                      <span className="text-lime-400 animate-pulse">.</span>
-                     <span className="absolute left-0 bottom-1 w-full h-[3px] bg-red-500 roundedScale" />
+                     <span className="absolute left-0 bottom-1 w-full h-[2.5px] bg-red-500 roundedScale" />
                    </motion.span>
                  </span>
                </h1>
@@ -377,7 +379,7 @@ export default function App() {
                 transition={{ duration: 0.8, delay: 0.45 }}
                 className="text-base sm:text-lg text-zinc-400 max-w-xl leading-relaxed text-left mb-8"
               >
-                에이브로는 지난 10년간 공교육 플랫폼과 대형 출판사의 교육 콘텐츠를 기획·검증해 왔습니다. 풍부한 학습 도메인 노하우와 검증된 기획력을 결합하여, 더 정확하고 실용적인 교육용 디지털 서비스와 다양한 스마트 도구들을 맞춤 개발 및 구축합니다.
+                에이브로는 대형 교과서 출판사와 공교육 플랫폼의 학습 콘텐츠 및 시스템을 구축·검수해 온 에듀테크 전문 기업입니다. 검증된 현장 도메인 노하우에 실용적인 AI 기술과 맞춤형 웹 개발 실무를 결합하여 정확하고 신뢰성 높은 교육용 서비스를 구축합니다.
               </motion.p>
 
               {/* Tag badges */}
@@ -460,7 +462,7 @@ export default function App() {
                     <Zap className="w-3 h-3 text-lime-400" />
                     Interactive Simulator — Click to test development tasks
                   </div>
-                  <div className="grid grid-cols-4 gap-1.5">
+                  <div className="grid grid-cols-2 xs:grid-cols-4 gap-1.5">
                     <button
                       onClick={() => runTerminalSimulation('lesson')}
                       disabled={isTerminalBuilding}
@@ -628,27 +630,27 @@ export default function App() {
                 </div>
                 
                 <div className="divide-y divide-white/[0.05]">
-                  <div className="grid grid-cols-3 p-3.5 px-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-1 sm:gap-4 p-3.5 px-4">
                     <span className="text-zinc-500">법인명</span>
-                    <span className="col-span-2 text-zinc-200 font-semibold">주식회사 에이브로 (AVRO INC.)</span>
+                    <span className="sm:col-span-2 text-zinc-200 font-semibold">주식회사 에이브로 (AVRO INC.)</span>
                   </div>
-                  <div className="grid grid-cols-3 p-3.5 px-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-1 sm:gap-4 p-3.5 px-4">
                     <span className="text-zinc-500">설립 일자</span>
-                    <span className="col-span-2 text-zinc-200">2016년 7월 18일</span>
+                    <span className="sm:col-span-2 text-zinc-200">2016년 7월 18일</span>
                   </div>
-                  <div className="grid grid-cols-3 p-3.5 px-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-1 sm:gap-4 p-3.5 px-4">
                     <span className="text-zinc-500">비즈니스 방향</span>
-                    <span className="col-span-2 text-lime-400 font-semibold flex items-center gap-1">
+                    <span className="sm:col-span-2 text-lime-400 font-semibold flex items-center gap-1">
                       전통 웹 에이전시 및 검수 대행 → 에듀테크 및 교육용 스마트 도구 기획/개발사로 확장
                     </span>
                   </div>
-                  <div className="grid grid-cols-3 p-3.5 px-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-1 sm:gap-4 p-3.5 px-4">
                     <span className="text-zinc-500">주요 수행 업무</span>
-                    <span className="col-span-2 text-zinc-300">교육용 학습 보조 웹 개발, 출판물 연계 스마트 저작 레이아웃 기획</span>
+                    <span className="sm:col-span-2 text-zinc-300">교육용 학습 보조 웹 개발, 출판물 연계 스마트 저작 레이아웃 기획</span>
                   </div>
-                  <div className="grid grid-cols-3 p-3.5 px-4 col-span-3">
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-1 sm:gap-4 p-3.5 px-4">
                     <span className="text-zinc-500">경쟁력 스택</span>
-                    <span className="col-span-2 text-zinc-400">Web App Development · Educational Content System · UI/UX Design</span>
+                    <span className="sm:col-span-2 text-zinc-400">Web App Development · Educational Content System · UI/UX Design</span>
                   </div>
                 </div>
               </div>
@@ -830,9 +832,9 @@ export default function App() {
                       </div>
 
                       <div>
-                        <h3 className="text-2xl sm:text-3xl font-sans font-black text-white tracking-tight flex items-center gap-2">
-                          {prj.name}
-                          <span className="text-xs font-mono font-medium text-zinc-500"> — {prj.client}</span>
+                        <h3 className="text-xl sm:text-2xl md:text-3xl font-sans font-black text-white tracking-tight flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-2">
+                          <span>{prj.name}</span>
+                          <span className="text-xs font-mono font-medium text-zinc-500 block sm:inline"> — {prj.client}</span>
                         </h3>
                         <p className="text-zinc-400 text-xs sm:text-sm leading-relaxed mt-2.5">
                           {prj.description}
