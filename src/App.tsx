@@ -12,6 +12,9 @@ import {
   Code2,
   Check,
   ChevronDown,
+  ChevronLeft,
+  ChevronRight,
+  Loader2,
   Mail,
   MapPin,
   Globe,
@@ -41,11 +44,8 @@ export default function App() {
   const [activeService, setActiveService] = useState<string | null>('01');
   const [projectFilter, setProjectFilter] = useState<'ALL' | 'AI' | 'CASE_STUDY'>('ALL');
   const [liveSeoulTime, setLiveSeoulTime] = useState<string>('');
-  const [scrollPercentage, setScrollPercentage] = useState<number>(0);
-  const [isNavHidden, setIsNavHidden] = useState<boolean>(false);
-  const [brandRotation, setBrandRotation] = useState<number>(0);
   const [typedCommand, setTypedCommand] = useState<string>('npm run dev --filter=ebsmath-helper');
-  const [terminalLogs, setTerminalLogs] = useState<Array<{ id: number; text: string; type: 'client' | 'info' | 'success' | 'warn' | 'header' }>>([
+  const [terminalLogs, setTerminalLogs] = useState<Array<{ id: string | number; text: string; type: 'client' | 'info' | 'success' | 'warn' | 'header' }>>([
     { id: 1, text: 'npm run dev --filter=ebsmath-helper', type: 'header' },
     { id: 2, text: '[vite] local server running on port 3000', type: 'info' },
     { id: 3, text: '✓ Educational metadata and QA validation schemas loaded.', type: 'success' },
@@ -55,9 +55,116 @@ export default function App() {
   const [isTerminalBuilding, setIsTerminalBuilding] = useState<boolean>(false);
   const [activeTerminalPreset, setActiveTerminalPreset] = useState<string>('lesson');
 
-  // Mouse coordinate tracking for spotlight effects
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-  const [cursorOpacity, setCursorOpacity] = useState(0);
+  // Main Horizontal Slide Navigation state (0 to 5)
+  // 0: Home/About Intro, 1: QA Checklist, 2: SaaS Playground, 3: Works, 4: Timeline & Partners, 5: Contact
+  const [currentSlide, setCurrentSlide] = useState<number>(0);
+  const totalSlides = 6;
+  const [slideDirection, setSlideDirection] = useState<'left' | 'right'>('right');
+
+  const goToSlide = (idx: number) => {
+    if (idx === currentSlide) return;
+    setSlideDirection(idx > currentSlide ? 'right' : 'left');
+    setCurrentSlide(idx);
+  };
+
+  const goToNextSlide = () => {
+    setSlideDirection('right');
+    setCurrentSlide((prev) => (prev + 1) % totalSlides);
+  };
+
+  const goToPrevSlide = () => {
+    setSlideDirection('left');
+    setCurrentSlide((prev) => (prev - 1 + totalSlides) % totalSlides);
+  };
+
+  // Keyboard navigation support for premium horizontal deck layout
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Don't navigate if user is in an active text area or input (if any are added)
+      const target = e.target as HTMLElement;
+      if (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA') return;
+
+      if (e.key === 'ArrowRight' || e.key === 'Space') {
+        goToNextSlide();
+      } else if (e.key === 'ArrowLeft') {
+        goToPrevSlide();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
+  // Slide 1: Interactive QA Checklist Simulator state
+  const [qaStatus, setQaStatus] = useState<'idle' | 'running' | 'complete'>('idle');
+  const [qaSteps, setQaSteps] = useState([
+    { name: 'LaTeX 수학 식 표준 기호 탑재 및 파싱 적합도 판정', status: 'idle', desc: '표준 수식 변환 규칙 일치 여부' },
+    { name: '대형 출판사 전임 단원 분류 메타데이터 매칭', status: 'idle', desc: '커리큘럼 맵핑 식별자 정밀도 100%' },
+    { name: '크로스 브라우저 다중 플랫폼 스크린 오차 검수', status: 'idle', desc: '크롬/사파리/웨일 반응형 깨짐 및 여백 공차 검출' },
+    { name: 'KWCAG 2.2 웹 접근성 준수 체크리스트 검사', status: 'idle', desc: '스크린 리더 태그 및 대체 텍스트 무결성 측정' }
+  ]);
+
+  const runQaSimulation = () => {
+    if (qaStatus === 'running') return;
+    setQaStatus('running');
+    
+    // Reset steps
+    setQaSteps((prev) => prev.map((s, idx) => ({ ...s, status: idx === 0 ? 'running' : 'idle' })));
+    
+    let currentStepIndex = 0;
+    const processSteps = () => {
+      setQaSteps((prev) => {
+        const next = [...prev];
+        // Complete current step
+        next[currentStepIndex] = { ...next[currentStepIndex], status: 'success' };
+        // If there's a next, make it running
+        if (currentStepIndex < 3) {
+          next[currentStepIndex + 1] = { ...next[currentStepIndex + 1], status: 'running' };
+        }
+        return next;
+      });
+      
+      currentStepIndex++;
+      if (currentStepIndex < 4) {
+        setTimeout(processSteps, 1200);
+      } else {
+        setQaStatus('complete');
+      }
+    };
+    
+    setTimeout(processSteps, 1200);
+  };
+
+  // Slide 2: Interactive Curriculum Block Customizer state
+  const [selectedBlocks, setSelectedBlocks] = useState<string[]>(['header', 'math', 'quiz']);
+  const toggleBlock = (blockId: string) => {
+    if (selectedBlocks.includes(blockId)) {
+      if (selectedBlocks.length > 1) { // keep at least 1 block active
+        setSelectedBlocks(selectedBlocks.filter((b) => b !== blockId));
+      }
+    } else {
+      setSelectedBlocks([...selectedBlocks, blockId]);
+    }
+  };
+
+  // Slide drawer state variables for full company details
+  const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
+  const [drawerTab, setDrawerTab] = useState<'about' | 'services' | 'timeline' | 'process'>('about');
+
+  const openDrawer = (tab: 'about' | 'services' | 'timeline' | 'process') => {
+    setDrawerTab(tab);
+    setIsDrawerOpen(true);
+  };
+
+  // Close drawer with Escape key
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setIsDrawerOpen(false);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
 
   // Time ticker effect
   useEffect(() => {
@@ -75,52 +182,6 @@ export default function App() {
     updateSeoulTime();
     const interval = setInterval(updateSeoulTime, 1000);
     return () => clearInterval(interval);
-  }, []);
-
-  // Scroll depth, direction, and brand mark rotation tracking
-  useEffect(() => {
-    let lastScrollY = window.scrollY;
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-      const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
-      if (scrollHeight > 0) {
-        setScrollPercentage((currentScrollY / scrollHeight) * 100);
-      }
-
-      // Hide nav when scrolling down past 100px, show when scrolling up
-      if (currentScrollY > 100) {
-        if (currentScrollY > lastScrollY) {
-          setIsNavHidden(true);
-        } else {
-          setIsNavHidden(false);
-        }
-      } else {
-        setIsNavHidden(false);
-      }
-
-      // Brand mark dynamic scroll rotation
-      setBrandRotation(currentScrollY * 0.15);
-      lastScrollY = currentScrollY;
-    };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  // Interactive mouse spotlight tracking for desktop
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePos({ x: e.clientX, y: e.clientY });
-      setCursorOpacity(1);
-    };
-    const handleMouseLeave = () => {
-      setCursorOpacity(0);
-    };
-    window.addEventListener('mousemove', handleMouseMove, { passive: true });
-    document.addEventListener('mouseleave', handleMouseLeave);
-    return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-      document.removeEventListener('mouseleave', handleMouseLeave);
-    };
   }, []);
 
   // Terminal process simulator trigger
@@ -196,7 +257,7 @@ export default function App() {
             setTerminalLogs((prev) => [
               ...prev.slice(-9), // Keep only last few logs to prevent overflow
               {
-                id: Date.now() + logIndex,
+                id: `log-${Date.now()}-${logIndex}-${Math.random().toString(36).substring(2, 9)}`,
                 text: currentLog.text,
                 type: currentLog.type
               }
@@ -219,8 +280,19 @@ export default function App() {
     return true;
   });
 
+  // Slide names mapping for visual pagination & navigation indicators
+  const slideTitles = [
+    { label: '회사 소개', eng: 'HOME ABOUT' },
+    { label: '검수 QA', eng: 'VERIFY QA' },
+    { label: 'SaaS 저작', eng: 'SAAS TOOL' },
+    { label: '주요 프로젝트', eng: 'WORKS' },
+    { label: '파트너 / 연혁', eng: 'PARTNERS' },
+    { label: '문의처', eng: 'CONTACT' }
+  ];
+
   return (
-    <div className="min-h-screen bg-[#07070a] text-slate-100 font-sans relative selection:bg-lime-400 selection:text-black">
+    <div className="w-screen h-screen overflow-hidden bg-[#07070a] text-slate-100 font-sans relative selection:bg-lime-400 selection:text-black flex flex-col">
+      
       {/* Visual background overlays & interactive gradients */}
       <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
         {/* Neon blur ambient gradients */}
@@ -237,44 +309,48 @@ export default function App() {
         <div className="absolute bottom-[35%] left-[10%] w-1 h-1 rounded-full bg-blue-400/20 shadow-[0_0_8px_#5b8bff]" />
       </div>
 
-      {/* Modern Aura Cursor Follower from HTML template with smooth inertia tracking */}
+      {/* Modern Aura Cursor Follower with smooth inertia tracking */}
       <CursorAura />
 
-      {/* Floating scroll indicator progress bar */}
-      <div
-        className="fixed top-0 left-0 h-[2.5px] bg-gradient-to-r from-lime-400 via-cyan-400 to-indigo-500 z-[1000] shadow-[0_0_8px_rgba(212,255,58,0.5)] transition-all duration-75"
-        style={{ width: `${scrollPercentage}%` }}
-      />
-
-      {/* STICKY NAV - direction-aware scroll toggle hide/show */}
-      <header 
-        className="fixed top-0 left-0 right-0 z-50 bg-black/60 backdrop-blur-xl border-b border-white/[0.04] transition-transform duration-300 ease-out"
-        style={{
-          transform: isNavHidden ? 'translateY(-110%)' : 'translateY(0)',
-          transition: 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)'
-        }}
-      >
+      {/* FIXED NAVHEADER */}
+      <header className="w-full z-50 bg-black/60 backdrop-blur-xl border-b border-white/[0.04]">
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div 
-              className="w-8 h-8 rounded-md bg-lime-400 text-black font-mono font-black flex items-center justify-center text-lg shadow-[0_0_15px_rgba(212,255,58,0.3)] relative group cursor-pointer transition-transform duration-100"
-              style={{ transform: `rotate(${brandRotation}deg)` }}
-              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+              className="w-8 h-8 rounded-md bg-lime-400 text-black font-mono font-black flex items-center justify-center text-lg shadow-[0_0_15px_rgba(212,255,58,0.3)] relative group cursor-pointer transition-transform"
+              onClick={() => goToSlide(0)}
             >
               A
               <span className="absolute -bottom-1 -right-1 w-2 h-2 rounded-full bg-red-500 animate-ping" />
             </div>
-            <div className="flex flex-col">
-              <span className="font-mono font-extrabold tracking-wider text-sm sm:text-base text-white">AVRO</span>
-              <span className="text-[10px] text-zinc-500 font-mono tracking-widest hidden sm:inline-block">에이브로</span>
+            <div className="flex flex-col text-left">
+              <span className="font-mono font-extrabold tracking-wider text-sm sm:text-base text-white leading-none">AVRO</span>
+              <span className="text-[9px] text-zinc-500 font-mono tracking-widest leading-none mt-1">에이브로</span>
             </div>
           </div>
 
-          <div className="flex items-center gap-3 sm:gap-6">
-            {/* Live Synchronized clock */}
-            <div className="hidden lg:flex items-center gap-2 border border-white/[0.06] rounded-full px-3.5 py-1 bg-white/[0.02]">
+          {/* Desktop Navigation linked directly to the 6 Horizontal Slides */}
+          <div className="hidden md:flex items-center gap-5 mr-1 font-sans text-xs">
+            {slideTitles.map((slide, idx) => (
+              <button
+                key={idx}
+                onClick={() => goToSlide(idx)}
+                className={`font-semibold tracking-wider transition-all cursor-pointer bg-transparent border-none py-1.5 px-3 rounded-lg ${
+                  currentSlide === idx 
+                    ? 'text-lime-400 bg-white/[0.03] border border-white/[0.05]' 
+                    : 'text-zinc-400 hover:text-white hover:bg-white/[0.01]'
+                }`}
+              >
+                {slide.label}
+              </button>
+            ))}
+          </div>
+
+          <div className="flex items-center gap-2 sm:gap-4">
+            {/* Live Seoul Time Clock */}
+            <div className="hidden lg:flex items-center gap-2 border border-white/[0.06] rounded-full px-3 py-1 bg-white/[0.02]">
               <span className="w-1.5 h-1.5 rounded-full bg-lime-400 animate-pulse shadow-[0_0_8px_#d4ff3a]" />
-              <span className="text-[10px] font-mono text-zinc-400 tracking-wider">SEL CLOCK {liveSeoulTime || '15:20:00'}</span>
+              <span className="text-[9px] font-mono text-zinc-400 tracking-wider">SEL CLOCK {liveSeoulTime || '15:20:00'}</span>
             </div>
 
             <motion.a
@@ -282,22 +358,20 @@ export default function App() {
               href="https://avro-home.netlify.app"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[10px] sm:text-[11px] font-mono font-bold tracking-wider sm:tracking-widest uppercase text-zinc-400 hover:text-white transition-colors duration-200 flex items-center gap-1"
+              className="text-[10px] sm:text-[11px] font-mono font-bold tracking-widest uppercase text-zinc-400 hover:text-white transition-colors flex items-center gap-1"
             >
-              <span className="hidden xs:inline">Main Website</span>
-              <span className="xs:hidden">Web</span>
+              <span>Main Site</span>
               <span className="text-lime-400 font-sans text-xs">↗</span>
             </motion.a>
 
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-              className="relative inline-flex items-center gap-1.5 sm:gap-2 px-3.5 sm:px-5 py-1.5 sm:py-2 rounded-full text-[10px] sm:text-[11px] font-mono font-bold tracking-wider sm:tracking-widest uppercase bg-gradient-to-r from-blue-500 via-cyan-400 to-lime-400 text-black overflow-hidden shadow-[0_4px_20px_rgba(34,211,238,0.25)] group"
+              onClick={() => goToSlide(5)}
+              className="relative inline-flex items-center gap-1.5 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-[10px] sm:text-[11px] font-mono font-bold tracking-widest uppercase bg-gradient-to-r from-blue-500 via-cyan-400 to-lime-400 text-black overflow-hidden shadow-[0_4px_15px_rgba(34,211,238,0.25)] group"
             >
               <span className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 pointer-events-none" />
-              <span className="hidden xs:inline">Contact Studio</span>
-              <span className="xs:hidden">Contact</span>
+              <span>Contact</span>
               <motion.span animate={{ x: [0, 3, 0] }} transition={{ repeat: Infinity, duration: 1.5, ease: 'easeInOut' }}>
                 →
               </motion.span>
@@ -306,885 +380,1102 @@ export default function App() {
         </nav>
       </header>
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-24 pb-16">
+      {/* MAIN VIEWPORT - RESPONSIVE SLIDER CONTENT */}
+      <main className="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex flex-col justify-center overflow-hidden">
         
-        {/* HERO SECTION */}
-        <section id="hero" className="min-h-[85vh] flex flex-col justify-center py-12 md:py-20 relative overflow-hidden">
-          {/* Ambient AI Background Connective Graph */}
-          <div className="absolute inset-0 z-0">
-            <AICanvas />
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
+        <div className="relative w-full h-[calc(100vh-160px)] flex items-center justify-center">
+          <AnimatePresence mode="wait" custom={slideDirection}>
             
-            {/* Hero text */}
-            <div className="lg:col-span-7 flex flex-col justify-center">
-              {/* Status capsule */}
-              <motion.div 
-                initial={{ opacity: 0, y: 15 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
-                className="inline-flex flex-wrap items-center gap-2 border border-white/[0.08] bg-white/[0.02] px-3.5 py-1.5 rounded-full w-max text-[10px] font-mono tracking-widest text-zinc-400 uppercase mb-8"
+            {/* SLIDE 0: INTRO */}
+            {currentSlide === 0 && (
+              <motion.div
+                key="slide-0"
+                custom={slideDirection}
+                variants={{
+                  enter: (direction: 'left' | 'right') => ({ x: direction === 'right' ? '100vw' : '-100vw', opacity: 0 }),
+                  center: { x: 0, opacity: 1 },
+                  exit: (direction: 'left' | 'right') => ({ x: direction === 'right' ? '-100vw' : '100vw', opacity: 0 })
+                }}
+                transition={{ type: 'spring', stiffness: 220, damping: 25 }}
+                className="absolute inset-0 w-full h-full flex items-center grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 overflow-y-auto lg:overflow-visible py-4 custom-scrollbar"
               >
-                <span className="text-lime-400 font-bold flex items-center gap-1.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-lime-400 animate-ping" />
-                  PIVOT_RELEASE_2026
-                </span>
-                <span className="text-zinc-600">|</span>
-                <span>EST 2016.07.18</span>
-                <span className="text-zinc-600">|</span>
-                <span className="text-cyan-400 font-medium">AVRO EDUTECH INTELLIGENCE</span>
-              </motion.div>
-
-               {/* Title with staggered text rise and interactive glitch hovering */}
-               <h1 className="text-[1.62rem] xs:text-[1.95rem] sm:text-4xl md:text-[3.1rem] lg:text-[3.8rem] xl:text-[4.2rem] font-sans font-black tracking-tight leading-[1.25] sm:leading-[1.15] md:leading-[1.1] lg:leading-[1.05] mb-6 select-none text-left break-keep">
-                 <span className="block overflow-hidden py-0.5">
-                   <motion.span 
-                     initial={{ y: '100%' }}
-                     animate={{ y: 0 }}
-                     transition={{ duration: 0.8, cubicBezier: [0.16, 1, 0.3, 1] }}
-                     className="inline-block md:block"
-                   >
-                     10년의 교육 콘텐츠 <GlitchText text="노하우" className="bg-gradient-to-r from-cyan-400 via-blue-400 to-indigo-400 bg-clip-text text-fill-transparent text-transparent" />와
-                   </motion.span>
-                 </span>
-                 <span className="block overflow-hidden py-0.5">
-                   <motion.span 
-                     initial={{ y: '100%' }}
-                     animate={{ y: 0 }}
-                     transition={{ duration: 0.8, delay: 0.15, cubicBezier: [0.16, 1, 0.3, 1] }}
-                     className="inline-block md:block"
-                   >
-                     실용적인 <span className="bg-lime-400 text-black px-2 py-0.5 sm:px-3 sm:py-1 rounded lg:rounded-lg inline-block mr-1 sm:mr-2 shadow-[0_0_15px_rgba(212,255,58,0.2)] hover:bg-lime-300 transition-colors">교육 &amp; AI 기술</span>의 결합
-                   </motion.span>
-                 </span>
-                 <span className="block overflow-hidden py-0.5">
-                   <motion.span 
-                     initial={{ y: '100%' }}
-                     animate={{ y: 0 }}
-                     transition={{ duration: 0.8, delay: 0.28, cubicBezier: [0.16, 1, 0.3, 1] }}
-                     className="inline-block md:block relative pb-0.5"
-                   >
-                     에듀테크 전문 파트너, <GlitchText text="에이브로" className="font-mono text-lime-400 italic font-medium hover:text-lime-300" />
-                     <span className="text-lime-400 animate-pulse">.</span>
-                     <span className="absolute left-0 bottom-1 w-full h-[2.5px] bg-red-500 roundedScale" />
-                   </motion.span>
-                 </span>
-               </h1>
-
-              {/* Tagline */}
-              <motion.p 
-                initial={{ opacity: 0, y: 15 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.45 }}
-                className="text-base sm:text-lg text-zinc-400 max-w-xl leading-relaxed text-left mb-8"
-              >
-                에이브로는 대형 교과서 출판사와 공교육 플랫폼의 학습 콘텐츠 및 시스템을 구축·검수해 온 에듀테크 전문 기업입니다. 검증된 현장 도메인 노하우에 실용적인 AI 기술과 맞춤형 웹 개발 실무를 결합하여 정확하고 신뢰성 높은 교육용 서비스를 구축합니다.
-              </motion.p>
-
-              {/* Tag badges */}
-              <motion.div 
-                initial={{ opacity: 0, y: 15 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.6 }}
-                className="flex flex-wrap gap-2 text-left justify-start"
-              >
-                <span className="px-3.5 py-1.5 rounded-full border border-lime-400/40 bg-lime-400/5 text-lime-400 font-mono text-[10px] uppercase font-bold tracking-widest shadow-[0_0_15px_rgba(212,255,58,0.1)] hover:scale-105 transition-transform duration-200">
-                  Educational Web App Dev
-                </span>
-                <span className="px-3.5 py-1.5 rounded-full border border-white/[0.08] bg-white/[0.02] text-zinc-300 font-mono text-[10px] uppercase font-semibold tracking-wider hover:border-cyan-400/50 hover:text-cyan-400 transition-colors duration-200">
-                  Content Curation &amp; QA
-                </span>
-                <span className="px-3.5 py-1.5 rounded-full border border-white/[0.08] bg-white/[0.02] text-zinc-300 font-mono text-[10px] uppercase font-semibold tracking-wider hover:border-cyan-400/50 hover:text-cyan-400 transition-colors duration-200">
-                  E-Learning Tool Design
-                </span>
-              </motion.div>
-            </div>
-
-            {/* AI Interactive Terminal Column */}
-            <div className="lg:col-span-5 w-full flex justify-center">
-              <motion.div 
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.8, delay: 0.3 }}
-                className="w-full max-w-md h-[380px] glass-effect rounded-2xl border border-white/[0.08] overflow-hidden flex flex-col shadow-[0_20px_50px_rgba(0,0,0,0.6)] relative group"
-              >
-                {/* Terminal top header */}
-                <div className="px-4 py-3 bg-[#0d0d12]/90 border-b border-white/[0.06] flex items-center justify-between">
-                  {/* Fake buttons */}
-                  <div className="flex gap-1.5">
-                    <span className="w-2.5 h-2.5 rounded-full bg-red-500/80 inline-block" />
-                    <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/80 inline-block" />
-                    <span className="w-2.5 h-2.5 rounded-full bg-green-500/80 inline-block" />
-                  </div>
-                  <div className="text-[10px] font-mono text-zinc-500">avro@studio: ~/workspace</div>
-                  <div className="flex items-center gap-1">
+                {/* Left Column Content */}
+                <div className="lg:col-span-7 flex flex-col justify-center text-left">
+                  <div className="inline-flex flex-wrap items-center gap-2 border border-cyan-400/20 bg-cyan-400/5 px-3 py-1 rounded-full w-max text-[9px] font-mono tracking-widest text-cyan-400 uppercase mb-4 sm:mb-6">
                     <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
-                    <span className="text-[9px] font-mono text-cyan-400 uppercase tracking-wider">online</span>
+                    <span>MISSION 01 : AI EDUTECH PIVOT</span>
+                    <span className="text-zinc-600">|</span>
+                    <span className="text-white">EST. 2016</span>
                   </div>
-                </div>
 
-                {/* Console Log Area */}
-                <div className="flex-1 p-4 overflow-y-auto text-left font-mono text-[11px] leading-relaxed space-y-1 bg-[#07070a]/90 select-text">
-                  <AnimatePresence>
-                    {terminalLogs.map((log) => (
-                      <motion.div 
-                        key={log.id}
-                        initial={{ opacity: 0, x: -5 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        exit={{ opacity: 0 }}
-                        className={`flex gap-1.5 items-baseline ${
-                          log.type === 'success' ? 'text-lime-400' :
-                          log.type === 'info' ? 'text-cyan-400' :
-                          log.type === 'warn' ? 'text-red-400' :
-                          log.type === 'header' ? 'text-indigo-400' : 'text-zinc-500'
-                        }`}
-                      >
-                        <span className="text-[9px] text-zinc-600">[{new Date().toLocaleTimeString('en-US', { hour12: false })}]</span>
-                        <span>{log.type === 'header' ? '$' : '→'}</span>
-                        <span className={log.type === 'success' ? 'text-zinc-200' : ''}>{log.text}</span>
-                      </motion.div>
-                    ))}
-                  </AnimatePresence>
+                  <h1 className="text-[1.5rem] xs:text-[1.8rem] sm:text-[2.2rem] md:text-[2.8rem] lg:text-[2.4rem] xl:text-[2.8rem] font-sans font-black tracking-tight leading-[1.2] mb-4 sm:mb-5 text-zinc-100 break-keep">
+                    10년의 교육 콘텐츠 노하우,<br/>
+                    <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-lime-400 bg-clip-text text-transparent">실용적 AI 기술</span>로 날개를 달다.
+                  </h1>
 
-                  {/* Input line */}
-                  <div className="flex gap-1.5 items-center pt-2 border-t border-white/[0.04] mt-2">
-                    <span className="text-[9px] text-zinc-600">[PROMPT]</span>
-                    <span className="text-lime-400">$</span>
-                    <span className="text-zinc-200">{typedCommand}</span>
-                    <span className="w-[6px] h-[12px] bg-lime-400 animate-pulse inline-block" />
-                  </div>
-                </div>
+                  <p className="text-xs sm:text-sm text-zinc-400 max-w-xl leading-relaxed mb-5 sm:mb-6">
+                    대형 출판 플랫폼 구축 운영에서 다져진 데이터 신뢰성을 수렴하며, 최적의 스마트 AI 학습 인터페이스 및 맞춤 에이전트를 실현해 나갑니다. 실용적인 교육적 성취를 위한 설계의 정수를 선보입니다.
+                  </p>
 
-                {/* Terminal Actions/Presets interactive tray */}
-                <div className="p-3 bg-zinc-950/90 border-t border-white/[0.06]">
-                  <div className="text-[9px] text-zinc-500 uppercase tracking-wider text-left mb-2 font-mono flex items-center gap-1.5">
-                    <Zap className="w-3 h-3 text-lime-400" />
-                    Interactive Simulator — Click to test development tasks
-                  </div>
-                  <div className="grid grid-cols-2 xs:grid-cols-4 gap-1.5">
-                    <button
-                      onClick={() => runTerminalSimulation('lesson')}
-                      disabled={isTerminalBuilding}
-                      className={`px-1 py-1.5 rounded text-[9px] font-mono font-bold tracking-tight uppercase border transition-all duration-200 ${
-                        activeTerminalPreset === 'lesson'
-                          ? 'bg-lime-400/10 border-lime-400/50 text-lime-400'
-                          : 'bg-white/[0.02] border-white/[0.06] text-zinc-400 hover:border-white/[0.12] hover:text-white'
-                      }`}
-                    >
-                      Math Parser
-                    </button>
-                    <button
-                      onClick={() => runTerminalSimulation('evaluation')}
-                      disabled={isTerminalBuilding}
-                      className={`px-1 py-1.5 rounded text-[9px] font-mono font-bold tracking-tight uppercase border transition-all duration-200 ${
-                        activeTerminalPreset === 'evaluation'
-                          ? 'bg-lime-400/10 border-lime-400/50 text-lime-400'
-                          : 'bg-white/[0.02] border-white/[0.06] text-zinc-400 hover:border-white/[0.12] hover:text-white'
-                      }`}
-                    >
-                      Workbook
-                    </button>
-                    <button
-                      onClick={() => runTerminalSimulation('visualize')}
-                      disabled={isTerminalBuilding}
-                      className={`px-1 py-1.5 rounded text-[9px] font-mono font-bold tracking-tight uppercase border transition-all duration-200 ${
-                        activeTerminalPreset === 'visualize'
-                          ? 'bg-lime-400/10 border-lime-400/50 text-lime-400'
-                          : 'bg-white/[0.02] border-white/[0.06] text-zinc-400 hover:border-white/[0.12] hover:text-white'
-                      }`}
-                    >
-                      Build UI
-                    </button>
-                    <button
-                      onClick={() => runTerminalSimulation('integrate')}
-                      disabled={isTerminalBuilding}
-                      className={`px-1 py-1.5 rounded text-[9px] font-mono font-bold tracking-tight uppercase border transition-all duration-200 ${
-                        activeTerminalPreset === 'integrate'
-                          ? 'bg-lime-400/10 border-lime-400/50 text-lime-400'
-                          : 'bg-white/[0.02] border-white/[0.06] text-zinc-400 hover:border-white/[0.12] hover:text-white'
-                      }`}
-                    >
-                      Deploy
-                    </button>
-                  </div>
-                </div>
-              </motion.div>
-            </div>
-
-          </div>
-
-          {/* Hero Bottom statistics/credits indicator */}
-          <div className="mt-16 md:mt-24 border-t border-white/[0.04] pt-8 flex flex-col sm:flex-row justify-between gap-6 font-mono text-[10px] text-zinc-500 uppercase tracking-widest text-left">
-            <div>
-              <span className="text-zinc-600 block mb-1">HQ ADDRESS & INFO</span>
-              <strong className="text-zinc-300 font-semibold">(주) 에이브로 · AVRO INC.</strong>
-            </div>
-            <div>
-              <span className="text-zinc-600 block mb-1">CORE METHOD</span>
-              <strong className="text-zinc-300 font-semibold">LLM + RAG + MULTI-AGENT AUTOPILOT</strong>
-            </div>
-            <div>
-              <span className="text-zinc-600 block mb-1">SUCCESS STATISTICS</span>
-              <strong className="text-zinc-300 font-semibold text-lime-400">10 YEARS EXPERIENCE ✓</strong>
-            </div>
-          </div>
-        </section>
-
-        {/* CONTINUOUS MARQUEE TICKER ROW */}
-        <section className="py-4 overflow-hidden border-y border-white/[0.08] bg-[#d4ff3a] text-black font-mono font-black text-xs uppercase tracking-widest mb-16 relative z-10">
-          <div className="flex whitespace-nowrap select-none overflow-hidden">
-            <div className="flex gap-16 shrink-0 animate-tick">
-              <span className="text-indigo-950 font-black">★ AVRO EDUTECH INTELLIGENCE</span>
-              <span className="text-black/30">/</span>
-              <span>DIGITAL CONTENT SOLUTION</span>
-              <span className="text-black/30">/</span>
-              <span className="text-indigo-950 font-black">AI EDUTECH SOLUTIONS</span>
-              <span className="text-black/30">/</span>
-              <span>VIDEO PRODUCTION EXPERT</span>
-              <span className="text-black/30">/</span>
-              <span className="text-red-700 font-bold">EBSMATH PARTNER</span>
-              <span className="text-black/30">/</span>
-              <span>SITE OPERATION CRITICAL SYSTEMS</span>
-              <span className="text-black/30">/</span>
-              <span>SINCE 2016</span>
-              <span className="text-black/30">/</span>
-            </div>
-            <div className="flex gap-16 shrink-0 animate-tick" aria-hidden="true">
-              <span className="text-indigo-950 font-black">★ AVRO EDUTECH INTELLIGENCE</span>
-              <span className="text-black/30">/</span>
-              <span>DIGITAL CONTENT SOLUTION</span>
-              <span className="text-black/30">/</span>
-              <span className="text-indigo-950 font-black">AI EDUTECH SOLUTIONS</span>
-              <span className="text-black/30">/</span>
-              <span>VIDEO PRODUCTION EXPERT</span>
-              <span className="text-black/30">/</span>
-              <span className="text-red-700 font-bold">EBSMATH PARTNER</span>
-              <span className="text-black/30">/</span>
-              <span>SITE OPERATION CRITICAL SYSTEMS</span>
-              <span className="text-black/30">/</span>
-              <span>SINCE 2016</span>
-              <span className="text-black/30">/</span>
-            </div>
-          </div>
-        </section>
-
-        {/* SECTION 1: ABOUT */}
-        <section id="about" className="py-16 md:py-24 text-left scroll-mt-24">
-          <motion.div 
-            initial={{ opacity: 0, y: 35 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-120px" }}
-            transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
-            className="grid grid-cols-1 lg:grid-cols-12 gap-12"
-          >
-            
-            {/* Title column */}
-            <div className="lg:col-span-5">
-              <div className="flex items-center gap-2 text-[10px] font-mono tracking-widest text-[#d4ff3a] uppercase mb-4">
-                <span>01</span>
-                <span className="text-zinc-700">/</span>
-                <span>ABOUT OUR JOURNEY</span>
-                <span className="text-zinc-700">↳</span>
-              </div>
-              <h2 className="text-3xl sm:text-5xl font-sans font-extrabold tracking-tight text-white mb-6">
-                10년의 견고한 레거시,<br/>
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-lime-400 via-cyan-400 to-indigo-400">인공지능</span>으로 날아오르다.
-              </h2>
-              <div className="w-12 h-[1px] bg-white/[0.1] block mb-6" />
-              <div className="space-y-4">
-                <div className="p-4 rounded-xl border border-white/[0.04] bg-white/[0.01] hover:border-lime-400/20 transition-all duration-300">
-                  <div className="font-mono text-lime-400 text-xs font-bold mb-1">LEGACY: 2016 - 2025</div>
-                  <div className="text-zinc-400 text-[11px] leading-relaxed">
-                    EBSMath, 미래엔 등 가이드라인이 명밀하고 탄탄한 교육 플랫폼들의 디지털 기능 검수(QA) 및 웹 시각 결과물 기획·제작을 대행했습니다.
-                  </div>
-                </div>
-                <div className="p-4 rounded-xl border border-lime-400/30 bg-lime-400/[0.02] hover:border-lime-400/50 transition-all duration-300">
-                  <div className="font-mono text-lime-400 text-xs font-bold mb-1">AI PIVOT NEXT: 2026 ~</div>
-                  <div className="text-zinc-300 text-[11px] leading-relaxed">
-                    학습과 교수에 실무적으로 도움이 되는 에듀테크 디지털 툴과 실용적인 웹 솔루션을 기획·설계하는 믿음직한 디지털 에이전시 및 개발 파트너로 나아갑니다.
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Paragraph column & Factsheet */}
-            <div className="lg:col-span-7 space-y-6">
-              <p className="text-xl font-sans font-medium text-white leading-relaxed">
-                "트렌디한 유행어나 과장 없이 실질적인 기획과 탄탄한 실행력으로 교육 및 에듀테크 프로젝트의 디테일을 완성합니다."
-              </p>
-              <div className="text-zinc-400 text-sm leading-relaxed space-y-4 text-left">
-                <p>
-                  에이브로는 지난 10년간 대형 교과서 출판사의 디지털 학습 서비스 검수(QA/QC) 업무를 전담하고, 공교육 수학 콘텐츠의 기획 및 개발을 수행해 왔습니다. 교육 현장의 다양한 규격과 세부 가이드라인을 면밀히 분석하고 검수해 온 안목이 에이브로의 가장 큰 자산입니다.
-                </p>
-                <p>
-                  우리는 정밀한 교육 업계 기획 노하우에 실용적인 AI 기술을 부드럽게 연동합니다. 교수자가 교재를 원활하게 구성하고 준비하는 과정을 돕는 웹 맞춤형 앱 개발과, 학습 데이터를 체계적으로 연동하는 직관적 시스템 설계를 지원하고 있습니다.
-                </p>
-              </div>
-
-              {/* FACT SHEET TABLE */}
-              <div className="border border-white/[0.08] lg:max-w-2xl bg-zinc-950/75 rounded-xl overflow-hidden font-mono text-xs mt-8 shadow-inner">
-                <div className="bg-white/[0.02] border-b border-white/[0.06] p-3 text-zinc-500 flex justify-between items-center px-4">
-                  <span>// FACT_SHEET_DATA</span>
-                  <span className="text-[10px] text-lime-400 font-bold uppercase">Pivot Status: Verified ✓</span>
-                </div>
-                
-                <div className="divide-y divide-white/[0.05]">
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-1 sm:gap-4 p-3.5 px-4">
-                    <span className="text-zinc-500">법인명</span>
-                    <span className="sm:col-span-2 text-zinc-200 font-semibold">주식회사 에이브로 (AVRO INC.)</span>
-                  </div>
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-1 sm:gap-4 p-3.5 px-4">
-                    <span className="text-zinc-500">설립 일자</span>
-                    <span className="sm:col-span-2 text-zinc-200">2016년 7월 18일</span>
-                  </div>
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-1 sm:gap-4 p-3.5 px-4">
-                    <span className="text-zinc-500">비즈니스 방향</span>
-                    <span className="sm:col-span-2 text-lime-400 font-semibold flex items-center gap-1">
-                      전통 웹 에이전시 및 검수 대행 → 에듀테크 및 교육용 스마트 도구 기획/개발사로 확장
+                  <div className="flex flex-wrap gap-1.5 mb-6">
+                    <span className="px-2.5 py-1 rounded-full border border-lime-400/30 bg-lime-400/5 text-lime-400 font-mono text-[8px] uppercase font-bold tracking-widest">
+                      Educational Web App
+                    </span>
+                    <span className="px-2.5 py-1 rounded-full border border-white/[0.08] bg-white/[0.02] text-zinc-300 font-mono text-[8px] uppercase font-semibold tracking-wider">
+                      AI Curation Engine
+                    </span>
+                    <span className="px-2.5 py-1 rounded-full border border-white/[0.08] bg-white/[0.02] text-zinc-300 font-mono text-[8px] uppercase font-semibold tracking-wider">
+                      E-Learning Tools
                     </span>
                   </div>
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-1 sm:gap-4 p-3.5 px-4">
-                    <span className="text-zinc-500">주요 수행 업무</span>
-                    <span className="sm:col-span-2 text-zinc-300">교육용 학습 보조 웹 개발, 출판물 연계 스마트 저작 레이아웃 기획</span>
-                  </div>
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-1 sm:gap-4 p-3.5 px-4">
-                    <span className="text-zinc-500">경쟁력 스택</span>
-                    <span className="sm:col-span-2 text-zinc-400">Web App Development · Educational Content System · UI/UX Design</span>
+
+                  <div className="flex flex-col sm:flex-row gap-3 pt-3 border-t border-white/[0.04]">
+                    <button
+                      onClick={() => openDrawer('about')}
+                      className="flex-1 flex items-center justify-between gap-3 px-4 py-3 rounded-lg bg-white/[0.02] hover:bg-neutral-900 border border-white/[0.08] hover:border-lime-400/40 text-left transition-all group max-w-sm cursor-pointer"
+                    >
+                      <div className="flex flex-col min-w-0">
+                        <span className="text-white text-xs font-bold font-sans flex items-center gap-1.5 truncate">
+                          회사 상세 안내서 확인
+                          <ArrowRight className="w-3.5 h-3.5 text-lime-400 group-hover:translate-x-1 transition-transform shrink-0" />
+                        </span>
+                        <span className="text-zinc-500 font-mono text-[8px] uppercase tracking-wider mt-0.5">ABOUT AVRO INC</span>
+                      </div>
+                    </button>
+
+                    <button
+                      onClick={() => openDrawer('services')}
+                      className="flex-1 flex items-center justify-between gap-3 px-4 py-3 rounded-lg bg-[#d4ff3a]/5 hover:bg-[#d4ff3a]/10 border border-[#d4ff3a]/25 hover:border-lime-400/60 text-left transition-all group max-w-sm cursor-pointer"
+                    >
+                      <div className="flex flex-col min-w-0">
+                        <span className="text-[#d4ff3a] text-xs font-bold font-sans flex items-center gap-1.5 truncate">
+                          핵심 서비스 상세 보기
+                          <ArrowRight className="w-3.5 h-3.5 text-lime-400 group-hover:translate-x-1 transition-transform shrink-0" />
+                        </span>
+                        <span className="text-lime-400/50 font-mono text-[8px] uppercase tracking-wider mt-0.5">AVRO SERVICES</span>
+                      </div>
+                    </button>
                   </div>
                 </div>
-              </div>
-            </div>
 
-          </motion.div>
-        </section>
+                {/* Right Interactive Column (Terminal Widget) */}
+                <div className="lg:col-span-5 w-full flex justify-center items-center">
+                  <div className="w-full max-w-md h-[340px] md:h-[360px] glass-effect rounded-xl border border-white/[0.08] overflow-hidden flex flex-col shadow-[0_20px_50px_rgba(0,0,0,0.6)]">
+                    <div className="px-3.5 py-2.5 bg-[#0d0d12]/90 border-b border-white/[0.06] flex items-center justify-between">
+                      <div className="flex gap-1.5">
+                        <span className="w-2.5 h-2.5 rounded-full bg-red-500/80 inline-block" />
+                        <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/80 inline-block" />
+                        <span className="w-2.5 h-2.5 rounded-full bg-green-500/80 inline-block" />
+                      </div>
+                      <div className="text-[9px] font-mono text-zinc-500">avro@studio: ~/workspace</div>
+                      <div className="flex items-center gap-1">
+                        <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
+                        <span className="text-[8px] font-mono text-cyan-400 uppercase tracking-wider">online</span>
+                      </div>
+                    </div>
 
-        {/* SECTION 2: SERVICES (ACCORDIONS) */}
-        <section id="services" className="py-16 md:py-24 text-left border-t border-white/[0.04] scroll-mt-24">
-          <motion.div
-            initial={{ opacity: 0, y: 35 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-120px" }}
-            transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
-          >
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 mb-12">
-            <div>
-              <div className="flex items-center gap-2 text-[10px] font-mono tracking-widest text-[#d4ff3a] uppercase mb-4">
-                <span>02</span>
-                <span className="text-zinc-700">/</span>
-                <span>CORE CAPABILITIES</span>
-                <span className="text-zinc-700">↳</span>
-              </div>
-              <h2 className="text-3xl sm:text-5xl font-sans font-black tracking-tight text-white">
-                AI로 극대화하는<br/><span className="text-transparent bg-clip-text bg-gradient-to-r from-lime-300 to-cyan-300">네 가지</span> 비즈니스 축.
-              </h2>
-            </div>
-            <div className="max-w-xs font-mono text-xs text-zinc-500">
-              * 각 항목을 클릭하여 구체적인 제공 사항과 핵심 태스크를 펼쳐보실 수 있습니다.
-            </div>
-          </div>
+                    <div className="flex-1 p-3 overflow-y-auto text-left font-mono text-[10px] leading-relaxed space-y-1 bg-[#07070a]/90 select-text custom-scrollbar">
+                      <AnimatePresence>
+                        {terminalLogs.map((log) => (
+                          <motion.div 
+                            key={log.id}
+                            initial={{ opacity: 0, x: -5 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            exit={{ opacity: 0 }}
+                            className={`flex gap-1.5 items-baseline ${
+                              log.type === 'success' ? 'text-lime-400' :
+                              log.type === 'info' ? 'text-cyan-400' :
+                              log.type === 'warn' ? 'text-red-400' :
+                              log.type === 'header' ? 'text-indigo-400' : 'text-zinc-500'
+                            }`}
+                          >
+                            <span className="text-[8px] text-zinc-600">[{new Date().toLocaleTimeString('en-US', { hour12: false })}]</span>
+                            <span>{log.type === 'header' ? '$' : '→'}</span>
+                            <span className={log.type === 'success' ? 'text-zinc-200' : ''}>{log.text}</span>
+                          </motion.div>
+                        ))}
+                      </AnimatePresence>
 
-          <div className="grid grid-cols-1 gap-4 max-w-5xl">
-            {servicesData.map((svc) => (
-              <TiltCard
-                key={svc.num}
-                onClick={() => setActiveService(activeService === svc.num ? null : svc.num)}
-                className={`glass-effect border rounded-xl overflow-hidden cursor-pointer transition-all duration-300 ${
-                  activeService === svc.num
-                    ? 'border-lime-400/40 bg-zinc-900/60 shadow-[0_4px_30px_rgba(212,255,58,0.05)]'
-                    : 'border-white/[0.05] hover:border-white/[0.12] hover:bg-white/[0.01]'
-                }`}
-              >
-                {/* Accordion header */}
-                <div className="p-6 flex justify-between items-center gap-4">
-                  <div className="flex items-center gap-5 sm:gap-7">
-                    <span className="font-mono text-xs sm:text-sm text-lime-400 bg-lime-400/10 px-3 py-1 rounded border border-lime-400/20 font-bold">
-                      {svc.num}
-                    </span>
-                    <div className="flex flex-col">
-                      <h3 className="font-sans font-bold text-lg sm:text-xl text-white tracking-tight">{svc.title}</h3>
-                      <span className="text-[9px] font-mono uppercase text-zinc-500 tracking-widest mt-0.5">{svc.englishTitle}</span>
+                      <div className="flex gap-1.5 items-center pt-1.5 border-t border-white/[0.04] mt-1.5">
+                        <span className="text-[8px] text-zinc-600">[READY]</span>
+                        <span className="text-lime-400">$</span>
+                        <span className="text-zinc-200">{typedCommand}</span>
+                        <span className="w-1 h-3 bg-lime-400 animate-pulse inline-block" />
+                      </div>
+                    </div>
+
+                    <div className="p-2.5 bg-zinc-950/90 border-t border-white/[0.06]">
+                      <div className="text-[8px] text-zinc-500 uppercase tracking-wider text-left mb-1.5 font-mono flex items-center gap-1">
+                        <Zap className="w-2.5 h-2.5 text-lime-400 animate-bounce" />
+                        Developer Commands Simulator
+                      </div>
+                      <div className="grid grid-cols-4 gap-1">
+                        {['lesson', 'evaluation', 'visualize', 'integrate'].map((preset) => (
+                          <button
+                            key={preset}
+                            onClick={() => runTerminalSimulation(preset)}
+                            disabled={isTerminalBuilding}
+                            className={`px-1 py-1 rounded text-[8px] font-mono font-bold uppercase border transition-all cursor-pointer ${
+                              activeTerminalPreset === preset
+                                ? 'bg-lime-400/10 border-lime-400/50 text-lime-400'
+                                : 'bg-white/[0.02] border-white/[0.06] text-zinc-400 hover:border-white/[0.12] hover:text-white'
+                            }`}
+                          >
+                            {preset === 'lesson' ? 'Parser' :
+                             preset === 'evaluation' ? 'Workbook' :
+                             preset === 'visualize' ? 'UI Build' : 'Deploy'}
+                          </button>
+                        ))}
+                      </div>
                     </div>
                   </div>
-                  <motion.div 
-                    animate={{ rotate: activeService === svc.num ? 180 : 0 }}
-                    transition={{ duration: 0.3 }}
-                    className="w-8 h-8 rounded-full border border-white/[0.08] flex items-center justify-center text-zinc-400 bg-white/[0.02]"
-                  >
-                    <ChevronDown className="w-4 h-4" />
-                  </motion.div>
+                </div>
+              </motion.div>
+            )}
+
+            {/* SLIDE 1: QA SYSTEM */}
+            {currentSlide === 1 && (
+              <motion.div
+                key="slide-1"
+                custom={slideDirection}
+                variants={{
+                  enter: (direction: 'left' | 'right') => ({ x: direction === 'right' ? '100vw' : '-100vw', opacity: 0 }),
+                  center: { x: 0, opacity: 1 },
+                  exit: (direction: 'left' | 'right') => ({ x: direction === 'right' ? '-100vw' : '100vw', opacity: 0 })
+                }}
+                transition={{ type: 'spring', stiffness: 220, damping: 25 }}
+                className="absolute inset-0 w-full h-full flex items-center grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 overflow-y-auto lg:overflow-visible py-4 custom-scrollbar"
+              >
+                {/* Left Column Content */}
+                <div className="lg:col-span-7 flex flex-col justify-center text-left">
+                  <div className="inline-flex flex-wrap items-center gap-2 border border-lime-400/20 bg-lime-400/5 px-3 py-1 rounded-full w-max text-[9px] font-mono tracking-widest text-lime-400 uppercase mb-4 sm:mb-6">
+                    <span className="w-1.5 h-1.5 rounded-full bg-lime-400 animate-pulse shadow-[0_0_8px_#d4ff3a]" />
+                    <span>MISSION 02 : METICULOUS VERIFICATION</span>
+                    <span className="text-zinc-600">|</span>
+                    <span className="text-white">QUALITY CONTROL</span>
+                  </div>
+
+                  <h1 className="text-[1.5rem] xs:text-[1.8rem] sm:text-[2.2rem] md:text-[2.8rem] lg:text-[2.4rem] xl:text-[2.8rem] font-sans font-black tracking-tight leading-[1.2] mb-4 sm:mb-5 text-zinc-100 break-keep">
+                    수식 기오 오치 하나 없는<br/>
+                    <span className="text-lime-400 underline underline-offset-4 decoration-lime-400/30">공교육 플랫폼 검수(QA)</span> 노하우.
+                  </h1>
+
+                  <p className="text-xs sm:text-sm text-zinc-400 max-w-xl leading-relaxed mb-5 sm:mb-6">
+                    EBSMath, 미래엔 등 최상위 지향 교육 플랫폼 규칙들을 정밀 설계하고 분석 지원해 왔습니다. 단순 확인 수준을 넘어, 수식 표준 파싱 설계 데이터와 크로스 브라우저 다중 플랫폼의 반응형 레이아웃 오차를 1:1 검토해냅니다.
+                  </p>
+
+                  <div className="flex flex-wrap gap-1.5 mb-6">
+                    <span className="px-2.5 py-1 rounded-full border border-lime-400/30 bg-lime-400/5 text-lime-400 font-mono text-[8px] uppercase font-bold tracking-widest">
+                      Perfect Quality Control
+                    </span>
+                    <span className="px-2.5 py-1 rounded-full border border-white/[0.08] bg-white/[0.02] text-zinc-300 font-mono text-[8px] uppercase font-semibold tracking-wider">
+                      10 Years Legacy
+                    </span>
+                    <span className="px-2.5 py-1 rounded-full border border-white/[0.08] bg-white/[0.02] text-zinc-300 font-mono text-[8px] uppercase font-semibold tracking-wider">
+                      Zero Error Limit
+                    </span>
+                  </div>
+
+                  <div className="flex flex-col sm:flex-row gap-3 pt-3 border-t border-white/[0.04]">
+                    <button
+                      onClick={() => openDrawer('timeline')}
+                      className="flex-1 flex items-center justify-between gap-3 px-4 py-3 rounded-lg bg-white/[0.02] hover:bg-neutral-900 border border-white/[0.08] hover:border-lime-400/40 text-left transition-all group max-w-sm cursor-pointer"
+                    >
+                      <div className="flex flex-col min-w-0">
+                        <span className="text-white text-xs font-bold font-sans flex items-center gap-1.5 truncate">
+                          설립 연력 및 연대기 보기
+                          <ArrowRight className="w-3.5 h-3.5 text-lime-400 group-hover:translate-x-1 transition-transform shrink-0" />
+                        </span>
+                        <span className="text-zinc-500 font-mono text-[8px] uppercase tracking-wider mt-0.5">AVRO ROADMAP HISTORY</span>
+                      </div>
+                    </button>
+
+                    <button
+                      onClick={() => goToSlide(5)}
+                      className="flex-1 flex items-center justify-between gap-3 px-4 py-3 rounded-lg bg-[#d4ff3a]/5 hover:bg-[#d4ff3a]/10 border border-[#d4ff3a]/25 hover:border-lime-400/60 text-left transition-all group max-w-sm cursor-pointer"
+                    >
+                      <div className="flex flex-col min-w-0">
+                        <span className="text-[#d4ff3a] text-xs font-bold font-sans flex items-center gap-1.5 truncate">
+                          검수 의뢰 도입 상담 접수
+                          <ArrowRight className="w-3.5 h-3.5 text-lime-400 group-hover:translate-x-1 transition-transform shrink-0" />
+                        </span>
+                        <span className="text-lime-400/50 font-mono text-[8px] uppercase tracking-wider mt-0.5">QA CONSULTING</span>
+                      </div>
+                    </button>
+                  </div>
                 </div>
 
-                {/* Accordion content */}
-                <AnimatePresence initial={false}>
-                  {activeService === svc.num && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: 'auto', opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.35, ease: 'easeInOut' }}
-                      className="border-t border-white/[0.06] bg-black/40 overflow-hidden"
-                    >
-                      <div className="p-6 space-y-6">
-                        <p className="text-zinc-300 text-sm sm:text-base leading-relaxed max-w-3xl">
-                          {svc.description}
-                        </p>
-                        
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
-                          {svc.items.map((item, idx) => (
-                            <div key={idx} className="flex items-center gap-2.5 font-mono text-[11px] text-zinc-400">
-                              <Check className="w-3.5 h-3.5 text-lime-400 shrink-0" />
-                              <span>{item}</span>
+                {/* Right Interactive Column (Scoring / QA Simulator) */}
+                <div className="lg:col-span-5 w-full flex justify-center items-center">
+                  <div className="w-full max-w-md h-[340px] md:h-[360px] glass-effect rounded-xl border border-white/[0.08] overflow-hidden flex flex-col shadow-[0_20px_50px_rgba(0,0,0,0.6)]">
+                    <div className="px-3.5 py-2.5 bg-[#0d0d12]/90 border-b border-white/[0.06] flex items-center justify-between">
+                      <div className="flex gap-1.5">
+                        <span className="w-2.5 h-2.5 rounded-full bg-lime-400 inline-block" />
+                        <span className="w-2.5 h-2.5 rounded-full bg-cyan-400 inline-block" />
+                        <span className="w-2.5 h-2.5 rounded-full bg-zinc-600 inline-block" />
+                      </div>
+                      <span className="text-[9px] font-mono text-lime-400 tracking-wider">QA_AUTOMATION v1.02</span>
+                      <span className="text-[8px] font-mono text-zinc-500 uppercase">Interactive</span>
+                    </div>
+
+                    <div className="flex-1 p-3 bg-[#07070a]/90 overflow-y-auto space-y-2.5 text-left custom-scrollbar">
+                      <div className="flex justify-between items-center pb-2 border-b border-white/[0.06]">
+                        <span className="text-[10px] font-mono text-zinc-400 uppercase">// Verification Rules</span>
+                        <button
+                          onClick={runQaSimulation}
+                          disabled={qaStatus === 'running'}
+                          className={`px-2.5 py-1 rounded text-[9px] font-sans font-bold flex items-center gap-1 hover:brightness-110 active:scale-95 transition-all cursor-pointer ${
+                            qaStatus === 'running'
+                              ? 'bg-zinc-800 text-zinc-500 border border-zinc-700'
+                              : 'bg-lime-400 text-black font-extrabold'
+                          }`}
+                        >
+                          {qaStatus === 'running' ? (
+                            <>
+                              <Loader2 className="w-2.5 h-2.5 animate-spin text-zinc-500" />
+                              검출 중
+                            </>
+                          ) : qaStatus === 'complete' ? (
+                            '재실행'
+                          ) : (
+                            '원클릭 검정'
+                          )}
+                        </button>
+                      </div>
+
+                      <div className="space-y-1.5">
+                        {qaSteps.map((step, idx) => (
+                          <div key={idx} className="p-2 rounded border border-white/[0.04] bg-white/[0.01] flex items-start gap-2">
+                            <div className="mt-0.5 shrink-0">
+                              {step.status === 'success' ? (
+                                <div className="w-3.5 h-3.5 rounded-full bg-lime-400/15 border border-lime-400 flex items-center justify-center text-lime-400">
+                                  <Check className="w-2 h-2" />
+                                </div>
+                              ) : step.status === 'running' ? (
+                                <Loader2 className="w-3.5 h-3.5 text-cyan-400 animate-spin" />
+                              ) : (
+                                <span className="w-3.5 h-3.5 rounded-full border border-white/[0.12] bg-white/[0.02] inline-block" />
+                              )}
                             </div>
-                          ))}
-                        </div>
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </TiltCard>
-            ))}
-          </div>
-          </motion.div>
-        </section>
-
-        {/* SECTION 3: WORKS (FILTERED PORTFOLIO) */}
-        <section id="works" className="py-16 md:py-24 text-left border-t border-white/[0.04] scroll-mt-24">
-          <motion.div
-            initial={{ opacity: 0, y: 35 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-120px" }}
-            transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
-          >
-            <div className="flex flex-col justify-start mb-12">
-            <div className="flex items-center gap-2 text-[10px] font-mono tracking-widest text-[#d4ff3a] uppercase mb-4">
-              <span>03</span>
-              <span className="text-zinc-700">/</span>
-              <span>SELECTED PROJECTS</span>
-              <span className="text-zinc-700">↳</span>
-            </div>
-            
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
-              <div>
-                <h2 className="text-3xl sm:text-5xl font-sans font-black tracking-tight text-white mb-4">
-                  프로젝트 &amp; 제품군.
-                </h2>
-                <p className="text-zinc-400 font-mono text-xs max-w-md">
-                  에이브로가 풍부한 도메인 전문성과 고유한 기획력을 바탕으로 완성한 주요 프로젝트 사례입니다.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* Project List/Grid Layout */}
-          <div className="grid grid-cols-1 gap-6 max-w-5xl">
-            <AnimatePresence mode="popLayout">
-              {filteredProjects.map((prj) => (
-                <motion.div
-                  key={prj.id}
-                  layout
-                  initial={{ opacity: 0, scale: 0.98, y: 15 }}
-                  animate={{ opacity: 1, scale: 1, y: 0 }}
-                  exit={{ opacity: 0, scale: 0.98, y: -15 }}
-                  transition={{ duration: 0.4 }}
-                  className="w-full h-full"
-                >
-                  <TiltCard
-                    className={`glass-effect border rounded-2xl p-6 sm:p-8 flex flex-col md:flex-row gap-6 justify-between items-start md:items-center relative overflow-hidden ${
-                      prj.isFeatured
-                        ? 'border-lime-400/[0.25] bg-gradient-to-r from-lime-400/[0.04] to-cyan-400/[0.02]'
-                        : 'border-white/[0.05]'
-                    } glass-effect-hover w-full h-full`}
-                  >
-                    {/* Glowing tag for featured badge */}
-                    {prj.isFeatured && (
-                      <div className="absolute top-0 right-0 p-1 px-3 bg-lime-400 text-black font-mono font-black text-[8px] uppercase tracking-widest rounded-bl-lg shadow-md animate-pulse">
-                        Featured Project
-                      </div>
-                    )}
-
-                    {/* Left detail area */}
-                    <div className="space-y-4 max-w-2xl text-left">
-                      <div className="flex flex-wrap items-center gap-3">
-                        <span className="font-mono text-[10px] font-bold text-lime-400 tracking-wider">
-                          {prj.id}
-                        </span>
-                        <span className="text-zinc-600 font-mono text-[10px]">•</span>
-                        <span className={`font-mono text-[10px] px-2.5 py-0.5 rounded-full border ${
-                          prj.status === 'LAUNCHING SOON' 
-                            ? 'bg-cyan-400/10 border-cyan-400/25 text-cyan-400 animate-pulse' 
-                            : prj.status === 'LIVE' 
-                            ? 'bg-lime-400/10 border-lime-400/25 text-lime-400' 
-                            : 'bg-white/[0.02] border-white/[0.08] text-zinc-400'
-                        }`}>
-                          {prj.status}
-                        </span>
-                        {prj.domain && (
-                          <a 
-                            href={`https://${prj.domain}`} 
-                            target="_blank" 
-                            rel="noopener" 
-                            className="font-mono text-[10px] text-zinc-500 hover:text-white flex items-center gap-0.5 transition-colors duration-150"
-                          >
-                            {prj.domain} <ExternalLink className="w-2.5 h-2.5" />
-                          </a>
-                        )}
-                      </div>
-
-                      <div>
-                        <h3 className="text-xl sm:text-2xl md:text-3xl font-sans font-black text-white tracking-tight flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-2">
-                          <span>{prj.name}</span>
-                          <span className="text-xs font-mono font-medium text-zinc-500 block sm:inline"> — {prj.client}</span>
-                        </h3>
-                        <p className="text-zinc-400 text-xs sm:text-sm leading-relaxed mt-2.5">
-                          {prj.description}
-                        </p>
-                      </div>
-
-                      {/* Chips list */}
-                      <div className="flex flex-wrap gap-1.5">
-                        {prj.tags.map((tag) => (
-                          <span key={tag} className="px-2.5 py-0.5 rounded bg-zinc-950 font-mono text-[9px] text-zinc-500 border border-white/[0.04]">
-                            #{tag}
-                          </span>
+                            <div className="flex flex-col min-w-0 text-left">
+                              <span className={`text-[9px] font-sans font-bold truncate ${step.status === 'success' ? 'text-zinc-200' : step.status === 'running' ? 'text-cyan-400 animate-pulse' : 'text-zinc-500'}`}>
+                                {step.name}
+                              </span>
+                              <span className="text-[8px] font-mono text-zinc-500 mt-0.5 truncate">{step.desc}</span>
+                            </div>
+                          </div>
                         ))}
                       </div>
                     </div>
 
-                    {/* Operational redirection link icon */}
-                    {prj.domain && (
-                      <motion.a
-                        href={`https://${prj.domain}`}
-                        target="_blank"
-                        rel="noopener"
-                        whileHover={{ scale: 1.1, rotate: 45 }}
-                        whileTap={{ scale: 0.95 }}
-                        className="w-12 h-12 rounded-full border border-lime-400/30 text-lime-400 bg-lime-400/10 flex items-center justify-center cursor-pointer shrink-0"
-                      >
-                        <ArrowUpRight className="w-5 h-5" />
-                      </motion.a>
-                    )}
-                  </TiltCard>
-                </motion.div>
-              ))}
-            </AnimatePresence>
-          </div>
-          </motion.div>
-        </section>
+                    <div className="p-2.5 bg-zinc-950/90 border-t border-white/[0.06] flex items-center justify-between text-left font-mono">
+                      <div className="flex flex-col">
+                        <span className="text-[8px] text-zinc-500 uppercase tracking-widest leading-none">VERDICT</span>
+                        <span className={`text-[9px] font-bold mt-1 ${qaStatus === 'complete' ? 'text-lime-400' : 'text-zinc-400'}`}>
+                          {qaStatus === 'complete' ? 'VERIFIED: 100% SUCCESS ✓' : qaStatus === 'running' ? 'COMPILING CHECK...' : 'STATUS: READY TO TEST'}
+                        </span>
+                      </div>
+                      <div className="w-20 bg-white/[0.06] h-1 rounded-full overflow-hidden">
+                        <div 
+                          className="bg-lime-400 h-full rounded-full transition-all duration-300"
+                          style={{ 
+                            width: qaStatus === 'complete' ? '100%' : 
+                                   qaStatus === 'running' ? '50%' : '0%' 
+                          }}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            )}
 
-        {/* SECTION 4: HISTORY TIMELINE */}
-        <section id="history" className="py-16 md:py-24 text-left border-t border-white/[0.04] scroll-mt-24">
-          <motion.div
-            initial={{ opacity: 0, y: 35 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-120px" }}
-            transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
-            className="grid grid-cols-1 lg:grid-cols-12 gap-12"
-          >
-            
-            {/* Left title card sticky scope */}
-            <div className="lg:col-span-5 lg:sticky lg:top-24 h-max">
-              <div className="flex items-center gap-2 text-[10px] font-mono tracking-widest text-[#d4ff3a] uppercase mb-4">
-                <span>04</span>
-                <span className="text-zinc-700">/</span>
-                <span>CHRONOLOGICAL MILESTONES</span>
-                <span className="text-zinc-700">↳</span>
-              </div>
-              <h2 className="text-3xl sm:text-5xl font-sans font-black tracking-tight text-white mb-6">
-                10년의<br/><span className="text-lime-400">발자취</span>와 증명.
-              </h2>
-              <p className="text-zinc-500 font-mono text-xs max-w-xs leading-relaxed">
-                에이브로는 반짝 뜨고 사라지는 유행성 개발팀이 아닙니다. 비즈니스 가치에 복종하고 실행 무결성을 확보해 온 연대기입니다.
-              </p>
-            </div>
+            {/* SLIDE 2: SAAS TOOL BUILDER */}
+            {currentSlide === 2 && (
+              <motion.div
+                key="slide-2"
+                custom={slideDirection}
+                variants={{
+                  enter: (direction: 'left' | 'right') => ({ x: direction === 'right' ? '100vw' : '-100vw', opacity: 0 }),
+                  center: { x: 0, opacity: 1 },
+                  exit: (direction: 'left' | 'right') => ({ x: direction === 'right' ? '-100vw' : '100vw', opacity: 0 })
+                }}
+                transition={{ type: 'spring', stiffness: 220, damping: 25 }}
+                className="absolute inset-0 w-full h-full flex items-center grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 overflow-y-auto lg:overflow-visible py-4 custom-scrollbar"
+              >
+                {/* Left Column Content */}
+                <div className="lg:col-span-7 flex flex-col justify-center text-left">
+                  <div className="inline-flex flex-wrap items-center gap-2 border border-purple-400/20 bg-purple-400/5 px-3 py-1 rounded-full w-max text-[9px] font-mono tracking-widest text-[#d8b4fe] uppercase mb-4 sm:mb-6">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#c084fc] animate-pulse" />
+                    <span>MISSION 03 : EDUTECH SMART SAAS</span>
+                    <span className="text-zinc-600">|</span>
+                    <span className="text-white">LOW-CODE WORKBENCH</span>
+                  </div>
 
-            {/* Right timeline path */}
-            <div className="lg:col-span-7 border-l border-white/[0.08] pl-6 sm:pl-8 space-y-12">
-              {timelineData.map((mile) => (
-                <div key={mile.year} className="relative group">
-                  {/* Circle locator target node */}
-                  <div className="absolute -left-[31px] sm:-left-[39px] top-1.5 w-3 h-3 rounded-full bg-[#07070a] border-2 border-lime-400 shadow-[0_0_8px_#d4ff3a] group-hover:scale-125 transition-transform duration-200" />
+                  <h1 className="text-[1.5rem] xs:text-[1.8rem] sm:text-[2.2rem] md:text-[2.8rem] lg:text-[2.4rem] xl:text-[2.8rem] font-sans font-black tracking-tight leading-[1.2] mb-4 sm:mb-5 text-zinc-100 break-keep">
+                    교사들의 교안 준비 부담을 비우는<br/>
+                    <span className="bg-gradient-to-r from-[#c084fc] to-[#f472b6] bg-clip-text text-transparent">학습 보조 저작 도구 &amp; SaaS</span> 패키지.
+                  </h1>
+
+                  <p className="text-xs sm:text-sm text-zinc-400 max-w-xl leading-relaxed mb-5 sm:mb-6">
+                    복잡한 LaTeX 수학 기호 입력부터 반응형 수식 퀴즈 세팅, 구조화 학습 미디어 배치를 법령 표준 조건에 딱 맞게 배치하는 맞춤 교안 기획 SaaS 및 통계 보드를 정교하게 설계 빌드해 드립니다.
+                  </p>
+
+                  <div className="flex flex-wrap gap-1.5 mb-6">
+                    <span className="px-2.5 py-1 rounded-full border border-indigo-400/30 bg-indigo-400/5 text-indigo-400 font-mono text-[8px] uppercase font-bold tracking-widest">
+                      LMS Curriculum SaaS
+                    </span>
+                    <span className="px-2.5 py-1 rounded-full border border-white/[0.08] bg-white/[0.02] text-zinc-300 font-mono text-[8px] uppercase font-semibold tracking-wider">
+                      Interactive Layouts
+                    </span>
+                    <span className="px-2.5 py-1 rounded-full border border-white/[0.08] bg-white/[0.02] text-zinc-300 font-mono text-[8px] uppercase font-semibold tracking-wider">
+                      Math Sheet Widgets
+                    </span>
+                  </div>
+
+                  <div className="flex flex-col sm:flex-row gap-3 pt-3 border-t border-white/[0.04]">
+                    <button
+                      onClick={() => openDrawer('process')}
+                      className="flex-1 flex items-center justify-between gap-3 px-4 py-3 rounded-lg bg-white/[0.02] hover:bg-neutral-900 border border-white/[0.08] hover:border-lime-400/40 text-left transition-all group max-w-sm cursor-pointer"
+                    >
+                      <div className="flex flex-col min-w-0">
+                        <span className="text-white text-xs font-bold font-sans flex items-center gap-1.5 truncate">
+                          에이브로 작업 프로세스 흐름
+                          <ArrowRight className="w-3.5 h-3.5 text-lime-400 group-hover:translate-x-1 transition-transform shrink-0" />
+                        </span>
+                        <span className="text-zinc-500 font-mono text-[8px] uppercase tracking-wider mt-0.5">AVRO STRATEGY PROCESS</span>
+                      </div>
+                    </button>
+
+                    <button
+                      onClick={() => goToSlide(5)}
+                      className="flex-1 flex items-center justify-between gap-3 px-4 py-3 rounded-lg bg-purple-500/5 hover:bg-purple-500/10 border border-purple-500/25 hover:border-purple-400/60 text-left transition-all group max-w-sm cursor-pointer"
+                    >
+                      <div className="flex flex-col min-w-0">
+                        <span className="text-purple-300 text-xs font-bold font-sans flex items-center gap-1.5 truncate">
+                          맞춤 에듀테크 SaaS 빌딩 도입하기
+                          <ArrowRight className="w-3.5 h-3.5 text-purple-400 group-hover:translate-x-1 transition-transform shrink-0" />
+                        </span>
+                        <span className="text-purple-500/50 font-mono text-[8px] uppercase tracking-wider mt-0.5">LAUNCH PILOT SAAS</span>
+                      </div>
+                    </button>
+                  </div>
+                </div>
+
+                {/* Right Interactive Column (Playground) */}
+                <div className="lg:col-span-5 w-full flex justify-center items-center">
+                  <div className="w-full max-w-md h-[340px] md:h-[360px] glass-effect rounded-xl border border-white/[0.08] overflow-hidden flex flex-col shadow-[0_20px_50px_rgba(0,0,0,0.6)]">
+                    <div className="px-3.5 py-2.5 bg-[#0d0d12]/90 border-b border-white/[0.06] flex items-center justify-between">
+                      <div className="flex gap-1.5">
+                        <span className="w-2.5 h-2.5 rounded-full bg-purple-400 inline-block" />
+                        <span className="w-2.5 h-2.5 rounded-full bg-pink-400 inline-block" />
+                        <span className="w-2.5 h-2.5 rounded-full bg-indigo-600 inline-block" />
+                      </div>
+                      <span className="text-[9px] font-mono text-[#c084fc] tracking-wider">BLOCKS_PLAYGROUND v1.0</span>
+                      <span className="text-[8px] font-mono text-zinc-500 uppercase">Live Preview</span>
+                    </div>
+
+                    <div className="p-2 bg-[#0d0d12]/80 border-b border-white/[0.04]">
+                      <span className="text-[8px] font-mono text-zinc-400 block mb-1 text-left uppercase">// Toggle layout modules:</span>
+                      <div className="grid grid-cols-4 gap-1">
+                        {[
+                          { id: 'header', label: '교안 헤더' },
+                          { id: 'math', label: 'LaTeX 수식' },
+                          { id: 'quiz', label: '단원 퀴즈' },
+                          { id: 'script', label: '수업 안내' }
+                        ].map((block) => {
+                          const isSel = selectedBlocks.includes(block.id);
+                          return (
+                            <button
+                              key={block.id}
+                              onClick={() => toggleBlock(block.id)}
+                              className={`px-1 py-1 rounded text-[8px] font-sans font-bold border transition-all cursor-pointer ${
+                                isSel
+                                  ? 'bg-purple-500/10 border-purple-400/50 text-purple-300'
+                                  : 'bg-white/[0.02] border-white/[0.06] text-zinc-500 hover:text-zinc-300'
+                              }`}
+                            >
+                              {block.label}
+                            </button>
+                          );
+                        })}
+                      </div>
+                    </div>
+
+                    <div className="flex-1 p-3 bg-[#07070a]/90 overflow-y-auto space-y-2 text-left custom-scrollbar relative">
+                      <span className="absolute right-2 top-1.5 text-[7px] font-mono text-zinc-600 bg-black/60 px-1.5 py-0.5 rounded border border-white/[0.04] select-none">
+                        PREVIEW_SCREEN ✓
+                      </span>
+
+                      <div className="space-y-2 pt-2">
+                        <AnimatePresence>
+                          {selectedBlocks.includes('header') && (
+                            <motion.div
+                              initial={{ opacity: 0, y: -5 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              exit={{ opacity: 0 }}
+                              className="p-2 bg-white/[0.01] border border-white/[0.04] rounded-lg text-left"
+                            >
+                              <span className="text-[7px] font-mono text-purple-400 select-none block">// MODULE : LESSON HEADER</span>
+                              <h4 className="text-[10px] font-bold text-zinc-100 mt-0.5">EBSMath 대수 기본학습 [일차함수]</h4>
+                              <span className="text-[7px] font-mono text-zinc-500">Curriculum Code: 중등수학 2-1</span>
+                            </motion.div>
+                          )}
+
+                          {selectedBlocks.includes('math') && (
+                            <motion.div
+                              initial={{ opacity: 0, y: -5 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              exit={{ opacity: 0 }}
+                              className="p-2 bg-white/[0.02] border border-[#d4ff3a]/15 rounded-lg font-mono text-left"
+                            >
+                              <span className="text-[7px] text-[#d4ff3a] block">// MODULE : LaTeX MATH FORMAT</span>
+                              <div className="text-[9px] text-zinc-300 mt-1 py-1 text-center bg-black/50 border border-white/[0.04] rounded">
+                                f(x) = ax + b \ (a \neq 0)
+                              </div>
+                            </motion.div>
+                          )}
+
+                          {selectedBlocks.includes('quiz') && (
+                            <motion.div
+                              initial={{ opacity: 0, y: -5 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              exit={{ opacity: 0 }}
+                              className="p-2 bg-white/[0.01] border border-white/[0.04] rounded-lg text-left"
+                            >
+                              <span className="text-[7px] font-mono text-cyan-400 block">// MODULE : INTERACTIVE QUIZ</span>
+                              <p className="text-[9px] font-semibold text-zinc-300 mt-0.5 leading-normal">다음 중 일차함수인 것을 모두 고르시오.</p>
+                              <div className="grid grid-cols-2 gap-1 mt-1.5">
+                                {['① y = 2x - 3', '② y = x²', '③ y = 3 / x', '④ y = 5'].map((opt, i) => (
+                                  <div key={i} className={`p-1 border rounded text-[8px] cursor-pointer font-sans transition-all text-left ${i === 0 ? 'border-lime-400/30 bg-lime-400/[0.02] text-lime-400 font-bold' : 'border-white/[0.05] bg-white/[0.01] text-zinc-400'}`}>
+                                    {opt}
+                                  </div>
+                                ))}
+                              </div>
+                            </motion.div>
+                          )}
+
+                          {selectedBlocks.includes('script') && (
+                            <motion.div
+                              initial={{ opacity: 0, y: -5 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              exit={{ opacity: 0 }}
+                              className="p-2 bg-white/[0.01] border border-dashed border-white/[0.08] rounded-lg text-zinc-400 text-[8px] leading-relaxed text-left"
+                            >
+                              <strong className="text-zinc-200 block mb-0.5 font-bold">💡 실무 설계 어드바이스:</strong>
+                              도해 및 LaTeX 수식은 태블릿 모바일 비율에서도 잘림 없이 가단 자동 조절되도록 CSS 비율 레이어를 보존합니다.
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            )}
+
+            {/* SLIDE 3: PORTFOLIO WORKS */}
+            {currentSlide === 3 && (
+              <motion.div
+                key="slide-3"
+                custom={slideDirection}
+                variants={{
+                  enter: (direction: 'left' | 'right') => ({ x: direction === 'right' ? '100vw' : '-100vw', opacity: 0 }),
+                  center: { x: 0, opacity: 1 },
+                  exit: (direction: 'left' | 'right') => ({ x: direction === 'right' ? '-100vw' : '100vw', opacity: 0 })
+                }}
+                transition={{ type: 'spring', stiffness: 220, damping: 25 }}
+                className="absolute inset-0 w-full h-full flex flex-col justify-center overflow-y-auto py-4 custom-scrollbar text-left"
+              >
+                <div className="max-w-5xl mx-auto w-full">
+                  <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-3 mb-6">
+                    <div>
+                      <div className="flex items-center gap-2 text-[10px] font-mono tracking-widest text-[#d4ff3a] uppercase mb-1">
+                        <span>03</span>
+                        <span className="text-zinc-700">/</span>
+                        <span>SELECTED PROJECTS</span>
+                        <span className="text-zinc-700">↳</span>
+                      </div>
+                      <h2 className="text-2xl sm:text-4xl font-sans font-black text-white">
+                        프로젝트 &amp; 제품군.
+                      </h2>
+                    </div>
+
+                    {/* Filter categories directly interactive in horizontal slide layout */}
+                    <div className="flex gap-1.5 border border-white/[0.08] p-1 rounded-lg bg-black/45 shrink-0">
+                      {(['ALL', 'AI', 'CASE_STUDY'] as const).map((filter) => (
+                        <button
+                          key={filter}
+                          onClick={() => setProjectFilter(filter)}
+                          className={`px-3 py-1 text-[9px] font-mono font-bold tracking-wider rounded-md uppercase transition-all cursor-pointer ${
+                            projectFilter === filter
+                              ? 'bg-lime-400 text-black'
+                              : 'text-zinc-400 hover:text-white'
+                          }`}
+                        >
+                          {filter === 'ALL' ? '전체 보기' : filter === 'AI' ? '스마트 AI / SaaS' : '기획사례'}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Filtered portfolio case list within viewport height bounds */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-h-[50vh] min-h-[250px] overflow-y-auto pr-2 custom-scrollbar">
+                    <AnimatePresence mode="popLayout">
+                      {filteredProjects.map((prj, idx) => (
+                        <motion.div
+                          key={prj.id}
+                          layout
+                          initial={{ opacity: 0, scale: 0.98, y: 15 }}
+                          animate={{ opacity: 1, scale: 1, y: 0 }}
+                          exit={{ opacity: 0, scale: 0.98, y: -15 }}
+                          transition={{ duration: 0.3 }}
+                          className="w-full"
+                        >
+                          <div className={`p-4 sm:p-5 rounded-xl border flex flex-col justify-between h-full bg-[#0d0d12]/60 hover:bg-[#12121c]/70 transition-all ${
+                            prj.isFeatured ? 'border-lime-400/[0.25]' : 'border-white/[0.05]'
+                          } relative overflow-hidden group`}>
+                            {prj.isFeatured && (
+                              <div className="absolute top-0 right-0 px-2.5 py-0.5 bg-lime-400 text-black font-mono font-extrabold text-[8px] uppercase tracking-widest rounded-bl-md">
+                                대표 혁신
+                              </div>
+                            )}
+
+                            <div className="space-y-2.5">
+                              <div className="flex flex-wrap items-center gap-2">
+                                <span className="font-mono text-[9px] font-bold text-lime-400">{prj.id}</span>
+                                <span className="text-zinc-700">•</span>
+                                <span className={`font-mono text-[8px] px-2 py-0.5 rounded-full border ${
+                                  prj.status === 'LIVE' ? 'border-lime-400/20 text-lime-400 bg-lime-400/5' : 'border-white/[0.08] text-zinc-400'
+                                }`}>
+                                  {prj.status}
+                                </span>
+                              </div>
+
+                              <h3 className="text-base sm:text-lg font-sans font-extrabold text-white tracking-tight flex items-baseline gap-1.5 flex-wrap">
+                                <span>{prj.name}</span>
+                                <span className="text-[10px] font-mono text-zinc-500">— {prj.client}</span>
+                              </h3>
+
+                              <p className="text-zinc-400 text-[11px] leading-relaxed line-clamp-3">
+                                {prj.description}
+                              </p>
+                            </div>
+
+                            <div className="flex items-center justify-between pt-3 mt-3 border-t border-white/[0.04]">
+                              <div className="flex flex-wrap gap-1">
+                                {prj.tags.slice(0, 3).map((tag, tIdx) => (
+                                  <span key={`${tag}-${tIdx}`} className="px-1.5 py-0.5 rounded bg-zinc-950 font-mono text-[8px] text-zinc-500 border border-white/[0.04]">
+                                    #{tag}
+                                  </span>
+                                ))}
+                              </div>
+                              {prj.domain && (
+                                <a 
+                                  href={`https://${prj.domain}`} 
+                                  target="_blank" 
+                                  rel="noopener noreferrer" 
+                                  className="text-[9px] font-mono text-lime-400 font-bold hover:underline flex items-center gap-1 shrink-0 ml-2"
+                                >
+                                  {prj.domain} <ExternalLink className="w-2.5 h-2.5" />
+                                </a>
+                              )}
+                            </div>
+                          </div>
+                        </motion.div>
+                      ))}
+                    </AnimatePresence>
+                  </div>
+                </div>
+              </motion.div>
+            )}
+
+            {/* SLIDE 4: TIMELINE & PARTNERS */}
+            {currentSlide === 4 && (
+              <motion.div
+                key="slide-4"
+                custom={slideDirection}
+                variants={{
+                  enter: (direction: 'left' | 'right') => ({ x: direction === 'right' ? '100vw' : '-100vw', opacity: 0 }),
+                  center: { x: 0, opacity: 1 },
+                  exit: (direction: 'left' | 'right') => ({ x: direction === 'right' ? '-100vw' : '100vw', opacity: 0 })
+                }}
+                transition={{ type: 'spring', stiffness: 220, damping: 25 }}
+                className="absolute inset-0 w-full h-full flex items-center grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 overflow-y-auto lg:overflow-visible py-4 custom-scrollbar"
+              >
+                {/* Left Column (Timeline roadmap chronology) */}
+                <div className="lg:col-span-6 text-left flex flex-col justify-center">
+                  <div className="flex items-center gap-2 text-[10px] font-mono tracking-widest text-[#d4ff3a] uppercase mb-2">
+                    <span>04</span>
+                    <span className="text-zinc-700">/</span>
+                    <span>CHRONOLOGY ROADMAP</span>
+                  </div>
+                  <h2 className="text-2xl sm:text-3xl font-sans font-black text-white mb-4">10년의 발자취와 증명.</h2>
                   
-                  {/* Year text badge */}
-                  <span className="font-mono text-sm sm:text-lg font-black text-lime-400 tracking-tight leading-none mb-4 block">
-                    {mile.year}
-                  </span>
+                  <div className="border-l border-white/[0.08] pl-5 ml-1 space-y-5 max-h-[42vh] overflow-y-auto pr-2 custom-scrollbar text-zinc-300">
+                    {timelineData.map((mile) => (
+                      <div key={mile.year} className="relative text-left">
+                        <div className="absolute -left-[26px] top-1 w-2 h-2 rounded-full bg-[#07070a] border-2 border-lime-400" />
+                        <span className="font-mono text-sm font-extrabold text-lime-400 block mb-1">
+                          {mile.year}
+                        </span>
+                        <ul className="space-y-1">
+                          {mile.events.map((ev, idx) => (
+                            <li
+                              key={idx}
+                              className={`text-[11px] leading-relaxed list-none pl-2.5 relative before:content-[''] before:absolute before:left-0 before:top-2 before:w-1 before:h-1 before:rounded-full ${
+                                ev.isHighlight ? 'before:bg-lime-400 text-zinc-100 font-semibold' : 'before:bg-zinc-600 text-zinc-400'
+                              }`}
+                            >
+                              {ev.description}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    ))}
+                  </div>
+                </div>
 
-                  {/* Events list */}
-                  <ul className="space-y-4">
-                    {mile.events.map((ev, idx) => (
-                      <li 
-                        key={idx} 
-                        className={`text-xs sm:text-sm text-zinc-400 leading-relaxed list-none relative pl-4 before:content-[''] before:absolute before:left-0 before:top-2 before:w-1 before:h-1 before:rounded-full ${
-                          ev.isHighlight 
-                            ? 'before:bg-lime-400 text-zinc-100 font-medium' 
-                            : 'before:bg-zinc-600 text-zinc-400'
+                {/* Right Column (Partners Grid) */}
+                <div className="lg:col-span-6 flex flex-col justify-center text-left">
+                  <div className="flex items-center gap-2 text-[10px] font-mono tracking-widest text-cyan-400 uppercase mb-2">
+                    <span>05</span>
+                    <span className="text-zinc-700">/</span>
+                    <span>TRUSTED PARTNERS</span>
+                  </div>
+                  <h2 className="text-2xl sm:text-3xl font-sans font-black text-white mb-4">함께 성과를 만들어간 파트너들.</h2>
+                  
+                  <div className="grid grid-cols-2 xs:grid-cols-3 gap-2 max-h-[42vh] overflow-y-auto pr-1 custom-scrollbar">
+                    {partnersData.map((part, pIdx) => (
+                      <div
+                        key={`${part.name}-${pIdx}`}
+                        className={`flex flex-col items-center justify-center p-3 rounded-lg border text-center transition-colors ${
+                          part.isHighlight
+                            ? 'border-lime-400/20 bg-lime-400/[0.02] text-white'
+                            : 'border-white/[0.04] bg-white/[0.01]'
                         }`}
                       >
-                        {ev.description}
-                      </li>
+                        <span className={`font-sans font-bold text-xs ${part.isHighlight ? 'text-lime-300' : 'text-zinc-300'}`}>
+                          {part.name}
+                        </span>
+                        <span className="font-mono text-[7px] tracking-wider text-zinc-500 uppercase mt-0.5">
+                          {part.type}
+                        </span>
+                      </div>
                     ))}
-                  </ul>
+                  </div>
                 </div>
-              ))}
-            </div>
-
-          </motion.div>
-        </section>
-
-        {/* SECTION 5: PARTNERS (LOGO GRID) */}
-        <section id="partners" className="py-16 md:py-24 text-left border-t border-white/[0.04]">
-          <motion.div
-            initial={{ opacity: 0, y: 35 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-120px" }}
-            transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
-          >
-            <div className="flex flex-col gap-3 mb-10">
-            <div className="flex items-center gap-2 text-[10px] font-mono tracking-widest text-[#d4ff3a] uppercase">
-              <span>05</span>
-              <span className="text-zinc-700">/</span>
-              <span>CLIENT PARTNERS</span>
-              <span className="text-zinc-700">↳</span>
-            </div>
-            <h2 className="text-2xl sm:text-4xl font-sans font-black text-white">
-              함께 혁신을 고도화한 파트너들.
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
-            {partnersData.map((part) => (
-              <motion.div
-                key={part.name}
-                whileHover={{ y: -3, borderFull: true, borderColor: 'rgba(212,255,58,0.2)' }}
-                className={`flex flex-col items-center justify-center p-5 rounded-lg border text-center relative overflow-hidden transition-colors duration-300 ${
-                  part.isHighlight
-                    ? 'border-lime-400/20 bg-lime-400/[0.02] text-white hover:bg-lime-400/[0.05]'
-                    : 'border-white/[0.04] bg-white/[0.01] hover:bg-neutral-900/40 hover:border-white/[0.12]'
-                }`}
-              >
-                {part.isHighlight && (
-                  <span className="absolute top-1 right-1 w-1 h-1 rounded-full bg-lime-400 shadow-[0_0_5px_#d4ff3a]" />
-                )}
-                <span className={`font-sans font-bold text-sm sm:text-base ${part.isHighlight ? 'text-lime-300' : 'text-zinc-200'}`}>
-                  {part.name}
-                </span>
-                <span className="font-mono text-[8px] tracking-wider text-zinc-500 uppercase mt-1">
-                  {part.type}
-                </span>
               </motion.div>
-            ))}
-          </div>
-          </motion.div>
-        </section>
+            )}
 
-        {/* SECTION 6: HOW WE WORK (PROCESS) */}
-        <section id="process" className="py-16 md:py-24 text-left border-t border-white/[0.04]">
-          <motion.div
-            initial={{ opacity: 0, y: 35 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-120px" }}
-            transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
-          >
-            <div className="flex flex-col gap-3 mb-12">
-            <div className="flex items-center gap-2 text-[10px] font-mono tracking-widest text-[#d4ff3a] uppercase">
-              <span>06</span>
-              <span className="text-zinc-700">/</span>
-              <span>METICULOUS WORKFLOW</span>
-              <span className="text-zinc-700">↳</span>
-            </div>
-            <h2 className="text-2xl sm:text-4xl font-sans font-black text-white">
-              의뢰가 완결로 이루어지는 정밀 흐름.
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {processSteps.map((step) => (
-              <div 
-                key={step.step} 
-                className="p-6 rounded-xl border border-white/[0.04] bg-white/[0.01] flex items-center gap-4 relative overflow-hidden group hover:border-lime-400/30 hover:bg-[#0c0c10] transition-colors duration-200"
+            {/* SLIDE 5: CONTACT & CORPORATE PROFILE */}
+            {currentSlide === 5 && (
+              <motion.div
+                key="slide-5"
+                custom={slideDirection}
+                variants={{
+                  enter: (direction: 'left' | 'right') => ({ x: direction === 'right' ? '100vw' : '-100vw', opacity: 0 }),
+                  center: { x: 0, opacity: 1 },
+                  exit: (direction: 'left' | 'right') => ({ x: direction === 'right' ? '-100vw' : '100vw', opacity: 0 })
+                }}
+                transition={{ type: 'spring', stiffness: 220, damping: 25 }}
+                className="absolute inset-0 w-full h-full flex items-center grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 overflow-y-auto lg:overflow-visible py-4 custom-scrollbar shadow-inner"
               >
-                {/* Static indicator badge inside card decoration */}
-                <div className="w-10 h-10 rounded-full bg-lime-400/10 text-lime-400 border border-lime-400/20 flex items-center justify-center font-mono font-bold text-sm shrink-0 flex-none shadow-sm shadow-lime-400/20">
-                  {step.step}
-                </div>
-                
-                <div className="flex flex-col text-left justify-center min-w-0">
-                  <span className="font-sans font-bold text-[14px] text-zinc-100 truncate">{step.title}</span>
-                  <span className="font-mono text-[9px] text-zinc-500 uppercase tracking-widest truncate mt-0.5">{step.englishTitle}</span>
-                </div>
-              </div>
-            ))}
-          </div>
-          </motion.div>
-        </section>
-
-        {/* METICULOUS MANIFESTO HIGHLIGHT BANNER */}
-        <motion.section 
-          initial={{ opacity: 0, scale: 0.98, y: 25 }}
-          whileInView={{ opacity: 1, scale: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className="py-12 md:py-16 my-8 px-6 sm:px-12 rounded-2xl border border-white/[0.08] bg-white/[0.01] flex flex-col justify-center items-start text-left relative overflow-hidden"
-        >
-          <div className="absolute top-4 left-6 sm:left-12 font-mono text-[9px] tracking-widest text-lime-400 uppercase font-black">
-            ◆ AVRO_MANIFESTO // AUTOMATION
-          </div>
-          <p className="font-sans font-bold text-xl sm:text-3xl text-white tracking-tight leading-relaxed max-w-3xl mt-6">
-            "대형 브랜드 및 기관의 다채로운 디지털 비주얼 콘텐츠 기획과 수작업 가공 구조, <br className="hidden sm:inline" />
-            이제 <span className="bg-lime-400 text-black px-2 py-0.5 rounded shadow-sm text-[16px] sm:text-[22px] font-black align-middle mx-1">AI</span> 엔지니어링이 지능적으로 분석·조율하여 정밀한 <span className="text-lime-400 underline decoration-lime-500/60 decoration-2 underline-offset-4 font-black">자동화</span> 설계로 기획과 운영 프로세스를 지원합니다."
-          </p>
-          <div className="font-mono text-[9px] text-zinc-500 tracking-wider uppercase mt-6">
-            AVRO STUDIO MANIFESTO · FY 2026. ALL PROCESS VERIFIED.
-          </div>
-        </motion.section>
-
-        {/* SECTION 7: CONTACT / CTA */}
-        <section id="contact" className="py-16 md:py-24 text-left border-t border-white/[0.04] scroll-mt-24">
-          <motion.div
-            initial={{ opacity: 0, y: 35 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-120px" }}
-            transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
-            className="grid grid-cols-1 lg:grid-cols-12 gap-12"
-          >
-            
-            {/* CTA action copy column */}
-            <div className="lg:col-span-7 flex flex-col justify-center">
-              <div className="flex items-center gap-2 text-[10px] font-mono tracking-widest text-lime-400 uppercase mb-4">
-                <span className="text-lime-300 font-bold">$</span>
-                <span className="text-zinc-700">/</span>
-                <span>avro_studio_routine_start.cmd</span>
-              </div>
-              <h2 className="text-4xl sm:text-6xl font-sans font-black tracking-tight text-white mb-6 leading-none">
-                Together,<br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-lime-300 via-cyan-300 to-emerald-300">함께 만들어갈까요?</span>
-                <motion.span 
-                  animate={{ opacity: [1, 0, 1] }} 
-                  transition={{ repeat: Infinity, duration: 1, step: 'end' }} 
-                  className="inline-block w-3 h-8 bg-lime-400 align-middle ml-1 shadow-[0_0_8px_#d4ff3a]" 
-                />
-              </h2>
-              <p className="text-zinc-400 text-sm sm:text-base leading-relaxed max-w-lg mb-8">
-                에듀테크 서비스 제작이 필요하시거나, 교육 콘텐츠 연동 및 웹 데이터 가공이 필요하시다면 언제든 편하게 아래 메일로 의견을 남겨주세요.
-              </p>
-
-              <div className="flex flex-col sm:flex-row gap-4">
-                <motion.a 
-                  href="mailto:ceo@avro.co.kr"
-                  whileHover={{ scale: 1.03 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="px-6 py-3.5 rounded-full bg-gradient-to-r from-blue-500 to-cyan-400 text-black font-mono font-black text-xs uppercase tracking-widest flex items-center justify-between gap-4 shadow-[0_4px_15px_rgba(34,211,238,0.3)] group"
-                >
-                  <span>ceo@avro.co.kr 이메일 전송</span>
-                  <ArrowRight className="w-4 h-4 text-black group-hover:translate-x-1.5 transition-transform duration-200" />
-                </motion.a>
-              </div>
-            </div>
-
-            {/* Practical corporate info list column */}
-            <div className="lg:col-span-5 flex flex-col justify-center">
-              <div className="glass-effect border border-white/[0.05] p-6 rounded-2xl space-y-6">
-                <h3 className="font-mono text-xs text-zinc-400 uppercase tracking-widest border-b border-white/[0.04] pb-3 text-left">
-                  // Contact Details
-                </h3>
-
-                <div className="space-y-4">
-                  <div className="flex items-start gap-4">
-                    <Mail className="w-4 h-4 text-lime-400 shrink-0 mt-0.5" />
-                    <div className="flex flex-col text-left">
-                      <span className="font-mono text-[9px] text-zinc-500 uppercase tracking-wider">email support</span>
-                      <a href="mailto:ceo@avro.co.kr" className="text-zinc-200 font-bold hover:text-lime-400 transition-colors duration-150">
-                        ceo@avro.co.kr
-                      </a>
-                    </div>
+                {/* Left Column Content */}
+                <div className="lg:col-span-7 flex flex-col justify-center text-left">
+                  <div className="flex items-center gap-2 text-[10px] font-mono tracking-widest text-lime-400 uppercase mb-4">
+                    <span className="text-lime-300 font-bold">$</span>
+                    <span className="text-zinc-700">/</span>
+                    <span>avro_studio_routine_start.cmd</span>
                   </div>
-                  <div className="flex items-start gap-4">
-                    <Globe className="w-4 h-4 text-cyan-400 shrink-0 mt-0.5" />
-                    <div className="flex flex-col text-left">
-                      <span className="font-mono text-[9px] text-zinc-500 uppercase tracking-wider">web link</span>
-                      <a href="https://www.avro.co.kr" target="_blank" rel="noopener" className="text-zinc-200 font-bold hover:text-cyan-400 transition-colors duration-150 flex items-center gap-1">
-                        www.avro.co.kr <ExternalLink className="w-3 h-3" />
-                      </a>
-                    </div>
+                  
+                  <h2 className="text-3xl sm:text-5xl font-sans font-black tracking-tight text-white mb-5 leading-none">
+                    Together,<br />
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-lime-300 via-cyan-300 to-emerald-300">함께 만들어갈까요?</span>
+                    <motion.span 
+                      animate={{ opacity: [1, 0, 1] }} 
+                      transition={{ repeat: Infinity, duration: 1, step: 'end' }} 
+                      className="inline-block w-2 sm:w-3 h-6 sm:h-7 bg-lime-400 align-middle ml-1 shadow-[0_0_8px_#d4ff3a]" 
+                    />
+                  </h2>
+
+                  <p className="text-zinc-400 text-xs sm:text-sm leading-relaxed max-w-lg mb-6 sm:mb-8">
+                    에듀테크 서비스 기획·구축이 필요하시거나, 맞춤식 생성형 AI 결합 설계 및 웹 데이터 가공 자동화 시스템 자문이 필요하시다면 언제든 편하게 아래 대표 이메일로 의견을 남겨주세요.
+                  </p>
+
+                  <div className="flex flex-col sm:flex-row gap-3">
+                    <motion.a 
+                      href="mailto:ceo@avro.co.kr"
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      className="px-5 py-3 rounded-full bg-gradient-to-r from-blue-500 to-cyan-400 text-black font-mono font-black text-xs uppercase tracking-widest flex items-center justify-between gap-4 shadow-[0_4px_15px_rgba(34,211,238,0.3)] group cursor-pointer"
+                    >
+                      <span>ceo@avro.co.kr 메일 전송</span>
+                      <ArrowRight className="w-3.5 h-3.5 text-black group-hover:translate-x-1 transition-transform" />
+                    </motion.a>
                   </div>
-                  <div className="flex items-start gap-4">
-                    <MapPin className="w-4 h-4 text-pink-400 shrink-0 mt-1" />
-                    <div className="flex flex-col text-left">
-                      <span className="font-mono text-[9px] text-zinc-500 uppercase tracking-wider">headquarters location</span>
-                      <span className="text-zinc-300 font-sans text-xs">
-                        인천광역시 서구 청라에메랄드로 99
+                </div>
+
+                {/* Right Column Content - Exquisite Corporate Board Details */}
+                <div className="lg:col-span-5 flex justify-center items-center">
+                  <div className="w-full glass-effect border border-white/[0.05] p-5 rounded-xl space-y-4 text-left shadow-lg">
+                    <h3 className="font-mono text-[10px] text-zinc-400 uppercase tracking-widest border-b border-white/[0.04] pb-2 flex justify-between items-center leading-none">
+                      <span>// Corporate Specifications</span>
+                      <span className="text-[8px] text-lime-400 font-bold uppercase flex items-center gap-1">
+                        <ShieldCheck className="w-3 h-3 text-lime-400" />
+                        Qualified
                       </span>
+                    </h3>
+
+                    <div className="space-y-3 font-mono text-[9px] text-zinc-400 leading-relaxed text-left">
+                      <div className="border-b border-white/[0.02] pb-1.5 flex justify-between gap-3">
+                        <span className="text-zinc-500 uppercase shrink-0">Company / 법인명</span>
+                        <strong className="text-zinc-200 text-right">(주)에이브로 · AVRO INC.</strong>
+                      </div>
+                      <div className="border-b border-white/[0.02] pb-1.5 flex justify-between gap-3">
+                        <span className="text-zinc-500 uppercase shrink-0">CEO / 대표자</span>
+                        <strong className="text-zinc-200 text-right">박예준 대표</strong>
+                      </div>
+                      <div className="border-b border-white/[0.02] pb-1.5 flex justify-between gap-3">
+                        <span className="text-zinc-500 uppercase shrink-0">Registration / 사업자</span>
+                        <strong className="text-zinc-200 text-right">205-87-00590</strong>
+                      </div>
+                      <div className="border-b border-white/[0.02] pb-1.5 flex justify-between gap-3">
+                        <span className="text-zinc-500 uppercase shrink-0">Established / 설립일</span>
+                        <strong className="text-zinc-200 text-right">2016-07-18</strong>
+                      </div>
+                      <div className="flex justify-between gap-3">
+                        <span className="text-zinc-500 uppercase shrink-0">Headquarters / 주소</span>
+                        <strong className="text-zinc-200 text-right font-sans text-[10px]">인천광역시 서구 청라에메랄드로 99</strong>
+                      </div>
+                    </div>
+
+                    <div className="border-t border-white/[0.04] pt-2.5 font-mono text-[8px] text-zinc-500 leading-normal">
+                      * 본 검수 및 맞춤 SAAS PoC 시스템은 AI 에이전트 인프라 보안 수칙에 의거하여 암호화 통제 중입니다. 귀하가 수신하는 답변은 평균 4시간 안에 회신 대기열에서 해제됩니다.
                     </div>
                   </div>
                 </div>
+              </motion.div>
+            )}
 
-                <div className="border-t border-white/[0.04] pt-4 font-mono text-[9px] text-zinc-500 leading-relaxed text-left">
-                  * 귀하가 전송해주시는 이메일은 대표 계정으로 직접 송신되며, 영업일 기준 평균 4시간 안에 담당 본부장급이 연락을 드립니다.
-                </div>
-              </div>
-            </div>
-
-          </motion.div>
-        </section>
-
+          </AnimatePresence>
+        </div>
       </main>
 
-      {/* FOOTER */}
-      <footer className="border-t border-white/[0.06] bg-black/90 py-12 relative z-10 select-none">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          
-          <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-8 mb-8 border-b border-white/[0.04] pb-8">
-            <div className="flex flex-col text-left">
-              <div className="flex items-center gap-2">
-                <span className="w-6 h-6 rounded bg-lime-400 text-black font-mono font-black flex items-center justify-center text-xs">A</span>
-                <span className="font-sans font-extrabold text-white tracking-widest">AVRO</span>
-              </div>
-              <span className="text-[10px] font-mono text-zinc-500 tracking-wider uppercase mt-1">
-                DIGITAL CONTENT × AI ENGINEERING SOLUTION
-              </span>
-              <a 
-                href="https://avro-home.netlify.app" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="text-[10px] font-mono text-lime-400 hover:text-lime-300 tracking-wider uppercase mt-3.5 inline-flex items-center gap-1.5 transition-colors font-bold"
-              >
-                <span>Go to Main Website</span>
-                <span className="text-xs">↗</span>
-              </a>
-            </div>
-
-            {/* Corp legal info box */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 bg-white/[0.01] border border-white/[0.04] p-4 rounded-xl font-mono text-[9px] text-zinc-500 leading-relaxed text-left">
-              <div>
-                <span className="text-zinc-600 uppercase block mb-0.5">CEO / 대표자</span>
-                <span className="text-zinc-300">박예준 대표</span>
-              </div>
-              <div>
-                <span className="text-zinc-600 uppercase block mb-0.5">설립 일자</span>
-                <span className="text-zinc-300">2016-07-18</span>
-              </div>
-              <div>
-                <span className="text-zinc-600 uppercase block mb-0.5">사업자등록번호</span>
-                <span className="text-zinc-300 font-medium">205-87-00590</span>
-              </div>
-              <div>
-                <span className="text-zinc-600 uppercase block mb-0.5">LOC CODE</span>
-                <span className="text-zinc-300">CHEONGNA, KOR</span>
-              </div>
-            </div>
+      {/* CONTINUOUS GLOBAL BRAND MARQUEE TICKER ROW (Floats above the bottom navigation panel) */}
+      <section className="fixed bottom-12 left-0 right-0 z-40 bg-[#d4ff3a] text-black font-mono font-black text-[9px] xs:text-[10px] uppercase tracking-wider border-y border-white/[0.04] py-1.5 overflow-hidden pointer-events-none select-none">
+        <div className="flex whitespace-nowrap select-none overflow-hidden">
+          <div className="flex gap-16 shrink-0 animate-tick">
+            <span className="text-indigo-950 font-black">★ AVRO EDUTECH INTELLIGENCE</span>
+            <span className="text-black/30">/</span>
+            <span>DIGITAL CONTENT SOLUTION</span>
+            <span className="text-black/30">/</span>
+            <span className="text-indigo-950 font-black">AI EDUTECH SOLUTIONS</span>
+            <span className="text-black/30">/</span>
+            <span>VIDEO PRODUCTION EXPERT</span>
+            <span className="text-black/30">/</span>
+            <span className="text-red-700 font-bold">EBSMATH PARTNER</span>
+            <span className="text-black/30">/</span>
+            <span>SINCE 2016</span>
           </div>
-
-          <div className="flex flex-col sm:flex-row justify-between gap-4 font-mono text-[10px] text-zinc-500">
-            <span>© 2026 (주)에이브로 · AVRO INC. ALL RIGHTS RESERVED.</span>
-            <span className="text-lime-400 font-extrabold flex items-center gap-1.5 self-start sm:self-auto">
-              <ShieldCheck className="w-3.5 h-3.5 text-lime-400" />
-              SECURED WITH ADVANCED AI WORKSPACE
-            </span>
+          <div className="flex gap-16 shrink-0 animate-tick font-sans" aria-hidden="true">
+            <span className="text-indigo-950 font-black">★ AVRO EDUTECH INTELLIGENCE</span>
+            <span className="text-black/30">/</span>
+            <span>DIGITAL CONTENT SOLUTION</span>
+            <span className="text-black/30">/</span>
+            <span className="text-indigo-950 font-black">AI EDUTECH SOLUTIONS</span>
+            <span className="text-black/30">/</span>
+            <span>VIDEO PRODUCTION EXPERT</span>
+            <span className="text-black/30">/</span>
+            <span className="text-red-700 font-bold">EBSMATH PARTNER</span>
+            <span className="text-black/30">/</span>
+            <span>SINCE 2016</span>
           </div>
-
         </div>
+      </section>
+
+      {/* FOOTER & DYNAMIC DECK PAGE POSITION CONTROLLERS */}
+      <footer className="w-full h-12 bg-black border-t border-white/[0.04] z-50 flex items-center justify-between px-4 sm:px-6 lg:px-8 relative">
+        {/* Progress Bar built into bottom controller */}
+        <div 
+          className="absolute top-0 left-0 h-[1.5px] bg-gradient-to-r from-lime-400 via-cyan-400 to-indigo-500 shadow-[0_0_8px_rgba(212,255,58,0.5)] transition-all duration-300"
+          style={{ width: `${((currentSlide + 1) / totalSlides) * 100}%` }}
+        />
+
+        <div className="flex items-center gap-4">
+          <div className="flex items-center gap-1 font-mono text-[9px] text-zinc-500 uppercase">
+            <button
+              onClick={goToPrevSlide}
+              className="w-6 h-6 rounded border border-white/[0.06] bg-white/[0.01] hover:border-lime-400/30 hover:text-lime-400 text-zinc-400 flex items-center justify-center transition-colors cursor-pointer"
+              title="이전 슬라이드"
+            >
+              <ChevronLeft className="w-3.5 h-3.5" />
+            </button>
+            <button
+              onClick={goToNextSlide}
+              className="w-6 h-6 rounded border border-white/[0.06] bg-white/[0.01] hover:border-lime-400/30 hover:text-lime-400 text-zinc-400 flex items-center justify-center transition-colors cursor-pointer"
+              title="다음 슬라이드"
+            >
+              <ChevronRight className="w-3.5 h-3.5" />
+            </button>
+          </div>
+
+          <div className="hidden xs:flex gap-1.5">
+            {slideTitles.map((slide, idx) => (
+              <button
+                key={idx}
+                onClick={() => goToSlide(idx)}
+                className={`w-2 h-2 rounded-full transition-all duration-300 cursor-pointer ${
+                  currentSlide === idx ? 'w-5 bg-lime-400 shadow-[0_0_8px_rgba(212,255,58,0.4)]' : 'bg-white/[0.12] hover:bg-white/[0.25]'
+                }`}
+                title={`${idx + 1}번 슬라이드: ${slide.label}`}
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* Current status tag */}
+        <span className="text-[8px] xs:text-[9px] font-mono text-zinc-400 uppercase tracking-widest flex items-center gap-1.5 leading-none select-none text-right">
+          <span className="w-1 h-1 rounded-full bg-lime-400 animate-pulse" />
+          <span>DECK : {currentSlide + 1} / {totalSlides} | Page: {slideTitles[currentSlide].eng}</span>
+        </span>
       </footer>
+
+      {/* SLIDE Drawer details overlay system */}
+      <AnimatePresence>
+        {isDrawerOpen && (
+          <div className="fixed inset-0 z-[9999] overflow-hidden" id="studio-drawer">
+            {/* Backdrop blurring filter */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 0.7 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsDrawerOpen(false)}
+              className="absolute inset-0 bg-black/60 backdrop-blur-sm cursor-pointer"
+            />
+
+            {/* Sliding Drawer Pane */}
+            <motion.div
+              initial={{ x: '100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '100%' }}
+              transition={{ type: 'spring', damping: 26, stiffness: 220 }}
+              className="absolute right-0 top-0 bottom-0 w-full sm:w-[540px] md:w-[640px] h-full bg-[#0a0a0f] border-l border-white/[0.08] shadow-[[-20px_0_60px_rgba(0,0,0,0.85)]] flex flex-col z-10"
+            >
+              <div className="px-6 py-5 border-b border-white/[0.06] flex items-center justify-between bg-[#111116] text-left">
+                <div className="flex items-center gap-3">
+                  <div className="w-6 h-6 rounded bg-[#d4ff3a] text-black font-mono font-black flex items-center justify-center text-sm shadow-[0_0_10px_rgba(212,255,58,0.3)]">
+                    A
+                  </div>
+                  <div className="flex flex-col items-start leading-none gap-0.5">
+                    <span className="font-mono font-extrabold tracking-wider text-xs text-white uppercase">AVRO INC. PLATFORM</span>
+                    <span className="text-[8px] text-zinc-500 font-mono tracking-widest uppercase">에이브로 상세 가이드</span>
+                  </div>
+                </div>
+
+                <button
+                  onClick={() => setIsDrawerOpen(false)}
+                  className="px-3 py-1.5 rounded border border-white/[0.08] bg-white/[0.02] text-zinc-400 hover:text-white hover:border-white/[0.15] text-[10px] font-mono uppercase tracking-widest transition-all cursor-pointer"
+                >
+                  Close [ESC]
+                </button>
+              </div>
+
+              {/* Tabs list */}
+              <div className="px-6 py-3 border-b border-white/[0.04] bg-[#0c0c11] flex items-center gap-1.5 overflow-x-auto scrollbar-none">
+                {([
+                  { id: 'about', label: '회사 소개', num: '01' },
+                  { id: 'services', label: '상세 서비스', num: '02' },
+                  { id: 'timeline', label: '스튜디오 연혁', num: '03' },
+                  { id: 'process', label: '작업 프로세스', num: '04' }
+                ] as const).map((tab) => (
+                  <button
+                    key={tab.id}
+                    onClick={() => setDrawerTab(tab.id)}
+                    className={`px-3.5 py-1.5 rounded-lg text-xs font-sans font-bold flex items-center gap-1.5 whitespace-nowrap transition-all border cursor-pointer ${
+                      drawerTab === tab.id
+                        ? 'bg-[#d4ff3a]/10 border-[#d4ff3a]/30 text-[#d4ff3a]'
+                        : 'border-transparent text-zinc-400 hover:text-zinc-200 hover:bg-white/[0.02]'
+                    }`}
+                  >
+                    <span className="font-mono text-[9px] text-zinc-600 font-black">{tab.num}</span>
+                    <span>{tab.label}</span>
+                  </button>
+                ))}
+              </div>
+
+              {/* Drawer inner container content scroll */}
+              <div className="flex-1 overflow-y-auto p-6 md:p-8 space-y-8 custom-scrollbar">
+                
+                {drawerTab === 'about' && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 15 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="space-y-6 text-left"
+                  >
+                    <div className="space-y-1 block">
+                      <span className="font-mono text-[9px] tracking-widest text-[#d4ff3a] font-bold block uppercase">// CORPORATE GOAL</span>
+                      <h3 className="text-xl sm:text-2xl font-sans font-black text-white tracking-tight leading-normal">
+                        10년의 견고한 레거시,<br />
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-lime-400 via-cyan-400 to-indigo-400">인공지능</span>으로 날아오르다.
+                      </h3>
+                    </div>
+
+                    <p className="text-zinc-300 text-xs sm:text-sm leading-relaxed">
+                      에이브로는 대형 교과서 출판사의 학습 플랫폼 운영 검수(QA) 및 수리 콘텐츠 설계를 10년간 대행하며, 교육 현장에 요구되는 세밀한 가이드라인과 기능 무결성을 다져왔습니다.
+                    </p>
+
+                    <p className="text-zinc-300 text-xs sm:text-sm leading-relaxed">
+                      이 실질적인 도메인 자산을 바탕으로, 교수자와 실무진이 필요로 하는 가장 직관적인 맞춤형 AI 에이전트와 에듀테크 저작 SaaS 및 맞춤 웹 솔루션을 신속하고 탄탄하게 기획·개발합니다.
+                    </p>
+
+                    <div className="border border-white/[0.08] bg-zinc-950/75 rounded-xl overflow-hidden font-mono text-[10px] mt-6">
+                      <div className="bg-white/[0.02] border-b border-white/[0.06] p-3 text-zinc-500 flex justify-between items-center px-4">
+                        <span>// FACT_SHEET_DATA</span>
+                        <span className="text-[8px] text-lime-400 font-bold uppercase">Pivot Status: Verified ✓</span>
+                      </div>
+                      
+                      <div className="divide-y divide-white/[0.05]">
+                        <div className="grid grid-cols-3 p-3 px-4">
+                          <span className="text-zinc-500">법인명</span>
+                          <span className="col-span-2 text-zinc-200 font-semibold font-sans">주식회사 에이브로 (AVRO INC.)</span>
+                        </div>
+                        <div className="grid grid-cols-3 p-3 px-4">
+                          <span className="text-zinc-500">설립 일자</span>
+                          <span className="col-span-2 text-zinc-200 font-sans">2016년 7월 18일</span>
+                        </div>
+                        <div className="grid grid-cols-3 p-3 px-4">
+                          <span className="text-zinc-500">주요 수행</span>
+                          <span className="col-span-2 text-zinc-300 font-sans">교육용 학습 보조 웹 개발, 출판물 연계 스마트 저작 레이아웃 기획</span>
+                        </div>
+                        <div className="grid grid-cols-3 p-3 px-4">
+                          <span className="text-zinc-500">대표이사</span>
+                          <span className="col-span-2 text-zinc-200 font-sans">박예준</span>
+                        </div>
+                      </div>
+                    </div>
+                  </motion.div>
+                )}
+
+                {drawerTab === 'services' && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 15 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="space-y-6 text-left"
+                  >
+                    <div className="space-y-1 block">
+                      <span className="font-mono text-[9px] tracking-widest text-[#d4ff3a] font-bold block uppercase">// FOUR CAPABILITIES</span>
+                      <h3 className="text-xl sm:text-2xl font-sans font-black text-white tracking-tight">
+                        AI로 극대화하는 네 가지 비즈니스 축.
+                      </h3>
+                    </div>
+
+                    <div className="space-y-3.5">
+                      {servicesData.map((svc) => (
+                        <div key={svc.num} className="p-4 rounded-xl border border-white/[0.05] bg-white/[0.01]">
+                          <div className="flex items-center gap-2 mb-1.5">
+                            <span className="font-mono text-[9px] text-lime-400 bg-lime-400/10 px-2 py-0.5 rounded border border-lime-400/20 font-bold">
+                              {svc.num}
+                            </span>
+                            <h4 className="font-sans font-bold text-sm sm:text-base text-white">{svc.title}</h4>
+                          </div>
+                          <span className="block text-[8px] font-mono text-zinc-500 uppercase tracking-widest mb-2 pl-7">{svc.englishTitle}</span>
+                          <p className="text-zinc-400 text-xs leading-relaxed pl-7 mb-3">
+                            {svc.description}
+                          </p>
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pl-7">
+                            {svc.items.map((item, i) => (
+                              <div key={i} className="flex items-center gap-2 text-[10px] font-mono text-zinc-400 text-left">
+                                <Check className="w-3 h-3 text-lime-400 shrink-0" />
+                                <span>{item}</span>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </motion.div>
+                )}
+
+                {drawerTab === 'timeline' && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 15 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="space-y-6 text-left text-zinc-300"
+                  >
+                    <div className="space-y-1 block">
+                      <span className="font-mono text-[9px] tracking-widest text-lime-400 font-bold uppercase block">// CHRONOLOGY</span>
+                      <h3 className="text-xl sm:text-2xl font-sans font-black text-white tracking-tight">
+                        10년의 발자취와 도약 레거시.
+                      </h3>
+                    </div>
+
+                    <div className="border-l border-white/[0.08] pl-5 ml-1 space-y-6 py-2">
+                      {timelineData.map((mile) => (
+                        <div key={mile.year} className="relative text-left">
+                          <div className="absolute -left-[26px] top-1.5 w-2 h-2 rounded-full bg-[#07070a] border-2 border-lime-400 shadow-[0_0_8px_#d4ff3a]" />
+                          <span className="font-mono text-base font-black text-lime-400 block mb-1.5 leading-none">
+                            {mile.year}
+                          </span>
+                          <ul className="space-y-2">
+                            {mile.events.map((ev, idx) => (
+                              <li
+                                key={idx}
+                                className={`text-xs leading-relaxed list-none pl-2.5 relative before:content-[''] before:absolute before:left-0 before:top-2 before:w-1 before:h-1 before:rounded-full ${
+                                  ev.isHighlight
+                                    ? 'before:bg-lime-400 text-zinc-200 font-semibold'
+                                    : 'before:bg-zinc-600 text-zinc-400'
+                                }`}
+                              >
+                                {ev.description}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      ))}
+                    </div>
+                  </motion.div>
+                )}
+
+                {drawerTab === 'process' && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 15 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="space-y-6 text-left text-zinc-300"
+                  >
+                    <div className="space-y-1 block">
+                      <span className="font-mono text-[9px] tracking-widest text-lime-400 font-bold uppercase block">// WORKFLOW</span>
+                      <h3 className="text-xl sm:text-2xl font-sans font-black text-white tracking-tight">
+                        의뢰가 완결로 이루어지는 정밀 흐름.
+                      </h3>
+                    </div>
+
+                    <div className="space-y-3 pt-1">
+                      {processSteps.map((step) => (
+                        <div key={step.step} className="p-4 rounded-xl border border-white/[0.04] bg-white/[0.01] flex items-center gap-4 hover:border-lime-400/20 transition-all">
+                          <div className="w-10 h-10 rounded-full bg-[#d4ff3a]/10 text-[#d4ff3a] border border-[#d4ff3a]/25 flex items-center justify-center font-mono font-black text-sm shrink-0">
+                            {step.step}
+                          </div>
+                          <div className="flex flex-col text-left">
+                            <span className="font-sans font-bold text-xs sm:text-sm text-zinc-200">{step.title}</span>
+                            <span className="font-mono text-[7px] text-zinc-500 uppercase tracking-widest mt-0.5">{step.englishTitle}</span>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </motion.div>
+                )}
+
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+
     </div>
   );
 }

@@ -2,33 +2,25 @@ import { TimelineItem, ServiceItem, ProjectItem, PartnerItem, ProcessStep } from
 
 export const timelineData: TimelineItem[] = [
   {
-    year: '2026',
+    year: 'Present & Beyond',
     events: [
-      { description: '★ 교육 및 에듀테크 AI 기업 선언 · 10년의 노하우를 계승하여 에듀테크 전문 AI 기획 및 저작 지원 하우스로 전환', isHighlight: true },
-      { description: '가르치고 배우는 이들을 위한 AI 맞춤형 교육 솔루션 및 저작 지원 툴 연구 개시', isHighlight: true }
+      { description: '에듀테크 전문 AI 기획 및 저작 지원 하우스 피벗 선언', isHighlight: true },
+      { description: '실무 지향형 생성형 AI 에이전트 및 교육용 SaaS 솔루션 최적화 공급' }
     ]
   },
   {
     year: '2022 — 2025',
     events: [
-      { description: 'EBSMath 핵심 콘텐츠 설계 및 교수학습지도안 4년 연속 개발 (수학 콘텐츠 설계 및 교수법 도메인 지식 구축)' },
-      { description: '미래엔(Mirae-N) 플랫폼 초코 · 엠티처 사이트 QA/QC 점검 및 디지털 검수 운영 (대형 에듀테크 플랫폼 기능 및 데이터 검수 역량 축적)' },
-      { description: '구미시청 지역 문화유산 투어 오리지널 실사/공연형 영상 시나리오 기획 및 영상 촬영 제작 (2023)' },
-      { description: '맥스(MAX)농구교실 풀스택 홈페이지 구축 및 BI 브랜드 아이덴티티 로고 디자인 (2023)' },
-      { description: '윌비스 1억뷰N잡 클래스 디지털 미디어 콘텐츠 기획 및 교육 콘텐츠 자문 (2022)' },
-      { description: '하나로컨설팅노무법인 등 오피스 전문 기관의 유튜브 대행 운영 및 디지털 교육 영상 제작 (2022)' },
-      { description: '동서대학교 LINC 3.0 사업단 공식 산학협약 체결 및 디지털 콘텐츠 공동 연구 개발 (2022)' }
+      { description: 'EBSMath 핵심 콘텐츠 기획 및 교수학습지도안 4년 연속 개발' },
+      { description: '미래엔 초코 · 엠티처 사이트 전용 QA/QC 및 디지털 검수 대행' },
+      { description: '라스트마일 Blogstudio 상세 에디터 UI/UX 기획 및 개발 설계 기여' }
     ]
   },
   {
     year: '2016 — 2021',
     events: [
-      { description: '윌비스(Willbes) 1억뷰N잡 공식 온라인 강의 디지털 미디어 콘텐츠 자문 및 디자인 패키지 기획 (2019–2022)' },
-      { description: '한국릴리 제약 메디컬 리서치 정보 인포그래픽스 및 인체 모션 소개 영상 제작 (2021)' },
-      { description: '롯데시네마 창립기념 영상 및 국기원 태권도 글로벌 보급 교육 콘텐츠 제작 (2020)' },
-      { description: '주식회사 에이브로 공식 법인 설립 (2016.07) · 디지털 콘텐츠 기획/제작 에이전시로서 비즈니스 개시' },
-      { description: '서울예술대학교 산학협력단 / 아시아문화원 미래 실감 비주얼 키 그래픽 기획 및 디자인 개발 (2017)' },
-      { description: '쥬스컴퍼니 및 남산골한옥마을 등 전통 문화 브랜드 페스티벌 온라인 전시 콘텐츠 기획 및 미디어 콘텐츠 구축 (2017)' }
+      { description: '주식회사 에이브로 법인 설립 및 대형 플랫폼 연계 웹 서비스 구축 개시' },
+      { description: '국기원, 롯데시네마 등 주요 기업 및 기관 대상 디지털 미디어 콘텐츠 구축 완수' }
     ]
   }
 ];
@@ -38,29 +30,29 @@ export const servicesData: ServiceItem[] = [
     num: '01',
     title: 'AI Engineering & SaaS',
     englishTitle: 'LLM · AGENT · SaaS ENGINE',
-    description: '10년의 공교육·출판 플랫폼 검수 노하우에 AI 기술을 융합합니다. 정밀한 기획력을 바탕으로 가볍고 강력한 맞춤형 교육 소프트웨어와 지능형 시스템을 설계합니다.',
-    items: ['안정적인 다중 AI 결합 설계', '도메인 맞춤 데이터 파싱', '실무 밀착형 AI 에이전트', '사용하기 쉬운 맞춤형 SaaS 구축']
+    description: '10년의 견고한 도메인 노하우와 기획력을 이식한 실용적인 AI SaaS를 구축합니다. 기업 실무진이 바로 사용 가능한 인텔리전트 에이전트와 지능형 비즈니스 워크플로우를 최적화 설계합니다.',
+    items: ['다중 AI 모델 지능형 결합 설계', '비정형 데이터 정제 및 파싱', '실무형 AI 에이전트 개발', '사용성이 명확한 맞춤형 SaaS 구축']
   },
   {
     num: '02',
     title: 'AI Education & Learning Tools',
     englishTitle: 'AI EDUTECH & AGENT SOLUTIONS',
-    description: 'EBSMath 등 공교육의 복잡한 교과/수학 콘텐츠를 개발했던 경험을 살려 에듀테크 도구를 만듭니다. 교수자를 위한 수학 수식 및 에듀텍스트 편리 저작 툴과, 학생들을 위한 맞춤 스마트 워크북을 설계합니다.',
-    items: ['가르치는 이들을 위한 교육 AI 설계', '수식 및 문항 저작 보조 AI 엔진', '배우는 이들을 위한 대화형 학습 앱', '교육 문서 자동 정형화 솔루션']
+    description: 'EBSMath 등 공교육 플랫폼을 설계한 실제 경험을 바탕으로, 학습 효율을 비약적으로 개선하는 스마트 에듀테크 도구를 제작합니다. 수식 저작 툴 및 개인화 스마트 워크북을 구축합니다.',
+    items: ['교육 특화 맞춤 AI 모델 설계', '에듀 텍스트 및 수식 저작 보조', '스마트 대화형 학습 위젯', '수리 영역 디지털 교재 변환']
   },
   {
     num: '03',
-    title: '10-Year Digital Legacy Operations',
+    title: 'Digital Legacy Operations',
     englishTitle: 'TRUSTED PLATFORM LEGACY',
-    description: 'EBSMath, 미래엔, 윌비스 등 주요 에듀테크 플랫폼의 기능 검수와 디지털 운영 파트너십. 비즈니스 품질과 신뢰도를 보장하기 위해, 다년간 축적해 온 디지털 기획 및 퍼블리싱 검수 역량을 최적으로 조화시킵니다.',
-    items: ['안정성/신뢰성 최우선 대형 시스템 조율', 'EBS/출판사 정밀 수학 및 콘텐츠 기획 설계', '에듀테크 전문 QA & 퍼블리싱 체계 보장', '레거시 연계 비즈니스 인터랙션 보정']
+    description: '대형 교육 포털 및 출판사 서비스의 면밀한 운영 검수(QA) 경력을 기반으로, 복잡성 높은 비즈니스 시스템의 조율과 검수 운영 체계를 빈틈없이 이끌어 안정성을 지원합니다.',
+    items: ['대형 시스템 기능 및 가이드 점검', '에듀테크 전문 퍼블리싱 검수', '데이터 무결성 검증 체계 보장', '웹 플랫폼 품질 개선 어드바이징']
   },
   {
     num: '04',
-    title: 'AI Visual & Cinema Production',
-    englishTitle: 'DIGITAL VIDEO & GENERATIVE SEAMLESS',
-    description: '구미시청, 한국릴리, 롯데시네마 등 10년간 누적된 전문적인 비주얼 콘텐츠 기획 노하우를 바탕으로, Generative AI 기술을 접목한 영상 콘텐츠 제작 워크플로우를 설계합니다. 전문적인 기획 노하우와 선진 AI 툴체인을 유기적으로 결합하여 완성도 높은 하이 퀄리티 실감 미디어 콘텐츠를 생산해 냅니다.',
-    items: ['브랜드 다큐멘터리 / 웰메이드 콘텐츠 영상', '교육 최적화 모션그래픽스 및 인포그래픽스', '생성형 비디오(Gen-2, Sora) 기반 워크플로우', '멀티미디어 채널 브랜딩 및 디지털 미디어 콘텐츠 포지셔닝']
+    title: 'AI Visual & Digital Media',
+    englishTitle: 'VISUAL CONTENT GENERATION',
+    description: '10년 동안 누적된 전문적인 비주얼 콘텐츠 자산을 바탕으로, Generative AI 툴체인을 영리하게 접목하여 독창적이고 생산성 높은 하이 퀄리티 디지털 콘텐츠를 기획·생산해냅니다.',
+    items: ['브랜드 웰메이드 콘텐츠 기획·제작', '교육 특화 모션그래픽스 영상 시각화', '생성형 AI 비디오 워크플로우 설계', '다채널 브랜딩 비주얼 최적화']
   }
 ];
 
@@ -108,28 +100,18 @@ export const projectsData: ProjectItem[] = [
 ];
 
 export const partnersData: PartnerItem[] = [
-  { name: 'EBS', type: 'BROADCAST', isHighlight: true },
-  { name: 'EBSMath', type: 'PLATFORM', isHighlight: true },
-  { name: '미래엔', type: 'CONTENT', isHighlight: true },
-  { name: '서울예대', type: 'ACADEMY', isHighlight: false },
-  { name: '아시아문화원', type: 'CULTURE', isHighlight: false },
-  { name: '윌비스', type: 'CONSULTING', isHighlight: true },
-  { name: '국기원', type: 'SPORTS', isHighlight: false },
-  { name: '롯데시네마', type: 'ENTERTAIN', isHighlight: false },
+  { name: 'EBSMath', type: 'EDUCATIONAL PORTAL', isHighlight: true },
+  { name: '미래엔', type: 'TEXTBOOK PUBLISHER', isHighlight: true },
+  { name: '라스트마일', type: 'AI PLATFORM', isHighlight: true },
+  { name: '윌비스', type: 'E-LEARNING', isHighlight: false },
   { name: '한국릴리', type: 'PHARMACEUTICAL', isHighlight: false },
-  { name: '동서대 LINC', type: 'UNIVERSITY', isHighlight: false },
-  { name: '동국대 산학', type: 'UNIVERSITY', isHighlight: false },
-  { name: '구미시청', type: 'GOVERNMENT', isHighlight: false },
-  { name: '남산골한옥마을', type: 'CULTURE', isHighlight: false },
-  { name: '라스트마일', type: 'AI TECH', isHighlight: true },
-  { name: 'MAX 농구교실', type: 'SPORTS', isHighlight: false },
+  { name: '롯데시네마', type: 'ENTERTAINMENT', isHighlight: false },
+  { name: '서울예대', type: 'UNIVERSITY', isHighlight: false },
+  { name: '구미시청', type: 'GOVERNMENT', isHighlight: false }
 ];
 
 export const processSteps: ProcessStep[] = [
-  { step: '01', title: 'AI 비즈니스 1:1 진단 및 분석', englishTitle: 'AI FIT DIAGNOSIS' },
-  { step: '02', title: '레거시 데이터 / 도메인 워크플로우 분석', englishTitle: 'LEGACY DATA ANALYSIS' },
-  { step: '03', title: '맞춤형 Multi-LLM 에이전트 상세 구조 기획', englishTitle: 'CUSTOM AGENTIC PLANNING' },
-  { step: '04', title: '무결성 PoC 테스트 및 개발 예산 조율', englishTitle: 'INTEGRITY POC & SCOPE' },
-  { step: '05', title: '애자일 기반 서비스/SaaS 엔진 신속한 배포', englishTitle: 'AGILE SaaS DEPLOYMENT' },
-  { step: '06', title: '정밀 결과 리포팅 및 실무 지속 고도화', englishTitle: 'VALUE SCALE-UP' }
+  { step: '01', title: '1:1 도메인 및 데이터 정밀 분석', englishTitle: 'DOMAIN DIAGNOSIS' },
+  { step: '02', title: '맞춤형 AI 아키텍처 및 화면 기획 설계', englishTitle: 'ARCHITECTURE & SYSTEM DESIGN' },
+  { step: '03', title: '검증된 PoC 및 고성능 SaaS 신속 배포', englishTitle: 'SaaS ENGINE BUILD & DEV' }
 ];
