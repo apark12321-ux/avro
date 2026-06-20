@@ -4,7 +4,6 @@ export default function CursorAura() {
   const auraRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    // Disable on touch devices
     if (window.matchMedia('(pointer: coarse)').matches) return;
 
     const aura = auraRef.current;
@@ -35,8 +34,8 @@ export default function CursorAura() {
 
     let animFrameId: number;
     const update = () => {
-      mx += (tx - mx) * 0.12;
-      my += (ty - my) * 0.12;
+      mx += (tx - mx) * 0.11;
+      my += (ty - my) * 0.11;
       aura.style.transform = `translate3d(${mx}px, ${my}px, 0) translate3d(-50%, -50%, 0)`;
       animFrameId = requestAnimationFrame(update);
     };
@@ -52,9 +51,9 @@ export default function CursorAura() {
   return (
     <div
       ref={auraRef}
-      className="fixed left-0 top-0 w-[420px] h-[420px] rounded-full pointer-events-none z-[2] opacity-0 transition-opacity duration-300 hidden md:block"
+      className="fixed left-0 top-0 w-[520px] h-[520px] rounded-full pointer-events-none z-[2] opacity-0 transition-opacity duration-300 hidden md:block"
       style={{
-        background: 'radial-gradient(circle, rgba(212, 255, 58, 0.08) 0%, rgba(212, 255, 58, 0.02) 35%, transparent 70%)',
+        background: 'radial-gradient(circle, rgba(0,255,213,0.15) 0%, rgba(34,211,238,0.07) 28%, rgba(129,140,248,0.045) 48%, transparent 72%)',
         mixBlendMode: 'screen',
         willChange: 'transform',
       }}
