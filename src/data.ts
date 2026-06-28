@@ -4,7 +4,7 @@ export const timelineData: TimelineItem[] = [
   {
     year: 'Present & Beyond',
     events: [
-      { description: '에듀테크 전문 AI 기획 및 저작 지원 하우스 피벗 선언', isHighlight: true },
+      { description: '에듀테크 전문 AI 서비스 기획 및 디지털 저작 도구 개발 사업 확대', isHighlight: true },
       { description: '실무 지향형 생성형 AI 에이전트 및 교육용 SaaS 솔루션 최적화 공급' }
     ]
   },

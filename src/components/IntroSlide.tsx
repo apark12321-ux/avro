@@ -57,7 +57,7 @@ export default function IntroSlide({
         </p>
 
         <p className="text-xs sm:text-xs text-zinc-400 max-w-xl leading-relaxed text-left mb-6 font-normal">
-          AVRO는 공교육용 교육 콘텐츠 표준 수식 규격(LaTeX)과 가변 해상도 검정 지능형 에이전트 기술을 10년간 개척해온 신뢰받는 빌더 하우스입니다. 지능형 교안 변환 솔루션과 차세대 에듀테크 생태계를 제시합니다.
+          AVRO는 공교육용 교육 콘텐츠 표준 수식 규격(LaTeX)과 가변 해상도 검정 지능형 에이전트 기술을 10년간 개척해온 신뢰받는 에듀테크 기술 전문 기업입니다. 지능형 교안 변환 솔루션과 차세대 에듀테크 생태계를 제시합니다.
         </p>
 
         <div className="flex flex-wrap gap-1.5 mb-7">

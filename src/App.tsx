@@ -362,7 +362,7 @@ export default function App() {
         <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 text-zinc-550 text-[9px] font-mono uppercase tracking-wider">
           <span>© {new Date().getFullYear()} AVRO Studio.</span>
           <span className="hidden sm:inline text-zinc-700">•</span>
-          <span>공교육 웹 및 LaTeX 수식 검증 하우스</span>
+          <span>공교육 웹 및 LaTeX 수식 검증 전문 기술 기업</span>
         </div>
 
         {/* Slide Counter & Arrow Indicators */}
@@ -440,7 +440,7 @@ export default function App() {
                         에이브로 공식 소개 및 기업 이념
                       </h3>
                       <p>
-                        에이브로는 대형 러닝 매니지먼트 시스템(LMS), 전국단위 수학 수식 빌더 구축 및 크로스 미디어 검정 품질 관리(QC)를 공급하는 특화 하우스입니다.
+                        에이브로는 대형 러닝 매니지먼트 시스템(LMS), 전국단위 수학 수식 빌더 구축 및 크로스 미디어 검정 품질 관리(QC)를 공급하는 에듀테크 전문 기술 기업입니다.
                       </p>
                       <p>
                         한 픽셀의 오차나 불규칙한 레이아웃 전위 현상을 용납하지 않으며, 공교육과 대형 출판 인프라를 연결하는 수리적 가교를 만듭니다.
