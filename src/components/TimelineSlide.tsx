@@ -105,10 +105,9 @@ export default function TimelineSlide({
             <span>// AVRO Legal &amp; Corporate Info</span>
             <span className="text-cyan-400 text-[8px]">Active Status ✓</span>
           </div>
-          <div>代表者 : <span className="text-zinc-300 font-sans font-bold">박예준 대표 (CEO)</span></div>
-          <div>設立日 : <span className="text-zinc-300 font-sans">2016-07-18</span></div>
-          <div>事業者등록번호 : <span className="text-zinc-300">205-87-00590</span></div>
-          <div>本店所在地 : <span className="text-zinc-350 font-sans">인천광역시 서구 청라에메랄드로 99, 10년 역사 법인</span></div>
+          <div>소속 : <span className="text-zinc-300 font-sans font-bold">(주)에이브로 기술연구소</span></div>
+          <div>기술 규격 : <span className="text-zinc-300 font-sans">LaTeX MathML 파싱 표준 준수</span></div>
+          <div>본점 소재지 : <span className="text-zinc-350 font-sans">인천광역시 서구 청라에메랄드로 99, 10년 역사 법인</span></div>
         </div>
       </div>
     </div>

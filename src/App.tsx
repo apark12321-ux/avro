@@ -447,12 +447,12 @@ export default function App() {
                       </p>
                       <div className="border-t border-white/[0.06] pt-5 mt-6 text-xs text-zinc-500 space-y-2.5 leading-relaxed bg-black/20 p-4 rounded-xl border border-white/[0.02]">
                         <div className="flex justify-between">
-                          <span className="font-mono uppercase">// Representative</span>
-                          <span className="text-zinc-300 font-bold">박예준 대표 (CEO)</span>
+                          <span className="font-mono uppercase">// Operations Role</span>
+                          <span className="text-zinc-300 font-bold">AVRO Executive Management</span>
                         </div>
                         <div className="flex justify-between">
-                          <span className="font-mono uppercase">// Incorporation Date</span>
-                          <span className="text-zinc-300">2016-07-18 (업력 10년)</span>
+                          <span className="font-mono uppercase">// Technical Focus</span>
+                          <span className="text-zinc-300">EduTech Core Systems (10+ Years Expertise)</span>
                         </div>
                         <div className="flex justify-between">
                           <span className="font-mono uppercase">// Major Engine</span>
