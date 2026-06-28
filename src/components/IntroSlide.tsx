@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import {
-  ArrowRight,
   Loader2,
   Check,
+  BookOpen,
+  Sparkles,
 } from 'lucide-react';
 
 interface IntroSlideProps {
@@ -46,52 +47,48 @@ export default function IntroSlide({
           <span>MISSION : AI EDUTECH PIVOT &amp; INTEGRITY</span>
         </div>
 
-        <h1 className="text-xl sm:text-2xl md:text-3xl xl:text-4.5xl font-sans font-black tracking-tight leading-[1.25] mb-4 sm:mb-5 text-left break-keep text-zinc-100">
-          10년의 교육 콘텐츠 노하우,<br/>
-          <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-lime-400 bg-clip-text text-transparent">실용적 AI 검증 기술</span>로 완성되다.
+        <h1 className="text-4xl sm:text-5xl md:text-6xl xl:text-7xl font-sans font-black tracking-tight leading-[1.1] mb-5 text-left break-keep text-white">
+          함께 여는<br />
+          <span className="bg-gradient-to-r from-[#00ffd5] via-[#00aaff] via-[#6a00ff] to-[#ff00ee] bg-clip-text text-transparent">새로운 연결</span>
         </h1>
 
-        <p className="text-xs sm:text-sm text-zinc-400 max-w-xl leading-relaxed text-left mb-5 sm:mb-6">
-          에이브로(AVRO)는 대형 교육 기관의 단원 메타데이터 정밀 분석과 수리 표준 LaTeX 변환 파싱을 10년간 운영 완료한 도메인 강점을 지니고 있습니다. 교육 현장에서 최고 신뢰도로 보증되는 지능형 교안 빌더 및 AI 에이전트 설계 통합 솔루션을 제시합니다.
+        <p className="text-[15px] sm:text-lg font-bold text-cyan-300 leading-snug tracking-wide text-left mb-4">
+          사람과 지식이 하나로 이어지는 공간, AVRO
         </p>
 
-        <div className="flex flex-wrap gap-1.5 mb-5 sm:mb-6">
-          <span className="px-3.5 py-1 rounded-full border border-lime-400/30 bg-lime-400/5 text-lime-400 font-mono text-[9px] uppercase font-bold tracking-widest">
+        <p className="text-xs sm:text-xs text-zinc-400 max-w-xl leading-relaxed text-left mb-6 font-normal">
+          AVRO는 공교육용 교육 콘텐츠 표준 수식 규격(LaTeX)과 가변 해상도 검정 지능형 에이전트 기술을 10년간 개척해온 신뢰받는 빌더 하우스입니다. 지능형 교안 변환 솔루션과 차세대 에듀테크 생태계를 제시합니다.
+        </p>
+
+        <div className="flex flex-wrap gap-1.5 mb-7">
+          <span className="px-3 py-1 rounded-full border border-cyan-400/30 bg-cyan-400/5 text-cyan-300 font-mono text-[9px] uppercase font-bold tracking-widest">
             Educational Web App
           </span>
-          <span className="px-3.5 py-1 rounded-full border border-white/[0.08] bg-white/[0.02] text-zinc-300 font-mono text-[9px] uppercase font-semibold tracking-wider">
+          <span className="px-3 py-1 rounded-full border border-[#6a00ff]/30 bg-[#6a00ff]/5 text-purple-300 font-mono text-[9px] uppercase font-semibold tracking-wider">
             AI Curation Engine
           </span>
-          <span className="px-3.5 py-1 rounded-full border border-white/[0.08] bg-white/[0.02] text-zinc-300 font-mono text-[9px] uppercase font-semibold tracking-wider">
+          <span className="px-3 py-1 rounded-full border border-white/[0.08] bg-white/[0.02] text-zinc-300 font-mono text-[9px] uppercase font-semibold tracking-wider">
             QA Automation Suite
           </span>
         </div>
 
-        <div className="flex flex-col sm:flex-row gap-3 w-full pr-4 pt-4 border-t border-white/[0.04]">
+        <div className="flex flex-col sm:flex-row gap-4 w-full pr-4 pt-5 border-t border-white/[0.06]">
+          {/* Outlined Frosted Button (Counterpart of '시설안내') */}
           <button
             onClick={() => openDrawer('about')}
-            className="flex-1 flex items-center justify-between gap-4 px-4 py-3 rounded-xl bg-white/[0.02] hover:bg-neutral-900 border border-white/[0.08] hover:border-lime-400/40 text-left transition-all duration-300 group shadow-lg cursor-pointer max-w-sm"
+            className="flex-1 max-w-sm flex items-center justify-center gap-2 px-6 py-3.5 rounded-full border border-white/20 bg-white/5 hover:bg-white/10 text-white text-xs font-black tracking-wide transition-all duration-300 shadow-md cursor-pointer outline-none"
           >
-            <div className="flex flex-col">
-              <span className="text-white text-xs font-bold font-sans flex items-center gap-1">
-                에이브로 상세 소개서
-                <ArrowRight className="w-3.5 h-3.5 text-lime-400 group-hover:translate-x-1 transition-transform" />
-              </span>
-              <span className="text-zinc-500 font-mono text-[8px] uppercase tracking-wider mt-0.5">About AVRO Studio</span>
-            </div>
+            <BookOpen className="w-4 h-4 text-cyan-400" />
+            <span>에이브로 소개서</span>
           </button>
 
+          {/* Luminous Gradient Button (Counterpart of '티켓예매') */}
           <button
             onClick={goToNextSlide}
-            className="flex-1 flex items-center justify-between gap-4 px-4 py-3 rounded-xl bg-[#d4ff3a]/5 hover:bg-[#d4ff3a]/10 border border-[#d4ff3a]/25 hover:border-lime-400/60 text-left transition-all duration-300 group shadow-lg cursor-pointer max-w-sm"
+            className="flex-1 max-w-sm flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-gradient-to-r from-cyan-500 via-blue-500 to-indigo-600 hover:brightness-110 text-white text-xs font-black tracking-wide transition-all duration-300 shadow-[0_4px_20px_rgba(6,182,212,0.35)] border border-cyan-300/20 cursor-pointer outline-none"
           >
-            <div className="flex flex-col">
-              <span className="text-[#d4ff3a] text-xs font-bold font-sans flex items-center gap-1">
-                선정 프로젝트 보러가기
-                <ArrowRight className="w-3.5 h-3.5 text-lime-400 group-hover:translate-x-1 transition-transform" />
-              </span>
-              <span className="text-lime-400/50 font-mono text-[8px] uppercase tracking-wider mt-0.5">Explore Selected Projects</span>
-            </div>
+            <Sparkles className="w-4 h-4 text-white" />
+            <span>프로젝트 탐색</span>
           </button>
         </div>
       </div>
@@ -114,7 +111,7 @@ export default function IntroSlide({
               onClick={() => setActiveDemoTab('cli')}
               className={`px-3 py-1 rounded text-[10px] font-mono font-bold border transition-all cursor-pointer ${
                 activeDemoTab === 'cli'
-                  ? 'bg-lime-400/10 border-lime-400/30 text-lime-400'
+                  ? 'bg-blue-400/10 border-blue-400/30 text-blue-400'
                   : 'border-transparent text-zinc-500 hover:text-zinc-300'
               }`}
             >
@@ -149,15 +146,15 @@ export default function IntroSlide({
                 <div className="min-h-0 flex flex-col">
                   <div className="flex items-center justify-between border-b border-white/[0.05] pb-2 shrink-0">
                     <span className="text-[10px] font-mono text-zinc-500 uppercase">// Terminal Dev Automation (npm run dev)</span>
-                    <span className="text-[9px] bg-lime-400/10 text-lime-400 font-mono px-1.5 rounded">Active</span>
+                    <span className="text-[9px] bg-cyan-400/10 text-cyan-400 font-mono px-1.5 rounded">Active</span>
                   </div>
                   
                   <div className="mt-2.5 bg-black/40 border border-white/[0.04] p-3 rounded font-mono text-[10px] space-y-2 h-[190px] overflow-y-auto custom-scrollbar flex-1">
-                    <div className="text-zinc-300">$ {typedCommand || 'npm run dev --filter=ebsmath-helper'}<span className="inline-block w-1 h-3 bg-lime-400 animate-pulse ml-0.5" /></div>
+                    <div className="text-zinc-300">$ {typedCommand || 'npm run dev --filter=ebsmath-helper'}<span className="inline-block w-1 h-3 bg-cyan-400 animate-pulse ml-0.5" /></div>
                     {terminalLogs.map((log) => (
                       <div key={log.id} className={`leading-relaxed ${
-                        log.type === 'success' ? 'text-lime-400' :
-                        log.type === 'info' ? 'text-cyan-400' :
+                        log.type === 'success' ? 'text-cyan-400 font-semibold' :
+                        log.type === 'info' ? 'text-[#00ffd5]' :
                         log.type === 'warn' ? 'text-amber-400 font-semibold' : 'text-zinc-400'
                       }`}>
                         {log.text}
@@ -174,7 +171,7 @@ export default function IntroSlide({
                       disabled={isTerminalBuilding}
                       className={`flex-1 py-1.5 rounded text-[8px] font-mono transition-all uppercase tracking-widest text-center cursor-pointer ${
                         activeTerminalPreset === preset && isTerminalBuilding
-                          ? 'bg-lime-400 text-black font-black border-transparent'
+                          ? 'bg-gradient-to-r from-cyan-400 to-blue-500 text-white font-black border-transparent shadow-[0_0_12px_rgba(34,211,238,0.25)]'
                           : 'border border-white/[0.06] bg-white/[0.01] text-zinc-400 hover:text-white hover:bg-white/[0.03]'
                       }`}
                     >
@@ -196,10 +193,10 @@ export default function IntroSlide({
                     <button
                       onClick={runQaSimulation}
                       disabled={qaStatus === 'running'}
-                      className={`px-2.5 py-1 rounded text-[9px] font-sans font-black flex items-center gap-1 transition-all shadow-md cursor-pointer ${
+                      className={`px-3 py-1.5 rounded-full text-[9px] font-sans font-black flex items-center gap-1 transition-all shadow-md cursor-pointer ${
                         qaStatus === 'running'
                           ? 'bg-zinc-805 text-zinc-550 border border-zinc-700'
-                          : 'bg-lime-400 text-black hover:bg-lime-300'
+                          : 'bg-gradient-to-r from-cyan-400 to-blue-500 text-white hover:brightness-110 shadow-[0_0_12px_rgba(34,211,238,0.25)]'
                       }`}
                     >
                       {qaStatus === 'running' ? '검수 진행 중' : qaStatus === 'complete' ? '재검정 시작' : '원클릭 검수'}
@@ -211,7 +208,7 @@ export default function IntroSlide({
                       <div key={idx} className="p-2 rounded border border-white/[0.04] bg-white/[0.01] flex items-start gap-2">
                         <div className="mt-0.5 shrink-0">
                           {step.status === 'success' ? (
-                            <div className="w-3.5 h-3.5 rounded-full bg-lime-400/15 border border-lime-400 flex items-center justify-center text-lime-400 shadow-[0_0_8px_rgba(212,255,58,0.2)]">
+                            <div className="w-3.5 h-3.5 rounded-full bg-cyan-400/15 border border-cyan-400 flex items-center justify-center text-cyan-400 shadow-[0_0_8px_rgba(34,211,238,0.2)]">
                               <Check className="w-2 h-2" />
                             </div>
                           ) : step.status === 'running' ? (
@@ -234,13 +231,13 @@ export default function IntroSlide({
                 <div className="p-2 bg-zinc-950/80 border border-white/[0.04] rounded-lg flex items-center justify-between text-left font-mono shrink-0">
                   <div className="flex flex-col">
                     <span className="text-[7.5px] text-zinc-500 uppercase tracking-widest leading-none">OPERATION INDEX</span>
-                    <span className={`text-[9.5px] font-bold mt-1 ${qaStatus === 'complete' ? 'text-lime-400 animate-pulse' : 'text-zinc-405'}`}>
+                    <span className={`text-[9.5px] font-bold mt-1 ${qaStatus === 'complete' ? 'text-cyan-400 animate-pulse' : 'text-zinc-405'}`}>
                       {qaStatus === 'complete' ? 'VERIFIED: 100% SUCCESS ✓' : qaStatus === 'running' ? 'AUDITING...' : 'STATUS: READY TO TEST'}
                     </span>
                   </div>
                   <div className="w-20 bg-white/[0.06] h-1 rounded-full overflow-hidden">
                     <div 
-                      className="bg-lime-400 h-full rounded-full transition-all duration-300"
+                      className="bg-gradient-to-r from-cyan-400 to-blue-500 h-full rounded-full transition-all duration-300"
                       style={{ width: qaStatus === 'complete' ? '100%' : qaStatus === 'running' ? '50%' : '0%' }}
                     />
                   </div>
@@ -305,9 +302,9 @@ export default function IntroSlide({
                             initial={{ opacity: 0, y: -5 }}
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0 }}
-                            className="p-1.5 bg-white/[0.02] border border-[#d4ff3a]/15 rounded font-mono"
+                            className="p-1.5 bg-white/[0.02] border border-cyan-400/20 rounded font-mono"
                           >
-                            <span className="text-[6.5px] text-[#d4ff3a] block">// MODULE: LaTeX MATH FORMAT</span>
+                            <span className="text-[6.5px] text-cyan-400 block">// MODULE: LaTeX MATH FORMAT</span>
                             <div className="text-[8.5px] text-zinc-300 mt-1 py-1 text-center bg-black/50 border border-white/[0.04] rounded">
                               f(x) = ax + b \ (a \neq 0)
                             </div>
@@ -326,7 +323,7 @@ export default function IntroSlide({
                             <p className="text-[8.5px] font-black text-zinc-300">다음 식 중에서 일차함수인 것은?</p>
                             <div className="grid grid-cols-2 gap-1 mt-1">
                               {['① y = 2x - 3', '② y = x²'].map((opt, i) => (
-                                <div key={i} className={`p-1 border rounded text-[7.5px] font-sans ${i === 0 ? 'border-lime-400/30 bg-lime-400/[0.02] text-lime-400 font-bold' : 'border-white/[0.05] bg-white/[0.01] text-zinc-400'}`}>
+                                <div key={i} className={`p-1 border rounded text-[7.5px] font-sans ${i === 0 ? 'border-cyan-400/30 bg-cyan-400/[0.02] text-cyan-400 font-bold' : 'border-white/[0.05] bg-white/[0.01] text-zinc-400'}`}>
                                   {opt}
                                 </div>
                               ))}

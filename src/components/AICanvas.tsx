@@ -1,7 +1,5 @@
 import { useEffect, useRef } from 'react';
 
-const PARTICLE_COLORS = ['#00ffd5', '#22d3ee', '#38bdf8', '#818cf8', '#c084fc', '#f0abfc'];
-
 export default function AICanvas() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
@@ -17,9 +15,9 @@ export default function AICanvas() {
     let height = canvas.height = canvas.offsetHeight;
 
     const particles: Particle[] = [];
-    const maxParticles = Math.min(96, Math.floor((width * height) / 10500));
-    const connectionDistance = 140;
-    const pointer = { x: -1000, y: -1000, radius: 210 };
+    const maxParticles = Math.min(80, Math.floor((width * height) / 12000));
+    const connectionDistance = 120;
+    const mouse = { x: -1000, y: -1000, radius: 180 };
 
     class Particle {
       x: number;
@@ -28,33 +26,37 @@ export default function AICanvas() {
       vy: number;
       radius: number;
       alpha: number;
+      decay: number;
       color: string;
 
       constructor() {
         this.x = Math.random() * width;
         this.y = Math.random() * height;
-        this.vx = (Math.random() - 0.5) * 0.36;
-        this.vy = (Math.random() - 0.5) * 0.36;
-        this.radius = Math.random() * 1.6 + 0.7;
-        this.alpha = Math.random() * 0.42 + 0.28;
-        this.color = PARTICLE_COLORS[Math.floor(Math.random() * PARTICLE_COLORS.length)];
+        this.vx = (Math.random() - 0.5) * 0.45;
+        this.vy = (Math.random() - 0.5) * 0.45;
+        this.radius = Math.random() * 1.8 + 0.8;
+        this.alpha = Math.random() * 0.5 + 0.4;
+        this.decay = 0.002 + Math.random() * 0.003;
+        this.color = Math.random() > 0.5 ? '#00ffd5' : Math.random() > 0.5 ? '#6a00ff' : '#00aaff'; // New brand gradient colors
       }
 
       update() {
         this.x += this.vx;
         this.y += this.vy;
 
+        // Bounce on borders
         if (this.x < 0 || this.x > width) this.vx *= -1;
         if (this.y < 0 || this.y > height) this.vy *= -1;
 
-        const dx = pointer.x - this.x;
-        const dy = pointer.y - this.y;
-        const dist = Math.hypot(dx, dy) || 1;
+        // Interactive mouse interaction (magnetic attraction)
+        const dx = mouse.x - this.x;
+        const dy = mouse.y - this.y;
+        const dist = Math.hypot(dx, dy);
 
-        if (dist < pointer.radius) {
-          const force = (pointer.radius - dist) / pointer.radius;
-          this.x -= (dx / dist) * force * 0.42;
-          this.y -= (dy / dist) * force * 0.42;
+        if (dist < mouse.radius) {
+          const force = (mouse.radius - dist) / mouse.radius;
+          this.x -= (dx / dist) * force * 0.6;
+          this.y -= (dy / dist) * force * 0.6;
         }
       }
 
@@ -63,7 +65,7 @@ export default function AICanvas() {
         c.beginPath();
         c.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
         c.fillStyle = this.color;
-        c.shadowBlur = 12;
+        c.shadowBlur = 6;
         c.shadowColor = this.color;
         c.globalAlpha = this.alpha;
         c.fill();
@@ -71,54 +73,48 @@ export default function AICanvas() {
       }
     }
 
-    const seedParticles = () => {
-      particles.length = 0;
-      const nextCount = Math.min(96, Math.floor((width * height) / 10500));
-      for (let i = 0; i < nextCount; i++) particles.push(new Particle());
-    };
+    // Initialize particles
+    for (let i = 0; i < maxParticles; i++) {
+      particles.push(new Particle());
+    }
 
-    seedParticles();
-
+    // Resize observer
     const resizeObserver = new ResizeObserver((entries) => {
-      for (const entry of entries) {
+      for (let entry of entries) {
         width = canvas.width = entry.contentRect.width;
         height = canvas.height = entry.contentRect.height;
-        seedParticles();
       }
     });
     resizeObserver.observe(canvas);
 
-    const updatePointer = (clientX: number, clientY: number) => {
+    // Mouse events
+    const handleMouseMove = (e: MouseEvent) => {
       const rect = canvas.getBoundingClientRect();
-      const x = clientX - rect.left;
-      const y = clientY - rect.top;
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      // Filter logical containment
       if (x >= 0 && x <= width && y >= 0 && y <= height) {
-        pointer.x = x;
-        pointer.y = y;
+        mouse.x = x;
+        mouse.y = y;
       } else {
-        pointer.x = -1000;
-        pointer.y = -1000;
+        mouse.x = -1000;
+        mouse.y = -1000;
       }
     };
 
-    const handleMouseMove = (e: MouseEvent) => updatePointer(e.clientX, e.clientY);
-    const handleTouchMove = (e: TouchEvent) => {
-      const touch = e.touches[0];
-      if (touch) updatePointer(touch.clientX, touch.clientY);
-    };
-    const resetPointer = () => {
-      pointer.x = -1000;
-      pointer.y = -1000;
+    const handleMouseLeave = () => {
+      mouse.x = -1000;
+      mouse.y = -1000;
     };
 
     window.addEventListener('mousemove', handleMouseMove, { passive: true });
-    window.addEventListener('touchmove', handleTouchMove, { passive: true });
-    document.addEventListener('mouseleave', resetPointer);
-    document.addEventListener('touchend', resetPointer);
+    document.addEventListener('mouseleave', handleMouseLeave);
 
+    // Render loop
     const render = () => {
       ctx.clearRect(0, 0, width, height);
 
+      // Render connection lines
       for (let i = 0; i < particles.length; i++) {
         const p1 = particles[i];
         p1.update();
@@ -129,17 +125,18 @@ export default function AICanvas() {
           const dist = Math.hypot(p1.x - p2.x, p1.y - p2.y);
 
           if (dist < connectionDistance) {
-            const alpha = (1 - dist / connectionDistance) * 0.13;
-            const grad = ctx.createLinearGradient(p1.x, p1.y, p2.x, p2.y);
-            grad.addColorStop(0, p1.color);
-            grad.addColorStop(1, p2.color);
-
+            const alpha = (1 - dist / connectionDistance) * 0.14;
             ctx.save();
             ctx.beginPath();
             ctx.moveTo(p1.x, p1.y);
             ctx.lineTo(p2.x, p2.y);
+            
+            // Create a gradient connection
+            const grad = ctx.createLinearGradient(p1.x, p1.y, p2.x, p2.y);
+            grad.addColorStop(0, p1.color);
+            grad.addColorStop(1, p2.color);
             ctx.strokeStyle = grad;
-            ctx.lineWidth = 0.7;
+            ctx.lineWidth = 0.75;
             ctx.globalAlpha = alpha;
             ctx.stroke();
             ctx.restore();
@@ -156,9 +153,7 @@ export default function AICanvas() {
       cancelAnimationFrame(animationFrameId);
       resizeObserver.disconnect();
       window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('touchmove', handleTouchMove);
-      document.removeEventListener('mouseleave', resetPointer);
-      document.removeEventListener('touchend', resetPointer);
+      document.removeEventListener('mouseleave', handleMouseLeave);
     };
   }, []);
 
@@ -166,7 +161,7 @@ export default function AICanvas() {
     <canvas
       ref={canvasRef}
       className="absolute inset-0 w-full h-full pointer-events-none"
-      style={{ mixBlendMode: 'screen', opacity: 0.72 }}
+      style={{ mixBlendMode: 'screen', opacity: 0.65 }}
     />
   );
 }

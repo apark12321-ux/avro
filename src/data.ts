@@ -12,7 +12,6 @@ export const timelineData: TimelineItem[] = [
     year: '2022 — 2025',
     events: [
       { description: 'EBSMath 핵심 콘텐츠 기획 및 교수학습지도안 4년 연속 개발' },
-      { description: '미래엔 초코 · 엠티처 사이트 전용 QA/QC 및 디지털 검수 대행' },
       { description: '라스트마일 Blogstudio 상세 에디터 UI/UX 기획 및 개발 설계 기여' }
     ]
   },
@@ -76,34 +75,12 @@ export const projectsData: ProjectItem[] = [
     description: '2022년부터 2025년까지 공교육 및 상용 수학 콘텐츠의 학습 활용 방안을 기획하고, 맞춤형 수학 수업지도안 연구 및 개발 업무를 수행하며 교육 콘텐츠 분야의 풍부한 도메인 지식을 축적해왔습니다.',
     isFeatured: true,
     status: 'CASE STUDY'
-  },
-  {
-    id: 'CASE_002',
-    name: '미래엔 초코 / 엠티처 플랫폼 검수 및 QA',
-    client: '(주)미래엔',
-    domain: 'mirae-n.com',
-    tags: ['초코', '엠티처', 'QA / QC', '안정적 운영 레거시'],
-    description: '교과서 출판사 미래엔의 온라인 교육 서비스인 초코 플랫폼과 교사용 교육 지원 시스템 엠티처 전반의 디지털 기능 검수 및 QA 퍼블리싱 지원을 수행하여 안정적이고 편리한 서비스 운영에 기여하였습니다.',
-    isFeatured: false,
-    status: 'CASE STUDY'
-  },
-  {
-    id: 'CASE_003',
-    name: '윌비스 1억뷰N잡 디지털 미디어 콘텐츠 기획',
-    client: '윌비스 (WILLBES)',
-    domain: 'njob.willbes.net',
-    tags: ['디지털 콘텐츠', '미디어 기획', '교육 콘텐츠 자문'],
-    description: '윌비스 1억뷰N잡 클래스의 디지털 마케팅 및 교육용 미디어 콘텐츠를 기획·제작하고, 양질의 이러닝 커리큘럼 구성에 관한 전문 자문 및 파트너십을 완수하였습니다.',
-    isFeatured: false,
-    status: 'CASE STUDY'
   }
 ];
 
 export const partnersData: PartnerItem[] = [
   { name: 'EBSMath', type: 'EDUCATIONAL PORTAL', isHighlight: true },
-  { name: '미래엔', type: 'TEXTBOOK PUBLISHER', isHighlight: true },
   { name: '라스트마일', type: 'AI PLATFORM', isHighlight: true },
-  { name: '윌비스', type: 'E-LEARNING', isHighlight: false },
   { name: '한국릴리', type: 'PHARMACEUTICAL', isHighlight: false },
   { name: '롯데시네마', type: 'ENTERTAINMENT', isHighlight: false },
   { name: '서울예대', type: 'UNIVERSITY', isHighlight: false },

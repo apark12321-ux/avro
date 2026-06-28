@@ -16,7 +16,7 @@ export default function ProjectsSlide({
 }: ProjectsSlideProps) {
   return (
     <div className="flex flex-col justify-center w-full h-full py-4 min-h-0 text-left">
-      <div className="flex items-center gap-2 text-[10px] font-mono tracking-widest text-[#d4ff3a] uppercase mb-1 shrink-0 select-none">
+      <div className="flex items-center gap-2 text-[10px] font-mono tracking-widest text-cyan-300 uppercase mb-1 shrink-0 select-none">
         <span>SLIDE 02</span>
         <span className="text-zinc-700">/</span>
         <span>SELECTED PORTFOLIO</span>
@@ -41,7 +41,7 @@ export default function ProjectsSlide({
               onClick={() => setProjectFilter(filter)}
               className={`px-3 py-1 rounded text-[8.5px] font-mono font-black transition-all cursor-pointer ${
                 projectFilter === filter
-                  ? 'bg-lime-400 text-black shadow-sm'
+                  ? 'bg-gradient-to-r from-cyan-400 to-blue-500 text-white shadow-[0_0_12px_rgba(6,182,212,0.25)]'
                   : 'text-zinc-400 hover:text-white hover:bg-white/[0.02]'
               }`}
             >
@@ -67,19 +67,19 @@ export default function ProjectsSlide({
               <TiltCard
                 className={`glass-effect border rounded-xl p-5 flex flex-col md:flex-row gap-4 justify-between items-start md:items-center relative overflow-hidden bg-[#0d0d12]/40 ${
                   prj.isFeatured
-                    ? 'border-lime-400/[0.2] bg-gradient-to-r from-lime-400/[0.02] to-cyan-400/[0.01]'
+                    ? 'border-cyan-400/[0.2] bg-gradient-to-r from-cyan-400/[0.04] to-indigo-500/[0.02]'
                     : 'border-white/[0.04]'
                 } glass-effect-hover w-full`}
               >
                 {prj.isFeatured && (
-                  <div className="absolute top-0 right-0 p-1 px-2.5 bg-lime-400 text-black font-mono font-black text-[7px] uppercase tracking-widest rounded-bl-md shadow-md select-none">
+                  <div className="absolute top-0 right-0 p-1 px-3 bg-gradient-to-r from-cyan-400 to-blue-500 text-white font-mono font-black text-[7px] uppercase tracking-widest rounded-bl-xl shadow-md border-l border-b border-cyan-300/20 select-none">
                     Featured
                   </div>
                 )}
 
                 <div className="space-y-2.5 max-w-3xl text-left">
                   <div className="flex flex-wrap items-center gap-2">
-                    <span className="font-mono text-[9px] font-bold text-lime-400 tracking-wider">
+                    <span className="font-mono text-[9px] font-bold text-cyan-400 tracking-wider">
                       {prj.id}
                     </span>
                     <span className="text-zinc-700 font-mono text-[9px]">•</span>
@@ -87,7 +87,7 @@ export default function ProjectsSlide({
                       prj.status === 'LAUNCHING SOON' 
                         ? 'bg-cyan-400/10 border-cyan-400/25 text-cyan-400 animate-pulse' 
                         : prj.status === 'LIVE' 
-                        ? 'bg-lime-400/10 border-lime-400/25 text-lime-400' 
+                        ? 'bg-emerald-400/10 border-emerald-400/25 text-emerald-400' 
                         : 'bg-white/[0.02] border-white/[0.08] text-zinc-400'
                     }`}>
                       {prj.status}
@@ -128,9 +128,9 @@ export default function ProjectsSlide({
                     href={`https://${prj.domain}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    whileHover={{ scale: 1.08 }}
+                    whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    className="w-10 h-10 rounded-full border border-lime-400/20 text-lime-400 bg-lime-400/5 flex items-center justify-center cursor-pointer shrink-0 mt-3 md:mt-0"
+                    className="w-10 h-10 rounded-full border border-cyan-500/25 text-cyan-400 bg-cyan-500/5 hover:border-cyan-400/50 hover:bg-cyan-400/10 flex items-center justify-center cursor-pointer shrink-0 mt-3 md:mt-0 transition-all shadow-sm hover:shadow-[0_0_12px_rgba(6,182,212,0.15)]"
                   >
                     <ArrowUpRight className="w-4 h-4" />
                   </motion.a>

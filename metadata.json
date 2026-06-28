@@ -1,6 +1,6 @@
 {
-  "name": "AVRO - AI Engineering Studio",
-  "description": "AVRO is an AI Engineering Studio specializing in LLM integrations, AI agents, full-stack product development, and workflow automation.",
+  "name": "AVRO - Quality Control Platform",
+  "description": "AVRO Quality Engine - Perfect Quality Control & Advanced LaTeX Verification Platform for Public Education Portals (EBSMath).",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }
