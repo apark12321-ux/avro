@@ -25,7 +25,7 @@ export default function ProjectsSlide({
 
       <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-3 mb-4 shrink-0">
         <div>
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-sans font-black tracking-tight text-white leading-none">
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-sans font-bold tracking-tight text-white leading-none">
             대표 프로젝트 &amp; 제품사례
           </h2>
           <p className="text-zinc-500 font-mono text-[9.5px] mt-2">
@@ -39,7 +39,7 @@ export default function ProjectsSlide({
             <button
               key={filter}
               onClick={() => setProjectFilter(filter)}
-              className={`px-3 py-1 rounded text-[8.5px] font-mono font-black transition-all cursor-pointer ${
+              className={`px-3 py-1 rounded text-[8.5px] font-mono font-bold transition-all cursor-pointer ${
                 projectFilter === filter
                   ? 'bg-gradient-to-r from-cyan-400 to-blue-500 text-white shadow-[0_0_12px_rgba(6,182,212,0.25)]'
                   : 'text-zinc-400 hover:text-white hover:bg-white/[0.02]'
@@ -72,7 +72,7 @@ export default function ProjectsSlide({
                 } glass-effect-hover w-full`}
               >
                 {prj.isFeatured && (
-                  <div className="absolute top-0 right-0 p-1 px-3 bg-gradient-to-r from-cyan-400 to-blue-500 text-white font-mono font-black text-[7px] uppercase tracking-widest rounded-bl-xl shadow-md border-l border-b border-cyan-300/20 select-none">
+                  <div className="absolute top-0 right-0 p-1 px-3 bg-gradient-to-r from-cyan-400 to-blue-500 text-white font-mono font-bold text-[7px] uppercase tracking-widest rounded-bl-xl shadow-md border-l border-b border-cyan-300/20 select-none">
                     Featured
                   </div>
                 )}
@@ -105,7 +105,7 @@ export default function ProjectsSlide({
                   </div>
 
                   <div>
-                    <h3 className="text-base sm:text-lg font-sans font-black text-white tracking-tight flex items-baseline gap-2">
+                    <h3 className="text-base sm:text-lg font-sans font-bold text-white tracking-tight flex items-baseline gap-2">
                       <span>{prj.name}</span>
                       <span className="text-[10px] font-mono text-zinc-500 font-normal"> — {prj.client}</span>
                     </h3>

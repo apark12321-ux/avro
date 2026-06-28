@@ -35,7 +35,7 @@ export default function TimelineSlide({
           <span>CHRONICS ROADMAP TIMELINE</span>
         </div>
         
-        <h3 className="text-lg sm:text-2xl font-sans font-black text-white mb-4 shrink-0">
+        <h3 className="text-lg sm:text-2xl font-sans font-bold text-white mb-4 shrink-0">
           에이브로의 발자취와 지속적인 증명.
         </h3>
 
@@ -44,7 +44,7 @@ export default function TimelineSlide({
           {timelineData.map((mile) => (
             <div key={mile.year} className="relative group text-left">
               <div className="absolute -left-[26px] top-1.5 w-2 h-2 rounded-full bg-[#07070a] border-2 border-cyan-405 shadow-[0_0_10px_#22d3ee]" style={{ borderColor: '#22d3ee' }} />
-              <span className="font-mono text-[13px] font-black text-cyan-400 block mb-1 leading-none text-left">
+              <span className="font-mono text-[13px] font-bold text-cyan-400 block mb-1 leading-none text-left">
                 {mile.year}
               </span>
               <ul className="space-y-1 text-left list-none pl-0 m-0">
@@ -88,7 +88,7 @@ export default function TimelineSlide({
                 {part.isHighlight && (
                   <span className="absolute top-1 right-1 w-1 h-1 rounded-full bg-cyan-400 shadow-[0_0_4px_#22d3ee]" />
                 )}
-                <span className={`font-sans font-bold text-[10.5px] ${part.isHighlight ? 'text-cyan-300 font-black' : 'text-zinc-300'}`}>
+                <span className={`font-sans font-bold text-[10.5px] ${part.isHighlight ? 'text-cyan-300 font-bold' : 'text-zinc-300'}`}>
                   {part.name}
                 </span>
                 <span className="font-mono text-[7px] tracking-wide text-zinc-500 mt-0.5">

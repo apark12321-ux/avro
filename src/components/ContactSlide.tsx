@@ -12,14 +12,14 @@ export default function ContactSlide() {
           <span>avro_studio_routine_start.sh</span>
         </div>
         
-        <h2 className="text-2xl sm:text-4.5xl font-sans font-black tracking-tight text-white mb-4 leading-none select-none">
+        <h2 className="text-2xl sm:text-4.5xl font-sans font-bold tracking-tight text-white mb-4 leading-none select-none">
           Together,<br />
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00ffd5] via-[#00aaff] to-[#ff00ee]">함께 만들어갈까요?</span>
           <span className="inline-block w-2.5 h-6 bg-cyan-400 align-middle ml-1.5 shadow-[0_0_8px_#22d3ee] animate-pulse" />
         </h2>
 
         <p className="text-zinc-400 text-xs sm:text-sm leading-relaxed max-w-lg mb-6 font-normal">
-          가장 정교하고 검증 가능한 교육용 교안 / 수식 검출 자동화 솔루션부터 최신 기술 트렌드와 결합한 맞춤 에듀테크 AI 비즈니스용 SaaS 개발에 대한 협력이 필요하시다면 아래 대표 메일로 연락해 보시기 바랍니다.
+          가장 정교하고 검증 가능한 차세대 디지털 교안 및 멀티모달 콘텐츠 변환 자동화 솔루션부터 최신 AI 트렌드와 결합한 지능형 교육 SaaS 플랫폼 개발에 대한 협력이 필요하시다면 아래 대표 메일로 연락해 보시기 바랍니다.
         </p>
 
         <div className="flex select-none">
@@ -27,7 +27,7 @@ export default function ContactSlide() {
             href="mailto:ceo@avro.co.kr"
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
-            className="px-6 py-3.5 rounded-full bg-gradient-to-r from-cyan-500 via-blue-500 to-indigo-600 hover:brightness-110 text-white font-sans font-black text-xs uppercase tracking-wide flex items-center justify-between gap-4 shadow-[0_4px_25px_rgba(6,182,212,0.35)] border border-cyan-300/10 cursor-pointer"
+            className="px-6 py-3.5 rounded-full bg-gradient-to-r from-cyan-500 via-blue-500 to-indigo-600 hover:brightness-110 text-white font-sans font-bold text-xs uppercase tracking-wide flex items-center justify-between gap-4 shadow-[0_4px_25px_rgba(6,182,212,0.35)] border border-cyan-300/10 cursor-pointer"
           >
             <span>ceo@avro.co.kr 이메일 송신</span>
             <ArrowRight className="w-3.5 h-3.5 text-white" />

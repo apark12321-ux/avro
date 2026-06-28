@@ -36,8 +36,8 @@ export const servicesData: ServiceItem[] = [
     num: '02',
     title: 'AI Education & Learning Tools',
     englishTitle: 'AI EDUTECH & AGENT SOLUTIONS',
-    description: 'EBSMath 등 공교육 플랫폼을 설계한 실제 경험을 바탕으로, 학습 효율을 비약적으로 개선하는 스마트 에듀테크 도구를 제작합니다. 수식 저작 툴 및 개인화 스마트 워크북을 구축합니다.',
-    items: ['교육 특화 맞춤 AI 모델 설계', '에듀 텍스트 및 수식 저작 보조', '스마트 대화형 학습 위젯', '수리 영역 디지털 교재 변환']
+    description: '대형 교육 포털 및 대화형 플랫폼을 구축한 설계 경험을 바탕으로, 학습 효율을 극대화하는 멀티모달 기반의 지능형 에듀테크 도구를 제작합니다. 디지털 지식 저작 솔루션 및 개인화 스마트 가이드를 연동 설계합니다.',
+    items: ['교육 특화 맞춤 AI 모델 설계', '에듀 텍스트 및 멀티모달 객체 변환 보조', '스마트 대화형 지식 위젯', '디지털 학습 콘텐츠 구조화 및 변환']
   },
   {
     num: '03',
@@ -72,7 +72,7 @@ export const projectsData: ProjectItem[] = [
     client: '한국교육방송공사 (EBS)',
     domain: 'ebsmath.co.kr',
     tags: ['EBSMath', '수업지도안', '교육 콘텐츠 개발', 'Legacy Operations'],
-    description: '2022년부터 2025년까지 공교육 및 상용 수학 콘텐츠의 학습 활용 방안을 기획하고, 맞춤형 수학 수업지도안 연구 및 개발 업무를 수행하며 교육 콘텐츠 분야의 풍부한 도메인 지식을 축적해왔습니다.',
+    description: '2022년부터 2025년까지 주요 교육 포털 및 상용 에듀테크 콘텐츠의 맞춤형 학습 인프라 구축 방안을 기획하고, 사용자 친화적인 스마트 수업지도 및 연구개발 업무를 수행하며 관련 지식 서비스 설계 도메인의 풍부한 전문성을 축적해왔습니다.',
     isFeatured: true,
     status: 'CASE STUDY'
   }

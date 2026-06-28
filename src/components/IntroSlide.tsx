@@ -57,7 +57,7 @@ export default function IntroSlide({
         </p>
 
         <p className="text-xs sm:text-xs text-zinc-400 max-w-xl leading-relaxed text-left mb-6 font-normal">
-          AVRO는 공교육용 교육 콘텐츠 표준 수식 규격(LaTeX)과 가변 해상도 검정 지능형 에이전트 기술을 10년간 개척해온 신뢰받는 에듀테크 기술 전문 기업입니다. 지능형 교안 변환 솔루션과 차세대 에듀테크 생태계를 제시합니다.
+          AVRO는 차세대 지식 기반 교육 플랫폼(EdTech)과 엔터프라이즈 멀티모달 객체 파싱, 가변 디바이스 최적화 지능형 에이전트 기술을 10년간 개척해온 신뢰받는 에듀테크 기술 전문 기업입니다. 지능형 교안 변환 솔루션과 차세대 기술 생태계를 제시합니다.
         </p>
 
         <div className="flex flex-wrap gap-1.5 mb-7">
@@ -76,7 +76,7 @@ export default function IntroSlide({
           {/* Outlined Frosted Button (Counterpart of '시설안내') */}
           <button
             onClick={() => openDrawer('about')}
-            className="flex-1 max-w-sm flex items-center justify-center gap-2 px-6 py-3.5 rounded-full border border-white/20 bg-white/5 hover:bg-white/10 text-white text-xs font-black tracking-wide transition-all duration-300 shadow-md cursor-pointer outline-none"
+            className="flex-1 max-w-sm flex items-center justify-center gap-2 px-6 py-3.5 rounded-full border border-white/20 bg-white/5 hover:bg-white/10 text-white text-xs font-bold tracking-wide transition-all duration-300 shadow-md cursor-pointer outline-none"
           >
             <BookOpen className="w-4 h-4 text-cyan-400" />
             <span>에이브로 소개서</span>
@@ -85,7 +85,7 @@ export default function IntroSlide({
           {/* Luminous Gradient Button (Counterpart of '티켓예매') */}
           <button
             onClick={goToNextSlide}
-            className="flex-1 max-w-sm flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-gradient-to-r from-cyan-500 via-blue-500 to-indigo-600 hover:brightness-110 text-white text-xs font-black tracking-wide transition-all duration-300 shadow-[0_4px_20px_rgba(6,182,212,0.35)] border border-cyan-300/20 cursor-pointer outline-none"
+            className="flex-1 max-w-sm flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-gradient-to-r from-cyan-500 via-blue-500 to-indigo-600 hover:brightness-110 text-white text-xs font-bold tracking-wide transition-all duration-300 shadow-[0_4px_20px_rgba(6,182,212,0.35)] border border-cyan-300/20 cursor-pointer outline-none"
           >
             <Sparkles className="w-4 h-4 text-white" />
             <span>프로젝트 탐색</span>
@@ -103,7 +103,7 @@ export default function IntroSlide({
               <span className="w-2.5 h-2.5 rounded-full bg-yellow-400 inline-block" />
               <span className="w-2.5 h-2.5 rounded-full bg-green-500 inline-block" />
             </div>
-            <span className="text-[10px] font-mono text-zinc-400 uppercase tracking-widest font-black">AVRO_SIMULATOR_SANDBOX v1.2</span>
+            <span className="text-[10px] font-mono text-zinc-400 uppercase tracking-widest font-bold">AVRO_SIMULATOR_SANDBOX v1.2</span>
           </div>
 
           <div className="px-2 py-1.5 bg-[#121217] border-b border-white/[0.04] flex items-center gap-1.5 overflow-x-auto scrollbar-none shrink-0 justify-around select-none">
@@ -171,7 +171,7 @@ export default function IntroSlide({
                       disabled={isTerminalBuilding}
                       className={`flex-1 py-1.5 rounded text-[8px] font-mono transition-all uppercase tracking-widest text-center cursor-pointer ${
                         activeTerminalPreset === preset && isTerminalBuilding
-                          ? 'bg-gradient-to-r from-cyan-400 to-blue-500 text-white font-black border-transparent shadow-[0_0_12px_rgba(34,211,238,0.25)]'
+                          ? 'bg-gradient-to-r from-cyan-400 to-blue-500 text-white font-bold border-transparent shadow-[0_0_12px_rgba(34,211,238,0.25)]'
                           : 'border border-white/[0.06] bg-white/[0.01] text-zinc-400 hover:text-white hover:bg-white/[0.03]'
                       }`}
                     >
@@ -193,7 +193,7 @@ export default function IntroSlide({
                     <button
                       onClick={runQaSimulation}
                       disabled={qaStatus === 'running'}
-                      className={`px-3 py-1.5 rounded-full text-[9px] font-sans font-black flex items-center gap-1 transition-all shadow-md cursor-pointer ${
+                      className={`px-3 py-1.5 rounded-full text-[9px] font-sans font-bold flex items-center gap-1 transition-all shadow-md cursor-pointer ${
                         qaStatus === 'running'
                           ? 'bg-zinc-805 text-zinc-550 border border-zinc-700'
                           : 'bg-gradient-to-r from-cyan-400 to-blue-500 text-white hover:brightness-110 shadow-[0_0_12px_rgba(34,211,238,0.25)]'
@@ -254,7 +254,7 @@ export default function IntroSlide({
                     <div className="grid grid-cols-4 gap-1">
                       {[
                         { id: 'header', label: '텍스트 헤더' },
-                        { id: 'math', label: 'LaTeX 수식' },
+                        { id: 'math', label: '지식 구조식' },
                         { id: 'quiz', label: '단원 퀴즈' },
                         { id: 'script', label: '수업 노트' }
                       ].map((block) => {
@@ -292,7 +292,7 @@ export default function IntroSlide({
                             className="p-1.5 bg-white/[0.01] border border-white/[0.04] rounded"
                           >
                             <span className="text-[6.5px] font-mono text-purple-400 block">// MODULE: LESSON HEADER</span>
-                            <h4 className="text-[9.5px] font-bold text-zinc-100 mt-0.5">EBSMath 대수 기본학습 [일차함수]</h4>
+                            <h4 className="text-[9.5px] font-bold text-zinc-100 mt-0.5">대수 구조식 및 가변적 지식 자원 [함수 해석]</h4>
                           </motion.div>
                         )}
 
@@ -304,7 +304,7 @@ export default function IntroSlide({
                             exit={{ opacity: 0 }}
                             className="p-1.5 bg-white/[0.02] border border-cyan-400/20 rounded font-mono"
                           >
-                            <span className="text-[6.5px] text-cyan-400 block">// MODULE: LaTeX MATH FORMAT</span>
+                            <span className="text-[6.5px] text-cyan-400 block">// MODULE: KNOWLEDGE PARSING SYSTEM</span>
                             <div className="text-[8.5px] text-zinc-300 mt-1 py-1 text-center bg-black/50 border border-white/[0.04] rounded">
                               f(x) = ax + b \ (a \neq 0)
                             </div>
@@ -320,7 +320,7 @@ export default function IntroSlide({
                             className="p-1.5 bg-white/[0.01] border border-white/[0.04] rounded"
                           >
                             <span className="text-[6.5px] font-mono text-cyan-400 block">// MODULE: INTERACTIVE QUIZ UNIT</span>
-                            <p className="text-[8.5px] font-black text-zinc-300">다음 식 중에서 일차함수인 것은?</p>
+                            <p className="text-[8.5px] font-bold text-zinc-300">다음 식 중에서 일차함수인 것은?</p>
                             <div className="grid grid-cols-2 gap-1 mt-1">
                               {['① y = 2x - 3', '② y = x²'].map((opt, i) => (
                                 <div key={i} className={`p-1 border rounded text-[7.5px] font-sans ${i === 0 ? 'border-cyan-400/30 bg-cyan-400/[0.02] text-cyan-400 font-bold' : 'border-white/[0.05] bg-white/[0.01] text-zinc-400'}`}>
@@ -339,7 +339,7 @@ export default function IntroSlide({
                             exit={{ opacity: 0 }}
                             className="p-1.5 bg-white/[0.01] border border-dashed border-white/[0.08] rounded text-zinc-500 font-sans text-[7.5px] leading-relaxed"
                           >
-                            수식과 도해는 모바일 가변 배치 수리에 적합하게 패싱 처리됩니다.
+                            구조화된 지식 데이터와 시각 도해는 크로스 플랫폼 환경에 최적화되어 자동 파싱 및 렌더링됩니다.
                           </motion.div>
                         )}
                       </AnimatePresence>
