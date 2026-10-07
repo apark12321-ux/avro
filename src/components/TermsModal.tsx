@@ -55,7 +55,7 @@ export default function TermsModal({ isOpen, type, onClose }: TermsModalProps) {
               </div>
               <div>
                 <h4 className="font-bold text-zinc-900 mb-0.5">3. 개인정보 책임자</h4>
-                <p>대표이사 박아론 (032-567-2480 / ceo@avro.co.kr)</p>
+                <p>대표이사 박예준 (032-567-2480 / ceo@avro.co.kr)</p>
               </div>
             </>
           )}

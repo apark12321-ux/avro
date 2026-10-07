@@ -10,15 +10,15 @@ export default function FactsheetFooter({ onOpenTerms, onOpenPrivacy }: Factshee
         
         {/* Left: Essential Corporate Details in one compact row */}
         <div className="flex flex-wrap items-center justify-center md:justify-start gap-x-3 gap-y-1 text-zinc-400">
-          <span className="font-bold text-white tracking-tight">(주)에이브로</span>
+          <span className="font-bold text-white tracking-tight">주식회사 에이브로</span>
           <span className="text-zinc-600">|</span>
-          <span>대표: 박아론</span>
+          <span>대표: 박예준</span>
           <span className="text-zinc-600">|</span>
-          <span>소재지: 인천광역시 서구 청라에메랄드로 99</span>
+          <span>소재지: 인천광역시 서구 청라에메랄드로 99, 1층 074-에이16호(청라동, 지젤엠청라)</span>
           <span className="text-zinc-600">|</span>
-          <span>사업자번호: 539-81-03099</span>
+          <span>등록번호: 205-87-00590</span>
           <span className="text-zinc-600">|</span>
-          <span>통신판매: 제2024-인천서구-1982호</span>
+          <span>법인등록번호: 120111-0829814</span>
           <span className="text-zinc-600">|</span>
           <span>이메일: ceo@avro.co.kr</span>
           <span className="text-zinc-600">|</span>

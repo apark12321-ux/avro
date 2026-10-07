@@ -62,7 +62,7 @@ export default function TemplateSlide13Footer({
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 py-8 border-t border-white/15 text-left text-xs text-zinc-400">
           <div>
             <span className="text-white font-bold block mb-1">상호 및 대표</span>
-            <span>(주)에이브로 · 대표 박아론</span>
+            <span>주식회사 에이브로 · 대표 박예준</span>
           </div>
           <div>
             <span className="text-white font-bold block mb-1">전화 상담</span>
@@ -74,14 +74,14 @@ export default function TemplateSlide13Footer({
           </div>
           <div>
             <span className="text-white font-bold block mb-1">사업자 정보</span>
-            <span>사업자등록: 539-81-03099</span>
+            <span>등록번호: 205-87-00590</span>
           </div>
         </div>
 
         {/* Minimal Footer Row */}
         <div className="pt-6 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-3 text-[11px] text-zinc-500">
           <div>
-            인천광역시 서구 청라에메랄드로 99 · 통신판매업 제2024-인천서구-1982호
+            인천광역시 서구 청라에메랄드로 99, 1층 074-에이16호(청라동, 지젤엠청라) · 법인등록번호: 120111-0829814
           </div>
 
           <div className="flex items-center gap-3 text-zinc-400">
