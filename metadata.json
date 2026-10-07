@@ -1,6 +1,6 @@
 {
-  "name": "AVRO - Quality Control Platform",
-  "description": "AVRO Quality Engine - Perfect Quality Control & Advanced LaTeX Verification Platform for Public Education Portals (EBSMath).",
+  "name": "AVRO - 수학 문항 조판 & 에듀테크 테크 에이전시",
+  "description": "주식회사 에이브로 — 수학 문제 한글 수식 타이핑, PDF 시험지 HWP 변환, 도형 그래프 작도, 학원 교재 및 전문 홈페이지 제작. 샘플 3문항 무료 신청 제공.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }
