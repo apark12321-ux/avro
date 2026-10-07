@@ -68,7 +68,7 @@ export default function ContactSlide() {
               <div className="flex flex-col text-left">
                 <span className="font-mono text-[8px] text-zinc-500 uppercase tracking-wider select-none">corporate headquarters location</span>
                 <span className="text-zinc-300 font-sans text-xs font-semibold leading-relaxed">
-                  인천광역시 서구 청라에메랄드로 99, 1층 074-에이16호(청라동, 지젤엠청라)
+                  인천광역시 서구 청라에메랄드로 99
                 </span>
               </div>
             </div>

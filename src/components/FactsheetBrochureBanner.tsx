@@ -1,4 +1,4 @@
-import { Phone, Mail, FileDown, ShieldCheck } from 'lucide-react';
+import { Mail, FileDown, ShieldCheck } from 'lucide-react';
 
 interface FactsheetBrochureBannerProps {
   onOpenModal: (mode?: 'inquiry' | 'sample') => void;
@@ -19,14 +19,6 @@ export default function FactsheetBrochureBanner({ onOpenModal }: FactsheetBrochu
 
         {/* Right */}
         <div className="flex items-center gap-2">
-          <a
-            href="tel:032-567-2480"
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-sm bg-zinc-800 hover:bg-zinc-700 text-zinc-200 transition-colors"
-          >
-            <Phone className="w-3.5 h-3.5 text-[#008CFF]" />
-            <span>032-567-2480</span>
-          </a>
-
           <a
             href="mailto:ceo@avro.co.kr"
             className="flex items-center gap-1.5 px-3 py-1.5 rounded-sm bg-zinc-800 hover:bg-zinc-700 text-zinc-200 transition-colors"

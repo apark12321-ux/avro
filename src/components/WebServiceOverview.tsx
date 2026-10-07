@@ -50,7 +50,7 @@ export default function WebServiceOverview({ onOpenModal }: WebServiceOverviewPr
             SERVICE OVERVIEW
           </span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-zinc-900 mb-3">
-            간결하고 완벽한 출판 인쇄 규격 HWP.
+            간결하고 완벽한 출판 인쇄 규격 HWP
           </h2>
           <p className="text-zinc-600 text-sm sm:text-base font-medium leading-relaxed">
             웹 기반 자동 변환기의 한계를 극복하고, 수식 오탈자 0%와 고화질 도판, 

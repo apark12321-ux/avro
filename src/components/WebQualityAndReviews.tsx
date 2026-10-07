@@ -70,7 +70,7 @@ export default function WebQualityAndReviews() {
               VERIFIED QUALITY &amp; BENCHMARK
             </span>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-zinc-900 mb-3">
-              데이터로 증명하는 조판 품질.
+              데이터로 증명하는 조판 품질
             </h2>
             <p className="text-zinc-600 text-sm sm:text-base font-medium leading-relaxed">
               수치로 입증된 납기 준수율과 수식 정확도로 고객사의 재편집 시간을 제로로 단축합니다.

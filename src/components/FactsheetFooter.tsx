@@ -14,15 +14,11 @@ export default function FactsheetFooter({ onOpenTerms, onOpenPrivacy }: Factshee
           <span className="text-zinc-600">|</span>
           <span>대표: 박예준</span>
           <span className="text-zinc-600">|</span>
-          <span>소재지: 인천광역시 서구 청라에메랄드로 99, 1층 074-에이16호(청라동, 지젤엠청라)</span>
+          <span>소재지: 인천광역시 서구 청라에메랄드로 99</span>
           <span className="text-zinc-600">|</span>
           <span>등록번호: 205-87-00590</span>
           <span className="text-zinc-600">|</span>
-          <span>법인등록번호: 120111-0829814</span>
-          <span className="text-zinc-600">|</span>
           <span>이메일: ceo@avro.co.kr</span>
-          <span className="text-zinc-600">|</span>
-          <span>TEL: 032-567-2480</span>
         </div>
 
         {/* Right: Policy Links & Copyright */}

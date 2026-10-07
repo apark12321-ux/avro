@@ -37,7 +37,7 @@ export default function WebFAQ() {
             FREQUENTLY ASKED QUESTIONS
           </span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-zinc-900 mb-3">
-            자주 묻는 질문.
+            자주 묻는 질문
           </h2>
           <p className="text-zinc-600 text-sm sm:text-base font-medium leading-relaxed">
             작업 의뢰 전 확인하시는 주요 질문과 명확한 팩트 답변

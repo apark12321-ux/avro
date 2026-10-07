@@ -57,7 +57,7 @@ export default function TemplateSlide1Hero({ onOpenModal }: TemplateSlide1HeroPr
             onClick={() => onOpenModal('inquiry')}
             className="px-7 py-3 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-white font-bold text-sm sm:text-base active:scale-95 transition-all flex items-center gap-2 cursor-pointer"
           >
-            <span>외주 도입 문의</span>
+            <span>외주 작업 문의</span>
             <ArrowRight className="w-4 h-4 text-zinc-300" />
           </button>
         </div>

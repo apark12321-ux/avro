@@ -78,7 +78,7 @@ export default function TemplateNavbar({ onOpenModal }: TemplateNavbarProps) {
               onClick={() => onOpenModal('inquiry')}
               className="px-3.5 py-1.5 text-zinc-300 hover:text-white transition-colors cursor-pointer"
             >
-              외주 도입 문의
+              외주 작업 문의
             </button>
             <button
               onClick={() => onOpenModal('sample')}
@@ -131,7 +131,7 @@ export default function TemplateNavbar({ onOpenModal }: TemplateNavbarProps) {
                 }}
                 className="w-full py-2.5 rounded-md border border-white/20 text-center text-white"
               >
-                외주 도입 문의
+                외주 작업 문의
               </button>
               <button
                 onClick={() => {

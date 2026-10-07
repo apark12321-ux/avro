@@ -73,7 +73,7 @@ export default function QuickContactForm({ initialService = '수학 문제 한�
             </div>
             <div className="flex items-center gap-2">
               <MapPin className="w-4 h-4 text-sky-400" />
-              <span>사업장 소재지: 인천광역시 서구 청라에메랄드로 99, 1층 074-에이16호(청라동, 지젤엠청라)</span>
+              <span>사업장 소재지: 인천광역시 서구 청라에메랄드로 99</span>
             </div>
           </div>
         </div>

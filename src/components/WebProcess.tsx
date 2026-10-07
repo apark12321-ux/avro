@@ -19,7 +19,7 @@ export default function WebProcess() {
             WORK PROCESS
           </span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-zinc-900 mb-3">
-            5단계 완결 프로세스.
+            5단계 완결 프로세스
           </h2>
           <p className="text-zinc-600 text-sm sm:text-base font-medium leading-relaxed">
             원고 접수부터 인쇄본 납품까지 빈틈없는 전담 에디터 케어로 진행됩니다.

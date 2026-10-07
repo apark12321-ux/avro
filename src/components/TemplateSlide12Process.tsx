@@ -19,7 +19,7 @@ export default function TemplateSlide12Process() {
             WORK PROCESS
           </span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-zinc-900">
-            5단계 완결 프로세스.
+            5단계 완결 프로세스
           </h2>
           <p className="text-zinc-600 text-sm sm:text-base font-medium mt-2">
             원고 접수부터 최종 인쇄본 납품까지의 체계적인 작업 흐름
