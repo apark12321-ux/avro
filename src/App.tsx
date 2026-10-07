@@ -10,6 +10,7 @@ import WebFAQ from './components/WebFAQ';
 import WebFooter from './components/WebFooter';
 import FactsheetContactModal from './components/FactsheetContactModal';
 import TermsModal from './components/TermsModal';
+import FloatingSampleButton from './components/FloatingSampleButton';
 
 export default function App() {
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
@@ -67,6 +68,9 @@ export default function App() {
         type={modalPolicy}
         onClose={() => setModalPolicy(null)}
       />
+
+      {/* Floating Action Button (FAB) for Free Sample Request */}
+      <FloatingSampleButton onOpenSampleModal={() => handleOpenModal('sample')} />
     </div>
   );
 }
