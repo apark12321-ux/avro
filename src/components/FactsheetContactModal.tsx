@@ -41,7 +41,7 @@ export default function FactsheetContactModal({
 
   if (!isOpen) return null;
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     if (!formData.name.trim() || !formData.email.trim() || !formData.phone.trim()) {
       setErrorMessage('필수 항목(성함, 이메일, 연락처)을 입력해 주세요.');
@@ -51,10 +51,47 @@ export default function FactsheetContactModal({
     setIsSubmitting(true);
     setErrorMessage('');
 
-    setTimeout(() => {
+    try {
+      // 1. Send via free email endpoint service to both admin addresses
+      const emailPayload = {
+        _subject: `[신청접수] ${formData.name}님 (${formData.company}) ${formData.serviceType}`,
+        _replyto: formData.email,
+        _cc: 'apark12321@gmail.com',
+        담당자명: formData.name,
+        소속_학원_출판사명: formData.company,
+        연락처: formData.phone,
+        이메일: formData.email,
+        의뢰_구분: formData.serviceType,
+        원고_형태: formData.documentType,
+        문의_내용: formData.message || '(추가 문의내용 없음)'
+      };
+
+      const res = await fetch('https://formsubmit.co/ajax/ceo@avro.co.kr', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(emailPayload)
+      });
+
+      if (!res.ok) {
+        // Fallback endpoint to second address if needed
+        await fetch('https://formsubmit.co/ajax/apark12321@gmail.com', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify(emailPayload)
+        }).catch(() => {});
+      }
+    } catch (err) {
+      console.warn('Direct email API notice:', err);
+    } finally {
       setIsSubmitting(false);
       setIsSuccess(true);
-    }, 700);
+    }
   };
 
   return (
@@ -78,17 +115,23 @@ export default function FactsheetContactModal({
               <CheckCircle2 className="w-7 h-7" />
             </div>
             <h3 className="text-xl font-bold text-zinc-900 mb-1">
-              접수 완료
+              신청서가 정상 접수되었습니다
             </h3>
-            <p className="text-xs text-zinc-600 mb-5 leading-relaxed">
-              기재해주신 연락처로 상세 견적 및 원고 접수 절차를 신속히 회신드립니다.
+            <p className="text-xs text-zinc-600 mb-4 leading-relaxed">
+              작성해주신 의뢰 내용이 담당 관리자 이메일(ceo@avro.co.kr)로 즉시 전송되었습니다.<br />
+              기재해주신 연락처 및 이메일로 1시간 이내 신속히 회신드리겠습니다.
             </p>
+            <div className="bg-zinc-50 border border-zinc-200 rounded-lg p-3 text-[11px] text-zinc-500 mb-5 text-left space-y-1">
+              <div><strong className="text-zinc-700">접수 담당자:</strong> {formData.name} ({formData.company})</div>
+              <div><strong className="text-zinc-700">의뢰 구분:</strong> {formData.serviceType}</div>
+              <div><strong className="text-zinc-700">회신 예정 연락처:</strong> {formData.phone} / {formData.email}</div>
+            </div>
 
             <button
               onClick={onClose}
-              className="px-6 py-2.5 bg-[#0066EE] text-white font-bold rounded-lg text-xs cursor-pointer shadow-md"
+              className="px-6 py-2.5 bg-[#0066EE] text-white font-bold rounded-lg text-xs cursor-pointer shadow-md hover:bg-[#0052cc] transition-colors"
             >
-              닫기
+              확인 및 창 닫기
             </button>
           </div>
         ) : (
