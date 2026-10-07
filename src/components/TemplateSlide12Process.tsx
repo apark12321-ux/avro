@@ -63,7 +63,7 @@ export default function TemplateSlide12Process() {
           </div>
 
           <h4 className="text-xl sm:text-2xl font-black text-zinc-900 mb-3">
-            “ 추가 재편집 0분, 수령 즉시 시험 및 인쇄 현장 즉시 투입 ”
+            “ 추가 재편집 부담 없이, 수령 즉시 시험 및 인쇄 현장 즉시 투입 ”
           </h4>
 
           <p className="text-xs sm:text-sm text-zinc-600 font-medium leading-relaxed max-w-4xl">

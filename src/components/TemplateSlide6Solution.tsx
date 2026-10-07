@@ -74,7 +74,7 @@ export default function TemplateSlide6Solution() {
             <span>Key Summary</span>
           </div>
           <h4 className="text-lg sm:text-xl font-black text-zinc-900 mb-2">
-            솔루션 핵심 요약: 고객사의 재편집 소요 시간을 0분으로 단축
+            솔루션 핵심 요약: 고객사의 교재 편집 및 수식 재작업 부담을 획기적으로 경감
           </h4>
           <p className="text-xs sm:text-sm text-zinc-600 font-medium max-w-2xl mx-auto leading-relaxed">
             미공개 시험지 및 연구 원고에 대한 비밀유지협약(NDA)을 철저히 준수하며, 납품 후 오탈자나 수정 사항 확인 시 담당 에디터가 신속하고 책임감 있게 피드백을 반영해 드립니다.

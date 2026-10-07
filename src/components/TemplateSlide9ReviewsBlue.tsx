@@ -28,7 +28,7 @@ export default function TemplateSlide9ReviewsBlue() {
       role: '고3 킬러문항반',
       inst: '분당 입시학원',
       quote: '학원 자체 교재 템플릿 양식에 맞춰 최종 문서 1:1 완결 출력.',
-      detail: '지정한 자간, 장평, 2단 레이아웃 그대로 납품받아 재편집 0분 달성.'
+      detail: '지정한 자간, 장평, 2단 레이아웃 그대로 납품받아 번거로운 서식 재편집 없이 바로 활용.'
     },
     {
       author: '정○우 소장',

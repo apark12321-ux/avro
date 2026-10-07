@@ -19,7 +19,7 @@ export default function FactsheetContactModal({
     phone: '',
     serviceType: defaultMode === 'sample' ? '샘플 3문항 무료 테스트' : '수학 문항 조판 정기 외주',
     documentType: '스캔 PDF 시험지',
-    questionCount: defaultMode === 'sample' ? '3문항 (무상 샘플)' : '100문항 내외',
+    questionCount: defaultMode === 'sample' ? '3문항 (무료 샘플 테스트)' : '100문항 내외',
     message: ''
   });
 
@@ -32,7 +32,7 @@ export default function FactsheetContactModal({
       setFormData(prev => ({
         ...prev,
         serviceType: defaultMode === 'sample' ? '샘플 3문항 무료 테스트' : '수학 문항 조판 정기 외주',
-        questionCount: defaultMode === 'sample' ? '3문항 (무상 샘플)' : '100문항 내외'
+        questionCount: defaultMode === 'sample' ? '3문항 (무료 샘플 테스트)' : '100문항 내외'
       }));
       setIsSuccess(false);
       setErrorMessage('');
@@ -61,7 +61,7 @@ export default function FactsheetContactModal({
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-xs font-sans">
       <div 
         onClick={(e) => e.stopPropagation()}
-        className="relative w-full max-w-lg bg-white text-zinc-900 rounded-sm p-6 sm:p-8 shadow-2xl border border-zinc-300 max-h-[92vh] overflow-y-auto"
+        className="relative w-full max-w-lg bg-white text-zinc-900 rounded-2xl p-6 sm:p-8 shadow-2xl border border-zinc-200 max-h-[92vh] overflow-y-auto"
       >
         {/* Close Button */}
         <button
@@ -74,19 +74,19 @@ export default function FactsheetContactModal({
 
         {isSuccess ? (
           <div className="text-center py-6">
-            <div className="w-12 h-12 bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto mb-4 rounded-none">
+            <div className="w-12 h-12 bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto mb-4 rounded-full">
               <CheckCircle2 className="w-7 h-7" />
             </div>
             <h3 className="text-xl font-bold text-zinc-900 mb-1">
               접수 완료
             </h3>
             <p className="text-xs text-zinc-600 mb-5 leading-relaxed">
-              1시간 이내에 기재해주신 연락처로 상세 견적 및 원고 접수 절차를 회신드립니다.
+              기재해주신 연락처로 상세 견적 및 원고 접수 절차를 신속히 회신드립니다.
             </p>
 
             <button
               onClick={onClose}
-              className="px-6 py-2.5 bg-black text-white font-bold rounded-sm text-xs cursor-pointer"
+              className="px-6 py-2.5 bg-[#0066EE] text-white font-bold rounded-lg text-xs cursor-pointer shadow-md"
             >
               닫기
             </button>
@@ -94,7 +94,7 @@ export default function FactsheetContactModal({
         ) : (
           <div>
             <div className="text-center mb-5">
-              <div className="inline-flex items-center gap-1 px-2.5 py-0.5 bg-[#008CFF]/10 text-[#008CFF] text-[11px] font-bold mb-1.5 rounded-none">
+              <div className="inline-flex items-center gap-1 px-3 py-1 bg-[#0066EE]/10 text-[#0066EE] text-xs font-bold mb-2 rounded-full">
                 <Sparkles className="w-3 h-3" />
                 <span>접수 창구</span>
               </div>
@@ -221,7 +221,7 @@ export default function FactsheetContactModal({
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full py-3 bg-[#008CFF] hover:bg-[#0070cc] text-white font-bold rounded-sm transition-all flex items-center justify-center gap-1.5 cursor-pointer disabled:opacity-70 text-sm"
+                  className="w-full py-3 bg-[#0066EE] hover:bg-[#0052cc] text-white font-bold rounded-xl transition-all flex items-center justify-center gap-1.5 cursor-pointer disabled:opacity-70 text-sm shadow-md shadow-[#0066EE]/30"
                 >
                   {isSubmitting ? '전송 중...' : '신청 접수하기'}
                 </button>
