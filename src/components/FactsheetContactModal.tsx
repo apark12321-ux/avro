@@ -17,7 +17,7 @@ export default function FactsheetContactModal({
     company: '',
     email: '',
     phone: '',
-    serviceType: defaultMode === 'sample' ? '샘플 3문항 무료 테스트' : '수학 문항 조판 정기 외주',
+    serviceType: defaultMode === 'sample' ? '샘플 3문항 무료 테스트' : '전과목 시험지 조판 외주',
     documentType: '스캔 PDF 시험지',
     questionCount: defaultMode === 'sample' ? '3문항 (무료 샘플 테스트)' : '100문항 내외',
     message: ''
@@ -31,7 +31,7 @@ export default function FactsheetContactModal({
     if (isOpen) {
       setFormData(prev => ({
         ...prev,
-        serviceType: defaultMode === 'sample' ? '샘플 3문항 무료 테스트' : '수학 문항 조판 정기 외주',
+        serviceType: defaultMode === 'sample' ? '샘플 3문항 무료 테스트' : '전과목 시험지 조판 외주',
         questionCount: defaultMode === 'sample' ? '3문항 (무료 샘플 테스트)' : '100문항 내외'
       }));
       setIsSuccess(false);
@@ -221,8 +221,8 @@ export default function FactsheetContactModal({
                     className="w-full px-3 py-2 rounded-sm border border-zinc-300 focus:border-[#008CFF] outline-none bg-white"
                   >
                     <option value="샘플 3문항 무료 변환 테스트">샘플 3문항 무료 변환 테스트</option>
-                    <option value="PDF → HWP 완벽 변환 (메인)">PDF → HWP 완벽 변환 (메인)</option>
-                    <option value="수학·과학 수식 정밀 타이핑">수학·과학 수식 정밀 타이핑</option>
+                    <option value="PDF → HWP 정밀 변환 (메인)">PDF → HWP 정밀 변환 (메인)</option>
+                    <option value="전과목 수식·지문 정밀 전산화">전과목 수식·지문 정밀 전산화</option>
                     <option value="캡처 사진/저화질 이미지 고화질 업스케일">캡처 사진/저화질 이미지 고화질 업스케일</option>
                     <option value="고객사 지정 템플릿 맞춤 출력">고객사 지정 템플릿 맞춤 출력</option>
                     <option value="스캔 시험지 / 이미지 HWP 전산화">스캔 시험지 / 이미지 HWP 전산화</option>

@@ -16,26 +16,26 @@ export default function WebServiceOverview({ onOpenModal }: WebServiceOverviewPr
   const capabilities = [
     {
       category: '메인 업무',
-      title: 'PDF → HWP / HWPX 정밀 변환',
-      desc: '스캔 PDF나 시험지 사진을 100% 수정·편집 가능한 정품 한글 문서로 원본 복원합니다. 표, 다단, 문단 스타일이 완벽히 유지됩니다.',
+      title: 'PDF → 정품 HWP 정밀 변환',
+      desc: '스캔 PDF·시험지 사진을 표·다단 스타일이 살아있는 편집 가능한 한글 문서로 복원합니다.',
       icon: <FileType className="w-5 h-5 text-[#0066EE]" />
     },
     {
-      category: '수식 전산화',
-      title: '수학·과학 복잡 수식 정밀 타이핑',
-      desc: '단순 OCR의 오류를 배제하고, 수학교육 및 이공계 전담 인력이 한글 수식 편집기로 표준 수식을 100% 전산화 타이핑합니다.',
+      category: '전과목 전산화',
+      title: '수식·지문 한글 표준화',
+      desc: '수학 수식부터 국·영 긴 지문과 도표까지 한글 표준 코드로 변환해 자유로운 편집·수정이 가능합니다.',
       icon: <FileCheck className="w-5 h-5 text-[#0066EE]" />
     },
     {
       category: '도판 최적화',
-      title: '캡처본 & 저화질 이미지 고화질 업스케일',
-      desc: '고단가의 신규 드로잉 대신, 캡처 사진이나 흐릿한 원본 이미지를 노이즈 없이 300dpi급으로 깔끔하게 업스케일 변환합니다. (원본 이미지 필수)',
+      title: '캡처본 300dpi 고화질 업스케일',
+      desc: '신규 작도 비용 부담 없이, 원본 캡처 노이즈를 제거해 300dpi 인쇄용 고해상도로 개선합니다.',
       icon: <Maximize2 className="w-5 h-5 text-[#0066EE]" />
     },
     {
       category: '서식 커스텀',
-      title: '학원·출판사 맞춤 템플릿 1:1 매칭',
-      desc: '고객사 전용 스타일 시트(글꼴, 장평, 자간, 수능 2단/내신 1단)를 100% 반영하여 수령 즉시 불필요한 서식 재작업 없이 바로 활용 가능합니다.',
+      title: '고객사 맞춤 템플릿 1:1 매칭',
+      desc: '귀사 고유 폰트, 자간, 2단 규격을 충실히 반영해 수령 즉시 수업에 활용할 수 있습니다.',
       icon: <Layers className="w-5 h-5 text-[#0066EE]" />
     }
   ];
@@ -50,11 +50,10 @@ export default function WebServiceOverview({ onOpenModal }: WebServiceOverviewPr
             SERVICE OVERVIEW
           </span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-zinc-900 mb-3">
-            간결하고 완벽한 출판 인쇄 규격 HWP
+            출판 인쇄 규격에 맞춘 정밀 HWP
           </h2>
           <p className="text-zinc-600 text-sm sm:text-base font-medium leading-relaxed">
-            웹 기반 자동 변환기의 한계를 극복하고, 수식 오탈자 0%와 고화질 도판, 
-            고객사 전용 템플릿까지 완결된 상태로 최종본을 납품합니다.
+            정밀 수식 입력, 고화질 도판 복원, 귀사 맞춤 템플릿 적용으로 바로 쓰는 최종본을 제공합니다.
           </p>
         </div>
 
@@ -86,7 +85,7 @@ export default function WebServiceOverview({ onOpenModal }: WebServiceOverviewPr
 
               <div className="mt-6 pt-3 border-t border-zinc-100 flex items-center gap-1.5 text-xs text-[#0066EE] font-bold">
                 <CheckCircle2 className="w-3.5 h-3.5" />
-                <span>표준 검수 통과 보장</span>
+                <span>자체 3단계 검수 완료</span>
               </div>
             </div>
           ))}
@@ -100,17 +99,12 @@ export default function WebServiceOverview({ onOpenModal }: WebServiceOverviewPr
               <span>도판 작업 핵심 정책 안내</span>
             </div>
 
-            <h3 className="text-2xl sm:text-3xl font-black mb-3 leading-snug">
-              신규 드로잉은 단가 부담으로 미진행,
-              <br />
-              전달 원본의 <span className="text-[#38BDF8]">고화질 클린 업스케일</span>에 집중합니다.
+            <h3 className="text-xl sm:text-2xl font-black mb-2 leading-snug">
+              신규 작도 비용 부담 없이, <span className="text-[#38BDF8]">고화질 클린 업스케일</span>로 해결합니다
             </h3>
 
-            <p className="text-blue-100 text-xs sm:text-sm md:text-base leading-relaxed font-medium mb-6">
-              그림이나 도형을 처음부터 직접 새로 그리는 작업은 단가가 너무 높아 고객의 부담이 큽니다.
-              합리적인 외주 단가와 신속 납품을 실현하기 위해 <strong>신규 드로잉은 진행하지 않으며, 
-              고객이 전달해주신 캡처 사진이나 퀄리티 낮은 원본 이미지를 고화질로 업스케일하여 깔끔하게 변환</strong>해 드리는 서비스만 전문으로 제공합니다.
-              따라서 변환할 캡처 사진, 시험지 사진 등 원본 이미지가 반드시 필요합니다.
+            <p className="text-blue-100 text-xs sm:text-sm leading-relaxed font-normal mb-5">
+              높은 단가의 신규 드로잉 대신, 원본 캡처본을 300dpi 인쇄용 고화질로 업스케일·리터칭하여 합리적인 단가로 완성합니다. (원본 이미지 접수 필수)
             </p>
 
             <div className="flex flex-wrap items-center gap-3">
@@ -118,10 +112,10 @@ export default function WebServiceOverview({ onOpenModal }: WebServiceOverviewPr
                 onClick={() => onOpenModal('sample')}
                 className="px-6 py-2.5 rounded-full bg-white text-[#0066EE] font-black text-xs sm:text-sm hover:bg-zinc-100 transition-all shadow cursor-pointer"
               >
-                무료 샘플 3문항 변환 테스트 신청
+                무료 샘플 3문항 신청
               </button>
               <span className="text-xs text-blue-200 font-medium">
-                ※ 보유 원고의 캡처본으로 변환 품질을 먼저 확인하실 수 있습니다.
+                ※ 보유 원고 캡처본으로 변환 품질을 먼저 확인하세요.
               </span>
             </div>
           </div>

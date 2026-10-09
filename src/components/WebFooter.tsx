@@ -35,8 +35,8 @@ export default function WebFooter({
         </h2>
 
         {/* Subtitle in Brackets */}
-        <p className="text-sm sm:text-lg md:text-xl font-bold text-blue-200 tracking-wide mb-10">
-          [ PDF to HWP 전산화 · 수식 타이핑 · 캡처 이미지 고화질 업스케일 ]
+        <p className="text-sm sm:text-base font-bold text-blue-200 tracking-wide mb-10">
+          [ PDF to HWP 정밀 변환 · 수식 표준화 · 300dpi 도판 복원 ]
         </p>
 
         {/* Action Buttons */}

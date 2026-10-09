@@ -46,7 +46,7 @@ export default function WebNavbar({ onOpenModal }: WebNavbarProps) {
             </div>
             <div className="flex items-baseline gap-1.5 leading-none">
               <span className="font-black tracking-tight text-lg sm:text-xl text-white">AVRO</span>
-              <span className="text-[11px] text-zinc-400 font-medium hidden sm:inline">문서 변환 &amp; 수식 조판 전문 기업</span>
+              <span className="text-[11px] text-zinc-400 font-medium hidden sm:inline">전과목 시험지 &amp; HWP 조판</span>
             </div>
           </div>
 
@@ -112,7 +112,7 @@ export default function WebNavbar({ onOpenModal }: WebNavbarProps) {
               서비스 소개
             </button>
             <button onClick={() => scrollTo('conversion-sample')} className="text-left py-1 text-[#38BDF8] font-bold">
-              변환 샘플 비교 (선별 ➔ 빈출유형 1회)
+              변환 샘플 비교
             </button>
             <button onClick={() => scrollTo('core-tech')} className="text-left py-1 hover:text-[#38BDF8]">
               수식 &amp; 이미지 업스케일

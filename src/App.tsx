@@ -31,7 +31,7 @@ export default function App() {
       <WebHero onOpenModal={handleOpenModal} />
 
       {/* Conversion Workstation Showcase: [선별 원고 캡처] ➔ [빈출유형 1회 최종 HWP] (No company names) */}
-      <ConversionWorkstation />
+      <ConversionWorkstation onOpenSampleModal={() => handleOpenModal('sample')} />
 
       {/* Service Overview & Upscale Technology Policy */}
       <WebServiceOverview onOpenModal={handleOpenModal} />
