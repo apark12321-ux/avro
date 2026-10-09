@@ -17,9 +17,11 @@ export default function QuickQuoteModal({ isOpen, onClose }: QuickQuoteModalProp
   if (!isOpen) return null;
 
   const docTypes = [
-    '스캔 PDF / 시험지 캡처',
-    '인쇄 교재 / 기출 문제집',
-    '손글씨 / 필기 원고',
+    '공공·행정 문서 / 조례·규정집 (스캔본)',
+    '연구소·엔지니어링 시방서 / 계산서',
+    '법률 판결문 / 특허명세서 / 재무제표',
+    '교육 시험지 / 기출 문제집 / 교재',
+    '손글씨 / 필기 원고 / 도면 캡처',
     '기존 HWP (서식 깨짐 재조판)'
   ];
 

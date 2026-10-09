@@ -15,27 +15,27 @@ interface WebServiceOverviewProps {
 export default function WebServiceOverview({ onOpenModal }: WebServiceOverviewProps) {
   const capabilities = [
     {
-      category: '메인 업무',
-      title: 'PDF → 정품 HWP 정밀 변환',
-      desc: '스캔 PDF·시험지 사진을 표·다단 스타일이 살아있는 편집 가능한 한글 문서로 복원합니다.',
+      category: '문서 엔지니어링',
+      title: 'PDF → 정품 HWP/HWPX 정밀 전산화',
+      desc: '스캔 PDF·이미지의 복합 다단 표, 들여쓰기, 행간 스타일이 온전히 살아있는 100% 편집 가능한 한글 문서로 복원합니다.',
       icon: <FileType className="w-5 h-5 text-[#0066EE]" />
     },
     {
-      category: '전과목 전산화',
-      title: '수식·지문 한글 표준화',
-      desc: '수학 수식부터 국·영 긴 지문과 도표까지 한글 표준 코드로 변환해 자유로운 편집·수정이 가능합니다.',
+      category: '전문 수식 코드화',
+      title: '수학·공학 수식 한글 표준화',
+      desc: '수학 수식부터 공학 계산서의 그리스 문자, 첨자, 행렬식까지 한글 표준 수식 코드로 1:1 변환해 자유로운 수정을 보장합니다.',
       icon: <FileCheck className="w-5 h-5 text-[#0066EE]" />
     },
     {
-      category: '도판 최적화',
-      title: '캡처본 300dpi 고화질 업스케일',
-      desc: '신규 작도 비용 부담 없이, 원본 캡처 노이즈를 제거해 300dpi 인쇄용 고해상도로 개선합니다.',
+      category: '도판 & 도면 최적화',
+      title: '300dpi 인쇄용 고화질 업스케일',
+      desc: '기하 도형 작도, 특허 도면, 공학 다이어그램의 스캔 노이즈와 계단 현상을 제거해 출판·인쇄 규격에 부합하게 복원합니다.',
       icon: <Maximize2 className="w-5 h-5 text-[#0066EE]" />
     },
     {
-      category: '서식 커스텀',
-      title: '고객사 맞춤 템플릿 1:1 매칭',
-      desc: '귀사 고유 폰트, 자간, 2단 규격을 충실히 반영해 수령 즉시 수업에 활용할 수 있습니다.',
+      category: '양식 1:1 매칭',
+      title: '기관·기업 맞춤 전용 템플릿',
+      desc: '행정안전부 공문서 규격, 사내 고유 결재선, 학원 2단 레이아웃 규격을 충실히 반영해 수령 즉시 실무에 투입할 수 있습니다.',
       icon: <Layers className="w-5 h-5 text-[#0066EE]" />
     }
   ];
@@ -46,14 +46,16 @@ export default function WebServiceOverview({ onOpenModal }: WebServiceOverviewPr
         
         {/* Section Header */}
         <div className="text-left mb-14 max-w-3xl">
-          <span className="text-xs sm:text-sm font-black text-[#0066EE] tracking-widest uppercase block mb-2">
-            SERVICE OVERVIEW
-          </span>
+          <div className="flex items-center gap-2 text-xs font-mono text-[#0066EE] uppercase tracking-wider mb-2 font-bold">
+            <span>CORE ENGINEERING CAPABILITIES</span>
+            <span aria-hidden="true">·</span>
+            <span>핵심 기술 역량</span>
+          </div>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-zinc-900 mb-3">
-            출판 인쇄 규격에 맞춘 정밀 HWP
+            공식 표준 서식 규격에 맞춘 <span className="text-[#0066EE]">완성형 HWP 문서</span>
           </h2>
           <p className="text-zinc-600 text-sm sm:text-base font-medium leading-relaxed">
-            정밀 수식 입력, 고화질 도판 복원, 귀사 맞춤 템플릿 적용으로 바로 쓰는 최종본을 제공합니다.
+            정밀 수식 입력, 고화질 도판 복원, 귀사 맞춤 템플릿 적용으로 추가 편집 부담 없는 실무 최종본을 제공합니다.
           </p>
         </div>
 
@@ -66,10 +68,10 @@ export default function WebServiceOverview({ onOpenModal }: WebServiceOverviewPr
             >
               <div>
                 <div className="flex items-center justify-between mb-4">
-                  <span className="text-[11px] font-black px-2.5 py-1 rounded bg-blue-50 text-[#0066EE] border border-blue-100">
+                  <span className="text-[11px] font-bold text-[#0066EE] tracking-wide">
                     {item.category}
                   </span>
-                  <div className="w-9 h-9 rounded-full bg-blue-50 flex items-center justify-center">
+                  <div className="w-9 h-9 rounded-xl bg-blue-50 flex items-center justify-center">
                     {item.icon}
                   </div>
                 </div>
@@ -85,7 +87,7 @@ export default function WebServiceOverview({ onOpenModal }: WebServiceOverviewPr
 
               <div className="mt-6 pt-3 border-t border-zinc-100 flex items-center gap-1.5 text-xs text-[#0066EE] font-bold">
                 <CheckCircle2 className="w-3.5 h-3.5" />
-                <span>자체 3단계 검수 완료</span>
+                <span>2단계 크로스 검수 완료</span>
               </div>
             </div>
           ))}

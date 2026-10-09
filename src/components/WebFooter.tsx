@@ -20,23 +20,23 @@ export default function WebFooter({
 
       <div className="max-w-[1440px] mx-auto px-6 sm:px-12 md:px-16 text-center relative z-10">
         
-        {/* Top Brand Label */}
+        {/* Top Brand Label with unboxed typography */}
         <div className="mb-4">
-          <span className="text-xs sm:text-sm font-bold tracking-widest text-[#38BDF8] uppercase">
-            AVRO TYPESETTING SUITE
+          <span className="text-xs sm:text-sm font-bold tracking-widest text-[#38BDF8] uppercase font-mono">
+            AVRO DOCUMENT ENGINEERING SUITE
           </span>
         </div>
 
         {/* Closing Title */}
         <h2 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight leading-tight mb-4 text-white">
-          문서 변환과 수식 조판의 완결,
+          공문서·기술서·시험지 조판의 완결,
           <br />
-          <span className="text-[#38BDF8]">지금 전문가와 함께하세요.</span>
+          <span className="text-[#38BDF8]">지금 에이브로와 함께하세요.</span>
         </h2>
 
-        {/* Subtitle in Brackets */}
+        {/* Subtitle in Unboxed Style */}
         <p className="text-sm sm:text-base font-bold text-blue-200 tracking-wide mb-10">
-          [ PDF to HWP 정밀 변환 · 수식 표준화 · 300dpi 도판 복원 ]
+          공공행정 표준 공문서 · 연구 기술계산서 &amp; 도판 · 특허·재무 서식 · 출판·시험지 정밀 조판
         </p>
 
         {/* Action Buttons */}
@@ -46,14 +46,14 @@ export default function WebFooter({
             className="w-full sm:w-auto px-8 py-3.5 rounded-full bg-[#0066EE] hover:bg-[#0052cc] text-white font-bold text-sm sm:text-base shadow-lg shadow-[#0066EE]/40 active:scale-95 transition-all flex items-center justify-center gap-2 cursor-pointer"
           >
             <Sparkles className="w-4 h-4 text-[#38BDF8]" />
-            <span>샘플 3문항 무료 테스트</span>
+            <span>무료 샘플 3쪽/3문항 테스트</span>
           </button>
 
           <button
             onClick={() => onOpenModal('inquiry')}
             className="w-full sm:w-auto px-8 py-3.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-white font-bold text-sm sm:text-base active:scale-95 transition-all flex items-center justify-center gap-2 cursor-pointer"
           >
-            <span>외주 작업 문의</span>
+            <span>외주 견적 · 프로젝트 문의</span>
             <ArrowRight className="w-4 h-4 text-zinc-300" />
           </button>
         </div>
@@ -79,17 +79,17 @@ export default function WebFooter({
           <div>
             인천광역시 서구 청라에메랄드로 99
           </div>
-
-          <div className="flex items-center gap-3 text-zinc-400">
-            <button onClick={onOpenTerms} className="hover:text-white transition-colors cursor-pointer">
+          <div className="flex items-center gap-4">
+            <button onClick={onOpenTerms} className="hover:text-zinc-300 transition-colors cursor-pointer">
               이용약관
             </button>
-            <span>|</span>
-            <button onClick={onOpenPrivacy} className="hover:text-white transition-colors cursor-pointer">
+            <span className="text-zinc-700">|</span>
+            <button onClick={onOpenPrivacy} className="hover:text-zinc-300 transition-colors cursor-pointer">
               개인정보처리방침
             </button>
-            <span>|</span>
-            <span>Copyright © AVRO Inc. All Rights Reserved.</span>
+          </div>
+          <div>
+            © {new Date().getFullYear()} AVRO Inc. All rights reserved.
           </div>
         </div>
 

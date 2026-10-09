@@ -220,27 +220,28 @@ export default function FactsheetContactModal({
                     onChange={(e) => setFormData({ ...formData, serviceType: e.target.value })}
                     className="w-full px-3 py-2 rounded-sm border border-zinc-300 focus:border-[#008CFF] outline-none bg-white"
                   >
-                    <option value="샘플 3문항 무료 변환 테스트">샘플 3문항 무료 변환 테스트</option>
-                    <option value="PDF → HWP 정밀 변환 (메인)">PDF → HWP 정밀 변환 (메인)</option>
-                    <option value="전과목 수식·지문 정밀 전산화">전과목 수식·지문 정밀 전산화</option>
-                    <option value="캡처 사진/저화질 이미지 고화질 업스케일">캡처 사진/저화질 이미지 고화질 업스케일</option>
-                    <option value="고객사 지정 템플릿 맞춤 출력">고객사 지정 템플릿 맞춤 출력</option>
-                    <option value="스캔 시험지 / 이미지 HWP 전산화">스캔 시험지 / 이미지 HWP 전산화</option>
+                    <option value="무료 샘플 3쪽/3문항 변환 테스트">무료 샘플 3쪽/3문항 변환 테스트</option>
+                    <option value="공공·행정 공문서 / 조례·규정집 전산화">공공·행정 공문서 / 조례·규정집 전산화</option>
+                    <option value="연구소·엔지니어링 시방서 / 계산서 전산화">연구소·엔지니어링 시방서 / 계산서 전산화</option>
+                    <option value="법률 판결문 / 특허명세서 / 재무제표 전산화">법률 판결문 / 특허명세서 / 재무제표 전산화</option>
+                    <option value="교육 시험지 / 교재 / 모의고사 조판 외주">교육 시험지 / 교재 / 모의고사 조판 외주</option>
+                    <option value="PDF → 정품 HWP/HWPX 정밀 변환">PDF → 정품 HWP/HWPX 정밀 변환</option>
                   </select>
                 </div>
                 <div>
                   <label className="block font-bold text-zinc-800 mb-1">
-                    원고 형태 <span className="text-[#008CFF] font-normal text-[10px]">(캡처/사진 필수)</span>
+                    원고 형태 <span className="text-[#008CFF] font-normal text-[10px]">(스캔/캡처)</span>
                   </label>
                   <select
                     value={formData.documentType}
                     onChange={(e) => setFormData({ ...formData, documentType: e.target.value })}
                     className="w-full px-3 py-2 rounded-sm border border-zinc-300 focus:border-[#008CFF] outline-none bg-white"
                   >
-                    <option value="스캔 PDF 시험지">스캔 PDF 시험지</option>
-                    <option value="캡처 사진 / 휴대폰 촬영본">캡처 사진 / 휴대폰 촬영본</option>
-                    <option value="기존 HWP 초안 (서식 교정)">기존 HWP 초안</option>
-                    <option value="사진/스캔 이미지">사진/스캔 이미지</option>
+                    <option value="스캔 PDF (공문서/기술서/시험지)">스캔 PDF (공문서/기술서/시험지)</option>
+                    <option value="도면 / 도판 / 그래프 포함 원고">도면 / 도판 / 그래프 포함 원고</option>
+                    <option value="스마트폰 촬영본 / 책 스캔 캡처본">스마트폰 촬영본 / 책 스캔 캡처본</option>
+                    <option value="손글씨 / 필기 원고">손글씨 / 필기 원고</option>
+                    <option value="기존 HWP 초안 (서식 교정)">기존 HWP 초안 (서식 교정)</option>
                   </select>
                 </div>
               </div>
