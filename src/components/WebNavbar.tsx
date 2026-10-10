@@ -46,7 +46,7 @@ export default function WebNavbar({ onOpenModal }: WebNavbarProps) {
             </div>
             <div className="flex items-baseline gap-1.5 leading-none">
               <span className="font-black tracking-tight text-lg sm:text-xl text-white">AVRO</span>
-              <span className="text-[11px] text-zinc-400 font-medium hidden sm:inline">공문서·기술서·시험지 HWP 조판</span>
+              <span className="text-[11px] text-zinc-400 font-medium hidden sm:inline">공문서·업무서식·시험지 HWP 조판</span>
             </div>
           </div>
 

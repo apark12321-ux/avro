@@ -105,7 +105,7 @@ export default function WebEnterpriseTrust() {
                 2-STAGE CROSS-INSPECTION WORKFLOW
               </span>
               <h3 className="text-lg sm:text-xl font-bold text-zinc-900">
-                에이브로 표준 전산화 4단계 작업 공정
+                표준 전산화 4단계 작업 공정
               </h3>
             </div>
             <span className="text-xs text-zinc-500 font-mono">

@@ -1,6 +1,6 @@
 import { 
   Building2, 
-  Cpu, 
+  Briefcase, 
   Scale, 
   GraduationCap, 
   ShieldCheck, 
@@ -16,16 +16,16 @@ export default function WebWhyAndSolutions() {
       desc: '스캔된 조례·지침서의 깨진 표를 행정안전부 공문서 규격에 맞게 복원해 전자결재 등록을 완결합니다.'
     },
     {
-      icon: <Cpu className="w-5 h-5 text-[#0066EE]" />,
-      role: '연구소 · 엔지니어링 실무진',
-      headline: "연구진의 핵심은 '그리스 수식 씨름'이 아닌 '기술 설계와 분석'",
-      desc: '시방서·구조계산서의 첨자·그리스 문자와 CAD 도판을 300dpi 인쇄 규격 HWP로 정밀 전산화합니다.'
+      icon: <Briefcase className="w-5 h-5 text-[#0066EE]" />,
+      role: '기업 경영지원 · 인사총무팀',
+      headline: "실무자의 핵심은 '양식 재작업 노가다'가 아닌 '사내 업무 운영'",
+      desc: '스캔된 사내 업무 매뉴얼, 프로세스 흐름도, 부서 결재 기안 양식을 한글 표준 도형과 표로 말끔하게 복원합니다.'
     },
     {
       icon: <Scale className="w-5 h-5 text-[#0066EE]" />,
-      role: '법률 · 특허 · 회계 법인',
-      headline: "전문가의 자산은 '오탈자 교정'이 아닌 '정밀 자문과 변론'",
-      desc: '소송 판결문, 특허 도면, 재무제표 표 서식을 2단계 교차 검수로 오차 없이 복원하며 NDA를 준수합니다.'
+      role: '법무 · 계약 · 사규 관리자',
+      headline: "관리자의 자산은 '오탈자 교정'이 아닌 '리스크 검토와 협상'",
+      desc: '계약서 조항, 취업규칙 사규집, 거래 약관의 번호 체계와 다단 표를 2단계 교차 검수로 오차 없이 복원합니다.'
     },
     {
       icon: <GraduationCap className="w-5 h-5 text-[#0066EE]" />,

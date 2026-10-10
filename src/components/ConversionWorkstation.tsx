@@ -36,11 +36,11 @@ export default function ConversionWorkstation({ onOpenSampleModal }: ConversionW
           </div>
 
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tight text-white mb-3">
-            불규칙한 스캔본·도면을 <span className="text-[#38BDF8]">완성형 HWP 문서</span>로
+            불규칙한 스캔본·서식을 <span className="text-[#38BDF8]">완성형 HWP 문서</span>로
           </h2>
 
           <p className="text-zinc-300 text-xs sm:text-sm max-w-2xl mx-auto leading-relaxed">
-            교육 기하 수식(실제 검증 샘플)부터 공공 조례 표, 엔지니어링 계산서까지 슬라이더를 드래그하여 원고 대비 HWP 완결본 품질을 직접 확인하세요.
+            교육 시험지 기하 수식(실제 의뢰 원고)부터 공공 조례 표, 사내 업무 매뉴얼 순서도까지 슬라이더를 드래그하여 원고 대비 HWP 완결본 품질을 직접 확인하세요.
           </p>
 
           {/* Quick Action Bar including Quick Quote & Sample Request */}

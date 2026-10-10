@@ -2,9 +2,9 @@ import { ChevronRight, ShieldCheck } from 'lucide-react';
 
 export default function WebProcess() {
   const steps = [
-    { code: 'STEP 01', title: '원고 접수 & NDA', desc: 'PDF·도면·스캔본 접수 및 기밀유지협약 체결' },
+    { code: 'STEP 01', title: '원고 접수 & NDA', desc: 'PDF·스캔본·인쇄본 접수 및 기밀유지협약 체결' },
     { code: 'STEP 02', title: '1차 정밀 전산화', desc: '한글 표준 수식·복합 다단 표 1:1 입력' },
-    { code: 'STEP 03', title: '도판 300dpi 복원', desc: '도면·도판 인쇄용 고해상도 벡터화 및 리터칭' },
+    { code: 'STEP 03', title: '도형·도판 300dpi 복원', desc: '기하 도형·순서도 인쇄용 고해상도 벡터화' },
     { code: 'STEP 04', title: '2차 수석 교차 검수', desc: '원본 1:1 대조 및 수치·서식 무결성 검증' },
     { code: 'STEP 05', title: '정품 HWP 납품', desc: '고객사 전용 템플릿 완결본 납품 및 원본 파기' },
   ];

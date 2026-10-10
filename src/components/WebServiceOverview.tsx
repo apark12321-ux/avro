@@ -22,14 +22,14 @@ export default function WebServiceOverview({ onOpenModal }: WebServiceOverviewPr
     },
     {
       category: '전문 수식 코드화',
-      title: '수학·공학 수식 한글 표준화',
-      desc: '수학 수식부터 공학 계산서의 그리스 문자, 첨자, 행렬식까지 한글 표준 수식 코드로 1:1 변환해 자유로운 수정을 보장합니다.',
+      title: '수학·과학 수식 한글 표준화',
+      desc: '분수, 근호, 미적분, 그리스 문자 등 복잡한 수식을 한글 표준 수식 코드로 1:1 변환해 자유로운 수정을 보장합니다.',
       icon: <FileCheck className="w-5 h-5 text-[#0066EE]" />
     },
     {
-      category: '도판 & 도면 최적화',
-      title: '300dpi 인쇄용 고화질 업스케일',
-      desc: '기하 도형 작도, 특허 도면, 공학 다이어그램의 스캔 노이즈와 계단 현상을 제거해 출판·인쇄 규격에 부합하게 복원합니다.',
+      category: '도형 & 순서도 최적화',
+      title: '300dpi 인쇄용 고화질 벡터화',
+      desc: '기하 도형 작도, 다이어그램, 프로세스 순서도의 스캔 노이즈와 계단 현상을 제거해 출판·인쇄 규격에 부합하게 복원합니다.',
       icon: <Maximize2 className="w-5 h-5 text-[#0066EE]" />
     },
     {

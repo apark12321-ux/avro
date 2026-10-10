@@ -45,7 +45,7 @@ export default function SampleBeforeAfterViewer({ onOpenSampleModal }: SampleBef
         ]
       },
       afterSummary: {
-        tag: '에이브로 납품본 (정품 HWP)',
+        tag: '정밀 조판 납품본 (정품 HWP)',
         features: [
           '한글 표준 수식 코드(overline, angle) 1:1 완결 입력',
           '300dpi 출판 인쇄용 벡터 작도 (모서리·원호 선명 복원)',
@@ -74,7 +74,7 @@ export default function SampleBeforeAfterViewer({ onOpenSampleModal }: SampleBef
         ]
       },
       afterSummary: {
-        tag: '에이브로 납품본 (정품 HWP)',
+        tag: '정밀 조판 납품본 (정품 HWP)',
         features: [
           '직각삼각형 및 수선 DE를 300dpi 벡터로 완벽 작도',
           '각의 이등분선 표기 점(••)과 직각 기호(∟) 정밀 배치',
@@ -102,7 +102,7 @@ export default function SampleBeforeAfterViewer({ onOpenSampleModal }: SampleBef
         ]
       },
       afterSummary: {
-        tag: '에이브로 납품본 (정품 HWP)',
+        tag: '정밀 조판 납품본 (정품 HWP)',
         features: [
           '행정안전부 공문서 서식 편람 1:1 표준 규격 준수',
           '표 테두리·셀 배경 음영(10%) 및 정렬 한글 표준화',
@@ -114,31 +114,31 @@ export default function SampleBeforeAfterViewer({ onOpenSampleModal }: SampleBef
       choices: ['1. 국가유공자: 100% 감면', '2. 관내 거주자: 30% 감면', '3. 취소 3일전: 80% 반환', '4. 당일 취소: 50% 반환']
     },
     {
-      id: 'engineering-specs',
-      category: '연구 · 엔지니어링',
-      title: '구조계산서 허용응력식 & 설계 도판 복원',
-      filename: '엔지니어링_구조계산서_수식도판_전후비교',
-      badge: '그리스 문자(σ, τ) & 적분·분수식 & 300dpi 도판',
-      hwpScript: 'sigma _{max} = {M cdot y} over {I _{x}} le sigma _{all} # tau = {V cdot Q} over {I cdot b}',
+      id: 'corporate-manual',
+      category: '기업 · 사내 서식',
+      title: '사내 업무 매뉴얼 & 결재 보고서 프로세스 복원',
+      filename: '기업실무_업무매뉴얼_프로세스도_전후비교',
+      badge: '업무 흐름도 & 다단 결재선 & 사내 표준 템플릿',
+      hwpScript: '표 1. 부서별 핵심 업무 프로세스 [기획 → 검토 → 결재 → 실행]',
       beforeSummary: {
-        tag: '기술 원고 (구조계산서 캡처)',
+        tag: '스캔 원고 (인쇄 매뉴얼 캡처)',
         issues: [
-          '그리스 문자(σ, τ, Δ) 및 위/아래 첨자 폰트 전면 깨짐',
-          '단면 2차 모멘트(Ix) 분수식 분모·분자 선 분절',
-          '도판 치수선 및 지시선의 저해상도 뭉개짐'
+          '인쇄 복사로 인한 순서도 도형 테두리 분절 및 먹번짐',
+          '텍스트 상자 내 글자 깨짐으로 내용 수정 불가',
+          '사내 보고서 양식 불일치로 결재 상신 불가 상태'
         ]
       },
       afterSummary: {
-        tag: '에이브로 납품본 (정품 HWP)',
+        tag: '정밀 조판 납품본 (정품 HWP)',
         features: [
-          '한글 수식 편집기 공식 명령어(sigma, tau, over) 100% 입력',
-          '단면도 및 응력 분포도 300dpi 고화질 벡터화 리터칭',
-          '토목·건축 시방서 규격 폰트 및 수치 정밀 검수 완결'
+          '한글 표준 그리기 개체(선·도형·화살표)로 1:1 완결 조판',
+          '모든 텍스트 상자 즉시 수정 가능한 상태로 납품',
+          '기업 전용 폰트, 자간, 결재선 양식 1:1 맞춤 적용'
         ]
       },
-      problemNumber: '식 (3-2).',
-      questionText: '단면의 최대 휨응력 σ_max는 허용휨응력 σ_all 이하이어야 하며, 전단응력 τ는 전단면에서 안전성을 만족해야 한다.',
-      choices: ['① σ_max = M·y / Ix', '② τ = V·Q / (I·b)', '③ δ_max = 5qL⁴/(384EI)', '④ P_cr = π²EI / (KL)²']
+      problemNumber: '제4조.',
+      questionText: '본 업무 매뉴얼의 추진 절차는 다음 프로세스 흐름도와 같으며, 단계별 승인을 거쳐 최종 기안한다.',
+      choices: ['1단계: 기획 수립', '2단계: 부서 협의', '3단계: 최종 결재', '4단계: 실행 보고']
     }
   ];
 
@@ -391,47 +391,44 @@ export default function SampleBeforeAfterViewer({ onOpenSampleModal }: SampleBef
     );
   };
 
-  // Render diagram for Sample 4 (Engineering Beam & Moment Diagram)
-  const renderEngineeringDiagram = (isBefore: boolean) => {
+  // Render diagram for Sample 4 (Corporate Process Flowchart)
+  const renderProcessFlow = (isBefore: boolean) => {
     return (
-      <div className={`relative w-44 h-44 sm:w-52 sm:h-52 mx-auto flex items-center justify-center p-2 rounded-lg ${
-        isBefore ? 'bg-[#F2F1EA] border border-amber-900/10' : 'bg-white border border-slate-200 shadow-xs'
+      <div className={`relative w-full sm:w-56 p-2 rounded-lg text-[10px] font-sans ${
+        isBefore ? 'bg-[#F2F1EA] border border-amber-900/10 text-slate-700 filter blur-[0.4px]' : 'bg-white border border-slate-300 text-slate-900 shadow-xs'
       }`}>
-        <svg 
-          viewBox="0 0 260 260" 
-          className={`w-full h-full ${isBefore ? 'filter blur-[0.45px] contrast-[1.25]' : ''}`}
-        >
-          {/* I-Beam Cross Section */}
-          {/* Top Flange */}
-          <rect x="50" y="40" width="160" height="24" fill={isBefore ? '#E2E8F0' : '#F1F5F9'} stroke={isBefore ? '#475569' : '#0F172A'} strokeWidth="1.8" />
-          {/* Web */}
-          <rect x="118" y="64" width="24" height="110" fill={isBefore ? '#E2E8F0' : '#F1F5F9'} stroke={isBefore ? '#475569' : '#0F172A'} strokeWidth="1.8" />
-          {/* Bottom Flange */}
-          <rect x="50" y="174" width="160" height="24" fill={isBefore ? '#E2E8F0' : '#F1F5F9'} stroke={isBefore ? '#475569' : '#0F172A'} strokeWidth="1.8" />
-
-          {/* Neutral Axis (중립축 N.A) line */}
-          <line x1="30" y1="119" x2="230" y2="119" stroke={isBefore ? '#94A3B8' : '#2563EB'} strokeWidth="1.2" strokeDasharray="6,4" />
-          <text x="234" y="122" fill={isBefore ? '#64748B' : '#2563EB'} fontSize="10" fontStyle="italic" fontWeight="bold">N.A</text>
-
-          {/* Dimensions */}
-          {/* Flange width b = 160 */}
-          <line x1="50" y1="28" x2="210" y2="28" stroke="#475569" strokeWidth="1.0" />
-          <polyline points="54,25 50,28 54,31" fill="none" stroke="#475569" strokeWidth="1.0" />
-          <polyline points="206,25 210,28 206,31" fill="none" stroke="#475569" strokeWidth="1.0" />
-          <text x="124" y="24" fill="#0F172A" fontSize="10" fontFamily="serif" textAnchor="middle">b = 200mm</text>
-
-          {/* Total Height h = 200 */}
-          <line x1="35" y1="40" x2="35" y2="198" stroke="#475569" strokeWidth="1.0" />
-          <polyline points="32,44 35,40 38,44" fill="none" stroke="#475569" strokeWidth="1.0" />
-          <polyline points="32,194 35,198 38,194" fill="none" stroke="#475569" strokeWidth="1.0" />
-          <text x="18" y="123" fill="#0F172A" fontSize="10" fontFamily="serif">h</text>
-
-          {/* Stress profile on right */}
-          <polygon points="180,60 215,60 180,119" fill={isBefore ? '#CBD5E1' : '#E0F2FE'} stroke="#0284C7" strokeWidth="1.2" />
-          <polygon points="180,119 145,178 180,178" fill={isBefore ? '#CBD5E1' : '#FEE2E2'} stroke="#DC2626" strokeWidth="1.2" />
-          <text x="195" y="55" fill="#0284C7" fontSize="9" fontWeight="bold">σ_c</text>
-          <text x="135" y="195" fill="#DC2626" fontSize="9" fontWeight="bold">σ_t</text>
-        </svg>
+        <div className="font-bold text-center mb-2 text-[11px] pb-1 border-b border-slate-200 text-slate-800">
+          [업무 추진 프로세스 흐름도]
+        </div>
+        <div className="flex flex-col gap-1.5">
+          <div className={`p-1.5 rounded border text-center font-bold flex items-center justify-between ${
+            isBefore ? 'bg-slate-200/60 border-slate-400' : 'bg-blue-50/80 border-blue-200 text-[#0066EE]'
+          }`}>
+            <span>01 기획 수립</span>
+            <span className="text-[9px] font-normal text-slate-500">부서 기안</span>
+          </div>
+          <div className="text-center text-slate-400 text-[10px] leading-none">▼</div>
+          <div className={`p-1.5 rounded border text-center font-bold flex items-center justify-between ${
+            isBefore ? 'bg-slate-200/60 border-slate-400' : 'bg-blue-50/80 border-blue-200 text-[#0066EE]'
+          }`}>
+            <span>02 유관부서 협의</span>
+            <span className="text-[9px] font-normal text-slate-500">검토 의견</span>
+          </div>
+          <div className="text-center text-slate-400 text-[10px] leading-none">▼</div>
+          <div className={`p-1.5 rounded border text-center font-bold flex items-center justify-between ${
+            isBefore ? 'bg-slate-200/60 border-slate-400' : 'bg-slate-900 border-slate-900 text-white'
+          }`}>
+            <span>03 최종 결재</span>
+            <span className={`text-[9px] font-normal ${isBefore ? 'text-slate-500' : 'text-blue-200'}`}>전자 승인</span>
+          </div>
+          <div className="text-center text-slate-400 text-[10px] leading-none">▼</div>
+          <div className={`p-1.5 rounded border text-center font-bold flex items-center justify-between ${
+            isBefore ? 'bg-slate-200/60 border-slate-400' : 'bg-emerald-50 border-emerald-200 text-emerald-800'
+          }`}>
+            <span>04 실행 및 보고</span>
+            <span className="text-[9px] font-normal text-emerald-600">결과 회신</span>
+          </div>
+        </div>
       </div>
     );
   };
@@ -450,7 +447,7 @@ export default function SampleBeforeAfterViewer({ onOpenSampleModal }: SampleBef
                 ? 'bg-amber-950/20 text-amber-900 border border-amber-800/20' 
                 : 'bg-blue-50 text-[#0066EE] border border-blue-200'
             }`}>
-              {isBefore ? '접수 원고 (스캔본)' : '에이브로 납품본 (정품 HWP)'}
+              {isBefore ? '접수 원고 (스캔본)' : '정밀 조판 납품본 (정품 HWP)'}
             </span>
             <span className="text-slate-500 font-mono text-[11px] hidden sm:inline">
               {isBefore ? '해상도 저하 · 텍스트 수정 불가' : '300dpi 벡터 · 100% 한글 수식·서식 코드'}
@@ -509,7 +506,7 @@ export default function SampleBeforeAfterViewer({ onOpenSampleModal }: SampleBef
                   )}
                   {activeSample === 3 && (
                     <>
-                      단면의 최대 휨응력 <span className="font-serif italic font-semibold">σ_max = (M·y)/Ix</span>는 재료의 허용응력 <span className="font-serif italic">σ_all</span>을 초과하지 않아야 하며, 플랜지 두께에 따른 전단응력 <span className="font-serif italic font-semibold">τ</span>의 연속성을 보장한다.
+                      본 업무 매뉴얼의 세부 추진 절차는 다음 [프로세스 흐름도]와 같으며, 각 주관 부서의 단계별 사전 검토 및 결재 승인을 거쳐 최종 기안·실행한다.
                     </>
                   )}
                 </p>
@@ -530,7 +527,7 @@ export default function SampleBeforeAfterViewer({ onOpenSampleModal }: SampleBef
               {activeSample === 0 && renderSquareDiagram(isBefore)}
               {activeSample === 1 && renderTriangleDiagram(isBefore)}
               {activeSample === 2 && renderPublicTable(isBefore)}
-              {activeSample === 3 && renderEngineeringDiagram(isBefore)}
+              {activeSample === 3 && renderProcessFlow(isBefore)}
             </div>
           </div>
         </div>
@@ -585,7 +582,7 @@ export default function SampleBeforeAfterViewer({ onOpenSampleModal }: SampleBef
                 {idx === 0 && '정사각형 각도 (실제원고)'}
                 {idx === 1 && '직각삼각형 수선 (실제원고)'}
                 {idx === 2 && '공공 조례·규정 표'}
-                {idx === 3 && '구조계산서 수식'}
+                {idx === 3 && '업무 매뉴얼 흐름도'}
               </span>
             </button>
           ))}
@@ -694,7 +691,7 @@ export default function SampleBeforeAfterViewer({ onOpenSampleModal }: SampleBef
             </div>
             <div className="absolute top-3 right-3 z-10 pointer-events-none">
               <span className="px-2.5 py-1 rounded bg-[#0066EE]/90 backdrop-blur-md text-white font-bold text-[11px] border border-white/20 shadow-md">
-                에이브로 정품 HWP (AFTER) ▶
+                정품 HWP 완결본 (AFTER) ▶
               </span>
             </div>
 
@@ -727,7 +724,7 @@ export default function SampleBeforeAfterViewer({ onOpenSampleModal }: SampleBef
               <div className="bg-blue-950/40 border-b border-blue-500/30 px-3.5 py-2 flex items-center justify-between text-xs font-bold text-[#38BDF8]">
                 <div className="flex items-center gap-1.5">
                   <CheckCircle2 className="w-3.5 h-3.5 text-[#38BDF8]" />
-                  <span>AFTER: 에이브로 조판 완결본</span>
+                  <span>AFTER: 정밀 조판 완결본</span>
                 </div>
                 <span className="text-[10px] text-blue-200/80 font-normal">정품 HWP 파일 납품</span>
               </div>
@@ -760,7 +757,7 @@ export default function SampleBeforeAfterViewer({ onOpenSampleModal }: SampleBef
           <div className="p-3.5 rounded-xl bg-blue-950/20 border border-blue-500/30">
             <span className="text-[11px] font-bold text-[#38BDF8] block mb-2 flex items-center gap-1">
               <CheckCircle2 className="w-3.5 h-3.5" />
-              <span>에이브로 조판 해결 결과</span>
+              <span>정밀 조판 해결 결과</span>
             </span>
             <ul className="space-y-1.5 text-zinc-200 text-[11px]">
               {current.afterSummary.features.map((feat, i) => (
@@ -846,7 +843,7 @@ export default function SampleBeforeAfterViewer({ onOpenSampleModal }: SampleBef
               </div>
               <div className="rounded-xl border border-blue-500/40 overflow-hidden">
                 <div className="bg-blue-950/60 p-2 text-xs font-bold text-sky-300 border-b border-blue-500/30">
-                  에이브로 완결본 (출판 규격 HWP)
+                  정밀 조판 완결본 (출판 규격 HWP)
                 </div>
                 {renderExamProblem(false)}
               </div>

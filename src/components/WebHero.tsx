@@ -24,14 +24,14 @@ export default function WebHero({ onOpenModal }: WebHeroProps) {
         {/* Top Company Badge & Category with zero-pill unboxed styling */}
         <div className="flex items-center justify-center gap-2 mb-5 text-xs sm:text-sm font-bold text-[#38BDF8]">
           <span className="w-2 h-2 rounded-full bg-[#38BDF8] animate-pulse"></span>
-          <span>AVRO DOCUMENT ENGINEERING</span>
+          <span>DOCUMENT ENGINEERING</span>
           <span aria-hidden="true" className="text-zinc-500">·</span>
-          <span>공문서·기술서·시험지 HWP 정밀 조판 솔루션</span>
+          <span>공문서·업무서식·시험지 HWP 정밀 조판</span>
         </div>
 
         {/* Main Title - Crystal Clear What We Do */}
         <h1 className="text-[2.2rem] sm:text-[3.4rem] md:text-[4.4rem] lg:text-[5rem] font-black tracking-tight leading-[1.14] mb-6 text-white">
-          스캔 PDF·도면·복잡 수식을
+          스캔 PDF·복잡 서식·수식을
           <br />
           <span className="text-[#38BDF8]">
             편집 가능한 한글(HWP)로 정밀 복원
@@ -40,12 +40,12 @@ export default function WebHero({ onOpenModal }: WebHeroProps) {
 
         {/* Subtitle - Punchy benefit summary */}
         <p className="text-zinc-300 text-sm sm:text-base md:text-lg max-w-3xl mx-auto mb-8 font-medium leading-relaxed">
-          공공행정 조례·서식부터 연구소 기술 시방서, 특허·재무표, 출판·시험지까지
+          공공기관 조례·규정집부터 기업 사내 매뉴얼, 계약서·사규, 교육·출판 시험지까지
           <br className="hidden sm:inline" />
           깨지는 웹 OCR 대신 규격을 준수하는 완성형 HWP/HWPX 문서로 납품합니다.
         </p>
 
-        {/* 3 Core Highlights (Benefit-focused across industries) */}
+        {/* 3 Core Highlights (Benefit-focused across practical documents) */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5 max-w-4xl mx-auto mb-8 text-left">
           <div className="p-4 rounded-xl bg-white/[0.05] backdrop-blur-md border border-white/10">
             <span className="text-[11px] font-bold text-[#38BDF8] uppercase tracking-wider block mb-1">
@@ -57,15 +57,15 @@ export default function WebHero({ onOpenModal }: WebHeroProps) {
 
           <div className="p-4 rounded-xl bg-white/[0.05] backdrop-blur-md border border-white/10">
             <span className="text-[11px] font-bold text-[#38BDF8] uppercase tracking-wider block mb-1">
-              02 엔지니어링 수식
+              02 기업 · 업무 서식
             </span>
-            <h3 className="text-sm font-bold text-white mb-1">공학 수식 &amp; 기술 도판</h3>
-            <p className="text-xs text-zinc-400">시방서·구조계산서의 그리스 문자, 첨자, 300dpi 설계 도판 고화질 복원</p>
+            <h3 className="text-sm font-bold text-white mb-1">사내 매뉴얼 &amp; 업무 흐름도</h3>
+            <p className="text-xs text-zinc-400">프로세스 순서도·도형·화살표 개체화, 다단 결재선 및 사내 서식 1:1 전산화</p>
           </div>
 
           <div className="p-4 rounded-xl bg-white/[0.05] backdrop-blur-md border border-white/10">
             <span className="text-[11px] font-bold text-[#38BDF8] uppercase tracking-wider block mb-1">
-              03 출판 · 시험지 조판
+              03 교육 · 출판 조판
             </span>
             <h3 className="text-sm font-bold text-white mb-1">수식 타이핑 &amp; 기하 작도</h3>
             <p className="text-xs text-zinc-400">초·중·고 시험지 및 교재의 기하 벡터 작도와 한글 수식 1:1 완결 (실제 검증본)</p>

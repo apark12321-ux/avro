@@ -221,10 +221,10 @@ export default function FactsheetContactModal({
                     className="w-full px-3 py-2 rounded-sm border border-zinc-300 focus:border-[#008CFF] outline-none bg-white"
                   >
                     <option value="무료 샘플 3쪽/3문항 변환 테스트">무료 샘플 3쪽/3문항 변환 테스트</option>
-                    <option value="공공·행정 공문서 / 조례·규정집 전산화">공공·행정 공문서 / 조례·규정집 전산화</option>
-                    <option value="연구소·엔지니어링 시방서 / 계산서 전산화">연구소·엔지니어링 시방서 / 계산서 전산화</option>
-                    <option value="법률 판결문 / 특허명세서 / 재무제표 전산화">법률 판결문 / 특허명세서 / 재무제표 전산화</option>
                     <option value="교육 시험지 / 교재 / 모의고사 조판 외주">교육 시험지 / 교재 / 모의고사 조판 외주</option>
+                    <option value="공공·행정 공문서 / 조례·규정집 전산화">공공·행정 공문서 / 조례·규정집 전산화</option>
+                    <option value="기업 사내 업무 매뉴얼 / 프로세스 순서도 전산화">기업 사내 업무 매뉴얼 / 프로세스 순서도 전산화</option>
+                    <option value="사규집 / 계약서 서식 / 약관 대조표 전산화">사규집 / 계약서 서식 / 약관 대조표 전산화</option>
                     <option value="PDF → 정품 HWP/HWPX 정밀 변환">PDF → 정품 HWP/HWPX 정밀 변환</option>
                   </select>
                 </div>
@@ -237,8 +237,8 @@ export default function FactsheetContactModal({
                     onChange={(e) => setFormData({ ...formData, documentType: e.target.value })}
                     className="w-full px-3 py-2 rounded-sm border border-zinc-300 focus:border-[#008CFF] outline-none bg-white"
                   >
-                    <option value="스캔 PDF (공문서/기술서/시험지)">스캔 PDF (공문서/기술서/시험지)</option>
-                    <option value="도면 / 도판 / 그래프 포함 원고">도면 / 도판 / 그래프 포함 원고</option>
+                    <option value="스캔 PDF (공문서/사내서식/시험지)">스캔 PDF (공문서/사내서식/시험지)</option>
+                    <option value="도형 / 순서도 / 표 / 그래프 포함 원고">도형 / 순서도 / 표 / 그래프 포함 원고</option>
                     <option value="스마트폰 촬영본 / 책 스캔 캡처본">스마트폰 촬영본 / 책 스캔 캡처본</option>
                     <option value="손글씨 / 필기 원고">손글씨 / 필기 원고</option>
                     <option value="기존 HWP 초안 (서식 교정)">기존 HWP 초안 (서식 교정)</option>

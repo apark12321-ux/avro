@@ -1,14 +1,13 @@
 import { useState } from 'react';
 import { 
   Building2, 
-  Cpu, 
-  Scale, 
+  Briefcase, 
+  FileText, 
   GraduationCap, 
   Check, 
   AlertTriangle, 
   CheckCircle2, 
   ArrowRight, 
-  FileText, 
   ShieldCheck,
   Sparkles
 } from 'lucide-react';
@@ -18,9 +17,39 @@ interface WebIndustrySolutionsProps {
 }
 
 export default function WebIndustrySolutions({ onOpenModal }: WebIndustrySolutionsProps) {
-  const [activeTab, setActiveTab] = useState<'public' | 'engineering' | 'legal' | 'education'>('public');
+  const [activeTab, setActiveTab] = useState<'education' | 'public' | 'corporate' | 'legal'>('education');
 
   const industries = {
+    education: {
+      id: 'education',
+      label: '교육 · 출판 · 시험지',
+      icon: <GraduationCap className="w-4 h-4" />,
+      tagline: '전과목 시험지 · 수식 타이핑 · 기하 벡터 작도 (실제 검증 샘플)',
+      desc: '초·중·고 내신 및 수능 모의고사, 학원 자체 교재의 흐릿한 스캔본을 수학·과학 한글 수식 및 300dpi 기하 벡터 도판이 포함된 완결형 HWP 시험지로 조판합니다.',
+      targetDocs: [
+        '기출 문제집, 모의고사 스캔 PDF 및 손글씨 선별 원고',
+        '중·고등 수학/과학/국어/영어 시험지 및 풀이 해설집',
+        '기하·도형·함수 그래프가 포함된 심화 문항집',
+        '학원 자체 브랜딩 2단 레이아웃 교재'
+      ],
+      ocrIssues: [
+        '분수식, 근호, 미적분, 극한 수식의 비트맵 깨짐 및 번짐',
+        '기하 도형의 계단 현상(Aliasing)으로 인쇄 시 선 뭉개짐',
+        '출처별 서체 불일치 및 캡처본 배경 그림자 노이즈'
+      ],
+      avroSolutions: [
+        '사용자 첨부 실제 샘플 4선 검증: 기하 작도 및 수식 1:1 정밀화',
+        '선명한 300dpi 출판 인쇄용 벡터 작도 및 노이즈 완전 제거',
+        '원장님 학원 전용 폰트, 배점 규격, 2단 레이아웃 1:1 매칭',
+        '3문항 무료 샘플 변환으로 품질 사전 확인 가능'
+      ],
+      specs: [
+        { label: '수식 조판', value: '한글 수식 편집기 100% 입력' },
+        { label: '도판 품질', value: '300dpi 기하 벡터 복원' },
+        { label: '서식 규격', value: '학원 A4 2단 템플릿 맞춤' },
+        { label: '샘플 제공', value: '실제 원고 3문항 무료 테스트' }
+      ]
+    },
     public: {
       id: 'public',
       label: '공공 · 행정 · 지자체',
@@ -51,94 +80,64 @@ export default function WebIndustrySolutions({ onOpenModal }: WebIndustrySolutio
         { label: '보안 기준', value: '폐쇄망 작업 · 공공 보안 준수' }
       ]
     },
-    engineering: {
-      id: 'engineering',
-      label: '연구 · 엔지니어링 · 기술',
-      icon: <Cpu className="w-4 h-4" />,
-      tagline: '공학 수식 · 기술계산서 · 시방서 · 설계 도판 복원',
-      desc: '구조·토목·플랜트 계산서의 복잡한 공학 수식(그리스 문자, 적분, 행렬, 공차 기호)과 CAD 도판을 한글 수식 편집기 표준 코드 및 300dpi 인쇄 규격으로 전산화합니다.',
+    corporate: {
+      id: 'corporate',
+      label: '기업 · 사내 실무 · 매뉴얼',
+      icon: <Briefcase className="w-4 h-4" />,
+      tagline: '사내 업무 매뉴얼 & 프로세스 순서도 & 보고서 서식 전산화',
+      desc: '인쇄·복사본으로 보관 중인 사내 업무 매뉴얼, 부서별 프로세스 흐름도, 결재 기안 양식을 한글 표준 도형 개체와 다단 표 서식으로 깔끔하게 복원합니다.',
       targetDocs: [
-        '건축·토목·플랜트 공사 시방서 및 기술계산서',
-        '정밀안전진단보고서 및 비파괴 검사 성적서',
-        '장비 운용 매뉴얼 및 기술 규격 해설서',
-        '연구소 학술 논문 및 실험 데이터 산출표'
+        '부서별 업무 추진 매뉴얼 및 인수인계서',
+        '사내 업무 프로세스 흐름도 및 직무 기술서',
+        '정기 결재 기안문 및 다단 결재선 보고 양식',
+        '사내 신입사원 교육 교재 및 직무 가이드북'
       ],
       ocrIssues: [
-        '그리스 문자(σ, τ, Δ), 위/아래 첨자 및 행렬식 전면 깨짐',
-        '설계 도판 치수선 및 지시선의 저해상도 뭉개짐으로 식별 불가',
-        '분수식 선 누락 및 오차로 인한 심각한 공학 계산 왜곡'
+        '흐름도 박스 테두리 분절 및 순서도 화살표 뭉개짐',
+        '텍스트 상자 글자 깨짐 및 내용 수정 불가 상태',
+        '사내 보고서 템플릿 양식 훼손으로 결재 상신 불가'
       ],
       avroSolutions: [
-        '한글 수식 편집기 공식 명령어(over, sqrt, sum, cases) 정밀 입력',
-        '설계 도판 및 공학 다이어그램 300dpi 인쇄용 고해상도 리터칭',
-        '기술 도표의 단위(kgf/cm², MPa, mm) 표준 코드 정렬',
-        '엔지니어링 전용 폰트 및 여백 규격 맞춤 완결본 납품'
+        '한글 표준 그리기 개체(선·도형·화살표)로 1:1 완결 조판',
+        '모든 텍스트 상자·설명문 즉시 수정 가능하도록 납품',
+        '기업 전용 폰트, 자간, 결재선 양식 1:1 맞춤 적용',
+        '회사 양식 템플릿(배경, 로고, 머리말/꼬리말) 매칭'
       ],
       specs: [
-        { label: '수식 규격', value: '한글 수식 표준 코드 1:1' },
-        { label: '도판 품질', value: '300dpi 기술 인쇄 규격' },
-        { label: '공학 기호', value: '그리스 문자 · 첨자 무결성' },
-        { label: '검수 체계', value: '수치·단위 정밀 교차 검수' }
+        { label: '도형 개체', value: '한글 벡터 그리기 100%' },
+        { label: '수정 편의', value: '전 문장 텍스트 즉시 편집' },
+        { label: '템플릿', value: '사내 표준 서식 1:1 매칭' },
+        { label: '납품 포맷', value: '정품 HWP / DOCX 선택' }
       ]
     },
     legal: {
       id: 'legal',
-      label: '법률 · 특허 · 회계 · 금융',
-      icon: <Scale className="w-4 h-4" />,
-      tagline: '오탈자 0% 지향 2단계 검수 & 특허 도면 & 재무제표 복원',
-      desc: '소송 판결문, 공증 증서, 특허청 규격 도면, 회계감사보고서의 다열 재무제표를 전문 에디터와 시니어 검수관의 2단계 크로스 검수로 철저하게 전산화합니다.',
+      label: '사규 · 계약 · 규정 서식',
+      icon: <FileText className="w-4 h-4" />,
+      tagline: '오탈자 0% 지향 2단계 검수 & 계약서 & 사규집 조판',
+      desc: '사내 취업규칙, 계약서 양식, 거래 약관, 정관 등 조항 번호 체계가 복잡한 규정 문서를 전문 에디터와 시니어 검수관의 2단계 크로스 검수로 오탈자 없이 전산화합니다.',
       targetDocs: [
-        '법원 판결문, 소장, 증거서류 및 공증 계약서',
-        '특허청(KIPO) 출원용 특허명세서 및 특허 도면',
-        '외부감사보고서, 재무제표 비교표 및 주석 명세서',
-        '금융 투자설명서 및 보험 약관 대조표'
+        '표준 근로계약서, 용역계약서 및 비밀유지서약서(NDA)',
+        '기업 취업규칙, 사규집, 정관 및 이사회 규정',
+        '서비스 이용약관, 개인정보처리방침 대조표',
+        '공증 문서, 소송 판결문 및 서증 자료 서식'
       ],
       ocrIssues: [
-        '법조문 호/목 번호 및 괄호 체계의 왜곡으로 법리 오인 유발',
-        '회계 표 음수 표기(△), 콤마(,), 소수점 누락 등 치명적 오류',
-        '특허 도면 선 굵기 기준 미달로 인한 보정명령 리스크'
+        '조항 번호(제1조, 제2항, 제1호) 및 괄호 체계 왜곡',
+        '약관 다단 표 서식의 행간 붕괴 및 조항 누락',
+        '민감한 계약 조건 문구의 OCR 오인식 리스크'
       ],
       avroSolutions: [
         '전문 조판원 1차 입력 + 시니어 검수관 2차 대조 크로스 시스템',
-        '특허청 제도 규칙에 부합하는 선 굵기 및 부호 지시선 복원',
-        '재무제표 10단 이상 다열 표 셀 규격화 및 회계 폰트 정렬',
+        '법령·규정 표준 들여쓰기 및 조항 번호 스타일 체계화',
+        '표 서식 셀 분할·병합 및 자간·장평 정밀 조판',
         '철저한 비밀유지서약(NDA) 체결 및 작업 후 원본 영구 파기'
       ],
       specs: [
         { label: '오탈자 방지', value: '2단계 크로스 교차 검수' },
-        { label: '특허 규격', value: 'KIPO 출원 제도 기준 충족' },
+        { label: '조항 체계', value: '장/조/항/호 들여쓰기 완결' },
         { label: '보안 서약', value: '표준 NDA · 영구 파기 증명' },
-        { label: '표 조판', value: '10열 이상 복합 재무표 완결' }
-      ]
-    },
-    education: {
-      id: 'education',
-      label: '교육 · 출판 · 시험지',
-      icon: <GraduationCap className="w-4 h-4" />,
-      tagline: '전과목 시험지 · 수식 타이핑 · 기하 벡터 도판 (사용자 검증 샘플)',
-      desc: '초·중·고 내신 및 수능 모의고사, 학원 자체 교재의 흐릿한 스캔본을 수학·과학 한글 수식 및 300dpi 기하 벡터 도판이 포함된 완결형 HWP 시험지로 조판합니다.',
-      targetDocs: [
-        '기출 문제집, 모의고사 스캔 PDF 및 손글씨 선별 원고',
-        '중·고등 수학/과학/국어/영어 시험지 및 풀이 해설집',
-        '기하·벡터·함수 그래프가 포함된 심화 문항집',
-        '학원 자체 브랜딩 2단 레이아웃 교재'
-      ],
-      ocrIssues: [
-        '분수식, 근호, 미적분, 극한 수식의 비트맵 깨짐 및 번짐',
-        '기하 도형의 계단 현상(Aliasing)으로 인쇄 시 선 뭉개짐',
-        '출처별 서체 불일치 및 캡처본 배경 그림자 노이즈'
-      ],
-      avroSolutions: [
-        '사용자 첨부 실제 샘플 4선 검증: 기하 작도 및 수식 1:1 정밀화',
-        '선명한 300dpi 출판 인쇄용 벡터 작도 및 노이즈 완전 제거',
-        '원장님 학원 전용 폰트, 배점 규격, 2단 레이아웃 1:1 매칭',
-        '3문항 무료 샘플 변환으로 품질 사전 확인 가능'
-      ],
-      specs: [
-        { label: '수식 조판', value: '한글 수식 편집기 100% 입력' },
-        { label: '도판 품질', value: '300dpi 기하 벡터 복원' },
-        { label: '서식 규격', value: '학원 A4 2단 템플릿 맞춤' },
-        { label: '샘플 제공', value: '실제 원고 3문항 무료 테스트' }
+        { label: '규정 서식', value: '사규집·계약서 템플릿 적용' }
       ]
     }
   };
@@ -160,7 +159,7 @@ export default function WebIndustrySolutions({ onOpenModal }: WebIndustrySolutio
             문서별 특수 규격에 맞춘 <span className="text-[#38BDF8]">맞춤형 HWP 조판</span>
           </h2>
           <p className="text-zinc-300 text-xs sm:text-sm md:text-base leading-relaxed">
-            단순 텍스트 추출이 아닙니다. 공공기관 행정 서식부터 공학 수식, 법률·특허 규격, 출판 시험지까지 각 분야의 고유 문서 표준을 완벽히 충족합니다.
+            단순 텍스트 추출이 아닙니다. 공공기관 조례 서식부터 기업 사내 매뉴얼, 계약서·사규, 교육·출판 시험지까지 각 문서의 고유 규격을 완벽히 충족합니다.
           </p>
         </div>
 
@@ -258,7 +257,7 @@ export default function WebIndustrySolutions({ onOpenModal }: WebIndustrySolutio
               <div>
                 <span className="text-xs font-bold text-[#38BDF8] uppercase tracking-wider block mb-3 pb-2 border-b border-blue-400/20 flex items-center gap-1.5">
                   <CheckCircle2 className="w-3.5 h-3.5 text-[#38BDF8]" />
-                  <span>에이브로 엔지니어링 납품 기준</span>
+                  <span>표준 정밀 조판 납품 기준</span>
                 </span>
                 <ul className="space-y-2 text-xs text-zinc-200">
                   {current.avroSolutions.map((sol, i) => (

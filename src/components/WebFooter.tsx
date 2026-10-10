@@ -23,20 +23,20 @@ export default function WebFooter({
         {/* Top Brand Label with unboxed typography */}
         <div className="mb-4">
           <span className="text-xs sm:text-sm font-bold tracking-widest text-[#38BDF8] uppercase font-mono">
-            AVRO DOCUMENT ENGINEERING SUITE
+            DOCUMENT ENGINEERING SUITE
           </span>
         </div>
 
         {/* Closing Title */}
         <h2 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight leading-tight mb-4 text-white">
-          공문서·기술서·시험지 조판의 완결,
+          공문서·업무서식·시험지 조판의 완결,
           <br />
-          <span className="text-[#38BDF8]">지금 에이브로와 함께하세요.</span>
+          <span className="text-[#38BDF8]">무료 샘플 테스트로 직접 확인해보세요.</span>
         </h2>
 
         {/* Subtitle in Unboxed Style */}
         <p className="text-sm sm:text-base font-bold text-blue-200 tracking-wide mb-10">
-          공공행정 표준 공문서 · 연구 기술계산서 &amp; 도판 · 특허·재무 서식 · 출판·시험지 정밀 조판
+          공공기관 표준 공문서 · 사내 매뉴얼 &amp; 순서도 · 사규·계약 서식 · 교육·출판 시험지 정밀 조판
         </p>
 
         {/* Action Buttons */}
