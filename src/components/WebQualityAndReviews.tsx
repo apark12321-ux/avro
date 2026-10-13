@@ -11,31 +11,31 @@ export default function WebQualityAndReviews() {
   const reviews = [
     {
       author: '정○우 주무관',
-      role: '기획조정실 자치법규팀',
-      inst: '수도권 지방자치단체',
-      quote: '스캔된 과거 30년치 조례·규칙집을 행정 표준 HWP로 완결',
-      detail: '다단 표와 들여쓰기가 깨져 수작업으로 막막했던 규정집 12권 분량을 공문서 규격에 맞춰 온-나라 시스템에 즉시 등록했습니다.'
+      role: '자치법규팀',
+      inst: '지방자치단체',
+      quote: '스캔된 조례·규칙집을 행정 표준 HWP로 완결',
+      detail: '깨진 다단 표와 들여쓰기를 공문서 규격에 맞춰 온-나라 시스템에 즉시 등록했습니다.'
     },
     {
       author: '이○준 팀장',
-      role: '경영혁신·인사총무팀',
+      role: '인사총무팀',
       inst: '제조·유통 중견기업',
-      quote: '종이로 묶여 있던 200쪽 사내 업무 매뉴얼과 순서도 완벽 디지털화',
-      detail: '스캔 복사본이라 글자와 결재선이 뭉개졌던 사규·매뉴얼을 한글 순서도와 다단 표로 깔끔하게 복원해 사내 교육용 HWP로 즉시 활용 중입니다.'
+      quote: '사내 업무 매뉴얼과 순서도 완벽 디지털화',
+      detail: '흐릿했던 매뉴얼을 한글 순서도와 표로 깔끔하게 복원해 사내 교육에 즉시 활용 중입니다.'
     },
     {
       author: '박○영 실장',
       role: '법무총괄팀',
       inst: 'IT 플랫폼 기업',
-      quote: '복잡한 표준 계약서 및 약관 대조표를 오탈자 0%로 정밀 전산화',
-      detail: '조항 번호 들여쓰기와 다단 표 서식을 2단계 교차 검수로 빈틈없이 맞춰주셨고, 표준 NDA 보안 준수 덕분에 안심하고 의뢰했습니다.'
+      quote: '표준 계약서와 약관을 오탈자 없이 전산화',
+      detail: '조항 들여쓰기와 표 서식을 2단계 교차 검수로 빈틈없이 맞춰주셨습니다.'
     },
     {
       author: '김○환 원장',
       role: '고등부 수능 총괄',
-      inst: '대치동 S수학학원',
-      quote: '스캔 시험지 20회분을 기하 벡터 도판과 함께 HWP 완결본으로 납품',
-      detail: '기하 도형의 계단 현상 없이 300dpi로 작도되었고, 수식 편집기 코드로 납품되어 학원 전용 양식으로 즉시 수업에 배부했습니다.'
+      inst: '대치동 수학학원',
+      quote: '스캔 시험지를 기하 벡터 도판과 함께 HWP로 납품',
+      detail: '도형이 300dpi로 선명하게 작도되었고, 수식 코드로 납품되어 바로 수업에 사용했습니다.'
     }
   ];
 
@@ -154,8 +154,8 @@ export default function WebQualityAndReviews() {
             </h3>
           </div>
 
-          {/* 3 Review Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 max-w-5xl mx-auto text-left">
+          {/* 4 Review Cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-6xl mx-auto text-left">
             {reviews.map((item, idx) => (
               <div
                 key={idx}

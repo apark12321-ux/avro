@@ -13,23 +13,23 @@ export default function WebEnterpriseTrust() {
   const securityPillars = [
     {
       icon: <Lock className="w-5 h-5 text-[#0066EE]" />,
-      title: '엄격한 기밀 유지 (NDA)',
-      desc: '의뢰 접수 즉시 법적 효력을 갖는 비밀유지서약서(NDA)를 체결하며, 고객사 상호 및 원본 문서는 대외 비노출 원칙을 엄수합니다.'
+      title: '표준 비밀유지서약 (NDA)',
+      desc: '법적 효력을 갖는 NDA를 체결하며, 고객사 정보와 원본 문서는 대외 비노출을 엄수합니다.'
     },
     {
       icon: <FileCheck2 className="w-5 h-5 text-[#0066EE]" />,
-      title: '원본 데이터 영구 폐기',
-      desc: '최종 납품 및 고객 검수 완료 7일 후 작업 서버 및 로컬 드라이브의 원본·변환본 데이터를 영구 삭제하며 폐기 확인서를 발급합니다.'
+      title: '작업 데이터 영구 폐기',
+      desc: '납품 완료 7일 후 원본 및 변환본 데이터를 영구 삭제하며 폐기 확인서를 발급합니다.'
     },
     {
       icon: <UserCheck className="w-5 h-5 text-[#0066EE]" />,
-      title: '2단계 크로스 교차 검수',
-      desc: '전문 조판원의 1차 1:1 입력 후, 시니어 수석 검수관이 원본 대조(오탈자, 수치, 그리스 문자, 표 병합선)를 전수 재검증합니다.'
+      title: '2단계 전수 교차 검수',
+      desc: '전문 조판원 1차 입력 후 시니어 검수관이 원본과 1:1 대조하여 오탈자를 방지합니다.'
     },
     {
       icon: <Receipt className="w-5 h-5 text-[#0066EE]" />,
-      title: '공공·기업 행정 서류 완비',
-      desc: '국세청 전자세금계산서 즉시 발행, 나라장터 수의계약 지원, 사업자등록증·통장사본·청렴서약서 등 필요 행정 서류를 일체 제공합니다.'
+      title: '행정 서류 일체 지원',
+      desc: '전자세금계산서 발행 및 공공기관 수의계약에 필요한 제반 서류를 신속 제공합니다.'
     }
   ];
 
@@ -68,10 +68,10 @@ export default function WebEnterpriseTrust() {
             <span>보안 및 검수 체계</span>
           </div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tight text-zinc-900 mb-3">
-            공공기관과 대기업이 신뢰하는 <span className="text-[#0066EE]">보안 및 품질 검증</span>
+            공공기관과 기업이 안심하는 <span className="text-[#0066EE]">보안 및 품질 검증</span>
           </h2>
           <p className="text-zinc-600 text-xs sm:text-sm md:text-base leading-relaxed">
-            민감한 행정 문서, 특허 명세서, 미공개 시험지까지 안전하게 맡기실 수 있도록 폐쇄형 작업 프로세스와 2단계 전수 교차 검수를 보장합니다.
+            폐쇄형 보안 프로세스와 2단계 전수 교차 검수로 안전하고 정확하게 완결합니다.
           </p>
         </div>
 

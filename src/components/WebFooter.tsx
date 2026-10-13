@@ -29,14 +29,14 @@ export default function WebFooter({
 
         {/* Closing Title */}
         <h2 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight leading-tight mb-4 text-white">
-          공문서·업무서식·시험지 조판의 완결,
+          완성도 높은 HWP 조판,
           <br />
-          <span className="text-[#38BDF8]">무료 샘플 테스트로 직접 확인해보세요.</span>
+          <span className="text-[#38BDF8]">무료 샘플로 먼저 확인하세요.</span>
         </h2>
 
         {/* Subtitle in Unboxed Style */}
         <p className="text-sm sm:text-base font-bold text-blue-200 tracking-wide mb-10">
-          공공기관 표준 공문서 · 사내 매뉴얼 &amp; 순서도 · 사규·계약 서식 · 교육·출판 시험지 정밀 조판
+          공문서 규정집 · 사내 매뉴얼 · 계약서 · 시험지 정밀 전산화
         </p>
 
         {/* Action Buttons */}

@@ -2,11 +2,11 @@ import { ChevronRight, ShieldCheck } from 'lucide-react';
 
 export default function WebProcess() {
   const steps = [
-    { code: 'STEP 01', title: '원고 접수 & NDA', desc: 'PDF·스캔본·인쇄본 접수 및 기밀유지협약 체결' },
-    { code: 'STEP 02', title: '1차 정밀 전산화', desc: '한글 표준 수식·복합 다단 표 1:1 입력' },
-    { code: 'STEP 03', title: '도형·도판 300dpi 복원', desc: '기하 도형·순서도 인쇄용 고해상도 벡터화' },
-    { code: 'STEP 04', title: '2차 수석 교차 검수', desc: '원본 1:1 대조 및 수치·서식 무결성 검증' },
-    { code: 'STEP 05', title: '정품 HWP 납품', desc: '고객사 전용 템플릿 완결본 납품 및 원본 파기' },
+    { code: 'STEP 01', title: '원고 접수 & NDA', desc: 'PDF·스캔본 접수 및 기밀유지협약 체결' },
+    { code: 'STEP 02', title: '1차 표준 조판', desc: '한글 수식 코드 및 복합 표 1:1 입력' },
+    { code: 'STEP 03', title: '도판 벡터 복원', desc: '도형·순서도 300dpi 고화질화' },
+    { code: 'STEP 04', title: '2차 교차 검수', desc: '원본 1:1 대조 및 오탈자 전수 검증' },
+    { code: 'STEP 05', title: '정품 HWP 납품', desc: '완성 파일 납품 및 원본 데이터 파기' },
   ];
 
   return (
@@ -24,7 +24,7 @@ export default function WebProcess() {
             5단계 완결 프로세스
           </h2>
           <p className="text-zinc-600 text-sm sm:text-base font-medium leading-relaxed">
-            원고 접수부터 정품 HWP 납품까지 전담 에디터와 수석 검수관이 책임 진행합니다.
+            원고 접수부터 최종 납품까지 체계적인 공정으로 안전하게 진행됩니다.
           </p>
         </div>
 

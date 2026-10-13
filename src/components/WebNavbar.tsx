@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Menu, X, ArrowRight, Sparkles } from 'lucide-react';
+import { Menu, X, ArrowRight } from 'lucide-react';
 
 interface WebNavbarProps {
   onOpenModal: (mode?: 'inquiry' | 'sample') => void;
@@ -51,19 +51,9 @@ export default function WebNavbar({ onOpenModal }: WebNavbarProps) {
           </div>
 
           {/* Website GNB Navigation Links */}
-          <nav className="hidden xl:flex items-center gap-6 text-xs font-bold text-zinc-300">
+          <nav className="hidden xl:flex items-center gap-7 text-xs font-bold text-zinc-300">
             <button onClick={() => scrollTo('industry-solutions')} className="hover:text-[#38BDF8] transition-colors cursor-pointer">
-              문서 유형별 솔루션
-            </button>
-            <button onClick={() => scrollTo('conversion-sample')} className="text-[#38BDF8] hover:text-white transition-colors cursor-pointer flex items-center gap-1">
-              <Sparkles className="w-3 h-3 text-[#38BDF8]" />
-              <span>실물 전·후 비교</span>
-            </button>
-            <button onClick={() => scrollTo('service-overview')} className="hover:text-[#38BDF8] transition-colors cursor-pointer">
-              핵심 기술 역량
-            </button>
-            <button onClick={() => scrollTo('solutions')} className="hover:text-[#38BDF8] transition-colors cursor-pointer">
-              도입 효과
+              문서 유형별 안내
             </button>
             <button onClick={() => scrollTo('security-assurance')} className="hover:text-[#38BDF8] transition-colors cursor-pointer">
               보안 &amp; 검수 체계
@@ -106,16 +96,7 @@ export default function WebNavbar({ onOpenModal }: WebNavbarProps) {
         <div className="fixed inset-x-0 top-[60px] z-40 p-5 bg-[#060B19]/95 border-b border-white/10 shadow-2xl xl:hidden font-sans text-xs font-semibold backdrop-blur-xl">
           <div className="flex flex-col gap-3.5 text-zinc-300">
             <button onClick={() => scrollTo('industry-solutions')} className="text-left py-1 hover:text-[#38BDF8]">
-              문서 유형별 솔루션
-            </button>
-            <button onClick={() => scrollTo('conversion-sample')} className="text-left py-1 text-[#38BDF8] font-bold">
-              실물 전·후 비교
-            </button>
-            <button onClick={() => scrollTo('service-overview')} className="text-left py-1 hover:text-[#38BDF8]">
-              핵심 기술 역량
-            </button>
-            <button onClick={() => scrollTo('solutions')} className="text-left py-1 hover:text-[#38BDF8]">
-              도입 효과
+              문서 유형별 안내
             </button>
             <button onClick={() => scrollTo('security-assurance')} className="text-left py-1 hover:text-[#38BDF8]">
               보안 &amp; 검수 체계

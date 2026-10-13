@@ -12,26 +12,26 @@ export default function WebWhyAndSolutions() {
     {
       icon: <Building2 className="w-5 h-5 text-[#0066EE]" />,
       role: '공공기관 · 지자체 담당관',
-      headline: "행정관의 본업은 '서식 재작업'이 아닌 '정책과 공공 서비스'",
-      desc: '스캔된 조례·지침서의 깨진 표를 행정안전부 공문서 규격에 맞게 복원해 전자결재 등록을 완결합니다.'
+      headline: "서식 재작업 대신 본연의 행정 업무에 집중",
+      desc: '조례·지침서의 깨진 표를 행정 표준 규격에 맞게 복원해 전자결재에 즉시 등록합니다.'
     },
     {
       icon: <Briefcase className="w-5 h-5 text-[#0066EE]" />,
       role: '기업 경영지원 · 인사총무팀',
-      headline: "실무자의 핵심은 '양식 재작업 노가다'가 아닌 '사내 업무 운영'",
-      desc: '스캔된 사내 업무 매뉴얼, 프로세스 흐름도, 부서 결재 기안 양식을 한글 표준 도형과 표로 말끔하게 복원합니다.'
+      headline: "매뉴얼 재작업 대신 핵심 사내 업무 운영",
+      desc: '업무 매뉴얼, 순서도, 결재 양식을 한글 표준 도형과 표로 말끔하게 복원합니다.'
     },
     {
       icon: <Scale className="w-5 h-5 text-[#0066EE]" />,
       role: '법무 · 계약 · 사규 관리자',
-      headline: "관리자의 자산은 '오탈자 교정'이 아닌 '리스크 검토와 협상'",
-      desc: '계약서 조항, 취업규칙 사규집, 거래 약관의 번호 체계와 다단 표를 2단계 교차 검수로 오차 없이 복원합니다.'
+      headline: "오탈자 교정 대신 실질적 리스크 검토",
+      desc: '계약서와 사규집의 조항 체계와 표를 2단계 교차 검수로 오차 없이 복원합니다.'
     },
     {
       icon: <GraduationCap className="w-5 h-5 text-[#0066EE]" />,
       role: '학원장 · 교재 출판사',
-      headline: "교육자의 가치는 '수식 타이핑'이 아닌 '강의와 문항 개발'",
-      desc: '흐릿한 모의고사·기출 스캔본을 수학 한글 수식과 기하 벡터 작도가 완료된 학원 교재로 완성합니다.'
+      headline: "수식 타이핑 대신 강의와 문항 개발",
+      desc: '시험지 스캔본을 한글 수식과 기하 벡터 도판이 완비된 학원 교재로 완성합니다.'
     }
   ];
 
@@ -47,10 +47,10 @@ export default function WebWhyAndSolutions() {
             <span>도입 효과</span>
           </div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tight text-zinc-900 mb-2">
-            전문 인력의 귀중한 시간을 <span className="text-[#0066EE]">본업에 집중</span>시켜 드립니다
+            반복 편집 작업 대신, <span className="text-[#0066EE]">본업에 집중하세요</span>
           </h2>
           <p className="text-zinc-600 text-xs sm:text-sm font-medium">
-            반복적인 표 서식 교정과 수식 타이핑은 맡기시고, 각 분야의 핵심 가치 창출에만 몰입하세요.
+            깨진 표 복원과 수식 타이핑은 맡기시고, 핵심 가치 창출에만 몰입하세요.
           </p>
         </div>
 

@@ -15,27 +15,27 @@ interface WebServiceOverviewProps {
 export default function WebServiceOverview({ onOpenModal }: WebServiceOverviewProps) {
   const capabilities = [
     {
-      category: '문서 엔지니어링',
-      title: 'PDF → 정품 HWP/HWPX 정밀 전산화',
-      desc: '스캔 PDF·이미지의 복합 다단 표, 들여쓰기, 행간 스타일이 온전히 살아있는 100% 편집 가능한 한글 문서로 복원합니다.',
+      category: '문서 전산화',
+      title: 'PDF → 정품 HWP 정밀 변환',
+      desc: '표, 들여쓰기, 글자 모양을 그대로 살려 100% 편집 가능한 한글 파일로 복원합니다.',
       icon: <FileType className="w-5 h-5 text-[#0066EE]" />
     },
     {
-      category: '전문 수식 코드화',
+      category: '전문 수식',
       title: '수학·과학 수식 한글 표준화',
-      desc: '분수, 근호, 미적분, 그리스 문자 등 복잡한 수식을 한글 표준 수식 코드로 1:1 변환해 자유로운 수정을 보장합니다.',
+      desc: '분수, 근호, 미적분 기호를 한글 공식 수식 코드로 1:1 정확하게 입력합니다.',
       icon: <FileCheck className="w-5 h-5 text-[#0066EE]" />
     },
     {
-      category: '도형 & 순서도 최적화',
-      title: '300dpi 인쇄용 고화질 벡터화',
-      desc: '기하 도형 작도, 다이어그램, 프로세스 순서도의 스캔 노이즈와 계단 현상을 제거해 출판·인쇄 규격에 부합하게 복원합니다.',
+      category: '도형 & 순서도',
+      title: '300dpi 인쇄용 벡터 복원',
+      desc: '기하 도형과 순서도의 깨짐과 노이즈를 제거해 선명한 인쇄용으로 복원합니다.',
       icon: <Maximize2 className="w-5 h-5 text-[#0066EE]" />
     },
     {
-      category: '양식 1:1 매칭',
-      title: '기관·기업 맞춤 전용 템플릿',
-      desc: '행정안전부 공문서 규격, 사내 고유 결재선, 학원 2단 레이아웃 규격을 충실히 반영해 수령 즉시 실무에 투입할 수 있습니다.',
+      category: '서식 매칭',
+      title: '기관·기업 전용 템플릿',
+      desc: '공문서 규격, 사내 결재선, 학원 2단 양식을 그대로 맞춰 납품 즉시 사용 가능합니다.',
       icon: <Layers className="w-5 h-5 text-[#0066EE]" />
     }
   ];
@@ -52,10 +52,10 @@ export default function WebServiceOverview({ onOpenModal }: WebServiceOverviewPr
             <span>핵심 기술 역량</span>
           </div>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-zinc-900 mb-3">
-            공식 표준 서식 규격에 맞춘 <span className="text-[#0066EE]">완성형 HWP 문서</span>
+            표준 규격에 맞춘 <span className="text-[#0066EE]">완성형 HWP 문서</span>
           </h2>
           <p className="text-zinc-600 text-sm sm:text-base font-medium leading-relaxed">
-            정밀 수식 입력, 고화질 도판 복원, 귀사 맞춤 템플릿 적용으로 추가 편집 부담 없는 실무 최종본을 제공합니다.
+            수식 입력, 도판 복원, 맞춤 서식 적용으로 바로 사용하는 최종 문서를 납품합니다.
           </p>
         </div>
 
@@ -106,7 +106,7 @@ export default function WebServiceOverview({ onOpenModal }: WebServiceOverviewPr
             </h3>
 
             <p className="text-blue-100 text-xs sm:text-sm leading-relaxed font-normal mb-5">
-              높은 단가의 신규 드로잉 대신, 원본 캡처본을 300dpi 인쇄용 고화질로 업스케일·리터칭하여 합리적인 단가로 완성합니다. (원본 이미지 접수 필수)
+              고비용 신규 작도 대신, 원본 캡처 이미지를 300dpi 인쇄용으로 선명하게 업스케일하여 합리적인 단가로 완성합니다.
             </p>
 
             <div className="flex flex-wrap items-center gap-3">

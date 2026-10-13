@@ -49,7 +49,7 @@ export default function QuickContactForm({ initialService = '수학 문제 한�
             </h3>
 
             <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-              조판 외주는 결과물을 보지 않고 맡기기 어렵습니다. 지금 원고의 가장 까다로운 3문항을 보내주시면, 에이브로 전문 에디터가 출판 규격 HWP 파일로 신속히 제작하여 회신해 드립니다.
+              조판 외주는 결과물을 보지 않고 맡기기 어렵습니다. 지금 원고의 가장 까다로운 3문항을 보내주시면, 전문 에디터가 출판 규격 HWP 파일로 신속히 제작하여 회신해 드립니다.
             </p>
           </div>
 
