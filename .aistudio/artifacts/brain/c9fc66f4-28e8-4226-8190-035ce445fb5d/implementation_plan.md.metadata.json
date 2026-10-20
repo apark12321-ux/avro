@@ -1,0 +1,6 @@
+{
+  "summary": "Implementation plan for creating src/components/SEO.tsx to dynamically manage document head meta tags (title, meta description, OpenGraph, Twitter, canonical, robots) and Schema.org JSON-LD (ProfessionalService, Organization) across the main page, sample request modal, and general inquiry modal without external dependencies.",
+  "updatedAt": "2026-10-20T13:14:20.593623964Z",
+  "requestFeedback": true,
+  "userFacing": true
+}
