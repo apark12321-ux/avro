@@ -24,7 +24,7 @@ export default function App() {
       {/* Floating Website GNB */}
       <WebNavbar onOpenModal={handleOpenModal} />
 
-      {/* Hero Section (Dark Navy #060B19 with high-contrast, ultra-punchy 4-panel SWOT cards) */}
+      {/* Hero Section (Dark Navy #060B19 with high-contrast, ultra-punchy 4-panel core feature cards) */}
       <WebHero onOpenModal={handleOpenModal} />
 
       {/* Cross-Industry Solutions Explorer (Education, Public, Corporate, Legal) */}

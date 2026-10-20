@@ -28,9 +28,8 @@ export default function WebHero({ onOpenModal }: WebHeroProps) {
 
   const columns = [
     {
-      letter: 'S',
-      code: 'STRENGTH',
       stepNum: '01',
+      tag: '수식·벡터 작도',
       title: '수식 & 도형 작도',
       points: [
         '수학·과학 복잡 수식 100% 한글 개체화',
@@ -43,17 +42,14 @@ export default function WebHero({ onOpenModal }: WebHeroProps) {
         border: 'border-cyan-500/30',
         bg: 'from-cyan-500/20 via-[#0B1528] to-[#081020]',
         badge: 'bg-cyan-400/15 text-cyan-300 border-cyan-400/40',
-        letter: 'text-cyan-400/25 group-hover:text-cyan-400/40',
-        letterActive: 'text-cyan-400/40',
       },
       icon: <Sigma className="w-5 h-5 text-cyan-400" />,
       actionText: '무료 샘플 테스트 신청',
       onAction: () => onOpenModal('sample'),
     },
     {
-      letter: 'W',
-      code: 'WORKFLOW',
       stepNum: '02',
+      tag: '신속 당일 출고',
       title: '신속 당일 납품',
       points: [
         '시험 직전 급한 원고 당일 4~8시간 출고',
@@ -66,17 +62,14 @@ export default function WebHero({ onOpenModal }: WebHeroProps) {
         border: 'border-blue-500/30',
         bg: 'from-blue-500/20 via-[#0B1528] to-[#081020]',
         badge: 'bg-sky-400/15 text-sky-300 border-sky-400/40',
-        letter: 'text-sky-400/25 group-hover:text-sky-400/40',
-        letterActive: 'text-sky-400/40',
       },
       icon: <Clock className="w-5 h-5 text-[#38BDF8]" />,
       actionText: '긴급 외주 일정 문의',
       onAction: () => onOpenModal('inquiry'),
     },
     {
-      letter: 'O',
-      code: 'OFFICIAL',
       stepNum: '03',
+      tag: '공문서 표준 규격',
       title: '서식 & 복합 표',
       points: [
         '행정안전부 공문서 편람 규격 1:1 준수',
@@ -89,17 +82,14 @@ export default function WebHero({ onOpenModal }: WebHeroProps) {
         border: 'border-emerald-500/30',
         bg: 'from-emerald-500/20 via-[#0B1528] to-[#081020]',
         badge: 'bg-emerald-400/15 text-emerald-300 border-emerald-400/40',
-        letter: 'text-emerald-400/25 group-hover:text-emerald-400/40',
-        letterActive: 'text-emerald-400/40',
       },
       icon: <Layers className="w-5 h-5 text-emerald-400" />,
       actionText: '공문서·교재 서식 상담',
       onAction: () => onOpenModal('inquiry'),
     },
     {
-      letter: 'T',
-      code: 'TRUST',
       stepNum: '04',
+      tag: '보안·전수 검수',
       title: '보안 & 전수 검수',
       points: [
         '작업 완료 즉시 원본 데이터 영구 파기',
@@ -112,8 +102,6 @@ export default function WebHero({ onOpenModal }: WebHeroProps) {
         border: 'border-purple-500/30',
         bg: 'from-purple-500/20 via-[#0B1528] to-[#081020]',
         badge: 'bg-purple-400/15 text-purple-300 border-purple-400/40',
-        letter: 'text-purple-400/25 group-hover:text-purple-400/40',
-        letterActive: 'text-purple-400/40',
       },
       icon: <Lock className="w-5 h-5 text-purple-400" />,
       actionText: '보안 정책 및 무료 샘플 신청',
@@ -185,7 +173,7 @@ export default function WebHero({ onOpenModal }: WebHeroProps) {
         </div>
 
         {/* ========================================================================= */}
-        {/* 4-COLUMN SWOT INTERACTIVE PANELS (High Contrast, Ultra-clean, Minimal Text)*/}
+        {/* 4-COLUMN CORE FEATURE INTERACTIVE PANELS (High Contrast, Ultra-clean, Minimal Text) */}
         {/* ========================================================================= */}
         <div className="max-w-6xl mx-auto mb-8">
           
@@ -204,26 +192,16 @@ export default function WebHero({ onOpenModal }: WebHeroProps) {
                       : `flex-1 bg-[#0A1324]/85 hover:bg-[#0D1A33] ${col.theme.border} hover:border-white/40`
                   }`}
                 >
-                  {/* Giant Typography Background Letter */}
-                  <span
-                    aria-hidden="true"
-                    className={`absolute -bottom-5 -right-2 text-[140px] lg:text-[160px] font-black font-mono leading-none pointer-events-none transition-all duration-300 select-none ${
-                      isActive ? col.theme.letterActive : col.theme.letter
-                    }`}
-                  >
-                    {col.letter}
-                  </span>
-
                   {/* Top Content */}
                   <div className="relative z-10">
-                    {/* Header Row: Step Number & Code */}
+                    {/* Header Row: Step Number & Tag */}
                     <div className="flex items-center justify-between mb-3">
                       <div className="flex items-center gap-2">
                         <span className="font-mono text-sm font-black text-white">
                           {col.stepNum}
                         </span>
-                        <span className={`text-[10px] font-black tracking-widest uppercase px-2 py-0.5 rounded-full border ${col.theme.badge}`}>
-                          {col.code}
+                        <span className={`text-[10px] font-bold tracking-wide px-2 py-0.5 rounded-full border ${col.theme.badge}`}>
+                          {col.tag}
                         </span>
                       </div>
                       <div className="p-2 rounded-xl bg-white/10 border border-white/15">
@@ -298,8 +276,8 @@ export default function WebHero({ onOpenModal }: WebHeroProps) {
                       : 'text-zinc-300 hover:text-white'
                   }`}
                 >
-                  <span className="font-mono text-sm leading-none">{col.letter}</span>
-                  <span className="text-[10px] font-bold leading-none truncate max-w-full">
+                  <span className="font-mono text-xs font-black leading-none opacity-80">{col.stepNum}</span>
+                  <span className="text-[11px] font-bold leading-none truncate max-w-full">
                     {col.title.split(' ')[0]}
                   </span>
                 </button>
@@ -311,21 +289,14 @@ export default function WebHero({ onOpenModal }: WebHeroProps) {
               const activeCol = columns[activeColumn];
               return (
                 <div className={`relative rounded-2xl overflow-hidden border p-5 bg-[#0B1528] ${activeCol.theme.activeBorder}`}>
-                  <span
-                    aria-hidden="true"
-                    className={`absolute -bottom-3 -right-1 text-[120px] font-black font-mono leading-none pointer-events-none select-none ${activeCol.theme.letterActive}`}
-                  >
-                    {activeCol.letter}
-                  </span>
-
                   <div className="relative z-10">
                     <div className="flex items-center justify-between mb-3">
                       <div className="flex items-center gap-2">
                         <span className="font-mono text-sm font-black text-white">
                           {activeCol.stepNum}
                         </span>
-                        <span className={`text-[10px] font-black tracking-widest uppercase px-2 py-0.5 rounded-full border ${activeCol.theme.badge}`}>
-                          {activeCol.code}
+                        <span className={`text-[10px] font-bold tracking-wide px-2 py-0.5 rounded-full border ${activeCol.theme.badge}`}>
+                          {activeCol.tag}
                         </span>
                       </div>
                       <div className="p-1.5 rounded-lg bg-white/10">
