@@ -43,14 +43,14 @@ export default function WebEnterpriseTrust() {
   return (
     <section
       id="process"
-      className="py-20 md:py-28 bg-[#F7F8FA] border-t border-slate-200"
+      className="py-20 md:py-28 bg-white border-t border-slate-200"
     >
       <div className="max-w-[1200px] mx-auto px-5 sm:px-8">
         {/* Header */}
-        <div className="max-w-xl mb-14">
-          <div className="text-xs font-medium text-[#2563EB] mb-2.5">진행 절차</div>
-          <h2 className="text-2xl sm:text-3xl md:text-[2.2rem] font-bold tracking-tight text-slate-900 leading-tight text-balance">
-            IT 지식이 없어도, 4단계면 충분합니다
+        <div className="mb-14">
+          <div className="text-xs font-medium text-[#2563EB] mb-2">Process</div>
+          <h2 className="text-2xl sm:text-3xl md:text-[2.2rem] font-bold tracking-tight text-slate-900 leading-tight">
+            진행 절차
           </h2>
         </div>
 

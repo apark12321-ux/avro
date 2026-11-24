@@ -268,7 +268,7 @@ export default function FactsheetContactModal({
                 </label>
                 <textarea
                   rows={2}
-                  placeholder="예) 카톡 예약 응대가 너무 많습니다 / 세무 증빙 정리를 줄이고 싶습니다"
+                  placeholder="예) 카카오톡 채널 예약 응대 자동화 / 세무 증빙 정리 / 지역 SEO 세팅"
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                   className="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 focus:border-[#2563EB] focus:ring-2 focus:ring-[#2563EB]/15 outline-none bg-white text-sm resize-none"

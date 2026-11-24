@@ -42,7 +42,7 @@ export default function WebNavbar({ onOpenModal }: WebNavbarProps) {
             AVRO
           </button>
 
-          {/* Zone 2: 4 concise single-line navigation links */}
+          {/* Zone 2: 5 concise single-line navigation links */}
           <nav
             aria-label="주요 메뉴"
             className="hidden md:flex items-center gap-7 text-sm font-medium text-slate-600"
@@ -53,6 +53,13 @@ export default function WebNavbar({ onOpenModal }: WebNavbarProps) {
               className="hover:text-slate-900 transition-colors whitespace-nowrap shrink-0 cursor-pointer"
             >
               업종별 솔루션
+            </button>
+            <button
+              type="button"
+              onClick={() => scrollTo('portfolio')}
+              className="hover:text-slate-900 transition-colors whitespace-nowrap shrink-0 cursor-pointer"
+            >
+              구축 사례
             </button>
             <button
               type="button"
@@ -73,7 +80,7 @@ export default function WebNavbar({ onOpenModal }: WebNavbarProps) {
               onClick={() => scrollTo('faq')}
               className="hover:text-slate-900 transition-colors whitespace-nowrap shrink-0 cursor-pointer"
             >
-              자주 묻는 질문
+              FAQ
             </button>
           </nav>
 
@@ -112,6 +119,13 @@ export default function WebNavbar({ onOpenModal }: WebNavbarProps) {
             </button>
             <button
               type="button"
+              onClick={() => scrollTo('portfolio')}
+              className="text-left py-2 hover:text-[#2563EB] cursor-pointer"
+            >
+              구축 사례
+            </button>
+            <button
+              type="button"
               onClick={() => scrollTo('capabilities')}
               className="text-left py-2 hover:text-[#2563EB] cursor-pointer"
             >
@@ -129,7 +143,7 @@ export default function WebNavbar({ onOpenModal }: WebNavbarProps) {
               onClick={() => scrollTo('faq')}
               className="text-left py-2 hover:text-[#2563EB] cursor-pointer"
             >
-              자주 묻는 질문
+              FAQ
             </button>
             <button
               type="button"

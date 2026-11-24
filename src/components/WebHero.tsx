@@ -15,8 +15,8 @@ export default function WebHero({ onOpenModal }: WebHeroProps) {
     { value: '무료 진단', label: '업무 흐름 분석·견적' },
   ];
 
-  const scrollToSolutions = () => {
-    const el = document.getElementById('industry-ai');
+  const scrollToPortfolio = () => {
+    const el = document.getElementById('portfolio');
     if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
@@ -58,10 +58,10 @@ export default function WebHero({ onOpenModal }: WebHeroProps) {
 
               <button
                 type="button"
-                onClick={scrollToSolutions}
+                onClick={scrollToPortfolio}
                 className="text-sm font-semibold text-slate-700 hover:text-slate-900 underline underline-offset-4 decoration-slate-300 hover:decoration-slate-900 transition-colors cursor-pointer whitespace-nowrap shrink-0"
               >
-                업종별 솔루션 보기
+                실제 구축 사례 보기
               </button>
             </div>
           </div>

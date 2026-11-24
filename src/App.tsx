@@ -3,6 +3,7 @@ import SEO from './components/SEO';
 import WebNavbar from './components/WebNavbar';
 import WebHero from './components/WebHero';
 import IndustryAIShowcase from './components/IndustryAIShowcase';
+import PortfolioShowcase from './components/PortfolioShowcase';
 import CoreCapabilities from './components/CoreCapabilities';
 import WebEnterpriseTrust from './components/WebEnterpriseTrust';
 import WebFAQ from './components/WebFAQ';
@@ -51,6 +52,7 @@ export default function App() {
       <main>
         <WebHero onOpenModal={handleOpenModal} />
         <IndustryAIShowcase onOpenModal={handleOpenModal} />
+        <PortfolioShowcase onOpenModal={handleOpenModal} />
         <CoreCapabilities onOpenModal={handleOpenModal} />
         <WebEnterpriseTrust />
         <WebFAQ />

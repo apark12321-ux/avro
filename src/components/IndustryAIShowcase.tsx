@@ -54,7 +54,7 @@ const SECTORS: Record<SectorKey, SectorConfig> = {
     sectors: ['병원', '약국', '학원'],
     headline: '예약·출결 자동화와 지역 검색(SEO) 신규 유입을 함께',
     points: [
-      '진료·수업 예약 변경 카톡 24시간 자동 응답',
+      '진료·수업 예약 변경 카카오톡 채널 24시간 자동 응답',
       '진료과목·학원 지역 검색 최적화(SEO) 및 플레이스 관리',
       '방문 전 안내·복약 지도·학부모 학습 리포트 자동 발송',
     ],
@@ -64,7 +64,7 @@ const SECTORS: Record<SectorKey, SectorConfig> = {
     uiMetricValue: '+42%',
     rows: [
       { time: '10:30', title: '지역 진료·학원 SEO 세팅', detail: '검색 스키마 및 플레이스 키워드 최적화', result: '노출 상승' },
-      { time: '14:30', title: '학원 등원·과제 리포트', detail: '학부모 카톡 개별 학습 요약 발송', result: '발송 완료' },
+      { time: '14:30', title: '학원 등원·과제 리포트', detail: '학부모 알림톡 개별 학습 요약 발송', result: '발송 완료' },
       { time: '16:05', title: '정기검진·복약 순응 알림', detail: '재방문 시점 자동 안내 및 예약 연동', result: '예약 11건' },
     ],
   },
@@ -141,11 +141,9 @@ export default function IndustryAIShowcase({ onOpenModal }: IndustryAIShowcasePr
         {/* Header + Segmented Controls */}
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-10">
           <div>
-            <div className="flex items-center gap-2 text-xs font-medium text-[#2563EB] mb-2.5">
-              <span>업종별 맞춤 솔루션</span>
-            </div>
-            <h2 className="text-2xl sm:text-3xl md:text-[2.2rem] font-bold tracking-tight text-slate-900 leading-tight text-balance">
-              업종마다 다른 업무, 전용 AI로 해결합니다
+            <div className="text-xs font-medium text-[#2563EB] mb-2">Solutions</div>
+            <h2 className="text-2xl sm:text-3xl md:text-[2.2rem] font-bold tracking-tight text-slate-900 leading-tight">
+              업종별 맞춤 AI
             </h2>
           </div>
 

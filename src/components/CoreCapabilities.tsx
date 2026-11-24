@@ -11,21 +11,21 @@ export default function CoreCapabilities({ onOpenModal }: CoreCapabilitiesProps)
   return (
     <section
       id="capabilities"
-      className="py-20 md:py-28 bg-white border-t border-slate-200"
+      className="py-20 md:py-28 bg-[#F7F8FA] border-t border-slate-200"
     >
       <div className="max-w-[1200px] mx-auto px-5 sm:px-8">
         {/* Minimal Section Header */}
-        <div className="max-w-xl mb-12">
-          <div className="text-xs font-medium text-[#2563EB] mb-2.5">핵심 구축 영역</div>
-          <h2 className="text-2xl sm:text-3xl md:text-[2.2rem] font-bold tracking-tight text-slate-900 leading-tight text-balance">
-            복잡한 기능은 빼고, 현장에서 바로 쓰는 4가지
+        <div className="mb-12">
+          <div className="text-xs font-medium text-[#2563EB] mb-2">Capabilities</div>
+          <h2 className="text-2xl sm:text-3xl md:text-[2.2rem] font-bold tracking-tight text-slate-900 leading-tight">
+            핵심 구축 영역
           </h2>
         </div>
 
         {/* Asymmetric 3-Column Bento Grid (2+1 / 1+2) */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* 01. Marquee Card (col-span-2) */}
-          <article className="lg:col-span-2 bg-[#F7F8FA] border border-slate-200 rounded-2xl overflow-hidden flex flex-col md:flex-row">
+          <article className="lg:col-span-2 bg-white border border-slate-200 rounded-2xl overflow-hidden flex flex-col md:flex-row">
             <div className="p-7 sm:p-8 flex flex-col justify-between flex-1">
               <div>
                 <div className="font-mono tabular-nums text-xs font-semibold text-[#2563EB] mb-3">
@@ -35,13 +35,13 @@ export default function CoreCapabilities({ onOpenModal }: CoreCapabilitiesProps)
                   24시간 고객 응대 · 예약 AI
                 </h3>
                 <p className="text-sm text-slate-600 leading-relaxed">
-                  카카오톡·네이버 톡톡·전화 문의를 업종 규칙에 맞춰 자동으로
+                  카카오톡 채널·알림톡·네이버 톡톡 문의를 업종 규칙에 맞춰 자동으로
                   답변하고 예약까지 확정합니다.
                 </p>
               </div>
 
               <div className="mt-6 pt-4 border-t border-slate-200/80 flex items-center justify-between text-xs text-slate-500">
-                <span>카카오톡 · 네이버 예약 · 알림톡</span>
+                <span>카카오톡 채널 · 알림톡 · 네이버 예약</span>
                 <button
                   type="button"
                   onClick={() => onOpenModal('sample')}
@@ -71,7 +71,7 @@ export default function CoreCapabilities({ onOpenModal }: CoreCapabilitiesProps)
           </article>
 
           {/* 02. Document, Accounting & Inventory Automation */}
-          <article className="bg-[#F7F8FA] border border-slate-200 rounded-2xl p-7 sm:p-8 flex flex-col justify-between">
+          <article className="bg-white border border-slate-200 rounded-2xl p-7 sm:p-8 flex flex-col justify-between">
             <div>
               <div className="font-mono tabular-nums text-xs font-semibold text-[#2563EB] mb-3">
                 02
@@ -90,7 +90,7 @@ export default function CoreCapabilities({ onOpenModal }: CoreCapabilitiesProps)
           </article>
 
           {/* 03. SEO & AI Marketing Promotion */}
-          <article className="bg-[#F7F8FA] border border-slate-200 rounded-2xl p-7 sm:p-8 flex flex-col justify-between">
+          <article className="bg-white border border-slate-200 rounded-2xl p-7 sm:p-8 flex flex-col justify-between">
             <div>
               <div className="font-mono tabular-nums text-xs font-semibold text-[#2563EB] mb-3">
                 03
@@ -109,7 +109,7 @@ export default function CoreCapabilities({ onOpenModal }: CoreCapabilitiesProps)
           </article>
 
           {/* 04. Custom Internal App (col-span-2) */}
-          <article className="lg:col-span-2 bg-[#F7F8FA] border border-slate-200 rounded-2xl p-7 sm:p-8 flex flex-col justify-between">
+          <article className="lg:col-span-2 bg-white border border-slate-200 rounded-2xl p-7 sm:p-8 flex flex-col justify-between">
             <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
               <div className="md:col-span-7">
                 <div className="font-mono tabular-nums text-xs font-semibold text-[#2563EB] mb-3">

@@ -78,7 +78,7 @@ export const DEFAULT_STRUCTURED_DATA = {
             itemOffered: {
               '@type': 'Service',
               name: '맞춤형 AI 고객 응대·예약·정산·전용 웹앱 개발',
-              description: '카카오톡·네이버 예약·POS·문서 자동화를 하나로 연결하는 전용 AI 소프트웨어 구축',
+              description: '카카오톡 채널·알림톡·네이버 예약·POS·문서 자동화를 하나로 연결하는 전용 AI 소프트웨어 구축',
             },
           },
           {

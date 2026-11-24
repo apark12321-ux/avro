@@ -22,8 +22,8 @@ export default function WebFAQ() {
       a: '네. 솔루션 및 웹 구축 시 네이버·구글·AI 검색 최적화(SEO/GEO) 구조와 업종별 홍보·단골 알림 자동화까지 기본 세팅해 드립니다.',
     },
     {
-      q: '지금 쓰는 카카오톡, 네이버 예약, 엑셀과 연동되나요?',
-      a: '네. 기존에 사용 중인 메신저, 예약 채널, POS, 엑셀 양식에 맞춰 자연스럽게 연결해 드립니다.',
+      q: '지금 쓰는 카카오톡 채널·알림톡, 네이버 예약, 엑셀과 연동되나요?',
+      a: '네. 카카오톡 비즈니스 채널·알림톡을 비롯해 네이버 예약, POS, 엑셀 양식 등 기존 도구에 맞춰 안전하게 연결해 드립니다.',
     },
     {
       q: '구축 후 수정이나 유지보수도 지원하나요?',
@@ -32,7 +32,7 @@ export default function WebFAQ() {
   ];
 
   return (
-    <section id="faq" className="py-20 md:py-28 bg-white border-t border-slate-200">
+    <section id="faq" className="py-20 md:py-28 bg-[#F7F8FA] border-t border-slate-200">
       <div className="max-w-[1200px] mx-auto px-5 sm:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12">
           {/* Left Sticky Title */}
