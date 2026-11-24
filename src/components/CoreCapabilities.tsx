@@ -70,41 +70,41 @@ export default function CoreCapabilities({ onOpenModal }: CoreCapabilitiesProps)
             </div>
           </article>
 
-          {/* 02. Document & Accounting Automation */}
+          {/* 02. Document, Accounting & Inventory Automation */}
           <article className="bg-[#F7F8FA] border border-slate-200 rounded-2xl p-7 sm:p-8 flex flex-col justify-between">
             <div>
               <div className="font-mono tabular-nums text-xs font-semibold text-[#2563EB] mb-3">
                 02
               </div>
               <h3 className="text-xl font-bold text-slate-900 tracking-tight mb-2.5">
-                문서 · 정산 자동 정리
+                문서 · 정산 · 발주 자동화
               </h3>
               <p className="text-sm text-slate-600 leading-relaxed">
-                영수증, 계약서, 상담 기록을 AI가 자동 분류하고 보고서·엑셀로
-                바로 정리합니다.
+                영수증·계약서·상담 기록을 자동 정리하고, 매출 추이에 맞춰 적정
+                발주량을 제안합니다.
               </p>
             </div>
             <div className="mt-6 pt-4 border-t border-slate-200/80 text-xs text-slate-500">
-              OCR 추출 · 자동 기장 · 계약서 요약
+              증빙 분류 · 계약서 요약 · 수요 예측 발주
             </div>
           </article>
 
-          {/* 03. Inventory & Repeat Customer AI */}
+          {/* 03. SEO & AI Marketing Promotion */}
           <article className="bg-[#F7F8FA] border border-slate-200 rounded-2xl p-7 sm:p-8 flex flex-col justify-between">
             <div>
               <div className="font-mono tabular-nums text-xs font-semibold text-[#2563EB] mb-3">
                 03
               </div>
               <h3 className="text-xl font-bold text-slate-900 tracking-tight mb-2.5">
-                발주 · 재고 · 단골 알림
+                검색 최적화(SEO) · AI 홍보
               </h3>
               <p className="text-sm text-slate-600 leading-relaxed">
-                매출 흐름을 분석해 적정 발주량을 알리고, 재방문 시점에 맞춰
-                단골 혜택을 발송합니다.
+                네이버·구글·AI 검색 상위 노출 구조(SEO/GEO)를 세팅하고, 블로그·SNS
+                홍보와 단골 알림을 자동화합니다.
               </p>
             </div>
             <div className="mt-6 pt-4 border-t border-slate-200/80 text-xs text-slate-500">
-              수요 예측 · 신선 입고 알림 · 리뷰 답글
+              SEO/GEO 세팅 · 플레이스 노출 · 홍보 콘텐츠
             </div>
           </article>
 
@@ -119,19 +119,19 @@ export default function CoreCapabilities({ onOpenModal }: CoreCapabilitiesProps)
                   우리 가게·사무실 전용 웹·앱 제작
                 </h3>
                 <p className="text-sm text-slate-600 leading-relaxed">
-                  엑셀과 수기 장부를 스마트폰·태블릿에서 버튼 몇 번으로 끝내는
-                  전용 관리 화면으로 바꿔드립니다.
+                  검색 유입(SEO)이 적용된 브랜드 홈페이지부터 엑셀·수기 장부를
+                  대체하는 전용 관리 화면까지 맞춤 제작합니다.
                 </p>
               </div>
 
               <div className="md:col-span-5 md:border-l md:border-slate-200 md:pl-6 space-y-3 text-xs">
                 <div className="flex items-center justify-between pb-2.5 border-b border-slate-200/70">
-                  <span className="text-slate-500">기존 툴 연동</span>
-                  <span className="font-semibold text-slate-900">POS · 캘린더 · 엑셀</span>
+                  <span className="text-slate-500">검색 최적화</span>
+                  <span className="font-semibold text-slate-900">SEO · GEO 기본 세팅</span>
                 </div>
                 <div className="flex items-center justify-between pb-2.5 border-b border-slate-200/70">
-                  <span className="text-slate-500">지원 기기</span>
-                  <span className="font-semibold text-slate-900">PC · 태블릿 · 모바일</span>
+                  <span className="text-slate-500">기존 툴 연동</span>
+                  <span className="font-semibold text-slate-900">POS · 캘린더 · 엑셀</span>
                 </div>
                 <div className="flex items-center justify-between">
                   <span className="text-slate-500">소유권</span>
@@ -141,7 +141,7 @@ export default function CoreCapabilities({ onOpenModal }: CoreCapabilitiesProps)
             </div>
 
             <div className="mt-6 pt-4 border-t border-slate-200/80 flex items-center justify-between text-xs text-slate-500">
-              <span>불필요한 구독료 없이 필요한 기능만 맞춤 구축</span>
+              <span>불필요한 구독료 없이 업무 자동화와 홍보 기반을 함께 구축</span>
               <button
                 type="button"
                 onClick={() => onOpenModal('inquiry')}

@@ -12,8 +12,8 @@ export default function WebEnterpriseTrust() {
     },
     {
       step: '03',
-      title: '맞춤 개발·연동',
-      desc: '카톡·POS·캘린더 등 기존 도구와 매끄럽게 연결합니다.',
+      title: '맞춤 개발 · SEO 세팅',
+      desc: '업무 도구 연동과 검색 최적화(SEO/GEO)를 함께 구축합니다.',
     },
     {
       step: '04',

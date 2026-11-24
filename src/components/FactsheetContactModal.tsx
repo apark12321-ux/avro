@@ -255,8 +255,8 @@ export default function FactsheetContactModal({
                   >
                     <option value="무료 AI 업무 진단">무료 AI 업무 진단</option>
                     <option value="고객 응대 · 예약 자동화">고객 응대 · 예약 자동화</option>
-                    <option value="문서 · 정산 자동 처리">문서 · 정산 자동 처리</option>
-                    <option value="발주 · 재고 · 단골 관리">발주 · 재고 · 단골 관리</option>
+                    <option value="검색 최적화(SEO) · AI 마케팅 홍보">검색 최적화(SEO) · AI 마케팅 홍보</option>
+                    <option value="문서 · 정산 · 발주 자동화">문서 · 정산 · 발주 자동화</option>
                     <option value="우리 매장 전용 웹·앱 제작">우리 매장 전용 웹·앱 제작</option>
                   </select>
                 </div>

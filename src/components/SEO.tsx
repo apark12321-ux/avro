@@ -14,11 +14,11 @@ export interface SEOProps {
 }
 
 const DEFAULT_SEO = {
-  title: 'AVRO — 소상공인·자영업자·전문직 맞춤형 AI 솔루션 개발사',
+  title: 'AVRO — 소상공인·자영업자·전문직 맞춤형 AI 솔루션 · SEO 마케팅 개발사',
   description:
-    '법무·세무·회계·병원·부동산부터 카페·식당·베이커리·학원·동네 매장까지. 소상공인과 개인사업자 업무에 꼭 맞춘 전용 AI 솔루션을 개발합니다.',
+    '법무·세무·회계·병원·부동산부터 카페·식당·베이커리·학원·동네 매장까지. 업무 자동화 AI 솔루션과 검색 최적화(SEO/GEO)·마케팅 홍보 세팅을 함께 구축합니다.',
   keywords:
-    'AI 솔루션 개발, 자영업자 AI, 소상공인 AI 자동화, 전문직 AI, 세무 AI, 법무 AI, 병원 예약 자동화, 카페 발주 AI, 개인사업자 맞춤 소프트웨어, AVRO, 에이브로',
+    'AI 솔루션 개발, 자영업자 AI, 소상공인 AI 자동화, 전문직 AI, 검색 최적화 SEO, GEO AI 검색 노출, 소상공인 마케팅 홍보, 병원 예약 자동화, 세무 AI, 개인사업자 맞춤 소프트웨어, AVRO, 에이브로',
   ogType: 'website',
   ogUrl: 'https://avro.co.kr',
   robots: 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1',
@@ -35,7 +35,7 @@ export const DEFAULT_STRUCTURED_DATA = {
       url: 'https://avro.co.kr',
       email: 'ceo@avro.co.kr',
       description:
-        '자영업자, 소상공인, 전문직 및 개인사업자를 위한 맞춤형 AI 업무 자동화 솔루션과 전용 웹·앱을 개발하는 AI 전문 개발사',
+        '자영업자, 소상공인, 전문직 및 개인사업자를 위한 맞춤형 AI 업무 자동화 솔루션과 검색 최적화(SEO/GEO)·홍보 시스템을 개발하는 AI 전문 개발사',
       address: {
         '@type': 'PostalAddress',
         streetAddress: '청라에메랄드로 99',
@@ -47,9 +47,9 @@ export const DEFAULT_STRUCTURED_DATA = {
     {
       '@type': 'ProfessionalService',
       '@id': 'https://avro.co.kr/#service',
-      name: 'AVRO 맞춤형 AI 솔루션 개발 서비스',
+      name: 'AVRO 맞춤형 AI 솔루션 및 검색 최적화(SEO) 개발 서비스',
       description:
-        '법무, 세무, 회계, 병원, 약국, 부동산, 카페, 식당, 베이커리, 학원, 휴대폰 판매점, 세탁소, 과일가게, 정육점 등 업종 특화 AI 자동화 솔루션 개발.',
+        '법무, 세무, 회계, 병원, 약국, 부동산, 카페, 식당, 베이커리, 학원, 휴대폰 판매점, 세탁소, 과일가게, 정육점 등 업종 특화 AI 자동화 및 SEO·마케팅 홍보 세팅.',
       url: 'https://avro.co.kr',
       email: 'ceo@avro.co.kr',
       areaServed: 'KR',
@@ -61,7 +61,7 @@ export const DEFAULT_STRUCTURED_DATA = {
       },
       hasOfferCatalog: {
         '@type': 'OfferCatalog',
-        name: '업종별 맞춤형 AI 솔루션',
+        name: '업종별 맞춤형 AI 솔루션 및 SEO 마케팅',
         itemListElement: [
           {
             '@type': 'Offer',
@@ -79,6 +79,14 @@ export const DEFAULT_STRUCTURED_DATA = {
               '@type': 'Service',
               name: '맞춤형 AI 고객 응대·예약·정산·전용 웹앱 개발',
               description: '카카오톡·네이버 예약·POS·문서 자동화를 하나로 연결하는 전용 AI 소프트웨어 구축',
+            },
+          },
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: '검색 최적화(SEO/GEO) 및 AI 마케팅 홍보 세팅',
+              description: '네이버·구글·AI 검색 상위 노출 구조 세팅 및 업종별 홍보·단골 알림 자동화',
             },
           },
         ],

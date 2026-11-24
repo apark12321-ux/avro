@@ -21,9 +21,9 @@ export default function App() {
     setIsContactModalOpen(true);
   };
 
-  let seoTitle = 'AVRO — 소상공인·자영업자·전문직 맞춤형 AI 솔루션 개발사';
+  let seoTitle = 'AVRO — 소상공인·자영업자·전문직 맞춤형 AI 솔루션 · SEO 마케팅 개발사';
   let seoDescription =
-    '법무·세무·회계·병원·부동산부터 카페·식당·베이커리·학원·동네 매장까지. 소상공인과 개인사업자 업무에 꼭 맞춘 전용 AI 솔루션을 개발합니다.';
+    '법무·세무·회계·병원·부동산부터 카페·식당·베이커리·학원·동네 매장까지. 업무 자동화 AI 솔루션과 검색 최적화(SEO/GEO)·마케팅 홍보 세팅을 함께 구축합니다.';
 
   if (isContactModalOpen) {
     if (modalMode === 'sample') {

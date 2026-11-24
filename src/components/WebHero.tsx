@@ -28,7 +28,7 @@ export default function WebHero({ onOpenModal }: WebHeroProps) {
           {/* Left Copy Column */}
           <div className="lg:col-span-6 flex flex-col justify-center">
             <div className="flex flex-wrap items-center gap-2 text-xs font-medium text-slate-500 mb-5">
-              <span className="text-[#2563EB] font-semibold">AI 맞춤 솔루션 개발</span>
+              <span className="text-[#2563EB] font-semibold">AI 솔루션 · 검색 최적화(SEO)</span>
               <span aria-hidden="true">·</span>
               <span>소상공인 · 자영업자 · 전문직</span>
             </div>
@@ -42,7 +42,7 @@ export default function WebHero({ onOpenModal }: WebHeroProps) {
             <p className="text-[15px] sm:text-base text-slate-600 leading-relaxed max-w-lg mb-8">
               법무·세무·병원부터 카페·식당·동네 매장까지.
               <br />
-              매일 반복되는 응대·예약·정산·문서를 전용 AI로 자동화합니다.
+              업무 자동화부터 검색 노출(SEO)·마케팅 홍보 세팅까지 한 번에 구축합니다.
             </p>
 
             {/* Primary CTA + Clean Text Action */}
