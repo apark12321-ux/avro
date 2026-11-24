@@ -14,17 +14,16 @@ export interface SEOProps {
 }
 
 const DEFAULT_SEO = {
-  title: 'AVRO - 수학 문항 조판 & 에듀테크 테크 에이전시',
+  title: 'AVRO — 소상공인·자영업자·전문직 맞춤형 AI 솔루션 개발사',
   description:
-    '수학·과학 시험지 PDF를 출판 인쇄 규격 HWP로 완벽 변환하는 전문 기업. 수식 타이핑, 캡처본 고화질 업스케일, 학원 교재 템플릿 맞춤 조판. 샘플 3문항 무료 테스트 제공.',
+    '법무·세무·회계·병원·부동산부터 카페·식당·베이커리·학원·동네 매장까지. 소상공인과 개인사업자 업무에 꼭 맞춘 전용 AI 솔루션을 개발합니다.',
   keywords:
-    '수학 문항 조판, 수학 문제 한글 타이핑, PDF HWP 변환, 수식 조판 외주, 학원 시험지 제작, 한글 수식 입력, 기출문제 HWP 전산화, 수식 타이핑 외주, 인천 서구 청라 조판, 에듀테크 전문 외주',
+    'AI 솔루션 개발, 자영업자 AI, 소상공인 AI 자동화, 전문직 AI, 세무 AI, 법무 AI, 병원 예약 자동화, 카페 발주 AI, 개인사업자 맞춤 소프트웨어, AVRO, 에이브로',
   ogType: 'website',
   ogUrl: 'https://avro.co.kr',
   robots: 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1',
 };
 
-// Default Schema.org Graph for Organization and ProfessionalService
 export const DEFAULT_STRUCTURED_DATA = {
   '@context': 'https://schema.org',
   '@graph': [
@@ -32,12 +31,11 @@ export const DEFAULT_STRUCTURED_DATA = {
       '@type': 'Organization',
       '@id': 'https://avro.co.kr/#organization',
       name: 'AVRO',
-      alternateName: '에이브로',
+      alternateName: '주식회사 에이브로',
       url: 'https://avro.co.kr',
-      logo: 'https://avro.co.kr/logo.png',
       email: 'ceo@avro.co.kr',
       description:
-        '수학·과학 시험지 PDF를 인쇄 출판 규격 한글(HWP)로 완벽 변환 조판하는 에듀테크 테크 에이전시',
+        '자영업자, 소상공인, 전문직 및 개인사업자를 위한 맞춤형 AI 업무 자동화 솔루션과 전용 웹·앱을 개발하는 AI 전문 개발사',
       address: {
         '@type': 'PostalAddress',
         streetAddress: '청라에메랄드로 99',
@@ -45,17 +43,15 @@ export const DEFAULT_STRUCTURED_DATA = {
         addressRegion: '인천광역시',
         addressCountry: 'KR',
       },
-      sameAs: [],
     },
     {
       '@type': 'ProfessionalService',
       '@id': 'https://avro.co.kr/#service',
-      name: 'AVRO 수학 문항 조판 및 HWP 전산화 서비스',
+      name: 'AVRO 맞춤형 AI 솔루션 개발 서비스',
       description:
-        '수학·과학 복합 수식 100% 한글 수식 개체 입력, 저해상도 캡처 도판 고화질 업스케일, 학원 및 출판사 전용 규격 1:1 맞춤 조판 납품.',
+        '법무, 세무, 회계, 병원, 약국, 부동산, 카페, 식당, 베이커리, 학원, 휴대폰 판매점, 세탁소, 과일가게, 정육점 등 업종 특화 AI 자동화 솔루션 개발.',
       url: 'https://avro.co.kr',
       email: 'ceo@avro.co.kr',
-      priceRange: '₩₩',
       areaServed: 'KR',
       openingHoursSpecification: {
         '@type': 'OpeningHoursSpecification',
@@ -65,15 +61,14 @@ export const DEFAULT_STRUCTURED_DATA = {
       },
       hasOfferCatalog: {
         '@type': 'OfferCatalog',
-        name: '수학 조판 및 문서 변환 서비스',
+        name: '업종별 맞춤형 AI 솔루션',
         itemListElement: [
           {
             '@type': 'Offer',
             itemOffered: {
               '@type': 'Service',
-              name: '샘플 3문항 무료 변환 테스트',
-              description:
-                '실제 보유 원고 3문항을 고객사 전용 한글 HWP 규격으로 무상 변환해 드리는 사전 품질 검증 서비스',
+              name: '무료 AI 업무 진단 및 시안 제안',
+              description: '업종별 반복 업무 분석과 맞춤형 AI 자동화 화면·견적 사전 제안',
             },
             price: '0',
             priceCurrency: 'KRW',
@@ -82,9 +77,8 @@ export const DEFAULT_STRUCTURED_DATA = {
             '@type': 'Offer',
             itemOffered: {
               '@type': 'Service',
-              name: 'PDF 및 캡처본 한글(HWP) 정밀 조판 변환',
-              description:
-                '수학·과학 복잡 수식 개체화, 도판 300dpi 벡터화/업스케일, 출판 인쇄 규격 완성본 납품',
+              name: '맞춤형 AI 고객 응대·예약·정산·전용 웹앱 개발',
+              description: '카카오톡·네이버 예약·POS·문서 자동화를 하나로 연결하는 전용 AI 소프트웨어 구축',
             },
           },
         ],
@@ -127,9 +121,6 @@ function setJsonLdScript(data: Record<string, unknown> | Array<Record<string, un
   scriptElement.textContent = JSON.stringify(data, null, 2);
 }
 
-/**
- * Lightweight, dependency-free React component for dynamic document head & meta tag management.
- */
 export const SEO: React.FC<SEOProps> = ({
   title = DEFAULT_SEO.title,
   description = DEFAULT_SEO.description,
@@ -143,31 +134,25 @@ export const SEO: React.FC<SEOProps> = ({
   structuredData = DEFAULT_STRUCTURED_DATA,
 }) => {
   useEffect(() => {
-    // 1. Update Document Title
     document.title = title;
 
-    // 2. Primary Meta Tags
     setMetaTag('name', 'title', title);
     setMetaTag('name', 'description', description);
     setMetaTag('name', 'keywords', keywords);
     setMetaTag('name', 'robots', robots);
 
-    // 3. OpenGraph Tags
     setMetaTag('property', 'og:title', ogTitle || title);
     setMetaTag('property', 'og:description', ogDescription || description);
     setMetaTag('property', 'og:type', ogType);
     setMetaTag('property', 'og:url', ogUrl);
 
-    // 4. Twitter Cards
     setMetaTag('name', 'twitter:title', ogTitle || title);
     setMetaTag('name', 'twitter:description', ogDescription || description);
 
-    // 5. Canonical Link
     if (canonicalUrl) {
       setCanonicalLink(canonicalUrl);
     }
 
-    // 6. Schema.org JSON-LD Structured Data
     if (structuredData) {
       setJsonLdScript(structuredData);
     }

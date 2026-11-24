@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Menu, X, ArrowRight } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 
 interface WebNavbarProps {
   onOpenModal: (mode?: 'inquiry' | 'sample') => void;
@@ -10,9 +10,7 @@ export default function WebNavbar({ onOpenModal }: WebNavbarProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
+    const handleScroll = () => setIsScrolled(window.scrollY > 12);
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -28,104 +26,122 @@ export default function WebNavbar({ onOpenModal }: WebNavbarProps) {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 font-sans ${
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-200 ${
           isScrolled
-            ? 'bg-[#060B19]/90 text-white border-b border-white/10 backdrop-blur-md shadow-xl py-3'
-            : 'bg-transparent text-white py-4.5'
+            ? 'bg-white/95 backdrop-blur-md border-b border-slate-200'
+            : 'bg-white/85 backdrop-blur-xs border-b border-transparent'
         }`}
       >
-        <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-8 flex items-center justify-between">
-          
-          {/* Logo */}
-          <div
+        <div className="max-w-[1200px] mx-auto px-5 sm:px-8 h-16 flex items-center justify-between gap-8">
+          {/* Zone 1: Single text element wordmark */}
+          <button
+            type="button"
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="flex items-center gap-2.5 cursor-pointer select-none group"
+            className="text-lg font-extrabold tracking-tight text-slate-900 whitespace-nowrap shrink-0 cursor-pointer"
           >
-            <div className="w-7 h-7 bg-[#0066EE] text-white font-black flex items-center justify-center text-xs rounded-sm shadow-md group-hover:scale-105 transition-transform">
-              A
-            </div>
-            <div className="flex items-baseline gap-1.5 leading-none">
-              <span className="font-black tracking-tight text-lg sm:text-xl text-white">AVRO</span>
-              <span className="text-[11px] text-zinc-400 font-medium hidden sm:inline">공문서·업무서식·시험지 HWP 조판</span>
-            </div>
-          </div>
+            AVRO
+          </button>
 
-          {/* Website GNB Navigation Links */}
-          <nav className="hidden xl:flex items-center gap-7 text-xs font-bold text-zinc-300">
-            <button onClick={() => scrollTo('industry-solutions')} className="hover:text-[#38BDF8] transition-colors cursor-pointer">
-              문서 유형별 안내
+          {/* Zone 2: 4 concise single-line navigation links */}
+          <nav
+            aria-label="주요 메뉴"
+            className="hidden md:flex items-center gap-7 text-sm font-medium text-slate-600"
+          >
+            <button
+              type="button"
+              onClick={() => scrollTo('industry-ai')}
+              className="hover:text-slate-900 transition-colors whitespace-nowrap shrink-0 cursor-pointer"
+            >
+              업종별 솔루션
             </button>
-            <button onClick={() => scrollTo('security-assurance')} className="hover:text-[#38BDF8] transition-colors cursor-pointer">
-              보안 &amp; 검수 체계
+            <button
+              type="button"
+              onClick={() => scrollTo('capabilities')}
+              className="hover:text-slate-900 transition-colors whitespace-nowrap shrink-0 cursor-pointer"
+            >
+              핵심 기능
             </button>
-            <button onClick={() => scrollTo('faq')} className="hover:text-[#38BDF8] transition-colors cursor-pointer">
+            <button
+              type="button"
+              onClick={() => scrollTo('process')}
+              className="hover:text-slate-900 transition-colors whitespace-nowrap shrink-0 cursor-pointer"
+            >
+              진행 절차
+            </button>
+            <button
+              type="button"
+              onClick={() => scrollTo('faq')}
+              className="hover:text-slate-900 transition-colors whitespace-nowrap shrink-0 cursor-pointer"
+            >
               자주 묻는 질문
             </button>
           </nav>
 
-          {/* Right Action Buttons */}
-          <div className="hidden sm:flex items-center gap-2.5 text-xs font-bold">
+          {/* Zone 3: 1 primary action */}
+          <div className="flex items-center gap-3 shrink-0">
             <button
-              onClick={() => onOpenModal('inquiry')}
-              className="px-3.5 py-1.5 text-zinc-300 hover:text-white transition-colors cursor-pointer"
-            >
-              외주 견적 문의
-            </button>
-            <button
+              type="button"
               onClick={() => onOpenModal('sample')}
-              className="px-4 py-2 rounded-full text-white bg-[#0066EE] hover:bg-[#0052cc] shadow-md shadow-[#0066EE]/40 active:scale-95 transition-all flex items-center gap-1.5 cursor-pointer"
+              className="hidden md:inline-flex items-center justify-center px-4 py-2 rounded-lg bg-[#2563EB] hover:bg-[#1D4ED8] text-white text-xs font-semibold transition-colors whitespace-nowrap shrink-0 cursor-pointer"
             >
-              <span>무료 샘플 테스트</span>
-              <ArrowRight className="w-3.5 h-3.5" />
+              무료 진단 신청
+            </button>
+
+            <button
+              type="button"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="md:hidden p-2 text-slate-700 hover:text-slate-900 cursor-pointer"
+              aria-label="메뉴 열기"
+            >
+              {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
           </div>
-
-          {/* Mobile Menu Toggle */}
-          <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="xl:hidden p-1.5 text-zinc-300 hover:text-white cursor-pointer"
-            aria-label="Toggle Menu"
-          >
-            {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-          </button>
         </div>
       </header>
 
       {/* Mobile Drawer */}
       {isMobileMenuOpen && (
-        <div className="fixed inset-x-0 top-[60px] z-40 p-5 bg-[#060B19]/95 border-b border-white/10 shadow-2xl xl:hidden font-sans text-xs font-semibold backdrop-blur-xl">
-          <div className="flex flex-col gap-3.5 text-zinc-300">
-            <button onClick={() => scrollTo('industry-solutions')} className="text-left py-1 hover:text-[#38BDF8]">
-              문서 유형별 안내
+        <div className="fixed inset-x-0 top-16 z-40 bg-white border-b border-slate-200 px-5 py-5 md:hidden shadow-lg">
+          <nav className="flex flex-col gap-3 text-sm font-medium text-slate-700">
+            <button
+              type="button"
+              onClick={() => scrollTo('industry-ai')}
+              className="text-left py-2 hover:text-[#2563EB] cursor-pointer"
+            >
+              업종별 솔루션
             </button>
-            <button onClick={() => scrollTo('security-assurance')} className="text-left py-1 hover:text-[#38BDF8]">
-              보안 &amp; 검수 체계
+            <button
+              type="button"
+              onClick={() => scrollTo('capabilities')}
+              className="text-left py-2 hover:text-[#2563EB] cursor-pointer"
+            >
+              핵심 기능
             </button>
-            <button onClick={() => scrollTo('faq')} className="text-left py-1 hover:text-[#38BDF8]">
-              자주 묻는 질문 (FAQ)
+            <button
+              type="button"
+              onClick={() => scrollTo('process')}
+              className="text-left py-2 hover:text-[#2563EB] cursor-pointer"
+            >
+              진행 절차
             </button>
-
-            <div className="pt-3.5 border-t border-white/10 flex flex-col gap-2">
-              <button
-                onClick={() => {
-                  setIsMobileMenuOpen(false);
-                  onOpenModal('inquiry');
-                }}
-                className="w-full py-2.5 rounded-md border border-white/20 text-center text-white cursor-pointer"
-              >
-                외주 견적 문의
-              </button>
-              <button
-                onClick={() => {
-                  setIsMobileMenuOpen(false);
-                  onOpenModal('sample');
-                }}
-                className="w-full py-2.5 rounded-full bg-[#0066EE] text-white text-center font-bold cursor-pointer"
-              >
-                무료 샘플 테스트
-              </button>
-            </div>
-          </div>
+            <button
+              type="button"
+              onClick={() => scrollTo('faq')}
+              className="text-left py-2 hover:text-[#2563EB] cursor-pointer"
+            >
+              자주 묻는 질문
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                setIsMobileMenuOpen(false);
+                onOpenModal('sample');
+              }}
+              className="mt-2 w-full py-2.5 rounded-lg bg-[#2563EB] text-white text-sm font-semibold text-center cursor-pointer"
+            >
+              무료 진단 신청
+            </button>
+          </nav>
         </div>
       )}
     </>

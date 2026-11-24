@@ -1,5 +1,5 @@
 import { useState, useEffect, type FormEvent } from 'react';
-import { X, CheckCircle2, ArrowRight, Sparkles } from 'lucide-react';
+import { X, CheckCircle2 } from 'lucide-react';
 
 interface FactsheetContactModalProps {
   isOpen: boolean;
@@ -10,17 +10,16 @@ interface FactsheetContactModalProps {
 export default function FactsheetContactModal({
   isOpen,
   onClose,
-  defaultMode = 'sample'
+  defaultMode = 'sample',
 }: FactsheetContactModalProps) {
   const [formData, setFormData] = useState({
     name: '',
     company: '',
     email: '',
     phone: '',
-    serviceType: defaultMode === 'sample' ? '샘플 3문항 무료 테스트' : '전과목 시험지 조판 외주',
-    documentType: '스캔 PDF 시험지',
-    questionCount: defaultMode === 'sample' ? '3문항 (무료 샘플 테스트)' : '100문항 내외',
-    message: ''
+    industry: '법무 · 세무 · 회계 · 부동산',
+    solutionType: defaultMode === 'sample' ? '무료 AI 업무 진단' : '고객 응대 · 예약 자동화',
+    message: '',
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -29,10 +28,9 @@ export default function FactsheetContactModal({
 
   useEffect(() => {
     if (isOpen) {
-      setFormData(prev => ({
+      setFormData((prev) => ({
         ...prev,
-        serviceType: defaultMode === 'sample' ? '샘플 3문항 무료 테스트' : '전과목 시험지 조판 외주',
-        questionCount: defaultMode === 'sample' ? '3문항 (무료 샘플 테스트)' : '100문항 내외'
+        solutionType: defaultMode === 'sample' ? '무료 AI 업무 진단' : '고객 응대 · 예약 자동화',
       }));
       setIsSuccess(false);
       setErrorMessage('');
@@ -43,8 +41,15 @@ export default function FactsheetContactModal({
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    if (!formData.name.trim() || !formData.email.trim() || !formData.phone.trim()) {
-      setErrorMessage('필수 항목(성함, 이메일, 연락처)을 입력해 주세요.');
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!formData.name.trim() || !formData.phone.trim() || !formData.email.trim()) {
+      setErrorMessage('성함, 연락처, 이메일을 모두 입력해 주세요.');
+      return;
+    }
+
+    if (!emailPattern.test(formData.email.trim())) {
+      setErrorMessage('올바른 이메일 형식을 입력해 주세요.');
       return;
     }
 
@@ -52,38 +57,36 @@ export default function FactsheetContactModal({
     setErrorMessage('');
 
     try {
-      // 1. Send via free email endpoint service to both admin addresses
       const emailPayload = {
-        _subject: `[신청접수] ${formData.name}님 (${formData.company}) ${formData.serviceType}`,
+        _subject: `[AI 솔루션 문의] ${formData.name}님 (${formData.company || formData.industry}) - ${formData.solutionType}`,
         _replyto: formData.email,
         _cc: 'apark12321@gmail.com',
         담당자명: formData.name,
-        소속_학원_출판사명: formData.company,
+        상호_사무소명: formData.company || '(미입력)',
+        업종: formData.industry,
+        희망_솔루션: formData.solutionType,
         연락처: formData.phone,
         이메일: formData.email,
-        의뢰_구분: formData.serviceType,
-        원고_형태: formData.documentType,
-        문의_내용: formData.message || '(추가 문의내용 없음)'
+        문의_내용: formData.message || '(추가 내용 없음)',
       };
 
       const res = await fetch('https://formsubmit.co/ajax/ceo@avro.co.kr', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Accept': 'application/json'
+          Accept: 'application/json',
         },
-        body: JSON.stringify(emailPayload)
+        body: JSON.stringify(emailPayload),
       });
 
       if (!res.ok) {
-        // Fallback endpoint to second address if needed
         await fetch('https://formsubmit.co/ajax/apark12321@gmail.com', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            'Accept': 'application/json'
+            Accept: 'application/json',
           },
-          body: JSON.stringify(emailPayload)
+          body: JSON.stringify(emailPayload),
         }).catch(() => {});
       }
     } catch (err) {
@@ -95,186 +98,193 @@ export default function FactsheetContactModal({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-xs font-sans">
-      <div 
+    <div
+      onClick={onClose}
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs"
+    >
+      <div
         onClick={(e) => e.stopPropagation()}
-        className="relative w-full max-w-lg bg-white text-zinc-900 rounded-2xl p-6 sm:p-8 shadow-2xl border border-zinc-200 max-h-[92vh] overflow-y-auto"
+        className="relative w-full max-w-lg bg-white text-slate-900 rounded-2xl p-6 sm:p-8 shadow-xl border border-slate-200 max-h-[92vh] overflow-y-auto"
       >
-        {/* Close Button */}
         <button
+          type="button"
           onClick={onClose}
-          className="absolute top-4 right-4 p-1.5 text-zinc-400 hover:text-zinc-800 transition-colors cursor-pointer"
-          aria-label="Close"
+          className="absolute top-5 right-5 p-1.5 text-slate-400 hover:text-slate-800 transition-colors cursor-pointer"
+          aria-label="닫기"
         >
           <X className="w-5 h-5" />
         </button>
 
         {isSuccess ? (
           <div className="text-center py-6">
-            <div className="w-12 h-12 bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto mb-4 rounded-full">
-              <CheckCircle2 className="w-7 h-7" />
+            <div className="w-11 h-11 bg-blue-50 text-[#2563EB] flex items-center justify-center mx-auto mb-4 rounded-full">
+              <CheckCircle2 className="w-6 h-6" />
             </div>
-            <h3 className="text-xl font-bold text-zinc-900 mb-1">
-              신청서가 정상 접수되었습니다
+            <h3 className="text-lg font-bold text-slate-900 mb-1.5">
+              상담 신청이 접수되었습니다
             </h3>
-            <p className="text-xs text-zinc-600 mb-4 leading-relaxed">
-              작성해주신 의뢰 내용이 담당 관리자 이메일(ceo@avro.co.kr)로 즉시 전송되었습니다.<br />
-              기재해주신 연락처 및 이메일로 1시간 이내 신속히 회신드리겠습니다.
+            <p className="text-sm text-slate-600 mb-5 leading-relaxed">
+              남겨주신 업종과 내용을 검토한 뒤 영업일 기준 빠르게 회신드리겠습니다.
             </p>
-            <div className="bg-zinc-50 border border-zinc-200 rounded-lg p-3 text-[11px] text-zinc-500 mb-5 text-left space-y-1">
-              <div><strong className="text-zinc-700">접수 담당자:</strong> {formData.name} ({formData.company})</div>
-              <div><strong className="text-zinc-700">의뢰 구분:</strong> {formData.serviceType}</div>
-              <div><strong className="text-zinc-700">회신 예정 연락처:</strong> {formData.phone} / {formData.email}</div>
+            <div className="bg-slate-50 border border-slate-200 rounded-lg p-3.5 text-xs text-slate-600 mb-6 text-left space-y-1">
+              <div>
+                <span className="font-semibold text-slate-900">신청자:</span> {formData.name}
+                {formData.company ? ` (${formData.company})` : ''}
+              </div>
+              <div>
+                <span className="font-semibold text-slate-900">업종:</span> {formData.industry}
+              </div>
+              <div>
+                <span className="font-semibold text-slate-900">희망 분야:</span> {formData.solutionType}
+              </div>
             </div>
 
             <button
+              type="button"
               onClick={onClose}
-              className="px-6 py-2.5 bg-[#0066EE] text-white font-bold rounded-lg text-xs cursor-pointer shadow-md hover:bg-[#0052cc] transition-colors"
+              className="px-6 py-2.5 bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-semibold rounded-lg text-sm cursor-pointer transition-colors"
             >
-              확인 및 창 닫기
+              확인
             </button>
           </div>
         ) : (
           <div>
-            <div className="text-center mb-5">
-              <div className="inline-flex items-center gap-1 px-3 py-1 bg-[#0066EE]/10 text-[#0066EE] text-xs font-bold mb-2 rounded-full">
-                <Sparkles className="w-3 h-3" />
-                <span>접수 창구</span>
+            <div className="mb-6 pr-6">
+              <div className="text-xs font-semibold text-[#2563EB] mb-1">
+                {defaultMode === 'sample' ? '무료 업무 진단' : '맞춤형 AI 개발 문의'}
               </div>
-              <h2 className="text-lg sm:text-xl font-black text-zinc-900">
-                {defaultMode === 'sample' ? '샘플 3문항 무료 변환 테스트 신청' : '문서 변환 및 템플릿 제작 의뢰'}
+              <h2 className="text-xl font-bold text-slate-900 tracking-tight">
+                {defaultMode === 'sample'
+                  ? '우리 업종 AI 자동화 무료 진단'
+                  : '맞춤형 AI 솔루션 제작 상담'}
               </h2>
             </div>
 
             {errorMessage && (
-              <div className="mb-3 p-2 bg-red-50 text-red-600 text-xs font-bold text-center border border-red-200">
+              <div className="mb-4 p-3 rounded-lg bg-rose-50 text-rose-700 text-xs font-medium border border-rose-200">
                 {errorMessage}
               </div>
             )}
 
-            <form onSubmit={handleSubmit} className="space-y-3 text-xs">
-              
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+            <form onSubmit={handleSubmit} className="space-y-4 text-xs sm:text-sm">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
-                  <label className="block font-bold text-zinc-800 mb-1">
-                    담당자명 <span className="text-[#008CFF]">*</span>
+                  <label className="block text-xs font-semibold text-slate-700 mb-1.5">
+                    성함 <span className="text-[#2563EB]">*</span>
                   </label>
                   <input
                     type="text"
                     required
-                    placeholder="예) 홍길동"
+                    placeholder="홍길동"
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="w-full px-3 py-2 rounded-sm border border-zinc-300 focus:border-[#008CFF] outline-none bg-white"
+                    className="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 focus:border-[#2563EB] focus:ring-2 focus:ring-[#2563EB]/15 outline-none bg-white text-sm"
                   />
                 </div>
                 <div>
-                  <label className="block font-bold text-zinc-800 mb-1">
-                    학원/출판사명 <span className="text-[#008CFF]">*</span>
+                  <label className="block text-xs font-semibold text-slate-700 mb-1.5">
+                    상호 · 사무소명
                   </label>
                   <input
                     type="text"
-                    required
-                    placeholder="예) 대치 명문학원"
+                    placeholder="예) 청라세무회계 / OO카페"
                     value={formData.company}
                     onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                    className="w-full px-3 py-2 rounded-sm border border-zinc-300 focus:border-[#008CFF] outline-none bg-white"
+                    className="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 focus:border-[#2563EB] focus:ring-2 focus:ring-[#2563EB]/15 outline-none bg-white text-sm"
                   />
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
-                  <label className="block font-bold text-zinc-800 mb-1">
-                    연락처 <span className="text-[#008CFF]">*</span>
+                  <label className="block text-xs font-semibold text-slate-700 mb-1.5">
+                    연락처 <span className="text-[#2563EB]">*</span>
                   </label>
                   <input
                     type="tel"
                     required
-                    placeholder="예) 010-1234-5678"
+                    placeholder="010-1234-5678"
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    className="w-full px-3 py-2 rounded-sm border border-zinc-300 focus:border-[#008CFF] outline-none bg-white"
+                    className="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 focus:border-[#2563EB] focus:ring-2 focus:ring-[#2563EB]/15 outline-none bg-white text-sm"
                   />
                 </div>
                 <div>
-                  <label className="block font-bold text-zinc-800 mb-1">
-                    이메일 <span className="text-[#008CFF]">*</span>
+                  <label className="block text-xs font-semibold text-slate-700 mb-1.5">
+                    이메일 <span className="text-[#2563EB]">*</span>
                   </label>
                   <input
                     type="email"
                     required
-                    placeholder="예) email@academy.com"
+                    placeholder="email@example.com"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full px-3 py-2 rounded-sm border border-zinc-300 focus:border-[#008CFF] outline-none bg-white"
+                    className="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 focus:border-[#2563EB] focus:ring-2 focus:ring-[#2563EB]/15 outline-none bg-white text-sm"
                   />
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
-                  <label className="block font-bold text-zinc-800 mb-1">의뢰 구분</label>
-                  <select
-                    value={formData.serviceType}
-                    onChange={(e) => setFormData({ ...formData, serviceType: e.target.value })}
-                    className="w-full px-3 py-2 rounded-sm border border-zinc-300 focus:border-[#008CFF] outline-none bg-white"
-                  >
-                    <option value="무료 샘플 3쪽/3문항 변환 테스트">무료 샘플 3쪽/3문항 변환 테스트</option>
-                    <option value="교육 시험지 / 교재 / 모의고사 조판 외주">교육 시험지 / 교재 / 모의고사 조판 외주</option>
-                    <option value="공공·행정 공문서 / 조례·규정집 전산화">공공·행정 공문서 / 조례·규정집 전산화</option>
-                    <option value="기업 사내 업무 매뉴얼 / 프로세스 순서도 전산화">기업 사내 업무 매뉴얼 / 프로세스 순서도 전산화</option>
-                    <option value="사규집 / 계약서 서식 / 약관 대조표 전산화">사규집 / 계약서 서식 / 약관 대조표 전산화</option>
-                    <option value="PDF → 정품 HWP/HWPX 정밀 변환">PDF → 정품 HWP/HWPX 정밀 변환</option>
-                  </select>
-                </div>
-                <div>
-                  <label className="block font-bold text-zinc-800 mb-1">
-                    원고 형태 <span className="text-[#008CFF] font-normal text-[10px]">(스캔/캡처)</span>
+                  <label className="block text-xs font-semibold text-slate-700 mb-1.5">
+                    업종 선택
                   </label>
                   <select
-                    value={formData.documentType}
-                    onChange={(e) => setFormData({ ...formData, documentType: e.target.value })}
-                    className="w-full px-3 py-2 rounded-sm border border-zinc-300 focus:border-[#008CFF] outline-none bg-white"
+                    value={formData.industry}
+                    onChange={(e) => setFormData({ ...formData, industry: e.target.value })}
+                    className="w-full px-3 py-2.5 rounded-lg border border-slate-300 focus:border-[#2563EB] outline-none bg-white text-sm"
                   >
-                    <option value="스캔 PDF (공문서/사내서식/시험지)">스캔 PDF (공문서/사내서식/시험지)</option>
-                    <option value="도형 / 순서도 / 표 / 그래프 포함 원고">도형 / 순서도 / 표 / 그래프 포함 원고</option>
-                    <option value="스마트폰 촬영본 / 책 스캔 캡처본">스마트폰 촬영본 / 책 스캔 캡처본</option>
-                    <option value="손글씨 / 필기 원고">손글씨 / 필기 원고</option>
-                    <option value="기존 HWP 초안 (서식 교정)">기존 HWP 초안 (서식 교정)</option>
+                    <option value="법무 · 세무 · 회계 · 부동산">법무 · 세무 · 회계 · 부동산</option>
+                    <option value="병원 · 약국 · 학원">병원 · 약국 · 학원</option>
+                    <option value="커피숍 · 카페 · 식당 · 베이커리">커피숍 · 카페 · 식당 · 베이커리</option>
+                    <option value="휴대폰 판매점 · 세탁소 · 과일가게 · 정육점">
+                      휴대폰 판매점 · 세탁소 · 과일가게 · 정육점
+                    </option>
+                    <option value="기타 소상공인 · 개인사업자">기타 소상공인 · 개인사업자</option>
                   </select>
                 </div>
-              </div>
 
-              <div className="p-2.5 bg-amber-50 border border-amber-200 rounded-sm text-[11px] text-amber-900 leading-snug">
-                <span className="font-bold text-amber-700">이미지 작업 안내:</span> 신규 드로잉(새로 그리기)은 고단가로 인해 지원되지 않으며, <strong>전달해주신 캡처 사진이나 저화질 이미지를 고화질로 업스케일하여 깔끔하게 변환</strong>해 드리는 서비스만 제공됩니다. (원본 이미지 첨부 필수)
+                <div>
+                  <label className="block text-xs font-semibold text-slate-700 mb-1.5">
+                    희망 솔루션
+                  </label>
+                  <select
+                    value={formData.solutionType}
+                    onChange={(e) => setFormData({ ...formData, solutionType: e.target.value })}
+                    className="w-full px-3 py-2.5 rounded-lg border border-slate-300 focus:border-[#2563EB] outline-none bg-white text-sm"
+                  >
+                    <option value="무료 AI 업무 진단">무료 AI 업무 진단</option>
+                    <option value="고객 응대 · 예약 자동화">고객 응대 · 예약 자동화</option>
+                    <option value="문서 · 정산 자동 처리">문서 · 정산 자동 처리</option>
+                    <option value="발주 · 재고 · 단골 관리">발주 · 재고 · 단골 관리</option>
+                    <option value="우리 매장 전용 웹·앱 제작">우리 매장 전용 웹·앱 제작</option>
+                  </select>
+                </div>
               </div>
 
               <div>
-                <label className="block font-bold text-zinc-800 mb-1">문의 내용 (선택)</label>
+                <label className="block text-xs font-semibold text-slate-700 mb-1.5">
+                  자동화하고 싶은 업무 (선택)
+                </label>
                 <textarea
                   rows={2}
-                  placeholder="예상 문항 수, 납품 희망 일정 등"
+                  placeholder="예) 카톡 예약 응대가 너무 많습니다 / 세무 증빙 정리를 줄이고 싶습니다"
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  className="w-full px-3 py-2 rounded-sm border border-zinc-300 focus:border-[#008CFF] outline-none bg-white resize-none"
+                  className="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 focus:border-[#2563EB] focus:ring-2 focus:ring-[#2563EB]/15 outline-none bg-white text-sm resize-none"
                 />
               </div>
 
-              <div className="pt-2">
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="w-full py-3 bg-[#0066EE] hover:bg-[#0052cc] text-white font-bold rounded-xl transition-all flex items-center justify-center gap-1.5 cursor-pointer disabled:opacity-70 text-sm shadow-md shadow-[#0066EE]/30"
-                >
-                  {isSubmitting ? '전송 중...' : '신청 접수하기'}
-                </button>
-              </div>
-
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="w-full py-3 rounded-lg bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-semibold text-sm transition-colors cursor-pointer disabled:opacity-60"
+              >
+                {isSubmitting ? '접수 중...' : '신청하기'}
+              </button>
             </form>
           </div>
         )}
-
       </div>
     </div>
   );
